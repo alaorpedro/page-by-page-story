@@ -1,85 +1,198 @@
 import { SlideLayout } from "@/components/SlideLayout";
 
+type Step = {
+  ord: string;
+  title: string;
+  desc: string;
+  accent?: boolean;
+};
+
+const STEPS: Step[] = [
+  {
+    ord: "1º",
+    title: "Descoberta",
+    desc: "Feed, Stories, Pesquisa, Display, Vídeos, Curtidas, Compartilhamento.",
+    accent: true,
+  },
+  {
+    ord: "2º",
+    title: "Contato",
+    desc: "Primeira apresentação da marca para o lead.",
+  },
+  {
+    ord: "3º",
+    title: "Argumentação",
+    desc: "Quebra de objeções e construção de confiança.",
+  },
+  {
+    ord: "4º",
+    title: "Fechamento",
+    desc: "Decisão de compra e conversão em cliente.",
+  },
+];
+
 export function Slide07() {
-  const steps = [
-    "Feed, Stories,\nPesquisa,\nDisplay, Vídeos,\nCurtidas,\nCompartilhamento,",
-    "Contato /\nApresentação",
-    "Argumentação /\nQuebra de Objeções",
-    "Fechamento",
-  ];
   return (
-    <SlideLayout arcs="corners" logo="bc">
-      <div className="absolute inset-x-0 top-[7%] text-center animate-[fade-in-up_0.8s_ease-out_both]">
-        <h2 className="slide-subtitle text-white" style={{ fontWeight: 400 }}>
-          Entendendo o Fluxo de
-        </h2>
-        <h1
-          className="slide-title text-white mt-2"
-          style={{ fontWeight: 800 }}
+    <SlideLayout variant="content" tone="dark" bgLetter="7">
+      {/* Header */}
+      <div className="absolute left-16 right-16 top-44 flex items-center gap-8 animate-fade-in-up z-20">
+        <div
+          className="font-extrabold"
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: 64,
+            lineHeight: 1,
+            color: "oklch(0.98 0 0)",
+          }}
         >
-          Anúncios / Divulgação
+          07<span className="text-lime">.</span>
+        </div>
+        <div
+          className="flex-1 h-px max-w-[460px]"
+          style={{ background: "oklch(1 0 0 / 0.15)" }}
+        />
+        <div
+          className="uppercase font-bold mr-auto"
+          style={{
+            fontSize: 18,
+            letterSpacing: "0.35em",
+            color: "oklch(1 0 0 / 0.55)",
+          }}
+        >
+          Fluxo de anúncios
+        </div>
+      </div>
+
+      {/* Title */}
+      <div
+        className="absolute left-16 right-16 animate-fade-in-up z-20"
+        style={{ top: 280, animationDelay: "0.1s" }}
+      >
+        <div
+          className="uppercase font-black mb-4"
+          style={{
+            fontSize: 22,
+            letterSpacing: "0.3em",
+            color: "var(--onmid-lime)",
+          }}
+        >
+          Entendendo o fluxo de
+        </div>
+        <h1
+          className="font-black"
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: 120,
+            lineHeight: 0.95,
+            letterSpacing: "-0.04em",
+            color: "oklch(0.98 0 0)",
+          }}
+        >
+          Anúncios{" "}
+          <span style={{ color: "oklch(1 0 0 / 0.35)" }}>/</span>{" "}
+          <span className="italic" style={{ fontWeight: 300 }}>
+            Divulgação
+          </span>
         </h1>
       </div>
 
-      <div className="absolute inset-0 flex items-center justify-center gap-6 px-[5%]">
-        {/* 1º ? circle */}
+      {/* Flow row */}
+      <div
+        className="absolute left-16 right-16 z-20"
+        style={{ bottom: 140 }}
+      >
+        {/* Connector line */}
         <div
-          className="rounded-full flex items-center justify-center animate-[pop-in_0.9s_cubic-bezier(0.34,1.56,0.64,1)_both]"
+          className="absolute animate-[fade-in_0.8s_ease-out_0.3s_both]"
           style={{
-            width: 230,
-            height: 230,
-            background: "var(--onmid-lime)",
-            color: "oklch(0.16 0.005 240)",
-            fontWeight: 800,
-            fontSize: 76,
-          }}
-        >
-          1º ?
-        </div>
-
-        {steps.map((s, i) => (
-          <div key={i} className="flex items-center gap-4">
-            <div
-              className="rounded-2xl border-2 px-6 py-8 flex items-center justify-center text-white whitespace-pre-line text-center animate-[fade-in-up_0.7s_ease-out_both]"
-              style={{
-                width: 240,
-                minHeight: 220,
-                borderColor: "var(--onmid-green)",
-                fontSize: 26,
-                lineHeight: 1.25,
-                animationDelay: `${0.2 + i * 0.12}s`,
-              }}
-            >
-              {s}
-            </div>
-            {i < steps.length - 1 && (
-              <div
-                className="rounded-full flex items-center justify-center text-white"
-                style={{
-                  width: 40,
-                  height: 40,
-                  background: "var(--onmid-green)",
-                  fontSize: 24,
-                }}
-              >
-                ›
-              </div>
-            )}
-          </div>
-        ))}
-
-        {/* Right yellow arrow */}
-        <div
-          className="animate-[slide-in-right_0.8s_ease-out_0.6s_both]"
-          style={{
-            width: 0,
-            height: 0,
-            borderTop: "120px solid transparent",
-            borderBottom: "120px solid transparent",
-            borderLeft: "100px solid var(--onmid-lime)",
-            marginLeft: -10,
+            left: 60,
+            right: 60,
+            top: 56,
+            height: 2,
+            background:
+              "repeating-linear-gradient(to right, oklch(1 0 0 / 0.25) 0 8px, transparent 8px 16px)",
           }}
         />
+
+        <div className="relative grid grid-cols-4 gap-8">
+          {STEPS.map((s, i) => (
+            <div
+              key={i}
+              className="flex flex-col items-start animate-fade-in-up"
+              style={{ animationDelay: `${0.25 + i * 0.12}s` }}
+            >
+              {/* Number badge */}
+              <div
+                className="rounded-full flex items-center justify-center font-black mb-6 relative"
+                style={{
+                  width: 112,
+                  height: 112,
+                  fontFamily: "var(--font-display)",
+                  fontSize: s.accent ? 52 : 48,
+                  background: s.accent
+                    ? "var(--onmid-lime)"
+                    : "oklch(1 0 0 / 0.06)",
+                  color: s.accent
+                    ? "oklch(0.13 0.005 240)"
+                    : "oklch(0.98 0 0)",
+                  border: s.accent
+                    ? "none"
+                    : "2px solid oklch(1 0 0 / 0.18)",
+                  boxShadow: s.accent
+                    ? "0 20px 50px oklch(0.84 0.18 130 / 0.35)"
+                    : "none",
+                  letterSpacing: "-0.04em",
+                }}
+              >
+                {s.ord}
+                {s.accent && (
+                  <span
+                    className="absolute"
+                    style={{
+                      right: -14,
+                      top: -10,
+                      fontSize: 56,
+                      fontWeight: 900,
+                      color: "var(--onmid-lime)",
+                      WebkitTextStroke: "3px oklch(0.13 0.005 240)",
+                      fontFamily: "var(--font-display)",
+                    }}
+                  >
+                    ?
+                  </span>
+                )}
+              </div>
+
+              {/* Title */}
+              <div
+                className="font-black mb-3"
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: 38,
+                  lineHeight: 1,
+                  letterSpacing: "-0.02em",
+                  color: s.accent
+                    ? "var(--onmid-lime)"
+                    : "oklch(0.98 0 0)",
+                }}
+              >
+                {s.title}
+              </div>
+
+              {/* Description */}
+              <p
+                style={{
+                  fontSize: 20,
+                  lineHeight: 1.35,
+                  color: "oklch(1 0 0 / 0.65)",
+                  maxWidth: 260,
+                }}
+              >
+                {s.desc}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </SlideLayout>
   );
