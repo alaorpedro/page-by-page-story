@@ -442,6 +442,10 @@ export function Slide11() {
           0%   { opacity: 0; transform: translateY(10px) scale(0.92); }
           100% { opacity: 1; transform: translateY(0) scale(1); }
         }
+        @keyframes pillar-dot {
+          0%, 100% { transform: scale(1); opacity: 1; }
+          50%      { transform: scale(1.6); opacity: 0.5; }
+        }
       `}</style>
     </SlideLayout>
   );
