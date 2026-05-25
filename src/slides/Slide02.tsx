@@ -1,4 +1,6 @@
 import { SlideLayout } from "@/components/SlideLayout";
+import alaorPhoto from "@/assets/alaor.jpg";
+
 
 export function Slide02() {
   return (
@@ -33,6 +35,7 @@ export function Slide02() {
           style={{ animationDelay: "0.1s" }}
         >
           <div className="relative" style={{ width: 440, height: 440 }}>
+            {/* Lime ring backdrop */}
             <div
               className="absolute rounded-full"
               style={{
@@ -41,27 +44,33 @@ export function Slide02() {
                 boxShadow: "0 30px 80px oklch(0.88 0.24 138 / 0.3)",
               }}
             />
+            {/* Photo inside circle */}
             <div
-              className="absolute rounded-full flex items-center justify-center overflow-hidden"
-              style={{
-                inset: 28,
-                background:
-                  "radial-gradient(ellipse at 30% 30%, oklch(0.28 0.01 240), oklch(0.13 0.005 240))",
-              }}
+              className="absolute rounded-full overflow-hidden"
+              style={{ inset: 14 }}
             >
-              <span
-                className="font-black text-lime"
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: 260,
-                  lineHeight: 1,
-                  letterSpacing: "-0.05em",
-                }}
-              >
-                A
-              </span>
+              <img
+                src={alaorPhoto}
+                alt="Alaor Pedro de Oliveira"
+                className="w-full h-full object-cover"
+                style={{ filter: "contrast(1.02) saturate(1.05)" }}
+                draggable={false}
+              />
             </div>
+            {/* Floating accent dot */}
+            <div
+              className="absolute rounded-full"
+              style={{
+                right: -10,
+                bottom: 40,
+                width: 48,
+                height: 48,
+                background: "oklch(0.13 0.005 240)",
+                border: "4px solid var(--onmid-lime)",
+              }}
+            />
           </div>
+
         </div>
 
         {/* Bio col 8 — wider, more space between blocks */}
