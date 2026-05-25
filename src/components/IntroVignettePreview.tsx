@@ -24,13 +24,13 @@ export function IntroVignettePreview({ hideReplay = false }: Props) {
           50% { opacity: 1 }
         }
         @keyframes vig-zoom-out {
-          0% { transform: scale(3); opacity: 0 }
-          20% { opacity: 1 }
+          0% { transform: scale(10); opacity: 0 }
+          15% { opacity: 1 }
           100% { transform: scale(1); opacity: 1 }
         }
         @keyframes vig-zoom-out-logo {
-          0% { transform: scale(3); opacity: 0 }
-          20% { opacity: 1 }
+          0% { transform: scale(8); opacity: 0 }
+          15% { opacity: 1 }
           100% { transform: scale(1); opacity: 1 }
         }
         @keyframes vig-glitch {
@@ -52,7 +52,7 @@ export function IntroVignettePreview({ hideReplay = false }: Props) {
           20%, 50%, 80% { opacity: 0.2 }
         }
         @keyframes vig-slam-in {
-          0% { transform: scale(3) skewX(-12deg); opacity: 0 }
+          0% { transform: scale(15) skewX(-12deg); opacity: 0 }
           60% { transform: scale(0.9) skewX(-6deg); opacity: 1 }
           80% { transform: scale(1.05) skewX(-4deg) }
           100% { transform: scale(1) skewX(-4deg) }
@@ -76,13 +76,12 @@ export function IntroVignettePreview({ hideReplay = false }: Props) {
           letter-spacing: -0.06em;
           text-transform: uppercase;
           white-space: nowrap;
-          will-change: transform, opacity, filter;
+          /* no will-change: transform → browser re-rasterizes each frame, text stays crisp at any zoom */
         }
         .vig-logo-img {
           width: 60%;
           max-width: 900px;
           height: auto;
-          will-change: transform, opacity, filter;
           filter: drop-shadow(0 0 40px oklch(0.88 0.24 138 / 0.5));
         }
         .vig-scanlines {
