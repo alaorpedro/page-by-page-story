@@ -2,11 +2,8 @@ import { SlideLayout } from "@/components/SlideLayout";
 
 export function Slide31() {
   return (
-    <SlideLayout
-      variant="hero"
-      tone="dark"
-      blob={{ variant: "lime", side: "left", top: 240, size: 720, opacity: 0.9 }}
-    >
+    <SlideLayout variant="hero" tone="dark">
+
       {/* Giant background number */}
       <div
         aria-hidden

@@ -2,54 +2,92 @@ import { SlideLayout } from "@/components/SlideLayout";
 
 export function Slide01() {
   return (
-    <SlideLayout variant="hero" tone="dark" blob={{ variant: "lime", side: "right", top: -120, size: 980, opacity: 0.95 }}>
-      {/* Giant background O */}
+    <SlideLayout variant="hero" tone="dark">
+      {/* Thin lime vertical rail */}
       <div
-        aria-hidden
-        className="absolute pointer-events-none select-none animate-fade-in"
-        style={{
-          left: "-3%",
-          top: "-12%",
-          fontFamily: "var(--font-display)",
-          fontWeight: 900,
-          fontSize: 1500,
-          lineHeight: 1,
-          letterSpacing: "-0.1em",
-          color: "oklch(1 0 0 / 0.03)",
-        }}
-      >
-        O
-      </div>
+        className="absolute left-16 top-44 bottom-32 animate-fade-in"
+        style={{ width: 2, background: "oklch(0.88 0.24 138 / 0.4)" }}
+      />
 
-      {/* Small kicker top-left */}
+      {/* Kicker top-left aligned to rail */}
       <div
-        className="absolute left-16 top-44 animate-fade-in-up flex items-center gap-4"
+        className="absolute left-24 top-44 animate-fade-in-up flex items-center gap-4"
         style={{ animationDelay: "0.05s" }}
       >
-        <div style={{ width: 48, height: 2, background: "var(--onmid-lime)" }} />
+        <div style={{ width: 36, height: 2, background: "var(--onmid-lime)" }} />
         <span
           className="uppercase font-bold text-foreground/70"
-          style={{ fontSize: 18, letterSpacing: "0.35em" }}
+          style={{ fontSize: 16, letterSpacing: "0.4em" }}
         >
-          Onmid · 2026
+          Onmid · Treinamento 2026
         </span>
       </div>
 
-      {/* Main copy bottom-left */}
-      <div className="absolute left-16 bottom-[14%] max-w-[1300px]">
+      {/* Center-left main copy */}
+      <div className="absolute left-24 top-1/2 -translate-y-1/2 max-w-[1500px]">
         <h1
-          className="slide-title-xl text-foreground uppercase animate-fade-in-up"
-          style={{ animationDelay: "0.15s", fontWeight: 900, letterSpacing: "-0.055em" }}
+          className="text-foreground uppercase animate-fade-in-up"
+          style={{
+            fontFamily: "var(--font-display)",
+            fontWeight: 900,
+            fontSize: 200,
+            lineHeight: 0.88,
+            letterSpacing: "-0.06em",
+            animationDelay: "0.15s",
+          }}
         >
-          Treinamento<br />
-          <span className="text-lime">de Vendas</span>
+          Vendas<br />
+          <span
+            className="inline-block px-6 mt-4"
+            style={{
+              background: "var(--onmid-lime)",
+              color: "oklch(0.13 0.005 240)",
+              transform: "skewX(-4deg)",
+            }}
+          >
+            de alta
+          </span>
+          <br />
+          performance
         </h1>
+      </div>
+
+      {/* Bottom-left subtitle aligned to rail */}
+      <div
+        className="absolute left-24 bottom-32 animate-fade-in-up max-w-[900px]"
+        style={{ animationDelay: "0.4s" }}
+      >
         <p
-          className="slide-subtitle text-foreground/55 mt-8 font-light animate-fade-in-up max-w-[1000px]"
-          style={{ animationDelay: "0.35s", letterSpacing: "0.01em" }}
+          className="text-foreground/55 font-light"
+          style={{ fontSize: 32, letterSpacing: "0.02em", lineHeight: 1.3 }}
         >
-          Atendimento Online de Alta Performance
+          Atendimento online <span className="text-foreground/85 font-semibold">para times comerciais</span> que precisam converter sob pressão.
         </p>
+      </div>
+
+      {/* Bottom-right meta */}
+      <div
+        className="absolute right-16 bottom-32 text-right animate-fade-in-up"
+        style={{ animationDelay: "0.5s" }}
+      >
+        <div
+          className="uppercase font-bold text-foreground/40"
+          style={{ fontSize: 13, letterSpacing: "0.35em" }}
+        >
+          Conduzido por
+        </div>
+        <div
+          className="text-foreground font-black mt-2"
+          style={{ fontSize: 22, lineHeight: 1.1 }}
+        >
+          Alaor Pedro de Oliveira
+        </div>
+        <div
+          className="text-foreground/50 mt-1"
+          style={{ fontSize: 16 }}
+        >
+          Diretor de Planejamento
+        </div>
       </div>
     </SlideLayout>
   );
