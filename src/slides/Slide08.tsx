@@ -170,7 +170,7 @@ export function Slide08() {
         </div>
 
         {/* Messages */}
-        <div className="flex-1 flex flex-col gap-4 overflow-hidden justify-end">
+        <div className="flex-1 flex flex-col gap-3 justify-end">
           {MESSAGES.map((m, i) => {
             const revealed = i < step;
             return (
@@ -188,7 +188,7 @@ export function Slide08() {
                 <div
                   className="rounded-3xl"
                   style={{
-                    padding: "20px 28px",
+                    padding: "14px 22px",
                     maxWidth: "92%",
                     background: m.bold
                       ? "var(--onmid-lime)"
@@ -196,7 +196,7 @@ export function Slide08() {
                     color: m.bold
                       ? "oklch(0.13 0.005 240)"
                       : "oklch(0.98 0 0)",
-                    fontSize: 28,
+                    fontSize: 22,
                     lineHeight: 1.32,
                     fontWeight: m.bold ? 700 : 400,
                     borderTopLeftRadius: 8,
