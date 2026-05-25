@@ -325,8 +325,8 @@ function Iphone({
           })}
 
           {showTyping && (
-            <div style={{ marginTop: step === 2 ? 14 : 0 }}>
-              <Typing side={step === 2 ? "client" : "company"} />
+            <div style={{ marginTop: visibleCount > 0 ? 14 : 0 }}>
+              <Typing />
             </div>
           )}
         </div>
