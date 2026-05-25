@@ -1,129 +1,363 @@
+import { useEffect, useState } from "react";
 import { SlideLayout } from "@/components/SlideLayout";
+import attendant from "@/assets/attendant-headset.png";
+
+// Steps: 0 only typing, 1 first msg, 2 second msg, 3 reveal context callout
+const STEPS = 4;
+
+type Msg = { text: string; time: string };
+const MESSAGES: Msg[] = [
+  { text: "Vcs perderam cliente", time: "10:12 PM" },
+  { text: "Obrigada pelas desculpas, porém não volto mais.", time: "10:13 PM" },
+];
 
 export function Slide06() {
+  const [step, setStep] = useState(0);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const fwd = e.key === "ArrowRight" || e.key === " " || e.key === "PageDown";
+      const back = e.key === "ArrowLeft" || e.key === "PageUp";
+      if (fwd && step < STEPS - 1) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setStep((s) => Math.min(STEPS - 1, s + 1));
+      } else if (back && step > 0) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setStep((s) => Math.max(0, s - 1));
+      }
+    };
+    window.addEventListener("keydown", onKey, true);
+    return () => window.removeEventListener("keydown", onKey, true);
+  }, [step]);
+
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.closest("button") || target.closest("a") || target.closest("[role=dialog]")) return;
+      if (step < STEPS - 1) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setStep((s) => Math.min(STEPS - 1, s + 1));
+      }
+    };
+    window.addEventListener("click", onClick, true);
+    return () => window.removeEventListener("click", onClick, true);
+  }, [step]);
+
+  // visible messages = step (0→0, 1→1, 2→2, 3→2)
+  const visibleCount = Math.min(step, MESSAGES.length);
+  const showTyping = step < MESSAGES.length;
+
   return (
-    <SlideLayout arcs="none" logo="none">
-      {/* Green panels */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(180deg, oklch(0.62 0.18 150) 0%, oklch(0.62 0.18 150) 65%, oklch(0.18 0.005 240) 65%, oklch(0.18 0.005 240) 100%)",
-        }}
-      />
-
-      {/* Floating WhatsApp bubbles */}
-      {[
-        { x: 60, y: 40, s: 110, o: 0.9 },
-        { x: 360, y: 30, s: 150, o: 1 },
-        { x: 720, y: 90, s: 130, o: 0.85 },
-        { x: 1150, y: 30, s: 140, o: 0.95 },
-        { x: 1500, y: 110, s: 180, o: 1 },
-        { x: 1780, y: 280, s: 110, o: 0.9 },
-        { x: 30, y: 700, s: 130, o: 0.95 },
-        { x: 1730, y: 740, s: 120, o: 0.9 },
-      ].map((b, i) => (
+    <SlideLayout variant="content" tone="dark" bgLetter="6">
+      {/* Kicker */}
+      <div className="absolute left-16 right-16 top-44 flex items-center gap-8 animate-fade-in-up z-20">
         <div
-          key={i}
-          className="absolute rounded-full flex items-center justify-center text-white animate-[pop-in_1s_cubic-bezier(0.34,1.56,0.64,1)_both]"
+          className="font-extrabold"
           style={{
-            left: b.x,
-            top: b.y,
-            width: b.s,
-            height: b.s,
-            background: "oklch(0.62 0.2 148)",
-            opacity: b.o,
-            boxShadow: "0 18px 40px rgba(0,0,0,0.35)",
-            fontSize: b.s * 0.55,
-            animationDelay: `${i * 0.08}s`,
+            fontFamily: "var(--font-display)",
+            fontSize: 64,
+            lineHeight: 1,
+            color: "oklch(0.98 0 0)",
           }}
         >
-          <span style={{ filter: "brightness(0) invert(1)" }}>💬</span>
+          06<span className="text-lime">.</span>
         </div>
-      ))}
+        <div className="flex-1 h-px max-w-[460px]" style={{ background: "oklch(1 0 0 / 0.15)" }} />
+        <div
+          className="uppercase font-bold mr-auto"
+          style={{ fontSize: 18, letterSpacing: "0.35em", color: "oklch(1 0 0 / 0.55)" }}
+        >
+          Caso real
+        </div>
+      </div>
 
-      {/* Phone */}
+      {/* iPhone mockup (left) */}
       <div
-        className="absolute animate-[fade-in-up_0.9s_ease-out_0.3s_both]"
-        style={{
-          left: 280,
-          top: 140,
-          width: 460,
-          height: 780,
-          background: "#1a1a1a",
-          borderRadius: 56,
-          padding: 14,
-          boxShadow: "0 30px 60px rgba(0,0,0,0.5)",
-        }}
+        className="absolute animate-fade-in-up z-20"
+        style={{ left: 160, top: 260, animationDelay: "0.1s" }}
+      >
+        <Iphone visibleCount={visibleCount} showTyping={showTyping} />
+      </div>
+
+      {/* Attendant photo (right) */}
+      <div
+        className="absolute z-20 animate-fade-in-up"
+        style={{ right: 80, top: 200, width: 720, animationDelay: "0.2s" }}
+      >
+        {/* Lime backdrop circle */}
+        <div
+          className="absolute rounded-full"
+          style={{
+            width: 620,
+            height: 620,
+            right: 40,
+            top: 60,
+            background: "var(--onmid-lime)",
+            opacity: 0.95,
+          }}
+        />
+        <img
+          src={attendant}
+          alt="Atendente com headset"
+          loading="lazy"
+          width={1024}
+          height={1024}
+          className="relative"
+          style={{
+            width: 720,
+            height: "auto",
+            filter: "drop-shadow(0 30px 60px oklch(0 0 0 / 0.45))",
+          }}
+        />
+      </div>
+
+      {/* Headline + callout (bottom right) */}
+      <div
+        className="absolute z-30"
+        style={{ right: 80, bottom: 140, maxWidth: 720 }}
       >
         <div
+          className="uppercase font-black mb-3 animate-fade-in-up"
           style={{
-            background: "#ECE5DD",
-            width: "100%",
-            height: "100%",
-            borderRadius: 44,
-            overflow: "hidden",
-            position: "relative",
+            fontSize: 18,
+            letterSpacing: "0.35em",
+            color: "var(--onmid-lime)",
+            animationDelay: "0.3s",
           }}
         >
-          {/* Status bar */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-7 bg-black rounded-b-2xl" />
-          {/* Header */}
-          <div
-            className="flex items-center gap-3 px-5 pt-12 pb-4"
-            style={{ background: "#075E54", color: "white" }}
+          O que ficou de fora
+        </div>
+        <div
+          className="font-black animate-fade-in-up"
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: 56,
+            lineHeight: 1,
+            letterSpacing: "-0.035em",
+            color: "oklch(0.98 0 0)",
+            animationDelay: "0.4s",
+          }}
+        >
+          A atendente até{" "}
+          <span
+            className="px-2 inline-block"
+            style={{
+              background: "var(--onmid-lime)",
+              color: "oklch(0.13 0.005 240)",
+              transform: "skewX(-4deg)",
+            }}
           >
-            <span className="text-2xl">←</span>
-            <div
-              className="w-12 h-12 rounded-full"
-              style={{ background: "#bbb" }}
-            />
-            <div>
-              <div style={{ fontWeight: 700, fontSize: 22 }}>Cliente</div>
-              <div style={{ fontSize: 16, opacity: 0.85 }}>Online</div>
-            </div>
-            <div className="ml-auto flex gap-4 text-2xl">📹 📞 ⋮</div>
-          </div>
-          {/* Messages */}
-          <div className="p-5 space-y-3">
-            <div
-              className="bg-white rounded-2xl px-4 py-3 max-w-[80%]"
-              style={{ fontSize: 20, color: "#111", boxShadow: "0 2px 4px rgba(0,0,0,0.1)" }}
-            >
-              Vcs perderam cliente{" "}
-              <span className="text-xs text-gray-500 ml-2">10:12 PM</span>
-            </div>
-            <div
-              className="bg-white rounded-2xl px-4 py-3 max-w-[85%]"
-              style={{ fontSize: 20, color: "#111", boxShadow: "0 2px 4px rgba(0,0,0,0.1)" }}
-            >
-              Obrigada pelas desculpas, porém não volto mais{" "}
-              <span className="text-xs text-gray-500 ml-2">10:12 PM</span>
-            </div>
-          </div>
+            resolveu
+          </span>
+          .
         </div>
+
+        {step >= 3 && (
+          <p
+            className="mt-6 font-medium animate-fade-in-up"
+            style={{
+              fontSize: 28,
+              lineHeight: 1.3,
+              color: "oklch(1 0 0 / 0.8)",
+            }}
+          >
+            Mas não mudou o estado emocional da cliente — e o relacionamento
+            terminou ali.
+          </p>
+        )}
       </div>
 
-      {/* Headset woman placeholder */}
+      {/* Step indicator */}
+      <div className="absolute bottom-14 left-16 z-30 flex items-center gap-2">
+        {Array.from({ length: STEPS }).map((_, i) => (
+          <div
+            key={i}
+            className="h-1 rounded-full transition-all"
+            style={{
+              width: i === step ? 32 : 12,
+              background: i <= step ? "var(--onmid-lime)" : "oklch(1 0 0 / 0.18)",
+            }}
+          />
+        ))}
+      </div>
+
+      {/* keyframes for typing dots */}
+      <style>{`
+        @keyframes typing-dot {
+          0%, 60%, 100% { transform: translateY(0); opacity: 0.35; }
+          30% { transform: translateY(-4px); opacity: 1; }
+        }
+        @keyframes bubble-in {
+          0% { transform: translateY(8px) scale(0.92); opacity: 0; }
+          100% { transform: translateY(0) scale(1); opacity: 1; }
+        }
+      `}</style>
+    </SlideLayout>
+  );
+}
+
+function Iphone({
+  visibleCount,
+  showTyping,
+}: {
+  visibleCount: number;
+  showTyping: boolean;
+}) {
+  return (
+    <div
+      style={{
+        width: 480,
+        height: 980,
+        background: "linear-gradient(180deg, #1a1a1c 0%, #0a0a0c 100%)",
+        borderRadius: 64,
+        padding: 12,
+        boxShadow:
+          "0 40px 80px oklch(0 0 0 / 0.55), inset 0 0 0 2px oklch(1 0 0 / 0.08)",
+        position: "relative",
+      }}
+    >
+      {/* Screen */}
       <div
-        className="absolute animate-[fade-in_1s_ease-out_0.5s_both]"
         style={{
-          right: 120,
-          top: 130,
-          width: 600,
-          height: 800,
-          borderRadius: 24,
-          background:
-            "linear-gradient(135deg, oklch(0.3 0.02 240), oklch(0.18 0.005 240))",
-          border: "1px solid oklch(1 0 0 / 0.08)",
+          width: "100%",
+          height: "100%",
+          borderRadius: 54,
+          overflow: "hidden",
+          background: "#e5ddd5",
+          position: "relative",
         }}
       >
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="slide-caption text-white/40 uppercase tracking-widest text-center px-4">
-            Foto: atendente<br />com headset
-          </span>
+        {/* Dynamic island */}
+        <div
+          className="absolute top-3 left-1/2 -translate-x-1/2"
+          style={{
+            width: 130,
+            height: 36,
+            background: "#000",
+            borderRadius: 22,
+            zIndex: 10,
+          }}
+        />
+
+        {/* WhatsApp header */}
+        <div
+          className="flex items-center gap-3 px-4"
+          style={{
+            background: "#075E54",
+            color: "white",
+            paddingTop: 56,
+            paddingBottom: 14,
+          }}
+        >
+          <span style={{ fontSize: 22, opacity: 0.9 }}>‹</span>
+          <div
+            className="w-11 h-11 rounded-full flex items-center justify-center"
+            style={{ background: "#cfd8dc", color: "#37474f", fontWeight: 700, fontSize: 18 }}
+          >
+            C
+          </div>
+          <div className="leading-tight">
+            <div style={{ fontWeight: 600, fontSize: 18 }}>Cliente</div>
+            <div style={{ fontSize: 13, opacity: 0.85 }}>online</div>
+          </div>
+          <div className="ml-auto flex gap-4" style={{ fontSize: 18, opacity: 0.9 }}>
+            <span>📹</span>
+            <span>📞</span>
+            <span>⋮</span>
+          </div>
+        </div>
+
+        {/* WhatsApp wallpaper pattern */}
+        <div
+          className="absolute"
+          style={{
+            top: 116,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundImage:
+              "radial-gradient(circle at 20% 30%, oklch(0 0 0 / 0.03) 1px, transparent 1px), radial-gradient(circle at 80% 70%, oklch(0 0 0 / 0.03) 1px, transparent 1px)",
+            backgroundSize: "40px 40px, 60px 60px",
+          }}
+        />
+
+        {/* Messages */}
+        <div
+          className="absolute left-0 right-0 px-4 flex flex-col gap-2"
+          style={{ top: 130, bottom: 24 }}
+        >
+          {MESSAGES.slice(0, visibleCount).map((m, i) => (
+            <Bubble key={i} msg={m} delay={i * 0.05} />
+          ))}
+          {showTyping && <Typing />}
         </div>
       </div>
-    </SlideLayout>
+    </div>
+  );
+}
+
+function Bubble({ msg, delay }: { msg: { text: string; time: string }; delay: number }) {
+  return (
+    <div
+      style={{
+        alignSelf: "flex-start",
+        maxWidth: "85%",
+        background: "white",
+        borderRadius: 12,
+        borderTopLeftRadius: 4,
+        padding: "10px 14px 8px",
+        boxShadow: "0 1px 1px oklch(0 0 0 / 0.13)",
+        animation: `bubble-in 320ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}s both`,
+        position: "relative",
+      }}
+    >
+      <div style={{ fontSize: 18, color: "#111b21", lineHeight: 1.3 }}>
+        {msg.text}
+      </div>
+      <div
+        style={{
+          fontSize: 11,
+          color: "#667781",
+          textAlign: "right",
+          marginTop: 2,
+        }}
+      >
+        {msg.time}
+      </div>
+    </div>
+  );
+}
+
+function Typing() {
+  return (
+    <div
+      style={{
+        alignSelf: "flex-start",
+        background: "white",
+        borderRadius: 12,
+        borderTopLeftRadius: 4,
+        padding: "12px 16px",
+        boxShadow: "0 1px 1px oklch(0 0 0 / 0.13)",
+        display: "flex",
+        gap: 5,
+        animation: "bubble-in 320ms cubic-bezier(0.22, 1, 0.36, 1) both",
+      }}
+    >
+      {[0, 1, 2].map((i) => (
+        <span
+          key={i}
+          style={{
+            width: 8,
+            height: 8,
+            borderRadius: 999,
+            background: "#8696a0",
+            animation: `typing-dot 1.1s ease-in-out ${i * 0.15}s infinite`,
+          }}
+        />
+      ))}
+    </div>
   );
 }
