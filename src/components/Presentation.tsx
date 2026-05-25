@@ -132,7 +132,21 @@ export function Presentation() {
   }
 
   return (
-    <div className={`fixed inset-0 ${chromeVisible ? "" : "cursor-none"}`} style={{ background: "oklch(0.13 0.005 240)" }}>
+    <div
+      className={`fixed inset-0 ${chromeVisible ? "" : "cursor-none"}`}
+      style={{ background: "oklch(0.13 0.005 240)" }}
+      onClick={(e) => {
+        // Ignore clicks on chrome / interactive elements
+        const target = e.target as HTMLElement;
+        if (target.closest("[data-slide-chrome]") || target.closest("button") || target.closest("a") || target.closest("[role=dialog]"))
+          return;
+        next();
+      }}
+      onContextMenu={(e) => {
+        e.preventDefault();
+        prev();
+      }}
+    >
       <SlideContext.Provider value={{ index: index + 1, total }}>
         <ScaledSlide key={slideKey}>{current.node}</ScaledSlide>
       </SlideContext.Provider>
