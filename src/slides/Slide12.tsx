@@ -107,38 +107,32 @@ export function Slide12() {
 
   return (
     <SlideLayout variant="content" tone="light" bgLetter="N">
-      {/* Brain 3D — intro spinning + persistent backdrop */}
-      <div
-        aria-hidden
-        className="absolute pointer-events-none z-10"
-        style={{
-          right: intro ? "50%" : -80,
-          top: intro ? "50%" : 200,
-          width: intro ? 720 : 620,
-          height: intro ? 720 : 620,
-          transform: intro
-            ? "translate(50%, -50%)"
-            : "translate(0, 0)",
-          transition:
-            "right 1100ms cubic-bezier(0.7,0,0.2,1) 200ms, top 1100ms cubic-bezier(0.7,0,0.2,1) 200ms, width 1100ms cubic-bezier(0.7,0,0.2,1) 200ms, height 1100ms cubic-bezier(0.7,0,0.2,1) 200ms, transform 1100ms cubic-bezier(0.7,0,0.2,1) 200ms",
-          filter: "drop-shadow(0 40px 80px oklch(0 0 0 / 0.25))",
-        }}
-      >
-        <img
-          src={brain3d}
-          alt=""
-          width={1024}
-          height={1024}
-          className="w-full h-full object-contain"
-          style={{
-            animation: intro
-              ? "brain-spin-in 1.3s cubic-bezier(0.34,1.2,0.5,1) both"
-              : "brain-float 6s ease-in-out infinite",
-            opacity: intro ? 1 : 0.92,
-            transition: "opacity 800ms ease 600ms",
-          }}
-        />
-      </div>
+      {/* Brain 3D — intro: gira no eixo vertical, zoom + fade out */}
+      {intro && (
+        <div
+          aria-hidden
+          className="absolute inset-0 pointer-events-none z-40 flex items-center justify-center"
+          style={{ perspective: 1600 }}
+        >
+          <img
+            src={brain3d}
+            alt=""
+            width={1024}
+            height={1024}
+            style={{
+              width: 900,
+              height: 900,
+              objectFit: "contain",
+              transformStyle: "preserve-3d",
+              backfaceVisibility: "visible",
+              filter: "drop-shadow(0 50px 100px oklch(0 0 0 / 0.35))",
+              animation: "brain-intro 2.4s cubic-bezier(0.6,0,0.3,1) both",
+            }}
+          />
+        </div>
+      )}
+
+
 
       {/* Header */}
       <div
