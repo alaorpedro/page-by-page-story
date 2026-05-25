@@ -164,8 +164,8 @@ export function Slide07() {
               key={i}
               className="flex flex-col items-start"
               style={{
-                opacity: active ? 1 : 0.22,
-                filter: active ? "none" : "saturate(0.3)",
+                opacity: active ? 1 : 0.25,
+                filter: active ? "none" : "saturate(0.3) blur(8px)",
                 transform: active ? "translateY(0)" : "translateY(6px)",
                 transition: "opacity 500ms ease, filter 500ms ease, transform 500ms ease",
               }}
