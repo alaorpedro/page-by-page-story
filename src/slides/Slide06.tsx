@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { SlideLayout } from "@/components/SlideLayout";
-import attendant from "@/assets/attendant-headset.png";
+import attendantHappy from "@/assets/attendant-headset.png";
+import attendantSad from "@/assets/attendant-headset-sad.png";
 
 // Steps:
 // 0 typing inicial
