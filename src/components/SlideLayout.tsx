@@ -92,7 +92,7 @@ export function SlideLayout({
       {/* Faded corner brand on content/statement slides */}
       {(variant === "content" || variant === "statement") && (
         <div className="absolute bottom-14 right-16 z-20">
-          <OnmidMark size={20} faded iconOnly />
+          <OnmidMark size={22} faded />
         </div>
       )}
 
