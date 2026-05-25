@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import brain3d from "@/assets/brain-3d.png";
+
 import { SlideLayout } from "@/components/SlideLayout";
 
 type Stage = {
