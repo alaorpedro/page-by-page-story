@@ -19,14 +19,21 @@ const FONT_CYCLE = [
 
 export function Slide03() {
   const [fontIdx, setFontIdx] = useState(0);
+  const [visible, setVisible] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
 
   useEffect(() => {
+    const CYCLE = 700;
+    const FADE = 220;
     const t = setInterval(() => {
-      setFontIdx((i) => (i + 1) % FONT_CYCLE.length);
-    }, 400);
+      setVisible(false);
+      setTimeout(() => {
+        setFontIdx((i) => (i + 1) % FONT_CYCLE.length);
+        setVisible(true);
+      }, FADE);
+    }, CYCLE);
     return () => clearInterval(t);
   }, []);
 
