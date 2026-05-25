@@ -10,7 +10,7 @@ export function Slide02() {
           src={alaorPhoto}
           alt="Alaor Pedro de Oliveira"
           className="w-full h-full object-cover"
-          style={{ filter: "grayscale(1) contrast(1.15) brightness(0.92)", objectPosition: "left center" }}
+          style={{ filter: "grayscale(1) contrast(1.15) brightness(0.92)", objectPosition: "center 22%" }}
           draggable={false}
         />
         {/* Lime duotone wash */}
