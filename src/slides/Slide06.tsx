@@ -307,46 +307,97 @@ function Iphone({
 
         {/* Messages */}
         <div
-          className="absolute left-0 right-0 px-4 flex flex-col gap-2"
+          className="absolute left-0 right-0 px-4 flex flex-col gap-1.5"
           style={{ top: 130, bottom: 24 }}
         >
-          {MESSAGES.slice(0, visibleCount).map((m, i) => (
-            <Bubble key={i} msg={m} delay={i * 0.05} />
-          ))}
-          {showTyping && <Typing />}
+          {/* "HOJE" divider — sempre visível */}
+          <DayDivider label="HOJE" />
+
+          {MESSAGES.slice(0, visibleCount).map((m, i) => {
+            const prev = i > 0 ? MESSAGES[i - 1] : null;
+            // gap maior entre o grupo 1 e o grupo 2 (intervalo de tempo)
+            const extraGap = prev && prev.group !== m.group ? 14 : 0;
+            return (
+              <div key={i} style={{ marginTop: extraGap }}>
+                <Bubble msg={m} delay={i * 0.05} />
+              </div>
+            );
+          })}
+
+          {showTyping && (
+            <div style={{ marginTop: step === 2 ? 14 : 0 }}>
+              <Typing side={step === 2 ? "client" : "company"} />
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
 }
 
-function Bubble({ msg, delay }: { msg: { text: string; time: string }; delay: number }) {
+function DayDivider({ label }: { label: string }) {
+  return (
+    <div className="flex justify-center my-1">
+      <span
+        style={{
+          background: "oklch(1 0 0 / 0.85)",
+          color: "#54656f",
+          fontSize: 11,
+          fontWeight: 600,
+          padding: "4px 12px",
+          borderRadius: 8,
+          boxShadow: "0 1px 1px oklch(0 0 0 / 0.08)",
+          letterSpacing: "0.05em",
+        }}
+      >
+        {label}
+      </span>
+    </div>
+  );
+}
+
+function Bubble({
+  msg,
+  delay,
+}: {
+  msg: { text: string; time: string; from: "client" | "company" };
+  delay: number;
+}) {
+  const isCompany = msg.from === "company";
   return (
     <div
       style={{
-        alignSelf: "flex-start",
-        maxWidth: "85%",
-        background: "white",
+        alignSelf: isCompany ? "flex-end" : "flex-start",
+        maxWidth: "82%",
+        background: isCompany ? "#d9fdd3" : "white",
         borderRadius: 12,
-        borderTopLeftRadius: 4,
-        padding: "10px 14px 8px",
+        borderTopLeftRadius: isCompany ? 12 : 4,
+        borderTopRightRadius: isCompany ? 4 : 12,
+        padding: "8px 12px 6px",
         boxShadow: "0 1px 1px oklch(0 0 0 / 0.13)",
         animation: `bubble-in 320ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}s both`,
         position: "relative",
       }}
     >
-      <div style={{ fontSize: 18, color: "#111b21", lineHeight: 1.3 }}>
+      <div style={{ fontSize: 17, color: "#111b21", lineHeight: 1.3 }}>
         {msg.text}
       </div>
       <div
         style={{
-          fontSize: 11,
+          fontSize: 10,
           color: "#667781",
           textAlign: "right",
           marginTop: 2,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-end",
+          gap: 3,
         }}
       >
         {msg.time}
+        {isCompany && (
+          <span style={{ color: "#53bdeb", fontSize: 12, lineHeight: 1 }}>✓✓</span>
+        )}
       </div>
     </div>
   );
