@@ -119,27 +119,38 @@ export function Slide03() {
         </div>
       </div>
 
-      {/* Giant animated "propósito" */}
+      {/* Giant animated "propósito" — auto-fits to slide width */}
       <div
-        className="absolute inset-x-0 z-10 px-[80px] animate-fade-in-up"
+        ref={containerRef}
+        className="absolute inset-x-0 z-10 px-[80px] animate-fade-in-up overflow-hidden"
         style={{ bottom: 140, animationDelay: "0.35s" }}
       >
         <div
-          key={fontIdx}
-          className="leading-none"
           style={{
-            fontFamily: f.family,
-            fontWeight: f.weight as number,
-            fontStyle: f.style,
-            letterSpacing: f.letter,
-            fontSize: 320,
-            color: "oklch(0.98 0.005 100)",
-            lineHeight: 0.85,
-            whiteSpace: "nowrap",
-            animation: "fade-in 0.45s ease-out both",
+            transform: `scale(${scale})`,
+            transformOrigin: "left bottom",
+            width: "fit-content",
+            height: 320 * 0.95,
           }}
         >
-          propósito<span className="text-lime">.</span>
+          <div
+            ref={textRef}
+            key={fontIdx}
+            className="leading-none"
+            style={{
+              fontFamily: f.family,
+              fontWeight: f.weight as number,
+              fontStyle: f.style,
+              letterSpacing: f.letter,
+              fontSize: 320,
+              color: "oklch(0.98 0.005 100)",
+              lineHeight: 0.9,
+              whiteSpace: "nowrap",
+              animation: "fade-in 0.25s ease-out both",
+            }}
+          >
+            propósito<span className="text-lime">.</span>
+          </div>
         </div>
       </div>
     </SlideLayout>
