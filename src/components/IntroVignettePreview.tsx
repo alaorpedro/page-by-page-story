@@ -10,8 +10,9 @@ import { useState } from "react";
  *  2.6s  cut to "PERFORMANCE" zoom-in
  *  3.2s  settle into final composition
  */
-export function IntroVignettePreview() {
+export function IntroVignettePreview({ hideReplay = false }: { hideReplay?: boolean } = {}) {
   const [runKey, setRunKey] = useState(0);
+
 
   return (
     <div className="relative w-full h-full bg-black overflow-hidden" key={runKey}>
