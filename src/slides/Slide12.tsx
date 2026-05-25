@@ -59,7 +59,7 @@ export function Slide12() {
   const [intro, setIntro] = useState(true);
 
   useEffect(() => {
-    const t = setTimeout(() => setIntro(false), 2400);
+    const t = setTimeout(() => setIntro(false), 3000);
     return () => clearTimeout(t);
   }, []);
 
