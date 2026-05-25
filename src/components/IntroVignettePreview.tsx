@@ -49,9 +49,9 @@ export function IntroVignettePreview({ hideReplay = false }: Props) {
           display: flex; align-items: center; justify-content: center;
           opacity: 0;
         }
-        .vig-stage-1 { animation: vigStage1 16s steps(1) forwards; }
-        .vig-stage-2 { animation: vigStage2 16s steps(1) forwards; }
-        .vig-stage-3 { animation: vigStage3 16s steps(1) forwards; }
+        .vig-stage-1 { animation: vigStage1 4s steps(1) forwards; }
+        .vig-stage-2 { animation: vigStage2 4s steps(1) forwards; }
+        .vig-stage-3 { animation: vigStage3 4s steps(1) forwards; }
         @keyframes vigStage1 { 0%,32% { opacity: 1; } 33%,100% { opacity: 0; } }
         @keyframes vigStage2 { 0%,32% { opacity: 0; } 33%,65% { opacity: 1; } 66%,100% { opacity: 0; } }
         @keyframes vigStage3 { 0%,65% { opacity: 0; } 66%,100% { opacity: 1; } }
@@ -68,12 +68,12 @@ export function IntroVignettePreview({ hideReplay = false }: Props) {
           letter-spacing: -0.06em; text-transform: uppercase;
         }
         .vig-stage-2 .vig-word {
-          animation: vigZoomWord 1.3s cubic-bezier(.2,.7,.2,1) 5.28s both,
-                     vigGlitch 0.12s steps(2) 6.4s 4;
+          animation: vigZoomWord 1.3s cubic-bezier(.2,.7,.2,1) 1.32s both,
+                     vigGlitch 0.12s steps(2) 1.6s 4;
         }
         .vig-stage-3 .vig-word {
-          animation: vigZoomWord 1.3s cubic-bezier(.2,.7,.2,1) 10.56s both,
-                     vigGlitch 0.12s steps(2) 11.6s 4;
+          animation: vigZoomWord 1.3s cubic-bezier(.2,.7,.2,1) 2.64s both,
+                     vigGlitch 0.12s steps(2) 2.9s 4;
         }
         .vig-word-lime { color: var(--onmid-lime, #c7ff3a); }
         .vig-bar {
@@ -83,7 +83,7 @@ export function IntroVignettePreview({ hideReplay = false }: Props) {
         }
         .vig-flash {
           position: absolute; inset: 0; background: white;
-          animation: vigFlash 16s steps(1) forwards;
+          animation: vigFlash 4s steps(1) forwards;
           opacity: 0;
         }
         .vig-scanlines {
