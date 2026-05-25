@@ -179,7 +179,7 @@ export function Slide06() {
           className="font-black animate-fade-in-up"
           style={{
             fontFamily: "var(--font-display)",
-            fontSize: 56,
+            fontSize: 48,
             lineHeight: 1,
             letterSpacing: "-0.035em",
             color: "oklch(0.98 0 0)",
