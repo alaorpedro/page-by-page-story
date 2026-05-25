@@ -29,6 +29,11 @@ const STEPS: Step[] = [
     title: "Persuasão",
     desc: "Argumentações, quebra de objeções, escuta ativa.",
   },
+  {
+    ord: "5º",
+    title: "Fechamento",
+    desc: "Agendamento confiante, transação financeira, fidelização.",
+  },
 ];
 
 export function Slide07() {
