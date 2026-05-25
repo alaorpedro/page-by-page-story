@@ -190,44 +190,42 @@ export function Slide07() {
                     letterSpacing: "-0.04em",
                   }}
                 >
-                  {/* Splash de sucesso (apenas no 5º) — ondas concêntricas + faíscas sutis em lime */}
-                  {isFinal && (
-                    <>
-                      {[0, 0.25, 0.5].map((delay, idx) => (
+                  {/* Ondas concêntricas em todas as etapas */}
+                  {[0, 0.25, 0.5].map((delay, idx) => (
+                    <span
+                      key={`ring-${idx}`}
+                      className="absolute rounded-full pointer-events-none"
+                      style={{
+                        inset: 0,
+                        border: "2px solid var(--onmid-lime)",
+                        opacity: 0,
+                        animation: `success-ring 1.8s ease-out ${delay}s infinite`,
+                      }}
+                    />
+                  ))}
+                  {/* Faíscas extras apenas no fechamento (5º) */}
+                  {isFinal &&
+                    Array.from({ length: 10 }).map((_, idx) => {
+                      const angle = (idx / 10) * Math.PI * 2;
+                      const dist = 200;
+                      return (
                         <span
-                          key={idx}
+                          key={`spark-${idx}`}
                           className="absolute rounded-full pointer-events-none"
                           style={{
-                            inset: 0,
-                            border: "2px solid var(--onmid-lime)",
+                            width: 6,
+                            height: 6,
+                            left: "50%",
+                            top: "50%",
+                            background: "var(--onmid-lime)",
                             opacity: 0,
-                            animation: `success-ring 1.8s ease-out ${delay}s infinite`,
+                            animation: `success-spark 1.1s ease-out ${0.15 + (idx % 5) * 0.05}s both`,
+                            ["--x" as string]: `${Math.cos(angle) * dist}px`,
+                            ["--y" as string]: `${Math.sin(angle) * dist}px`,
                           }}
                         />
-                      ))}
-                      {Array.from({ length: 10 }).map((_, idx) => {
-                        const angle = (idx / 10) * Math.PI * 2;
-                        const dist = 200;
-                        return (
-                          <span
-                            key={`spark-${idx}`}
-                            className="absolute rounded-full pointer-events-none"
-                            style={{
-                              width: 6,
-                              height: 6,
-                              left: "50%",
-                              top: "50%",
-                              background: "var(--onmid-lime)",
-                              opacity: 0,
-                              animation: `success-spark 1.1s ease-out ${0.15 + (idx % 5) * 0.05}s both`,
-                              ["--x" as string]: `${Math.cos(angle) * dist}px`,
-                              ["--y" as string]: `${Math.sin(angle) * dist}px`,
-                            }}
-                          />
-                        );
-                      })}
-                    </>
-                  )}
+                      );
+                    })}
                   {current.ord}
                   {current.accent && (
                     <span
