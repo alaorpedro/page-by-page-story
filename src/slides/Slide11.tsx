@@ -158,7 +158,7 @@ export function Slide11() {
           left: "44%",
           right: 64,
           top: 240,
-          bottom: 220,
+          bottom: 340,
         }}
       >
         {current ? (
