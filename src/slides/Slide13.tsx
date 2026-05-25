@@ -243,20 +243,6 @@ export function Slide13() {
         </span>
       </div>
 
-      {/* Step indicator */}
-      <div className="absolute bottom-14 right-32 z-30 flex items-center gap-2">
-        {Array.from({ length: TOTAL + 1 }).map((_, i) => (
-          <div
-            key={i}
-            className="h-1 rounded-full transition-all"
-            style={{
-              width: i === step ? 32 : 12,
-              background:
-                i <= step ? "var(--onmid-lime)" : "oklch(0.18 0.01 240 / 0.15)",
-            }}
-          />
-        ))}
-      </div>
     </SlideLayout>
   );
 }
