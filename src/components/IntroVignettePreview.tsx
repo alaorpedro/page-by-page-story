@@ -4,151 +4,183 @@ import logoWhite from "@/assets/onmid-logo-white.png";
 type Props = { hideReplay?: boolean };
 
 /**
- * Vinheta "radical": Logo → VENDAS → DE ALTA → PERFORMANCE.
- * Cada palavra desliza da direita, dá um pulse de zoom curto (sem escalar
- * para 10x — isso borrava o texto) e some com glitch + flash sincronizado.
- * Duração total: 5.2s (4 estágios × 1.3s).
+ * Radical intro vignette.
+ * Sequence (~3.4s):
+ *  0.0s  white flash
+ *  0.2s  Logo Onmid zoom-out + RGB glitch
+ *  1.0s  cut to "VENDAS" glitch
+ *  1.8s  cut to "DE ALTA" lime slam
+ *  2.6s  cut to "PERFORMANCE" zoom-in
+ *  3.2s  settle
  */
 export function IntroVignettePreview({ hideReplay = false }: Props) {
-  const [key, setKey] = useState(0);
-
-  const TOTAL = 5.2; // seconds
-  const STAGE = TOTAL / 4; // 1.3s each
-  // stage windows as %: 0-25, 25-50, 50-75, 75-100
+  const [runKey, setRunKey] = useState(0);
 
   return (
-    <div className="absolute inset-0 overflow-hidden bg-black" key={key}>
+    <div className="relative w-full h-full bg-black overflow-hidden" key={runKey}>
       <style>{`
-        @keyframes vigLogo {
-          0%   { transform: translateX(40vw) scale(0.6); opacity: 0; filter: blur(16px); }
-          25%  { transform: translateX(0) scale(1); opacity: 1; filter: blur(0); }
-          70%  { transform: translateX(0) scale(1.04); opacity: 1; filter: blur(0); }
-          85%  { transform: translateX(-15vw) scale(1.1); opacity: 0.9; filter: blur(3px); }
-          100% { transform: translateX(-60vw) scale(1.15); opacity: 0; filter: blur(10px); }
+        @keyframes vig-flash {
+          0%,100% { opacity: 0 }
+          50% { opacity: 1 }
         }
-        @keyframes vigWord {
-          0%   { transform: translateX(60vw) scale(0.85) skewX(-10deg); opacity: 0; filter: blur(8px); }
-          22%  { transform: translateX(0) scale(1) skewX(-4deg); opacity: 1; filter: blur(0); }
-          70%  { transform: translateX(0) scale(1.03) skewX(-4deg); opacity: 1; filter: blur(0); }
-          85%  { transform: translateX(-20vw) scale(1.08) skewX(4deg); opacity: 0.85; filter: blur(2px); }
-          100% { transform: translateX(-80vw) scale(1.15) skewX(8deg); opacity: 0; filter: blur(12px); }
+        @keyframes vig-zoom-out {
+          0% { transform: scale(10); filter: blur(40px); opacity: 0 }
+          20% { opacity: 1 }
+          100% { transform: scale(1); filter: blur(0); opacity: 1 }
         }
-        @keyframes vigGlitch {
-          0%,100% { transform: translate(0,0); }
-          25% { transform: translate(-5px,2px); }
-          50% { transform: translate(4px,-3px); }
-          75% { transform: translate(-2px,3px); }
+        @keyframes vig-zoom-out-logo {
+          0% { transform: scale(8); filter: blur(30px); opacity: 0 }
+          20% { opacity: 1 }
+          100% { transform: scale(1); filter: blur(0); opacity: 1 }
         }
-        @keyframes vigFlash {
-          0%, 24%  { opacity: 0; }
-          25%      { opacity: 0.85; }
-          27%, 49% { opacity: 0; }
-          50%      { opacity: 0.85; }
-          52%, 74% { opacity: 0; }
-          75%      { opacity: 0.85; }
-          77%, 100%{ opacity: 0; }
+        @keyframes vig-glitch {
+          0%, 100% { transform: translate(0,0); text-shadow: 0 0 0 transparent }
+          10% { transform: translate(-8px, 2px); text-shadow: 6px 0 #ff003c, -6px 0 #00f0ff }
+          20% { transform: translate(6px, -3px); text-shadow: -4px 0 #ff003c, 4px 0 #00f0ff }
+          30% { transform: translate(-3px, 1px); text-shadow: 3px 0 #ff003c, -3px 0 #00f0ff }
+          40% { transform: translate(0,0); text-shadow: 0 0 0 transparent }
         }
-        @keyframes vigBar {
-          0%   { transform: scaleX(0); transform-origin: left; }
-          30%  { transform: scaleX(1); transform-origin: left; }
-          70%  { transform: scaleX(1); transform-origin: right; }
-          100% { transform: scaleX(0); transform-origin: right; }
+        @keyframes vig-shake {
+          0%, 100% { transform: translate(0,0) }
+          25% { transform: translate(-12px, 6px) }
+          50% { transform: translate(10px, -8px) }
+          75% { transform: translate(-6px, 4px) }
+        }
+        @keyframes vig-bar-flicker {
+          0%, 100% { opacity: 0 }
+          10%, 30%, 60% { opacity: 1 }
+          20%, 50%, 80% { opacity: 0.2 }
+        }
+        @keyframes vig-slam-in {
+          0% { transform: scale(20) skewX(-12deg); opacity: 0; filter: blur(20px) }
+          60% { transform: scale(0.9) skewX(-6deg); opacity: 1; filter: blur(0) }
+          80% { transform: scale(1.05) skewX(-4deg) }
+          100% { transform: scale(1) skewX(-4deg) }
+        }
+        @keyframes vig-cut-show {
+          0%, 100% { opacity: 0 }
+          5%, 95% { opacity: 1 }
+        }
+        @keyframes vig-scanlines {
+          0% { background-position: 0 0 }
+          100% { background-position: 0 8px }
         }
 
-        .vig-stage {
-          position: absolute; inset: 0;
-          display: flex; align-items: center; justify-content: center;
-          opacity: 0;
-        }
-        .vig-s1 { animation: vigS1 ${TOTAL}s steps(1) forwards; }
-        .vig-s2 { animation: vigS2 ${TOTAL}s steps(1) forwards; }
-        .vig-s3 { animation: vigS3 ${TOTAL}s steps(1) forwards; }
-        .vig-s4 { animation: vigS4 ${TOTAL}s steps(1) forwards; }
-        @keyframes vigS1 { 0%,24% { opacity: 1; } 25%,100% { opacity: 0; } }
-        @keyframes vigS2 { 0%,24% { opacity: 0; } 25%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
-        @keyframes vigS3 { 0%,49% { opacity: 0; } 50%,74% { opacity: 1; } 75%,100% { opacity: 0; } }
-        @keyframes vigS4 { 0%,74% { opacity: 0; } 75%,100% { opacity: 1; } }
-
-        .vig-logo {
-          height: 42vh; width: auto; object-fit: contain;
-          filter: drop-shadow(0 0 60px oklch(0.88 0.24 138 / 0.45));
-          animation: vigLogo ${STAGE}s cubic-bezier(.2,.7,.2,1) 0s both,
-                     vigGlitch 0.1s steps(2) ${STAGE * 0.25}s 5;
-        }
+        .vig-stage { position: absolute; inset: 0; display: grid; place-items: center; }
         .vig-word {
-          font-family: var(--font-display, system-ui);
-          font-weight: 900; color: white;
-          /* tamanho base ENORME — sem precisar escalar p/ 10x e perder qualidade */
-          font-size: clamp(120px, 22vw, 380px);
+          font-family: var(--font-display);
+          font-weight: 900;
+          color: oklch(0.97 0.01 100);
+          font-size: 360px;
           line-height: 0.85;
-          letter-spacing: -0.06em; text-transform: uppercase;
+          letter-spacing: -0.06em;
+          text-transform: uppercase;
           white-space: nowrap;
           will-change: transform, opacity, filter;
-          -webkit-font-smoothing: antialiased;
         }
-        .vig-s2 .vig-word { animation: vigWord ${STAGE}s cubic-bezier(.2,.7,.2,1) ${STAGE}s both,
-                                       vigGlitch 0.1s steps(2) ${STAGE * 1.25}s 5; }
-        .vig-s3 .vig-word { animation: vigWord ${STAGE}s cubic-bezier(.2,.7,.2,1) ${STAGE * 2}s both,
-                                       vigGlitch 0.1s steps(2) ${STAGE * 2.25}s 5; }
-        .vig-s4 .vig-word { animation: vigWord ${STAGE}s cubic-bezier(.2,.7,.2,1) ${STAGE * 3}s both,
-                                       vigGlitch 0.1s steps(2) ${STAGE * 3.25}s 5; }
-
-        .vig-word-lime { color: var(--onmid-lime, #c7ff3a); }
-        .vig-word-outline {
-          color: transparent;
-          -webkit-text-stroke: 3px var(--onmid-lime, #c7ff3a);
-        }
-
-        .vig-bar {
-          position: absolute; left: 0; right: 0; height: 12px;
-          background: var(--onmid-lime, #c7ff3a);
-        }
-        .vig-s1 .vig-bar { animation: vigBar ${STAGE}s ease-out forwards; }
-
-        .vig-flash {
-          position: absolute; inset: 0; background: white;
-          animation: vigFlash ${TOTAL}s steps(1) forwards;
-          opacity: 0; pointer-events: none;
+        .vig-logo-img {
+          width: 60%;
+          max-width: 900px;
+          height: auto;
+          will-change: transform, opacity, filter;
+          filter: drop-shadow(0 0 40px oklch(0.88 0.24 138 / 0.5));
         }
         .vig-scanlines {
-          position: absolute; inset: 0; pointer-events: none;
-          background: repeating-linear-gradient(to bottom,
-            transparent 0, transparent 3px,
-            rgba(255,255,255,0.04) 3px, rgba(255,255,255,0.04) 4px);
+          position: absolute; inset: 0; pointer-events: none; z-index: 50;
+          background: repeating-linear-gradient(
+            to bottom,
+            oklch(0 0 0 / 0.18) 0px,
+            oklch(0 0 0 / 0.18) 1px,
+            transparent 1px,
+            transparent 4px
+          );
+          mix-blend-mode: multiply;
+          animation: vig-scanlines 0.6s linear infinite;
         }
+        .vig-noise {
+          position: absolute; inset: 0; pointer-events: none; z-index: 40;
+          background-image: radial-gradient(oklch(0 0 0 / 0.35) 1px, transparent 1px);
+          background-size: 3px 3px;
+          opacity: 0.25;
+          mix-blend-mode: overlay;
+        }
+
+        /* timeline */
+        .vig-flash-1 { animation: vig-flash 0.2s ease-out 0s 1 both; background:#fff; position:absolute; inset:0; z-index:60 }
+        .vig-flash-2 { animation: vig-flash 0.12s ease-out 1.0s 1 both; background:var(--onmid-lime); position:absolute; inset:0; z-index:60 }
+        .vig-flash-3 { animation: vig-flash 0.12s ease-out 1.8s 1 both; background:#fff; position:absolute; inset:0; z-index:60 }
+        .vig-flash-4 { animation: vig-flash 0.1s ease-out 2.6s 1 both; background:var(--onmid-lime); position:absolute; inset:0; z-index:60 }
+
+        .vig-stage-1 { animation: vig-cut-show 0.8s steps(1,end) 0.2s 1 both; }
+        .vig-stage-1 .vig-logo-img { animation: vig-zoom-out-logo 0.7s cubic-bezier(.2,.8,.2,1) 0.2s 1 both; }
+
+        .vig-stage-2 { animation: vig-cut-show 0.8s steps(1,end) 1.0s 1 both; }
+        .vig-stage-2 .vig-word { animation: vig-zoom-out 0.5s cubic-bezier(.2,.8,.2,1) 1.0s 1 both, vig-glitch 0.4s steps(1,end) 1.4s 1 both; }
+
+        .vig-stage-3 { animation: vig-cut-show 0.8s steps(1,end) 1.8s 1 both; }
+        .vig-stage-3 .vig-word {
+          background: var(--onmid-lime);
+          color: oklch(0.13 0.005 240);
+          padding: 0 32px;
+          animation: vig-slam-in 0.6s cubic-bezier(.2,.8,.2,1) 1.8s 1 both, vig-shake 0.2s steps(2,end) 2.3s 2 both;
+        }
+
+        .vig-stage-4 { animation: vig-cut-show 0.6s steps(1,end) 2.6s 1 both; }
+        .vig-stage-4 .vig-word { font-size: 240px; animation: vig-zoom-out 0.55s cubic-bezier(.2,.8,.2,1) 2.6s 1 both, vig-glitch 0.3s steps(1,end) 3.0s 1 both; }
+
+        .vig-bar { animation: vig-bar-flicker 0.6s steps(1,end) 0.4s 3 both; }
       `}</style>
 
-      {/* Stage 1 — Logo */}
-      <div className="vig-stage vig-s1">
-        <img src={logoWhite} alt="Onmid" className="vig-logo" draggable={false} />
-        <div className="vig-bar" style={{ top: "28%" }} />
-        <div className="vig-bar" style={{ top: "68%", background: "#ff003c", height: 4 }} />
+      {/* STAGE 1: Logo Onmid */}
+      <div className="vig-stage vig-stage-1">
+        <img src={logoWhite} alt="Onmid" className="vig-logo-img" draggable={false} />
+        <div
+          className="vig-bar absolute left-0 right-0 h-2"
+          style={{ top: "30%", background: "var(--onmid-lime)" }}
+        />
+        <div
+          className="vig-bar absolute left-0 right-0 h-1"
+          style={{ top: "62%", background: "#ff003c" }}
+        />
       </div>
 
-      {/* Stage 2 — Vendas */}
-      <div className="vig-stage vig-s2">
+      {/* STAGE 2: VENDAS */}
+      <div className="vig-stage vig-stage-2">
         <div className="vig-word">Vendas</div>
       </div>
 
-      {/* Stage 3 — DE ALTA */}
-      <div className="vig-stage vig-s3">
+      {/* STAGE 3: DE ALTA (lime slam) */}
+      <div className="vig-stage vig-stage-3">
         <div className="vig-word">DE ALTA</div>
       </div>
 
-      {/* Stage 4 — PERFORMANCE */}
-      <div className="vig-stage vig-s4">
-        <div className="vig-word vig-word-lime">Performance</div>
+      {/* STAGE 4: PERFORMANCE */}
+      <div className="vig-stage vig-stage-4">
+        <div className="vig-word">PERFORMANCE</div>
       </div>
 
-      <div className="vig-flash" />
+      {/* Flashes */}
+      <div className="vig-flash-1" />
+      <div className="vig-flash-2" />
+      <div className="vig-flash-3" />
+      <div className="vig-flash-4" />
+
+      {/* CRT overlays */}
       <div className="vig-scanlines" />
+      <div className="vig-noise" />
 
       {!hideReplay && (
         <button
-          onClick={() => setKey((k) => k + 1)}
-          className="absolute bottom-6 right-6 z-50 px-4 py-2 bg-white text-black font-bold text-sm rounded"
+          onClick={() => setRunKey((k) => k + 1)}
+          className="absolute bottom-8 right-8 z-[100] uppercase font-bold px-6 py-3 rounded-full"
+          style={{
+            fontSize: 14,
+            letterSpacing: "0.3em",
+            background: "var(--onmid-lime)",
+            color: "oklch(0.13 0.005 240)",
+          }}
         >
-          Replay
+          ▶ Reproduzir de novo
         </button>
       )}
     </div>

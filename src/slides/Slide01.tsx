@@ -5,7 +5,7 @@ import { LiveInfoBar } from "@/components/LiveInfoBar";
 
 
 const STATIC_MS = 10000; // hold the static slide for 10s
-const ANIM_MS = 5200;    // vignette duration (~5.2s, 4 estágios)
+const ANIM_MS = 3400;    // vignette duration (~3.4s)
 
 export function Slide01() {
   const [playKey, setPlayKey] = useState<number | null>(null);
