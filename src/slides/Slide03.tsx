@@ -7,7 +7,14 @@ const FONT_CYCLE = [
   { family: "'Instrument Serif', serif", weight: 400, style: "italic", letter: "-0.03em" },
   { family: "'Archivo Black', sans-serif", weight: 900, style: "normal", letter: "-0.04em" },
   { family: "'Cormorant Garamond', serif", weight: 700, style: "italic", letter: "-0.02em" },
-  { family: "'Bebas Neue', sans-serif", weight: 400, style: "normal", letter: "0.01em" },
+  { family: "'Bebas Neue', sans-serif", weight: 400, style: "normal", letter: "0.02em" },
+  { family: "'Caveat', cursive", weight: 700, style: "normal", letter: "-0.01em" },
+  { family: "'Major Mono Display', monospace", weight: 400, style: "normal", letter: "-0.04em" },
+  { family: "'Abril Fatface', serif", weight: 400, style: "normal", letter: "-0.03em" },
+  { family: "'Bungee', sans-serif", weight: 400, style: "normal", letter: "-0.02em" },
+  { family: "'Playfair Display', serif", weight: 900, style: "italic", letter: "-0.03em" },
+  { family: "'Rubik Mono One', monospace", weight: 400, style: "normal", letter: "-0.05em" },
+  { family: "'Pacifico', cursive", weight: 400, style: "normal", letter: "-0.01em" },
 ];
 
 export function Slide03() {
@@ -16,7 +23,7 @@ export function Slide03() {
   useEffect(() => {
     const t = setInterval(() => {
       setFontIdx((i) => (i + 1) % FONT_CYCLE.length);
-    }, 1400);
+    }, 650);
     return () => clearInterval(t);
   }, []);
 
