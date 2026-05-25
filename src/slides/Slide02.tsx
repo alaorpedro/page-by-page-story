@@ -103,62 +103,106 @@ export function Slide02() {
         </p>
 
         <div
-          className="grid grid-cols-2 gap-10 mt-12 ml-auto text-left"
-          style={{ maxWidth: 680 }}
+          className="grid grid-cols-2 gap-6 mt-14 ml-auto text-left"
+          style={{ maxWidth: 720 }}
         >
-          <div>
-            <div
-              className="uppercase font-black mb-4 flex items-center gap-3"
+          {/* Formação card */}
+          <div
+            className="relative p-7 rounded-2xl"
+            style={{
+              background: "oklch(1 0 0 / 0.06)",
+              border: "1px solid oklch(1 0 0 / 0.12)",
+              backdropFilter: "blur(8px)",
+            }}
+          >
+            <span
+              className="absolute -top-3 left-7 px-3 py-1 uppercase font-black rounded-full"
               style={{
-                fontSize: 12,
-                letterSpacing: "0.35em",
-                color: "oklch(0.98 0.005 100)",
+                fontSize: 11,
+                letterSpacing: "0.32em",
+                background: "var(--onmid-lime)",
+                color: "oklch(0.13 0.005 240)",
               }}
             >
-              <span style={{ width: 22, height: 2, background: "var(--onmid-lime)" }} />
               Formação
-            </div>
+            </span>
             <ul
-              className="space-y-2"
+              className="space-y-3 mt-2"
               style={{
-                fontSize: 15,
-                color: "oklch(0.98 0.005 100 / 0.78)",
-                lineHeight: 1.5,
+                fontSize: 16,
+                color: "oklch(0.98 0.005 100 / 0.92)",
+                lineHeight: 1.4,
+                fontWeight: 500,
               }}
             >
-              <li>Marketing e Publicidade · UNOPAR</li>
-              <li>Gestão de RH · UNOPAR</li>
-              <li>Gestão Comercial · UNOPAR</li>
-              <li>Practitioner em PNL · INEMP</li>
+              <li className="flex items-start gap-3">
+                <span className="mt-2" style={{ width: 6, height: 6, borderRadius: 999, background: "var(--onmid-lime)", flexShrink: 0 }} />
+                <span>Marketing e Publicidade <span style={{ opacity: 0.55 }}>· UNOPAR</span></span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="mt-2" style={{ width: 6, height: 6, borderRadius: 999, background: "var(--onmid-lime)", flexShrink: 0 }} />
+                <span>Gestão de RH <span style={{ opacity: 0.55 }}>· UNOPAR</span></span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="mt-2" style={{ width: 6, height: 6, borderRadius: 999, background: "var(--onmid-lime)", flexShrink: 0 }} />
+                <span>Gestão Comercial <span style={{ opacity: 0.55 }}>· UNOPAR</span></span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="mt-2" style={{ width: 6, height: 6, borderRadius: 999, background: "var(--onmid-lime)", flexShrink: 0 }} />
+                <span>Practitioner em PNL <span style={{ opacity: 0.55 }}>· INEMP</span></span>
+              </li>
             </ul>
           </div>
-          <div>
-            <div
-              className="uppercase font-black mb-4 flex items-center gap-3"
+
+          {/* Contato card */}
+          <div
+            className="relative p-7 rounded-2xl"
+            style={{
+              background: "oklch(1 0 0 / 0.06)",
+              border: "1px solid oklch(1 0 0 / 0.12)",
+              backdropFilter: "blur(8px)",
+            }}
+          >
+            <span
+              className="absolute -top-3 left-7 px-3 py-1 uppercase font-black rounded-full"
               style={{
-                fontSize: 12,
-                letterSpacing: "0.35em",
-                color: "oklch(0.98 0.005 100)",
+                fontSize: 11,
+                letterSpacing: "0.32em",
+                background: "var(--onmid-lime)",
+                color: "oklch(0.13 0.005 240)",
               }}
             >
-              <span style={{ width: 22, height: 2, background: "var(--onmid-lime)" }} />
               Contato
-            </div>
+            </span>
             <ul
-              className="space-y-2"
+              className="space-y-3 mt-2"
               style={{
-                fontSize: 15,
-                color: "oklch(0.98 0.005 100 / 0.78)",
-                lineHeight: 1.5,
+                fontSize: 16,
+                color: "oklch(0.98 0.005 100 / 0.92)",
+                lineHeight: 1.4,
+                fontWeight: 500,
               }}
             >
-              <li>onmid.com.br</li>
-              <li>alaor@onmid.com.br</li>
-              <li>Av. Higienópolis, 1601</li>
-              <li>Londrina · PR</li>
+              <li className="flex items-center gap-3">
+                <span style={{ fontSize: 10, letterSpacing: "0.3em", opacity: 0.5, width: 32 }}>WEB</span>
+                <span>onmid.com.br</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <span style={{ fontSize: 10, letterSpacing: "0.3em", opacity: 0.5, width: 32 }}>MAIL</span>
+                <span>alaor@onmid.com.br</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <span style={{ fontSize: 10, letterSpacing: "0.3em", opacity: 0.5, width: 32 }}>END</span>
+                <span>Av. Higienópolis, 1601</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <span style={{ fontSize: 10, letterSpacing: "0.3em", opacity: 0.5, width: 32 }}>LOC</span>
+                <span>Londrina · PR</span>
+              </li>
             </ul>
           </div>
         </div>
+
 
       </div>
 
