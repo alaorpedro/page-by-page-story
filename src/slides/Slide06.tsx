@@ -3,10 +3,10 @@ import { SlideLayout } from "@/components/SlideLayout";
 import attendant from "@/assets/attendant-headset.png";
 
 // Steps:
-// 0 typing (início)
-// 1 troca inicial educada (3 bolhas)
-// 2 typing (mais tarde, mesmo dia)
-// 3 mensagens finais — cliente frustrado (2 bolhas)
+// 0 typing inicial
+// 1 grupo 1 (ontem) — cliente furiosa, "não volto mais"
+// 2 typing simulando a passagem do tempo
+// 3 grupo 2 (hoje) — divisor HOJE + cliente voltando pra pedir pizza
 // 4 callout final
 const STEPS = 5;
 
@@ -14,19 +14,21 @@ type Msg = {
   text: string;
   time: string;
   from: "client" | "company";
-  group: 1 | 2; // 1 = troca inicial, 2 = finalização
+  group: 1 | 2; // 1 = ontem (angry) | 2 = hoje (volta pedindo pizza)
 };
 const MESSAGES: Msg[] = [
-  { text: "Boa noite", time: "08:16 PM", from: "client", group: 1 },
-  { text: "Boa noite 👋", time: "08:17 PM", from: "company", group: 1 },
-  { text: "Quero pedir pizza", time: "08:17 PM", from: "client", group: 1 },
-  { text: "Vcs perderam cliente", time: "10:12 PM", from: "client", group: 2 },
+  // Ontem
+  { text: "Vcs perderam cliente", time: "10:12 PM", from: "client", group: 1 },
   {
     text: "Obrigada pelas desculpas, porém não volto mais.",
     time: "10:13 PM",
     from: "client",
-    group: 2,
+    group: 1,
   },
+  // Hoje
+  { text: "Boa noite", time: "08:16 PM", from: "client", group: 2 },
+  { text: "Boa noite 👋", time: "08:17 PM", from: "company", group: 2 },
+  { text: "Quero pedir pizza", time: "08:17 PM", from: "client", group: 2 },
 ];
 
 export function Slide06() {
@@ -310,15 +312,16 @@ function Iphone({
           className="absolute left-0 right-0 px-4 flex flex-col gap-1.5"
           style={{ top: 130, bottom: 24 }}
         >
-          {/* "HOJE" divider — sempre visível */}
-          <DayDivider label="HOJE" />
-
           {MESSAGES.slice(0, visibleCount).map((m, i) => {
             const prev = i > 0 ? MESSAGES[i - 1] : null;
-            // gap maior entre o grupo 1 e o grupo 2 (intervalo de tempo)
-            const extraGap = prev && prev.group !== m.group ? 14 : 0;
+            const groupChanged = prev && prev.group !== m.group;
             return (
-              <div key={i} style={{ marginTop: extraGap }}>
+              <div key={i}>
+                {groupChanged && (
+                  <div style={{ marginTop: 12, marginBottom: 8 }}>
+                    <DayDivider label="HOJE" />
+                  </div>
+                )}
                 <Bubble msg={m} delay={i * 0.05} />
               </div>
             );
