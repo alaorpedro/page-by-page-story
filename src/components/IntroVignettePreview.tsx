@@ -39,7 +39,8 @@ export function IntroVignettePreview({ hideReplay = false }: Props) {
         }
         @keyframes vigFlash {
           0%, 100% { opacity: 0; }
-          5%, 8%   { opacity: 1; }
+          32%, 33% { opacity: 0.5; }
+          65%, 66% { opacity: 0.5; }
         }
         .vig-stage {
           position: absolute; inset: 0;
@@ -74,8 +75,8 @@ export function IntroVignettePreview({ hideReplay = false }: Props) {
         }
         .vig-flash {
           position: absolute; inset: 0; background: white;
-          animation: vigFlash 1.3s steps(1) infinite;
-          mix-blend-mode: screen;
+          animation: vigFlash 4s steps(1) forwards;
+          opacity: 0;
         }
         .vig-scanlines {
           position: absolute; inset: 0; pointer-events: none;
