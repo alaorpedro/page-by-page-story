@@ -58,7 +58,7 @@ export function Slide02() {
 
       {/* Text column over photo */}
       <div
-        className="absolute right-24 top-[280px] animate-fade-in-up text-right z-10"
+        className="absolute right-[196px] top-[280px] animate-fade-in-up text-right z-10"
         style={{ width: "44%", animationDelay: "0.15s" }}
       >
         <div
