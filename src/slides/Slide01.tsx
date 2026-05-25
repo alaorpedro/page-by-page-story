@@ -1,8 +1,32 @@
+import { useEffect, useState } from "react";
 import { SlideLayout } from "@/components/SlideLayout";
+import { IntroVignettePreview } from "@/components/IntroVignettePreview";
+
+const STATIC_MS = 10000; // hold the static slide for 10s
+const ANIM_MS = 4000;    // vignette duration (~4s)
 
 export function Slide01() {
+  const [playKey, setPlayKey] = useState<number | null>(null);
+
+  useEffect(() => {
+    let t: ReturnType<typeof setTimeout>;
+    const cycle = () => {
+      t = setTimeout(() => {
+        setPlayKey((k) => (k ?? 0) + 1);
+        t = setTimeout(() => {
+          setPlayKey(null);
+          cycle();
+        }, ANIM_MS);
+      }, STATIC_MS);
+    };
+    cycle();
+    return () => clearTimeout(t);
+  }, []);
+
   return (
+    <>
     <SlideLayout variant="hero" tone="dark">
+
       {/* Thin lime vertical rail */}
       <div
         className="absolute left-16 top-44 bottom-32 animate-fade-in"
