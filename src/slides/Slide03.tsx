@@ -1,22 +1,119 @@
 import { SlideLayout } from "@/components/SlideLayout";
+import { useEffect, useState } from "react";
+import familiaPhoto from "@/assets/familia.jpg";
+
+const FONT_CYCLE = [
+  { family: "'Sora', sans-serif", weight: 900, style: "normal", letter: "-0.05em" },
+  { family: "'Instrument Serif', serif", weight: 400, style: "italic", letter: "-0.03em" },
+  { family: "'Archivo Black', sans-serif", weight: 900, style: "normal", letter: "-0.04em" },
+  { family: "'Cormorant Garamond', serif", weight: 700, style: "italic", letter: "-0.02em" },
+  { family: "'Bebas Neue', sans-serif", weight: 400, style: "normal", letter: "0.01em" },
+];
 
 export function Slide03() {
+  const [fontIdx, setFontIdx] = useState(0);
+
+  useEffect(() => {
+    const t = setInterval(() => {
+      setFontIdx((i) => (i + 1) % FONT_CYCLE.length);
+    }, 1400);
+    return () => clearInterval(t);
+  }, []);
+
+  const f = FONT_CYCLE[fontIdx];
+
   return (
-    <SlideLayout arcs="none" logo="none">
-      <div className="absolute inset-0 flex items-center justify-center">
+    <SlideLayout variant="content" tone="light">
+      {/* Full-bleed background photo */}
+      <div className="absolute inset-0 animate-fade-in overflow-hidden">
+        <img
+          src={familiaPhoto}
+          alt="Família do Alaor"
+          className="w-full h-full object-cover"
+          style={{ filter: "grayscale(1) contrast(1.18) brightness(0.9)", objectPosition: "center 30%" }}
+          draggable={false}
+        />
+        {/* Lime duotone wash */}
         <div
-          className="relative rounded-3xl border-4 border-dashed border-white/15 flex items-center justify-center animate-[scale-in_0.9s_cubic-bezier(0.22,1,0.36,1)_both]"
-          style={{ width: 1500, height: 880, background: "oklch(0.2 0.005 240)" }}
+          className="absolute inset-0 mix-blend-multiply"
+          style={{ background: "var(--onmid-lime)", opacity: 0.42 }}
+        />
+        {/* Bottom dark gradient — keeps faces clean while giving room for the word */}
+        <div
+          className="absolute inset-x-0 bottom-0 pointer-events-none"
+          style={{
+            height: "62%",
+            background:
+              "linear-gradient(to top, oklch(0.11 0.005 240 / 0.96) 0%, oklch(0.11 0.005 240 / 0.78) 35%, oklch(0.11 0.005 240 / 0) 100%)",
+          }}
+        />
+        {/* Subtle top vignette */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(180deg, oklch(0 0 0 / 0.35) 0%, oklch(0 0 0 / 0) 25%)",
+          }}
+        />
+      </div>
+
+      {/* Section marker — top right */}
+      <div
+        className="absolute right-[120px] top-44 flex items-center gap-8 animate-fade-in-up z-10"
+        style={{ width: "32%" }}
+      >
+        <div className="flex-1 h-px" style={{ background: "oklch(1 0 0 / 0.25)" }} />
+        <div
+          className="font-extrabold"
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: 72,
+            lineHeight: 1,
+            color: "oklch(0.98 0.005 100)",
+          }}
         >
-          <div className="text-center">
-            <p className="slide-kicker text-onmid-green">Foto pessoal</p>
-            <p className="slide-title text-white/90 mt-4" style={{ fontWeight: 700 }}>
-              Família
-            </p>
-            <p className="slide-body text-white/50 mt-4">
-              (foto/vídeo a ser enviado pelo Alaor)
-            </p>
-          </div>
+          03<span className="text-lime">.</span>
+        </div>
+      </div>
+
+      {/* Kicker */}
+      <div
+        className="absolute left-[120px] z-10 animate-fade-in-up"
+        style={{ bottom: 440, animationDelay: "0.2s" }}
+      >
+        <div
+          className="uppercase font-bold"
+          style={{
+            fontSize: 18,
+            letterSpacing: "0.5em",
+            color: "var(--onmid-lime)",
+          }}
+        >
+          O que me move
+        </div>
+      </div>
+
+      {/* Giant animated "propósito" */}
+      <div
+        className="absolute inset-x-0 z-10 px-[80px] animate-fade-in-up"
+        style={{ bottom: 140, animationDelay: "0.35s" }}
+      >
+        <div
+          key={fontIdx}
+          className="leading-none"
+          style={{
+            fontFamily: f.family,
+            fontWeight: f.weight as number,
+            fontStyle: f.style,
+            letterSpacing: f.letter,
+            fontSize: 320,
+            color: "oklch(0.98 0.005 100)",
+            lineHeight: 0.85,
+            whiteSpace: "nowrap",
+            animation: "fade-in 0.45s ease-out both",
+          }}
+        >
+          propósito<span className="text-lime">.</span>
         </div>
       </div>
     </SlideLayout>
