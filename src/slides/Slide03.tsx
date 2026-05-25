@@ -19,13 +19,32 @@ const FONT_CYCLE = [
 
 export function Slide03() {
   const [fontIdx, setFontIdx] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(1);
 
   useEffect(() => {
     const t = setInterval(() => {
       setFontIdx((i) => (i + 1) % FONT_CYCLE.length);
-    }, 650);
+    }, 400);
     return () => clearInterval(t);
   }, []);
+
+  useLayoutEffect(() => {
+    const fit = () => {
+      const c = containerRef.current;
+      const t = textRef.current;
+      if (!c || !t) return;
+      const cw = c.clientWidth;
+      const tw = t.scrollWidth;
+      setScale(tw > 0 ? Math.min(1, cw / tw) : 1);
+    };
+    fit();
+    // refit after webfont loads
+    (document as any).fonts?.ready?.then(fit);
+    const id = requestAnimationFrame(fit);
+    return () => cancelAnimationFrame(id);
+  }, [fontIdx]);
 
   const f = FONT_CYCLE[fontIdx];
 
