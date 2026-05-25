@@ -59,7 +59,7 @@ export function Slide12() {
   const [intro, setIntro] = useState(true);
 
   useEffect(() => {
-    const t = setTimeout(() => setIntro(false), 6500);
+    const t = setTimeout(() => setIntro(false), 4500);
     return () => clearTimeout(t);
   }, []);
 
@@ -124,7 +124,7 @@ export function Slide12() {
               height: 1200,
               objectFit: "contain",
               background: "transparent",
-              animation: "brain-intro 6.5s cubic-bezier(0.6,0,0.25,1) both",
+              animation: "brain-intro 4.5s cubic-bezier(0.6,0,0.25,1) both",
             }}
           />
         </div>
@@ -138,7 +138,7 @@ export function Slide12() {
         style={{
           opacity: intro ? 0 : 1,
           transform: intro ? "translateY(-12px)" : "translateY(0)",
-          transition: "opacity 500ms ease 4000ms, transform 500ms ease 4000ms",
+          transition: "opacity 400ms ease 2200ms, transform 400ms ease 2200ms",
         }}
       >
 
@@ -171,7 +171,7 @@ export function Slide12() {
           maxWidth: 620,
           opacity: intro ? 0 : 1,
           transform: intro ? "translateY(20px)" : "translateY(0)",
-          transition: "opacity 600ms ease 4200ms, transform 600ms ease 4200ms",
+          transition: "opacity 500ms ease 2400ms, transform 500ms ease 2400ms",
         }}
       >
 
@@ -236,7 +236,7 @@ export function Slide12() {
           top: 240,
           bottom: 220,
           opacity: intro ? 0 : 1,
-          transition: "opacity 600ms ease 4400ms",
+          transition: "opacity 500ms ease 2600ms",
         }}
       >
 
