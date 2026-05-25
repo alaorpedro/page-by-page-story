@@ -160,17 +160,20 @@ export function Slide02() {
           </div>
         </div>
 
-        <div
-          className="mt-8 inline-block font-black"
-          style={{
-            fontFamily: "var(--font-display)",
-            fontSize: 22,
-            color: "var(--onmid-lime)",
-            letterSpacing: "-0.02em",
-          }}
-        >
-          @alaorpedro10
-        </div>
+      </div>
+
+      {/* Handle — left side over the photo */}
+      <div
+        className="absolute left-24 bottom-24 font-black animate-fade-in-up z-10"
+        style={{
+          fontFamily: "var(--font-display)",
+          fontSize: 28,
+          color: "var(--onmid-lime)",
+          letterSpacing: "-0.02em",
+          animationDelay: "0.3s",
+        }}
+      >
+        @alaorpedro10
       </div>
     </SlideLayout>
   );
