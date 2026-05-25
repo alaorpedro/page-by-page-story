@@ -57,9 +57,15 @@ export function Slide12() {
   const TOTAL = STAGES.length;
   const [step, setStep] = useState(0);
   const [intro, setIntro] = useState(true);
+  const [contentVisible, setContentVisible] = useState(false);
 
   useEffect(() => {
     const t = setTimeout(() => setIntro(false), 4500);
+    return () => clearTimeout(t);
+  }, []);
+
+  useEffect(() => {
+    const t = setTimeout(() => setContentVisible(true), 3000);
     return () => clearTimeout(t);
   }, []);
 
@@ -136,9 +142,9 @@ export function Slide12() {
       <div
         className="absolute left-16 right-16 top-44 flex items-center gap-8 z-30"
         style={{
-          opacity: intro ? 0 : 1,
-          transform: intro ? "translateY(-12px)" : "translateY(0)",
-          transition: "opacity 400ms ease 3000ms, transform 400ms ease 3000ms",
+          opacity: contentVisible ? 1 : 0,
+          transform: contentVisible ? "translateY(0)" : "translateY(-12px)",
+          transition: "opacity 400ms ease, transform 400ms ease",
         }}
       >
 
@@ -169,9 +175,9 @@ export function Slide12() {
           left: 64,
           top: 260,
           maxWidth: 620,
-          opacity: intro ? 0 : 1,
-          transform: intro ? "translateY(20px)" : "translateY(0)",
-          transition: "opacity 500ms ease 3200ms, transform 500ms ease 3200ms",
+          opacity: contentVisible ? 1 : 0,
+          transform: contentVisible ? "translateY(0)" : "translateY(20px)",
+          transition: "opacity 500ms ease 120ms, transform 500ms ease 120ms",
         }}
       >
 
@@ -235,8 +241,8 @@ export function Slide12() {
           right: 64,
           top: 240,
           bottom: 220,
-          opacity: intro ? 0 : 1,
-          transition: "opacity 500ms ease 3400ms",
+          opacity: contentVisible ? 1 : 0,
+          transition: "opacity 500ms ease 220ms",
         }}
       >
 
