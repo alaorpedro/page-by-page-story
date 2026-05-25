@@ -119,7 +119,10 @@ export function Slide04() {
           }}
         >
           Nós acreditamos que os clientes tomam decisões de compra porque
-          consideraram cuidadosamente nossa oferta, proposta e benefícios.
+          consideraram cuidadosamente nossa{" "}
+          <TermBtn k="oferta" onOpen={setOpenTerm}>oferta</TermBtn>,{" "}
+          <TermBtn k="proposta" onOpen={setOpenTerm}>proposta</TermBtn> e{" "}
+          <TermBtn k="beneficios" onOpen={setOpenTerm}>benefícios</TermBtn>.
         </p>
 
         {/* Step 1 — "Mas isso não é tudo." */}
