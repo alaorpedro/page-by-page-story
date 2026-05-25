@@ -254,9 +254,7 @@ export function Slide07() {
                       fontSize: 96,
                       lineHeight: 0.95,
                       letterSpacing: "-0.035em",
-                      color: current.accent || isFinal
-                        ? "var(--onmid-lime)"
-                        : "oklch(0.98 0 0)",
+                      color: "oklch(0.13 0.005 240)",
                     }}
                   >
                     {current.title}
@@ -265,7 +263,7 @@ export function Slide07() {
                     style={{
                       fontSize: 30,
                       lineHeight: 1.3,
-                      color: "oklch(1 0 0 / 0.78)",
+                      color: "oklch(0.13 0.005 240 / 0.72)",
                       maxWidth: 820,
                     }}
                   >
