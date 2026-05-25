@@ -59,19 +59,31 @@ export function Slide04() {
     return () => window.removeEventListener("keydown", onKey, true);
   }, [step, openTerm]);
 
-  const onClick = () => setStep((s) => Math.min(STEPS - 1, s + 1));
+  // Click capture: intercepts slide advance to step through internal states first.
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      // ignore clicks on interactive elements (term buttons, modal, chrome)
+      if (
+        target.closest("button") ||
+        target.closest("a") ||
+        target.closest("[role=dialog]")
+      )
+        return;
+      if (openTerm) return;
+      if (step < STEPS - 1) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setStep((s) => Math.min(STEPS - 1, s + 1));
+      }
+    };
+    window.addEventListener("click", onClick, true);
+    return () => window.removeEventListener("click", onClick, true);
+  }, [step, openTerm]);
 
   return (
     <SlideLayout variant="content" tone="light" bgLetter="4">
-      {/* click overlay to advance internal steps */}
-      {step < STEPS - 1 && (
-        <button
-          aria-label="Avançar"
-          onClick={onClick}
-          className="absolute inset-0 z-10 cursor-pointer"
-          style={{ background: "transparent" }}
-        />
-      )}
+
 
       {/* Section kicker */}
       <div className="absolute left-16 right-16 top-44 flex items-center gap-8 animate-fade-in-up z-20">
