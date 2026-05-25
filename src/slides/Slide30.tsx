@@ -22,10 +22,7 @@ export function Slide30() {
   return (
     <SlideLayout arcs="corners" logo="br">
       <div className="absolute inset-0 flex flex-col items-center justify-center px-[10%]">
-        <h2
-          className="text-white animate-[fade-in-up_0.8s_ease-out_both]"
-          style={{ fontSize: 56, fontWeight: 700 }}
-        >
+        <h2 className="slide-subtitle text-foreground font-bold animate-fade-in-up">
           Texto para reflexão:
         </h2>
 
@@ -33,32 +30,21 @@ export function Slide30() {
           {items.map((it, i) => (
             <div
               key={i}
-              className="animate-[fade-in-up_0.7s_ease-out_both]"
+              className="animate-fade-in-up"
               style={{ animationDelay: `${0.2 + i * 0.18}s` }}
             >
-              <p
-                className="text-white italic"
-                style={{ fontSize: 36, fontWeight: 700 }}
-              >
+              <p className="slide-body-lg text-foreground italic font-bold">
                 {it.title}
               </p>
               <a
                 href={it.url}
                 target="_blank"
                 rel="noreferrer"
-                className="block break-all underline italic"
-                style={{
-                  fontSize: 28,
-                  color: "var(--onmid-lime)",
-                  fontWeight: 600,
-                  marginTop: 4,
-                }}
+                className="slide-body text-lime italic font-semibold underline block break-all mt-1"
               >
                 {it.url}
               </a>
-              <p className="text-white mt-1" style={{ fontSize: 26 }}>
-                {it.author}
-              </p>
+              <p className="slide-caption text-foreground mt-1">{it.author}</p>
             </div>
           ))}
         </div>

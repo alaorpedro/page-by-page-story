@@ -22,26 +22,18 @@ export function Slide20() {
     <SlideLayout arcs="corners" logo="br">
       <div className="absolute inset-0 grid grid-cols-2 gap-16 px-[7%] py-[6%]">
         <div>
-          <h3
-            className="inline-block px-2 animate-[fade-in-up_0.7s_ease-out_both]"
-            style={{
-              fontSize: 48,
-              fontWeight: 700,
-              background: "var(--onmid-lime)",
-              color: "oklch(0.2 0.005 240)",
-            }}
-          >
+          <h3 className="slide-subtitle hl-lime inline-block animate-fade-in-up">
             Crenças do Cliente
           </h3>
-          <ul className="mt-8 space-y-5 text-white" style={{ fontSize: 24 }}>
+          <ul className="mt-8 space-y-4 text-foreground slide-caption">
             {clientBeliefs.map((b, i) => (
               <li
                 key={i}
-                className="animate-[fade-in-up_0.6s_ease-out_both]"
+                className="animate-fade-in-up"
                 style={{ animationDelay: `${0.15 + i * 0.07}s` }}
               >
-                <span style={{ fontWeight: 700 }}>{b.q}</span>{" "}
-                <span style={{ color: "oklch(0.85 0 0)" }}>→ {b.a}</span>
+                <span className="font-bold">{b.q}</span>{" "}
+                <span className="text-foreground/80">→ {b.a}</span>
               </li>
             ))}
           </ul>
@@ -49,22 +41,17 @@ export function Slide20() {
 
         <div>
           <h3
-            className="inline-block px-2 animate-[fade-in-up_0.7s_ease-out_0.1s_both]"
-            style={{
-              fontSize: 48,
-              fontWeight: 700,
-              background: "var(--onmid-lime)",
-              color: "oklch(0.2 0.005 240)",
-            }}
+            className="slide-subtitle hl-lime inline-block animate-fade-in-up"
+            style={{ animationDelay: "0.1s" }}
           >
             Crenças do Vendedor
           </h3>
-          <ul className="mt-8 space-y-7 text-white" style={{ fontSize: 30 }}>
+          <ul className="mt-8 space-y-6 text-foreground slide-body">
             {sellerBeliefs.map((b, i) => (
               <li
                 key={i}
-                className="animate-[fade-in-up_0.6s_ease-out_both]"
-                style={{ animationDelay: `${0.25 + i * 0.08}s`, fontWeight: 600 }}
+                className="animate-fade-in-up font-semibold"
+                style={{ animationDelay: `${0.25 + i * 0.08}s` }}
               >
                 {b}
               </li>
