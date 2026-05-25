@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import brain3d from "@/assets/brain-3d.png";
+import brainVideo from "@/assets/brain-rotate.mp4.asset.json";
 
 import { SlideLayout } from "@/components/SlideLayout";
 
