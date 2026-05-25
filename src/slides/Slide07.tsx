@@ -115,7 +115,7 @@ export function Slide07() {
           style={{
             fontSize: 20,
             letterSpacing: "0.3em",
-            color: "var(--onmid-lime)",
+            color: "oklch(0.13 0.005 240 / 0.55)",
           }}
         >
           Entendendo o fluxo de
@@ -127,11 +127,11 @@ export function Slide07() {
             fontSize: 80,
             lineHeight: 0.95,
             letterSpacing: "-0.04em",
-            color: "oklch(0.98 0 0)",
+            color: "oklch(0.13 0.005 240)",
           }}
         >
           Anúncios{" "}
-          <span style={{ color: "oklch(1 0 0 / 0.35)" }}>/</span>{" "}
+          <span style={{ color: "oklch(0.13 0.005 240 / 0.35)" }}>/</span>{" "}
           <span className="italic" style={{ fontWeight: 300 }}>
             Divulgação
           </span>
