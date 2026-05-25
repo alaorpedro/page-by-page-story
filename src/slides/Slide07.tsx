@@ -105,15 +105,15 @@ export function Slide07() {
         </div>
       </div>
 
-      {/* Title */}
+      {/* Title (top, mais compacto) */}
       <div
         className="absolute left-16 right-16 animate-fade-in-up z-20"
-        style={{ top: 280, animationDelay: "0.1s" }}
+        style={{ top: 260, animationDelay: "0.1s" }}
       >
         <div
-          className="uppercase font-black mb-4"
+          className="uppercase font-black mb-3"
           style={{
-            fontSize: 22,
+            fontSize: 20,
             letterSpacing: "0.3em",
             color: "var(--onmid-lime)",
           }}
@@ -124,7 +124,7 @@ export function Slide07() {
           className="font-black"
           style={{
             fontFamily: "var(--font-display)",
-            fontSize: 120,
+            fontSize: 80,
             lineHeight: 0.95,
             letterSpacing: "-0.04em",
             color: "oklch(0.98 0 0)",
@@ -138,109 +138,185 @@ export function Slide07() {
         </h1>
       </div>
 
-      {/* Flow row */}
+      {/* HERO: etapa atual em destaque no centro */}
+      <div
+        className="absolute z-20"
+        style={{ left: "8%", right: "8%", top: 460, height: 360 }}
+      >
+        {step === 0 ? (
+          <div
+            className="h-full flex items-center justify-center text-center animate-fade-in"
+            style={{
+              fontSize: 28,
+              color: "oklch(1 0 0 / 0.45)",
+              letterSpacing: "0.05em",
+            }}
+          >
+            Clique para avançar pelas etapas →
+          </div>
+        ) : (
+          (() => {
+            const current = STEPS[step - 1];
+            return (
+              <div
+                key={step}
+                className="h-full flex items-center gap-16 animate-[fade-in-up_0.6s_cubic-bezier(0.22,1,0.36,1)_both]"
+              >
+                {/* Big badge */}
+                <div
+                  className="rounded-full flex items-center justify-center font-black relative shrink-0 animate-[pop-in_0.7s_cubic-bezier(0.34,1.56,0.64,1)_both]"
+                  style={{
+                    width: 280,
+                    height: 280,
+                    fontFamily: "var(--font-display)",
+                    fontSize: 140,
+                    background: current.accent
+                      ? "var(--onmid-lime)"
+                      : "oklch(1 0 0 / 0.06)",
+                    color: current.accent
+                      ? "oklch(0.13 0.005 240)"
+                      : "oklch(0.98 0 0)",
+                    border: current.accent
+                      ? "none"
+                      : "2px solid oklch(1 0 0 / 0.2)",
+                    boxShadow: current.accent
+                      ? "0 30px 80px oklch(0.84 0.18 130 / 0.45)"
+                      : "0 30px 80px oklch(0 0 0 / 0.5)",
+                    letterSpacing: "-0.04em",
+                  }}
+                >
+                  {current.ord}
+                  {current.accent && (
+                    <span
+                      className="absolute"
+                      style={{
+                        right: -28,
+                        top: -22,
+                        fontSize: 140,
+                        fontWeight: 900,
+                        color: "var(--onmid-lime)",
+                        WebkitTextStroke: "6px oklch(0.13 0.005 240)",
+                        fontFamily: "var(--font-display)",
+                      }}
+                    >
+                      ?
+                    </span>
+                  )}
+                </div>
+
+                {/* Title + description */}
+                <div className="flex-1">
+                  <div
+                    className="font-black mb-5"
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontSize: 96,
+                      lineHeight: 0.95,
+                      letterSpacing: "-0.035em",
+                      color: current.accent
+                        ? "var(--onmid-lime)"
+                        : "oklch(0.98 0 0)",
+                    }}
+                  >
+                    {current.title}
+                  </div>
+                  <p
+                    style={{
+                      fontSize: 30,
+                      lineHeight: 1.3,
+                      color: "oklch(1 0 0 / 0.78)",
+                      maxWidth: 820,
+                    }}
+                  >
+                    {current.desc}
+                  </p>
+                </div>
+              </div>
+            );
+          })()
+        )}
+      </div>
+
+      {/* TIMELINE inferior — chips compactos das 5 etapas */}
       <div
         className="absolute left-16 right-16 z-20"
-        style={{ bottom: 140 }}
+        style={{ bottom: 110 }}
       >
-        {/* Connector line */}
+        {/* Linha conectora */}
         <div
-          className="absolute animate-[fade-in_0.8s_ease-out_0.3s_both]"
+          className="absolute"
           style={{
-            left: 60,
-            right: 60,
-            top: 56,
+            left: 40,
+            right: 40,
+            top: 28,
             height: 2,
             background:
-              "repeating-linear-gradient(to right, oklch(1 0 0 / 0.25) 0 8px, transparent 8px 16px)",
+              "repeating-linear-gradient(to right, oklch(1 0 0 / 0.18) 0 8px, transparent 8px 16px)",
           }}
         />
 
-        <div className="relative grid grid-cols-5 gap-6">
+        <div className="relative grid grid-cols-5 gap-4">
           {STEPS.map((s, i) => {
-            const active = i < step;
+            const revealed = i < step;
+            const current = i === step - 1;
             return (
-            <div
-              key={i}
-              className="flex flex-col items-start"
-              style={{
-                opacity: active ? 1 : 0.25,
-                filter: active ? "none" : "saturate(0.3) blur(8px)",
-                transform: active ? "translateY(0)" : "translateY(6px)",
-                transition: "opacity 500ms ease, filter 500ms ease, transform 500ms ease",
-              }}
-            >
-              {/* Number badge */}
               <div
-                className="rounded-full flex items-center justify-center font-black mb-6 relative"
+                key={i}
+                className="flex flex-col items-center text-center"
                 style={{
-                  width: 112,
-                  height: 112,
-                  fontFamily: "var(--font-display)",
-                  fontSize: s.accent ? 52 : 48,
-                  background: s.accent && active
-                    ? "var(--onmid-lime)"
-                    : "oklch(1 0 0 / 0.06)",
-                  color: s.accent && active
-                    ? "oklch(0.13 0.005 240)"
-                    : "oklch(0.98 0 0)",
-                  border: s.accent && active
-                    ? "none"
-                    : "2px solid oklch(1 0 0 / 0.18)",
-                  boxShadow: s.accent && active
-                    ? "0 20px 50px oklch(0.84 0.18 130 / 0.35)"
-                    : "none",
-                  letterSpacing: "-0.04em",
-                  transition: "background 400ms ease, color 400ms ease, box-shadow 400ms ease",
+                  opacity: revealed ? 1 : 0.3,
+                  filter: revealed ? "none" : "saturate(0.3) blur(6px)",
+                  transition:
+                    "opacity 500ms ease, filter 500ms ease, transform 400ms ease",
+                  transform: current ? "translateY(-4px)" : "translateY(0)",
                 }}
               >
-                {s.ord}
-                {s.accent && (
-                  <span
-                    className="absolute"
-                    style={{
-                      right: -14,
-                      top: -10,
-                      fontSize: 56,
-                      fontWeight: 900,
-                      color: "var(--onmid-lime)",
-                      WebkitTextStroke: "3px oklch(0.13 0.005 240)",
-                      fontFamily: "var(--font-display)",
-                    }}
-                  >
-                    ?
-                  </span>
-                )}
+                <div
+                  className="rounded-full flex items-center justify-center font-black mb-3"
+                  style={{
+                    width: 56,
+                    height: 56,
+                    fontFamily: "var(--font-display)",
+                    fontSize: 22,
+                    background:
+                      current && s.accent
+                        ? "var(--onmid-lime)"
+                        : current
+                        ? "oklch(0.98 0 0)"
+                        : revealed && s.accent
+                        ? "var(--onmid-lime)"
+                        : "oklch(0.13 0.005 240)",
+                    color:
+                      current && !s.accent
+                        ? "oklch(0.13 0.005 240)"
+                        : s.accent && revealed
+                        ? "oklch(0.13 0.005 240)"
+                        : "oklch(0.98 0 0)",
+                    border: revealed
+                      ? "none"
+                      : "2px solid oklch(1 0 0 / 0.2)",
+                    boxShadow: current
+                      ? "0 10px 30px oklch(0.84 0.18 130 / 0.4)"
+                      : "none",
+                    letterSpacing: "-0.04em",
+                    transition: "all 400ms ease",
+                  }}
+                >
+                  {s.ord}
+                </div>
+                <div
+                  className="font-bold uppercase"
+                  style={{
+                    fontSize: 14,
+                    letterSpacing: "0.15em",
+                    color: current
+                      ? "var(--onmid-lime)"
+                      : "oklch(1 0 0 / 0.7)",
+                  }}
+                >
+                  {s.title}
+                </div>
               </div>
-
-              {/* Title */}
-              <div
-                className="font-black mb-3"
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: 38,
-                  lineHeight: 1,
-                  letterSpacing: "-0.02em",
-                  color: s.accent && active
-                    ? "var(--onmid-lime)"
-                    : "oklch(0.98 0 0)",
-                }}
-              >
-                {s.title}
-              </div>
-
-              {/* Description */}
-              <p
-                style={{
-                  fontSize: 20,
-                  lineHeight: 1.35,
-                  color: "oklch(1 0 0 / 0.65)",
-                  maxWidth: 260,
-                }}
-              >
-                {s.desc}
-              </p>
-            </div>
             );
           })}
         </div>
