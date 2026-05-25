@@ -1,6 +1,22 @@
 import { useEffect, useState } from "react";
 import { SlideLayout } from "@/components/SlideLayout";
 
+type TermKey = "oferta" | "proposta" | "beneficios";
+const TERMS: Record<TermKey, { title: string; body: string }> = {
+  oferta: {
+    title: "Oferta",
+    body: "É o que está sendo vendido — o produto ou serviço em si, com suas características, condições comerciais e o pacote completo que chega às mãos do cliente.",
+  },
+  proposta: {
+    title: "Proposta",
+    body: "É a promessa de valor: o motivo pelo qual aquela oferta é relevante para esse cliente específico, naquele momento, em comparação às alternativas disponíveis.",
+  },
+  beneficios: {
+    title: "Benefícios",
+    body: "São os ganhos práticos e emocionais que o cliente passa a ter ao escolher a oferta — o que muda na vida, na rotina ou no negócio dele depois da compra.",
+  },
+};
+
 const STEPS = 3; // 0: p1, 1: + "Mas isso não é tudo.", 2: + frase final
 
 export function Slide04() {
