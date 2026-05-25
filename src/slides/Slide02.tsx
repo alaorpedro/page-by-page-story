@@ -82,9 +82,8 @@ export function Slide02() {
             color: "oklch(0.98 0.005 100)",
           }}
         >
-          Alaor<br />
-          Pedro de<br />
-          <span className="text-lime">Oliveira</span>
+          Alaor Pedro<br />
+          de <span className="text-lime">Oliveira</span>
         </h2>
 
         <p
