@@ -2,87 +2,88 @@ import { SlideLayout } from "@/components/SlideLayout";
 
 export function Slide04() {
   return (
-    <SlideLayout variant="content">
+    <SlideLayout variant="content" tone="dark" bgLetter="4">
+      {/* Section kicker */}
       <div className="absolute left-16 right-16 top-44 flex items-center gap-8 animate-fade-in-up">
         <div
-          className="font-extrabold text-lime"
-          style={{ fontFamily: "var(--font-display)", fontSize: 72, lineHeight: 1 }}
+          className="font-extrabold"
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: 64,
+            lineHeight: 1,
+            color: "oklch(0.98 0 0)",
+          }}
         >
-          04.
+          04<span className="text-lime">.</span>
         </div>
-        <div className="flex-1 h-px bg-foreground/10" />
         <div
-          className="text-foreground/40 uppercase font-semibold"
-          style={{ fontSize: 22, letterSpacing: "0.3em" }}
+          className="flex-1 h-px max-w-[600px]"
+          style={{ background: "oklch(1 0 0 / 0.15)" }}
+        />
+        <div
+          className="uppercase font-bold mr-auto"
+          style={{
+            fontSize: 18,
+            letterSpacing: "0.35em",
+            color: "oklch(1 0 0 / 0.55)",
+          }}
         >
-          Mudança do Estado Emocional
+          Nossa Crença
         </div>
       </div>
 
-      <div className="absolute left-16 right-16 top-72 bottom-32 grid grid-cols-12 gap-12">
-        <div className="col-span-5 flex items-center">
-          <h2 className="slide-title text-foreground">
-            Mover o cliente<br />
-            do{" "}
-            <span className="bg-[var(--onmid-lime)] text-[var(--onmid-bg)] px-3">
-              estado atual
-            </span>
-          </h2>
-        </div>
-
-        <div
-          className="col-span-7 flex flex-col justify-center pl-12 border-l"
-          style={{ borderColor: "oklch(0.88 0.24 138 / 0.3)" }}
+      {/* Body */}
+      <div className="absolute left-16 right-16 top-[300px] bottom-32 max-w-[1280px]">
+        <p
+          className="font-medium animate-fade-in-up"
+          style={{
+            fontSize: 44,
+            lineHeight: 1.28,
+            color: "oklch(1 0 0 / 0.85)",
+            animationDelay: "0.1s",
+          }}
         >
-          <p
-            className="slide-body-lg text-foreground font-medium animate-fade-in-up"
-            style={{ animationDelay: "0.15s" }}
-          >
-            Vendas é a arte de provocar uma{" "}
-            <span className="text-lime font-bold">
-              mudança no estado emocional
-            </span>{" "}
-            do lead — sair da dor, dúvida e hesitação rumo a confiança,
-            urgência e desejo de ação.
-          </p>
+          Nós acreditamos que os clientes tomam decisões de compra porque
+          consideraram cuidadosamente nossa oferta, proposta e benefícios.
+        </p>
 
-          <div className="flex gap-4 mt-12">
-            <div
-              className="flex-1 bg-foreground/5 p-6 animate-fade-in-up"
-              style={{
-                borderBottom: "2px solid oklch(1 0 0 / 0.2)",
-                animationDelay: "0.3s",
-              }}
-            >
-              <div
-                className="text-foreground/60 uppercase font-bold mb-2"
-                style={{ fontSize: 18, letterSpacing: "0.2em" }}
-              >
-                Estado Atual
-              </div>
-              <div className="slide-caption text-foreground/80">
-                Dor · dúvida · hesitação · medo
-              </div>
-            </div>
-            <div
-              className="flex-1 bg-foreground/5 p-6 animate-fade-in-up"
-              style={{
-                borderBottom: "2px solid var(--onmid-lime)",
-                animationDelay: "0.45s",
-              }}
-            >
-              <div
-                className="text-lime uppercase font-bold mb-2"
-                style={{ fontSize: 18, letterSpacing: "0.2em" }}
-              >
-                Estado Desejado
-              </div>
-              <div className="slide-caption text-foreground/80">
-                Confiança · urgência · ação
-              </div>
-            </div>
-          </div>
-        </div>
+        <p
+          className="mt-10 animate-fade-in-up"
+          style={{
+            fontFamily: "var(--font-display)",
+            fontWeight: 900,
+            fontSize: 72,
+            lineHeight: 1,
+            letterSpacing: "-0.04em",
+            color: "oklch(0.98 0 0)",
+            animationDelay: "0.25s",
+          }}
+        >
+          Mas isso não é tudo.
+        </p>
+
+        <p
+          className="mt-10 font-medium animate-fade-in-up"
+          style={{
+            fontSize: 44,
+            lineHeight: 1.28,
+            color: "oklch(1 0 0 / 0.85)",
+            animationDelay: "0.4s",
+          }}
+        >
+          Decisões de compra são sempre o resultado de uma{" "}
+          <span
+            className="px-3 inline-block font-black"
+            style={{
+              background: "var(--onmid-lime)",
+              color: "oklch(0.13 0.005 240)",
+              transform: "skewX(-4deg)",
+            }}
+          >
+            mudança em seu estado emocional
+          </span>
+          .
+        </p>
       </div>
     </SlideLayout>
   );
