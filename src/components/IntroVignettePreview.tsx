@@ -1,4 +1,6 @@
 import { useState } from "react";
+import logoWhite from "@/assets/onmid-logo-white.png";
+
 
 /**
  * Radical intro vignette — preview only.
@@ -83,6 +85,9 @@ export function IntroVignettePreview({ hideReplay = false }: { hideReplay?: bool
           white-space: nowrap;
           will-change: transform, opacity, filter, text-shadow, clip-path;
         }
+        .vig-logo { height: 380px; width: auto; font-size: 0; object-fit: contain; filter: drop-shadow(0 0 40px oklch(0.88 0.24 138 / 0.4)); }
+
+
         .vig-scanlines {
           position: absolute; inset: 0; pointer-events: none; z-index: 50;
           background: repeating-linear-gradient(
@@ -152,7 +157,13 @@ export function IntroVignettePreview({ hideReplay = false }: { hideReplay?: bool
 
       {/* ============== STAGE 1: ONMID ============== */}
       <div className="vig-stage vig-stage-1">
-        <div className="vig-word">ONMID</div>
+        <img
+          src={logoWhite}
+          alt="Onmid"
+          className="vig-word vig-logo"
+          draggable={false}
+        />
+
         <div
           className="vig-bar absolute left-0 right-0 h-2 bg-lime"
           style={{ top: "30%", background: "var(--onmid-lime)" }}
