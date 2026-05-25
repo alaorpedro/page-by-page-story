@@ -5,24 +5,13 @@ export function Slide16() {
     <SlideLayout arcs="corners" logo="br">
       <div className="absolute inset-0 flex items-center justify-center px-[6%]">
         <div
-          className="rounded-[44px] py-20 px-16 text-center animate-[scale-in_0.9s_cubic-bezier(0.22,1,0.36,1)_both]"
-          style={{
-            background: "var(--onmid-lime)",
-            color: "oklch(0.3 0.01 240)",
-            maxWidth: 1500,
-          }}
+          className="rounded-[44px] py-20 px-16 text-center animate-scale-in max-w-[1500px]"
+          style={{ background: "var(--onmid-lime)", color: "var(--onmid-bg)" }}
         >
-          <p style={{ fontSize: 64, fontWeight: 700, lineHeight: 1.2 }}>
+          <p className="slide-title font-extrabold">
             O produto / serviço é caro em<br />relação a que?
           </p>
-          <p
-            style={{
-              fontSize: 60,
-              fontWeight: 700,
-              lineHeight: 1.2,
-              marginTop: 64,
-            }}
-          >
+          <p className="slide-title font-extrabold mt-16">
             É menos caro não fazer o<br />adquirir nosso produto / serviço?
           </p>
         </div>
