@@ -8,6 +8,7 @@ import { Slide04 } from "@/slides/Slide04";
 import { Slide05 } from "@/slides/Slide05";
 import { Slide06 } from "@/slides/Slide06";
 import { Slide07 } from "@/slides/Slide07";
+import { Slide07b } from "@/slides/Slide07b";
 import { Slide08 } from "@/slides/Slide08";
 import { Slide09 } from "@/slides/Slide09";
 import { Slide10 } from "@/slides/Slide10";
