@@ -1,33 +1,34 @@
 import { SlideLayout } from "@/components/SlideLayout";
-import { OnmidLogo } from "@/components/OnmidLogo";
 
 export function Slide29() {
   return (
-    <SlideLayout arcs="corners" logo="none">
-      <div className="absolute inset-0 opacity-25 flex flex-col items-center justify-center px-[8%] text-center">
-        <p className="slide-subtitle text-foreground">
-          As pessoas estão acostumadas a clicar<br />em tudo!
-        </p>
-        <div className="mt-32">
-          <OnmidLogo size={150} />
-        </div>
-      </div>
-
+    <SlideLayout variant="statement">
+      {/* Diagonal lime banner */}
       <div
-        className="absolute inset-x-[-10%] top-[28%] py-14 origin-center animate-scale-in"
+        className="absolute inset-x-[-12%] top-[32%] py-16 animate-scale-in"
         style={{
           background: "var(--onmid-lime)",
-          transform: "rotate(-10deg)",
-          boxShadow: "0 30px 80px rgba(0,0,0,0.5)",
+          transform: "rotate(-9deg)",
+          boxShadow: "0 30px 100px rgba(0,0,0,0.6)",
         }}
       >
         <p
-          className="slide-title-lg text-center"
-          style={{ color: "var(--onmid-bg)" }}
+          className="text-center uppercase"
+          style={{
+            fontFamily: "var(--font-display)",
+            color: "var(--onmid-bg)",
+            fontSize: 130,
+            fontWeight: 900,
+            letterSpacing: "-0.03em",
+            lineHeight: 0.95,
+          }}
         >
-          NÃO ATENDA PARA<br />VENDER;{" "}
-          <span style={{ color: "oklch(0.1 0.005 240)" }}>
-            ENTENDA<br />PARA ATENDER
+          Não atenda para<br />
+          vender;{" "}
+          <span style={{ color: "oklch(0.08 0.005 240)" }}>
+            entenda
+            <br />
+            para atender.
           </span>
         </p>
       </div>

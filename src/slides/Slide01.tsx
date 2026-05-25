@@ -3,44 +3,55 @@ import cover from "@/assets/cover-gold-dollar.jpg";
 
 export function Slide01() {
   return (
-    <SlideLayout arcs="none" logo="none">
-      <img
-        src={cover}
-        alt=""
-        width={1920}
-        height={1080}
-        className="absolute inset-0 w-full h-full object-cover"
-      />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-transparent" />
-
-      <div className="absolute left-[8%] top-1/2 -translate-y-1/2 max-w-[900px]">
-        <h1
-          className="slide-title-lg text-white animate-[fade-in-up_0.9s_ease-out_both]"
-          style={{ fontWeight: 700, letterSpacing: "-0.04em" }}
-        >
-          Treinamento<br />de vendas
-        </h1>
-        <p
-          className="slide-subtitle text-white/90 mt-6 animate-[fade-in-up_1s_ease-out_0.2s_both]"
-          style={{ fontWeight: 400 }}
-        >
-          Atendimento Online
-        </p>
+    <SlideLayout variant="hero">
+      {/* Hero visual right side */}
+      <div className="absolute right-0 top-0 bottom-0 w-[42%]">
+        <img
+          src={cover}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ filter: "saturate(1.1)" }}
+        />
         <div
-          className="mt-10 h-[6px] w-[520px] rounded-full animate-[slide-in-left_1s_ease-out_0.4s_both]"
+          className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(90deg, var(--onmid-green), var(--onmid-lime), transparent)",
+              "linear-gradient(90deg, var(--onmid-bg) 0%, transparent 35%, transparent 100%)",
           }}
         />
-        <div className="mt-10 animate-[fade-in-up_1s_ease-out_0.6s_both]">
-          <img
-            src={new URL("../assets/onmid-logo-white.png", import.meta.url).href}
-            alt="Onmid"
-            width={220}
-            style={{ height: "auto", display: "block" }}
-          />
-        </div>
+        {/* Pulsing lime dot accent */}
+        <div
+          className="absolute rounded-full animate-pulse"
+          style={{
+            bottom: 120,
+            right: 100,
+            width: 64,
+            height: 64,
+            background: "var(--onmid-lime)",
+            boxShadow: "0 0 80px oklch(0.88 0.24 138 / 0.6)",
+          }}
+        />
+      </div>
+
+      {/* Main copy bottom-left */}
+      <div className="absolute left-[8%] bottom-[18%] max-w-[1100px]">
+        <div
+          className="h-3 mb-10 animate-slide-in-left"
+          style={{ width: 140, background: "var(--onmid-lime)" }}
+        />
+        <h1
+          className="slide-title-xl text-foreground uppercase animate-fade-in-up"
+          style={{ animationDelay: "0.1s" }}
+        >
+          Treinamento<br />
+          <span className="text-lime">de Vendas</span>
+        </h1>
+        <p
+          className="slide-subtitle text-foreground/60 mt-8 font-light animate-fade-in-up"
+          style={{ animationDelay: "0.3s", letterSpacing: "0.02em" }}
+        >
+          Atendimento Online de Alta Performance
+        </p>
       </div>
     </SlideLayout>
   );
