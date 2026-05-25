@@ -39,7 +39,7 @@ export function Slide02() {
 
       {/* Section marker — right side */}
       <div
-        className="absolute right-24 top-44 flex items-center gap-8 animate-fade-in-up z-10"
+        className="absolute right-[124px] top-44 flex items-center gap-8 animate-fade-in-up z-10"
         style={{ width: "40%" }}
       >
         <div className="flex-1 h-px" style={{ background: "oklch(1 0 0 / 0.25)" }} />
