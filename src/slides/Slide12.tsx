@@ -123,8 +123,7 @@ export function Slide12() {
               width: 1200,
               height: 1200,
               objectFit: "contain",
-              mixBlendMode: "multiply",
-              filter: "drop-shadow(0 40px 80px oklch(0.84 0.18 130 / 0.35))",
+              mixBlendMode: "darken",
               animation: "brain-intro 3s cubic-bezier(0.6,0,0.25,1) both",
             }}
           />
