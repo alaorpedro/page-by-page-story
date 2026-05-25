@@ -1,42 +1,26 @@
-type Props = { size?: number; faded?: boolean };
+import logoWhite from "@/assets/onmid-logo-white.png";
+import logoIcon from "@/assets/onmid-icon.png";
+
+type Props = { size?: number; faded?: boolean; iconOnly?: boolean };
 
 /**
- * Inline Onmid mark: small circular ring with center dot + "onmid" wordmark.
- * Used in slide chrome (header / faded corner).
+ * Real Onmid logo (PNG). Uses the white wordmark on dark backgrounds.
+ * Set iconOnly to render just the circular icon mark.
  */
-export function OnmidMark({ size = 32, faded = false }: Props) {
-  const dot = Math.max(4, Math.round(size / 4));
-  const border = Math.max(2, Math.round(size / 8));
-  const fontSize = Math.round(size * 0.95);
+export function OnmidMark({ size = 40, faded = false, iconOnly = false }: Props) {
+  const src = iconOnly ? logoIcon : logoWhite;
   return (
-    <div
-      className={`flex items-center gap-3 ${
-        faded ? "opacity-30 grayscale" : ""
-      }`}
-    >
-      <div
-        className="rounded-full flex items-center justify-center"
-        style={{
-          width: size,
-          height: size,
-          border: `${border}px solid var(--onmid-lime)`,
-        }}
-      >
-        <div
-          className="rounded-full bg-foreground"
-          style={{ width: dot, height: dot }}
-        />
-      </div>
-      <span
-        className="font-extrabold text-foreground tracking-tighter"
-        style={{
-          fontFamily: "var(--font-display)",
-          fontSize,
-          lineHeight: 1,
-        }}
-      >
-        onmid
-      </span>
-    </div>
+    <img
+      src={src}
+      alt="Onmid"
+      style={{
+        height: size,
+        width: "auto",
+        objectFit: "contain",
+        opacity: faded ? 0.25 : 1,
+        filter: faded ? "grayscale(1)" : undefined,
+      }}
+      draggable={false}
+    />
   );
 }
