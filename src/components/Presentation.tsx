@@ -1,19 +1,71 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ScaledSlide } from "./ScaledSlide";
-import { Slide01Cover } from "@/slides/Slide01Cover";
-import { Slide02Presenter } from "@/slides/Slide02Presenter";
-import { Slide03Concept } from "@/slides/Slide03Concept";
-import { Slide04EmotionalChange } from "@/slides/Slide04EmotionalChange";
-import { Slide05WhatsAppMeme } from "@/slides/Slide05WhatsAppMeme";
+import { Slide01 } from "@/slides/Slide01";
+import { Slide02 } from "@/slides/Slide02";
+import { Slide03 } from "@/slides/Slide03";
+import { Slide04 } from "@/slides/Slide04";
+import { Slide05 } from "@/slides/Slide05";
+import { Slide06 } from "@/slides/Slide06";
+import { Slide07 } from "@/slides/Slide07";
+import { Slide08 } from "@/slides/Slide08";
+import { Slide09 } from "@/slides/Slide09";
+import { Slide10 } from "@/slides/Slide10";
+import { Slide11 } from "@/slides/Slide11";
+import { Slide12 } from "@/slides/Slide12";
+import { Slide13 } from "@/slides/Slide13";
+import { Slide14 } from "@/slides/Slide14";
+import { Slide15 } from "@/slides/Slide15";
+import { Slide16 } from "@/slides/Slide16";
+import { Slide17 } from "@/slides/Slide17";
+import { Slide18 } from "@/slides/Slide18";
+import { Slide19 } from "@/slides/Slide19";
+import { Slide20 } from "@/slides/Slide20";
+import { Slide21 } from "@/slides/Slide21";
+import { Slide22 } from "@/slides/Slide22";
+import { Slide23 } from "@/slides/Slide23";
+import { Slide24 } from "@/slides/Slide24";
+import { Slide25 } from "@/slides/Slide25";
+import { Slide26 } from "@/slides/Slide26";
+import { Slide27 } from "@/slides/Slide27";
+import { Slide28 } from "@/slides/Slide28";
+import { Slide29 } from "@/slides/Slide29";
+import { Slide30 } from "@/slides/Slide30";
+import { Slide31 } from "@/slides/Slide31";
 
 type SlideEntry = { id: string; title: string; node: React.ReactNode };
 
 const SLIDES: SlideEntry[] = [
-  { id: "01", title: "Capa", node: <Slide01Cover /> },
-  { id: "02", title: "Apresentador", node: <Slide02Presenter /> },
-  { id: "03", title: "Conceito de Vendas", node: <Slide03Concept /> },
-  { id: "04", title: "Mudança do Estado Emocional", node: <Slide04EmotionalChange /> },
-  { id: "05", title: "Caso WhatsApp", node: <Slide05WhatsAppMeme /> },
+  { id: "01", title: "Capa", node: <Slide01 /> },
+  { id: "02", title: "Apresentador", node: <Slide02 /> },
+  { id: "03", title: "Família", node: <Slide03 /> },
+  { id: "04", title: "Decisão de compra", node: <Slide04 /> },
+  { id: "05", title: "Mudança do Estado Emocional", node: <Slide05 /> },
+  { id: "06", title: "Caso WhatsApp", node: <Slide06 /> },
+  { id: "07", title: "Fluxo de Anúncios", node: <Slide07 /> },
+  { id: "08", title: "Mensagem Beto/Yamaha", node: <Slide08 /> },
+  { id: "09", title: "Rotina das pessoas", node: <Slide09 /> },
+  { id: "10", title: "Agora!", node: <Slide10 /> },
+  { id: "11", title: "Planejamento", node: <Slide11 /> },
+  { id: "12", title: "O que acontece no cérebro", node: <Slide12 /> },
+  { id: "13", title: "Modo autor", node: <Slide13 /> },
+  { id: "14", title: "Só pode ser o preço", node: <Slide14 /> },
+  { id: "15", title: "Quote Julius", node: <Slide15 /> },
+  { id: "16", title: "Caro em relação a quê", node: <Slide16 /> },
+  { id: "17", title: "Por que as pessoas compram?", node: <Slide17 /> },
+  { id: "18", title: "Compra emocional", node: <Slide18 /> },
+  { id: "19", title: "Marketing Emocional", node: <Slide19 /> },
+  { id: "20", title: "Crenças", node: <Slide20 /> },
+  { id: "21", title: "6 Gatilhos", node: <Slide21 /> },
+  { id: "22", title: "Pertencimento", node: <Slide22 /> },
+  { id: "23", title: "Reciprocidade", node: <Slide23 /> },
+  { id: "24", title: "Coerência e compromisso", node: <Slide24 /> },
+  { id: "25", title: "Afeição", node: <Slide25 /> },
+  { id: "26", title: "Aprovação social", node: <Slide26 /> },
+  { id: "27", title: "Escassez", node: <Slide27 /> },
+  { id: "28", title: "100% presente", node: <Slide28 /> },
+  { id: "29", title: "Não atenda para vender", node: <Slide29 /> },
+  { id: "30", title: "Texto para reflexão", node: <Slide30 /> },
+  { id: "31", title: "Obrigado", node: <Slide31 /> },
 ];
 
 export function Presentation() {

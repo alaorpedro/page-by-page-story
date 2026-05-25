@@ -1,58 +1,31 @@
-type Props = { className?: string; size?: number };
+import logoWhite from "@/assets/onmid-logo-white.png";
+import logoDark from "@/assets/onmid-logo-dark.png";
+import logoSlogan from "@/assets/onmid-logo-slogan.png";
+
+type Props = {
+  className?: string;
+  size?: number;
+  variant?: "white" | "dark" | "slogan";
+};
 
 /**
- * Onmid brand mark: "on.mid" wordmark with a green dot,
- * and a small toggle/pill underneath the "i".
+ * Official Onmid wordmark. White variant for dark backgrounds,
+ * dark variant for light backgrounds, slogan variant with "make strategy move".
  */
-export function OnmidLogo({ className, size = 180 }: Props) {
+export function OnmidLogo({ className, size = 180, variant = "white" }: Props) {
+  const src =
+    variant === "dark" ? logoDark : variant === "slogan" ? logoSlogan : logoWhite;
+  // Native PNG aspect ratios:
+  // white/dark ≈ 4.0 : 1, slogan ≈ 1.5 : 1
+  const ratio = variant === "slogan" ? 1.5 : 4;
   return (
-    <svg
-      viewBox="0 0 360 130"
+    <img
+      src={src}
+      alt="Onmid"
       width={size}
-      height={(size * 130) / 360}
+      height={size / ratio}
       className={className}
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-label="Onmid"
-    >
-      {/* Wordmark */}
-      <text
-        x="0"
-        y="78"
-        fontFamily="Sora, system-ui, sans-serif"
-        fontWeight={700}
-        fontSize="92"
-        letterSpacing="-2"
-        fill="white"
-      >
-        on
-      </text>
-      {/* Green dot between on and mid */}
-      <circle cx="138" cy="65" r="8" fill="oklch(0.72 0.27 142)" />
-      <text
-        x="156"
-        y="78"
-        fontFamily="Sora, system-ui, sans-serif"
-        fontWeight={700}
-        fontSize="92"
-        letterSpacing="-2"
-        fill="white"
-      >
-        mid
-      </text>
-      {/* Green dot of the "i" */}
-      <circle cx="237" cy="36" r="8" fill="oklch(0.72 0.27 142)" />
-
-      {/* Toggle pill under "id" */}
-      <rect
-        x="216"
-        y="100"
-        width="64"
-        height="24"
-        rx="12"
-        fill="oklch(0.72 0.27 142)"
-      />
-      <circle cx="270" cy="112" r="9" fill="white" />
-    </svg>
+      style={{ display: "block", height: "auto" }}
+    />
   );
 }
