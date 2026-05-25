@@ -140,7 +140,7 @@ export function Slide12() {
         style={{
           opacity: intro ? 0 : 1,
           transform: intro ? "translateY(-12px)" : "translateY(0)",
-          transition: "opacity 600ms ease 1000ms, transform 600ms ease 1000ms",
+          transition: "opacity 600ms ease 1900ms, transform 600ms ease 1900ms",
         }}
       >
 
@@ -173,7 +173,7 @@ export function Slide12() {
           maxWidth: 620,
           opacity: intro ? 0 : 1,
           transform: intro ? "translateY(20px)" : "translateY(0)",
-          transition: "opacity 700ms ease 1150ms, transform 700ms ease 1150ms",
+          transition: "opacity 700ms ease 2050ms, transform 700ms ease 2050ms",
         }}
       >
 
@@ -238,7 +238,7 @@ export function Slide12() {
           top: 240,
           bottom: 220,
           opacity: intro ? 0 : 1,
-          transition: "opacity 700ms ease 1300ms",
+          transition: "opacity 700ms ease 2200ms",
         }}
       >
 
