@@ -69,7 +69,7 @@ export function Slide02() {
             color: "var(--onmid-lime)",
           }}
         >
-          Apresentador
+          Palestrante
         </div>
 
         <h2
