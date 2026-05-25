@@ -153,7 +153,8 @@ export function Slide03() {
               color: "oklch(0.98 0.005 100)",
               lineHeight: 0.9,
               whiteSpace: "nowrap",
-              animation: "fade-in 0.25s ease-out both",
+              opacity: visible ? 1 : 0,
+              transition: "opacity 220ms ease-out",
             }}
           >
             propósito<span className="text-lime">.</span>
