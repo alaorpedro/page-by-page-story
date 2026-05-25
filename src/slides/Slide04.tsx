@@ -173,24 +173,24 @@ export function Slide04() {
             >
               <div className="flex flex-col items-start gap-3">
                 <span
-                  className="px-4"
+                  className="glitch px-4"
+                  data-text="mudança em seu"
                   style={{
                     background: "var(--onmid-lime)",
                     transform: "skewX(-4deg)",
                     transformOrigin: "left center",
-                    display: "inline-block",
                     backfaceVisibility: "hidden",
                   }}
                 >
                   mudança em seu
                 </span>
                 <span
-                  className="px-4"
+                  className="glitch px-4"
+                  data-text="estado emocional."
                   style={{
                     background: "var(--onmid-lime)",
                     transform: "skewX(-4deg)",
                     transformOrigin: "left center",
-                    display: "inline-block",
                     backfaceVisibility: "hidden",
                   }}
                 >
