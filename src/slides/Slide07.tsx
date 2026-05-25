@@ -148,7 +148,7 @@ export function Slide07() {
             className="h-full flex items-center justify-center text-center animate-fade-in"
             style={{
               fontSize: 28,
-              color: "oklch(1 0 0 / 0.45)",
+              color: "oklch(0.13 0.005 240 / 0.45)",
               letterSpacing: "0.05em",
             }}
           >
