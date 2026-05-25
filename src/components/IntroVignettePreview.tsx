@@ -132,7 +132,7 @@ export function IntroVignettePreview({ hideReplay = false }: Props) {
 
       {/* Stage 3 — DE ALTA */}
       <div className="vig-stage vig-s3">
-        <div className="vig-word vig-word-outline">DE ALTA</div>
+        <div className="vig-word">DE ALTA</div>
       </div>
 
       {/* Stage 4 — PERFORMANCE */}
