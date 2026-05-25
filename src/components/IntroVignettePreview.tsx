@@ -10,8 +10,9 @@ import { useState } from "react";
  *  2.6s  cut to "PERFORMANCE" zoom-in
  *  3.2s  settle into final composition
  */
-export function IntroVignettePreview() {
+export function IntroVignettePreview({ hideReplay = false }: { hideReplay?: boolean } = {}) {
   const [runKey, setRunKey] = useState(0);
+
 
   return (
     <div className="relative w-full h-full bg-black overflow-hidden" key={runKey}>
@@ -228,18 +229,21 @@ export function IntroVignettePreview() {
       <div className="vig-noise" />
 
       {/* Replay button */}
-      <button
-        onClick={() => setRunKey((k) => k + 1)}
-        className="absolute bottom-8 right-8 z-[100] uppercase font-bold px-6 py-3 rounded-full"
-        style={{
-          fontSize: 14,
-          letterSpacing: "0.3em",
-          background: "var(--onmid-lime)",
-          color: "oklch(0.13 0.005 240)",
-        }}
-      >
-        ▶ Reproduzir de novo
-      </button>
+      {!hideReplay && (
+        <button
+          onClick={() => setRunKey((k) => k + 1)}
+          className="absolute bottom-8 right-8 z-[100] uppercase font-bold px-6 py-3 rounded-full"
+          style={{
+            fontSize: 14,
+            letterSpacing: "0.3em",
+            background: "var(--onmid-lime)",
+            color: "oklch(0.13 0.005 240)",
+          }}
+        >
+          ▶ Reproduzir de novo
+        </button>
+      )}
+
     </div>
   );
 }
