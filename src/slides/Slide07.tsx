@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { SlideLayout } from "@/components/SlideLayout";
 
 type Step = {
