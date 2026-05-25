@@ -6,8 +6,8 @@ export function Slide17() {
       variant="content"
       tone="light"
       bgLetter="?"
-      blob={{ variant: "dark", side: "right", top: 60, size: 620, opacity: 0.9 }}
     >
+
       {/* Section kicker */}
       <div className="absolute left-16 right-16 top-44 flex items-center gap-8 animate-fade-in-up">
         <div
