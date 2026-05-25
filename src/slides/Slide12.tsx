@@ -151,74 +151,26 @@ export function Slide12() {
           </span>
         </h1>
 
-        {/* Pulso visual (cérebro abstrato) */}
-        <div className="relative mt-12" style={{ width: 360, height: 360 }}>
-          {/* Halo */}
+        {/* Label da química atual */}
+        {current && (
           <div
-            className="absolute rounded-full"
+            key={`chem-${step}`}
+            className="mt-10 inline-flex uppercase font-black whitespace-nowrap animate-[fade-in-up_0.5s_cubic-bezier(0.22,1,0.36,1)_both]"
             style={{
-              inset: 0,
-              background:
-                "radial-gradient(circle at 40% 35%, oklch(0.96 0.02 130) 0%, transparent 65%)",
-              filter: "blur(10px)",
+              fontSize: 14,
+              letterSpacing: "0.28em",
+              color: isReward ? "var(--onmid-lime)" : INK,
+              background: isReward ? INK : "oklch(0.98 0.005 90)",
+              padding: "12px 20px",
+              borderRadius: 999,
+              border: `1px solid ${isReward ? INK : INK_FAINT}`,
+              boxShadow: "0 10px 30px oklch(0 0 0 / 0.08)",
             }}
-          />
-          {/* Anéis sincronizados com o stage atual */}
-          {[0, 0.3, 0.6].map((delay, i) => (
-            <span
-              key={`pulse-${i}-${step}`}
-              className="absolute rounded-full pointer-events-none"
-              style={{
-                inset: 40,
-                border: `2px solid ${
-                  isReward
-                    ? "var(--onmid-lime)"
-                    : current
-                    ? "oklch(0.13 0.005 240 / 0.35)"
-                    : INK_FAINT
-                }`,
-                opacity: 0,
-                animation: current
-                  ? `brain-pulse 2.4s ease-out ${delay}s infinite`
-                  : "none",
-              }}
-            />
-          ))}
-          {/* Esfera central */}
-          <div
-            className="absolute rounded-full"
-            style={{
-              inset: 90,
-              background: isReward
-                ? "radial-gradient(circle at 35% 30%, oklch(0.95 0.18 130) 0%, var(--onmid-lime) 50%, oklch(0.55 0.18 130) 100%)"
-                : "radial-gradient(circle at 35% 30%, oklch(0.4 0.01 240) 0%, oklch(0.18 0.01 240) 100%)",
-              boxShadow: isReward
-                ? "0 30px 80px oklch(0.84 0.18 130 / 0.5)"
-                : "0 30px 80px oklch(0 0 0 / 0.25)",
-              transition: "all 600ms cubic-bezier(0.34,1.56,0.64,1)",
-            }}
-          />
-          {/* Label da química atual */}
-          {current && (
-            <div
-              key={`chem-${step}`}
-              className="absolute left-1/2 -translate-x-1/2 -bottom-4 uppercase font-black whitespace-nowrap animate-[fade-in-up_0.5s_cubic-bezier(0.22,1,0.36,1)_both]"
-              style={{
-                fontSize: 14,
-                letterSpacing: "0.28em",
-                color: isReward ? "var(--onmid-lime)" : INK,
-                background: isReward ? INK : "oklch(0.98 0.005 90)",
-                padding: "10px 18px",
-                borderRadius: 999,
-                border: `1px solid ${isReward ? INK : INK_FAINT}`,
-                boxShadow: "0 10px 30px oklch(0 0 0 / 0.08)",
-              }}
-            >
-              {current.chem}
-            </div>
-          )}
-        </div>
-      </div>
+          >
+            {current.chem}
+          </div>
+        )}
+
 
       {/* HERO do stage (lado direito) */}
       <div
