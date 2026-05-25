@@ -26,8 +26,8 @@ const STEPS: Step[] = [
   },
   {
     ord: "4º",
-    title: "Fechamento",
-    desc: "Decisão de compra e conversão em cliente.",
+    title: "Persuasão",
+    desc: "Argumentações, quebra de objeções, escuta ativa.",
   },
 ];
 
