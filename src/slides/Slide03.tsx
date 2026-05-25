@@ -31,7 +31,11 @@ export function Slide03() {
       setVisible(false);
       setTimeout(() => {
         setFontIdx((i) => (i + 1) % FONT_CYCLE.length);
-        setVisible(true);
+        // wait two frames so the new font renders with opacity:0
+        // before transitioning to opacity:1 — guarantees the fade-in
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => setVisible(true));
+        });
       }, FADE);
     }, CYCLE);
     return () => clearInterval(t);
