@@ -176,7 +176,7 @@ export function Slide06() {
           .
         </div>
 
-        {step >= 3 && (
+        {step >= 4 && (
           <p
             className="mt-6 font-medium animate-fade-in-up"
             style={{
