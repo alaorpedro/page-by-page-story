@@ -484,7 +484,17 @@ export function Slide12() {
           60%  { opacity: 1; transform: scale(1.05); }
           100% { opacity: 1; transform: scale(1); }
         }
+        @keyframes brain-spin-in {
+          0%   { opacity: 0; transform: scale(0.2) rotate(-540deg); filter: blur(8px); }
+          60%  { opacity: 1; filter: blur(0); }
+          100% { opacity: 1; transform: scale(1) rotate(0deg); filter: blur(0); }
+        }
+        @keyframes brain-float {
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          50%      { transform: translateY(-14px) rotate(2deg); }
+        }
       `}</style>
+
     </SlideLayout>
   );
 }
