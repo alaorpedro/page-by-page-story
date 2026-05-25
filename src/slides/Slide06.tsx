@@ -2,13 +2,31 @@ import { useEffect, useState } from "react";
 import { SlideLayout } from "@/components/SlideLayout";
 import attendant from "@/assets/attendant-headset.png";
 
-// Steps: 0 only typing, 1 first msg, 2 second msg, 3 reveal context callout
-const STEPS = 4;
+// Steps:
+// 0 typing (início)
+// 1 troca inicial educada (3 bolhas)
+// 2 typing (mais tarde, mesmo dia)
+// 3 mensagens finais — cliente frustrado (2 bolhas)
+// 4 callout final
+const STEPS = 5;
 
-type Msg = { text: string; time: string };
+type Msg = {
+  text: string;
+  time: string;
+  from: "client" | "company";
+  group: 1 | 2; // 1 = troca inicial, 2 = finalização
+};
 const MESSAGES: Msg[] = [
-  { text: "Vcs perderam cliente", time: "10:12 PM" },
-  { text: "Obrigada pelas desculpas, porém não volto mais.", time: "10:13 PM" },
+  { text: "Boa noite", time: "08:16 PM", from: "client", group: 1 },
+  { text: "Boa noite 👋", time: "08:17 PM", from: "company", group: 1 },
+  { text: "Quero pedir pizza", time: "08:17 PM", from: "client", group: 1 },
+  { text: "Vcs perderam cliente", time: "10:12 PM", from: "client", group: 2 },
+  {
+    text: "Obrigada pelas desculpas, porém não volto mais.",
+    time: "10:13 PM",
+    from: "client",
+    group: 2,
+  },
 ];
 
 export function Slide06() {
