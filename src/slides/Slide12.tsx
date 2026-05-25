@@ -171,9 +171,17 @@ export function Slide12() {
 
       {/* Título lateral vertical */}
       <div
-        className="absolute z-20 animate-fade-in-up"
-        style={{ left: 64, top: 260, animationDelay: "0.1s", maxWidth: 620 }}
+        className="absolute z-20"
+        style={{
+          left: 64,
+          top: 260,
+          maxWidth: 620,
+          opacity: intro ? 0 : 1,
+          transform: intro ? "translateY(20px)" : "translateY(0)",
+          transition: "opacity 700ms ease 1150ms, transform 700ms ease 1150ms",
+        }}
       >
+
         <div
           className="uppercase font-black"
           style={{
