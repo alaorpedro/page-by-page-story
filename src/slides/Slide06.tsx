@@ -149,10 +149,20 @@ export function Slide06() {
         </div>
       </div>
 
-      {/* Headline + callout (bottom right) */}
+      {/* Headline + callout (bottom right) — caixa escura para legibilidade */}
       <div
         className="absolute z-30"
-        style={{ right: 80, bottom: 140, maxWidth: 720 }}
+        style={{
+          right: 80,
+          bottom: 90,
+          width: 720,
+          padding: "32px 36px",
+          background: "oklch(0.13 0.005 240 / 0.78)",
+          backdropFilter: "blur(14px)",
+          border: "1px solid oklch(1 0 0 / 0.08)",
+          borderLeft: "4px solid var(--onmid-lime)",
+          boxShadow: "0 30px 60px oklch(0 0 0 / 0.45)",
+        }}
       >
         <div
           className="uppercase font-black mb-3 animate-fade-in-up"
