@@ -1,13 +1,48 @@
 import { useEffect, useState } from "react";
 import { SlideLayout } from "@/components/SlideLayout";
 
+type TermKey = "oferta" | "proposta" | "beneficios";
+const TERMS: Record<TermKey, { title: string; body: string }> = {
+  oferta: {
+    title: "Oferta",
+    body: "É o que está sendo vendido — o produto ou serviço em si, com suas características, condições comerciais e o pacote completo que chega às mãos do cliente.",
+  },
+  proposta: {
+    title: "Proposta",
+    body: "É a promessa de valor: o motivo pelo qual aquela oferta é relevante para esse cliente específico, naquele momento, em comparação às alternativas disponíveis.",
+  },
+  beneficios: {
+    title: "Benefícios",
+    body: "São os ganhos práticos e emocionais que o cliente passa a ter ao escolher a oferta — o que muda na vida, na rotina ou no negócio dele depois da compra.",
+  },
+};
+
 const STEPS = 3; // 0: p1, 1: + "Mas isso não é tudo.", 2: + frase final
 
 export function Slide04() {
   const [step, setStep] = useState(0);
+  const [openTerm, setOpenTerm] = useState<TermKey | null>(null);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      if (openTerm) {
+        if (e.key === "Escape") {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          setOpenTerm(null);
+        } else if (
+          e.key === "ArrowRight" ||
+          e.key === " " ||
+          e.key === "PageDown" ||
+          e.key === "ArrowLeft" ||
+          e.key === "PageUp"
+        ) {
+          // bloqueia avanço/volta de slide enquanto modal está aberto
+          e.preventDefault();
+          e.stopImmediatePropagation();
+        }
+        return;
+      }
       const fwd = e.key === "ArrowRight" || e.key === " " || e.key === "PageDown";
       const back = e.key === "ArrowLeft" || e.key === "PageUp";
       if (fwd && step < STEPS - 1) {
@@ -20,9 +55,9 @@ export function Slide04() {
         setStep((s) => Math.max(0, s - 1));
       }
     };
-    window.addEventListener("keydown", onKey, true); // capture phase, beats Presentation
+    window.addEventListener("keydown", onKey, true);
     return () => window.removeEventListener("keydown", onKey, true);
-  }, [step]);
+  }, [step, openTerm]);
 
   const onClick = () => setStep((s) => Math.min(STEPS - 1, s + 1));
 
@@ -84,7 +119,10 @@ export function Slide04() {
           }}
         >
           Nós acreditamos que os clientes tomam decisões de compra porque
-          consideraram cuidadosamente nossa oferta, proposta e benefícios.
+          consideraram cuidadosamente nossa{" "}
+          <TermBtn k="oferta" onOpen={setOpenTerm}>oferta</TermBtn>,{" "}
+          <TermBtn k="proposta" onOpen={setOpenTerm}>proposta</TermBtn> e{" "}
+          <TermBtn k="beneficios" onOpen={setOpenTerm}>benefícios</TermBtn>.
         </p>
 
         {/* Step 1 — "Mas isso não é tudo." */}
@@ -171,6 +209,107 @@ export function Slide04() {
           />
         ))}
       </div>
+
+      {/* Term modal */}
+      {openTerm && (
+        <div
+          className="absolute inset-0 z-40 flex items-center justify-center animate-fade-in"
+          style={{ background: "oklch(0.13 0.005 240 / 0.55)", backdropFilter: "blur(8px)" }}
+          onClick={() => setOpenTerm(null)}
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            onClick={(e) => e.stopPropagation()}
+            className="relative animate-scale-in"
+            style={{
+              width: 880,
+              maxWidth: "90%",
+              background: "oklch(0.985 0.004 90)",
+              color: "oklch(0.13 0.005 240)",
+              padding: "72px 80px",
+              borderRadius: 8,
+              boxShadow: "0 60px 120px oklch(0 0 0 / 0.45)",
+              borderTop: "8px solid var(--onmid-lime)",
+            }}
+          >
+            <button
+              onClick={() => setOpenTerm(null)}
+              aria-label="Fechar"
+              className="absolute top-6 right-6 w-12 h-12 rounded-full flex items-center justify-center hover:opacity-70 transition"
+              style={{ background: "oklch(0 0 0 / 0.06)", fontSize: 22 }}
+            >
+              ×
+            </button>
+            <div
+              className="uppercase font-bold mb-4"
+              style={{
+                fontSize: 14,
+                letterSpacing: "0.35em",
+                color: "oklch(0.18 0.01 240 / 0.55)",
+              }}
+            >
+              Definição
+            </div>
+            <h3
+              style={{
+                fontFamily: "var(--font-display)",
+                fontWeight: 900,
+                fontSize: 96,
+                lineHeight: 0.95,
+                letterSpacing: "-0.04em",
+                marginBottom: 24,
+              }}
+            >
+              {TERMS[openTerm].title}
+              <span className="text-lime">.</span>
+            </h3>
+            <p
+              className="font-medium"
+              style={{
+                fontSize: 28,
+                lineHeight: 1.4,
+                color: "oklch(0.18 0.01 240 / 0.82)",
+              }}
+            >
+              {TERMS[openTerm].body}
+            </p>
+          </div>
+        </div>
+      )}
     </SlideLayout>
+  );
+}
+
+function TermBtn({
+  k,
+  onOpen,
+  children,
+}: {
+  k: TermKey;
+  onOpen: (k: TermKey) => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={(e) => {
+        e.stopPropagation();
+        onOpen(k);
+      }}
+      className="relative font-black inline-block transition-transform hover:-translate-y-0.5"
+      style={{
+        color: "oklch(0.13 0.005 240)",
+        backgroundImage:
+          "linear-gradient(var(--onmid-lime), var(--onmid-lime))",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "100% 38%",
+        backgroundPosition: "0 88%",
+        padding: "0 6px",
+        cursor: "pointer",
+      }}
+    >
+      {children}
+    </button>
   );
 }
