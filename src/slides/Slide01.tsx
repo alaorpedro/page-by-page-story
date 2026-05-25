@@ -49,6 +49,10 @@ export function Slide01() {
         </span>
       </div>
 
+      {/* Live info: hora de Londrina, clima, data, status */}
+      <LiveInfoBar />
+
+
       {/* Center-left main copy */}
       <div className="absolute left-24 top-1/2 -translate-y-1/2 max-w-[1500px]">
         <h1
