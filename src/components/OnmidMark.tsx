@@ -1,14 +1,17 @@
 import logoWhite from "@/assets/onmid-logo-white.png";
+import logoDark from "@/assets/onmid-logo-dark.png";
 import logoIcon from "@/assets/onmid-icon.png";
 
-type Props = { size?: number; faded?: boolean; iconOnly?: boolean };
+type Props = {
+  size?: number;
+  faded?: boolean;
+  iconOnly?: boolean;
+  /** "dark" = use dark wordmark (for light backgrounds) */
+  tone?: "light" | "dark";
+};
 
-/**
- * Real Onmid logo (PNG). Uses the white wordmark on dark backgrounds.
- * Set iconOnly to render just the circular icon mark.
- */
-export function OnmidMark({ size = 40, faded = false, iconOnly = false }: Props) {
-  const src = iconOnly ? logoIcon : logoWhite;
+export function OnmidMark({ size = 40, faded = false, iconOnly = false, tone = "light" }: Props) {
+  const src = iconOnly ? logoIcon : tone === "dark" ? logoDark : logoWhite;
   return (
     <img
       src={src}

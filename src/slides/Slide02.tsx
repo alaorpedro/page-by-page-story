@@ -2,89 +2,120 @@ import { SlideLayout } from "@/components/SlideLayout";
 
 export function Slide02() {
   return (
-    <SlideLayout variant="content">
-      {/* Section header */}
+    <SlideLayout variant="content" tone="light" bgLetter="A">
+      {/* Section kicker */}
       <div className="absolute left-16 right-16 top-44 flex items-center gap-8 animate-fade-in-up">
         <div
-          className="font-extrabold text-lime"
-          style={{ fontFamily: "var(--font-display)", fontSize: 72, lineHeight: 1 }}
+          className="font-extrabold"
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: 64,
+            lineHeight: 1,
+            color: "oklch(0.18 0.01 240)",
+          }}
         >
-          02.
+          02<span className="text-lime">.</span>
         </div>
-        <div className="flex-1 h-px bg-foreground/10" />
+        <div className="flex-1 h-px" style={{ background: "oklch(0 0 0 / 0.12)" }} />
         <div
-          className="text-foreground/40 uppercase font-semibold"
-          style={{ fontSize: 22, letterSpacing: "0.3em" }}
+          className="uppercase font-bold"
+          style={{ fontSize: 18, letterSpacing: "0.35em", color: "oklch(0.18 0.01 240 / 0.55)" }}
         >
           Apresentador
         </div>
       </div>
 
-      {/* Content grid */}
-      <div className="absolute left-16 right-16 top-72 bottom-32 grid grid-cols-12 gap-12">
-        {/* Photo placeholder (col-span-5) */}
+      {/* Body grid */}
+      <div className="absolute left-16 right-16 top-[280px] bottom-32 grid grid-cols-12 gap-12">
+        {/* Duotone circle "photo" — col 5 */}
         <div
-          className="col-span-5 animate-scale-in flex items-center justify-center"
+          className="col-span-5 flex items-center justify-center animate-scale-in"
           style={{ animationDelay: "0.1s" }}
         >
-          <div
-            className="relative rounded-3xl overflow-hidden border w-full h-full"
-            style={{
-              background:
-                "linear-gradient(180deg, var(--onmid-bg-2), var(--onmid-bg))",
-              borderColor: "oklch(1 0 0 / 0.08)",
-              maxHeight: 620,
-            }}
-          >
+          <div className="relative" style={{ width: 560, height: 560 }}>
+            {/* Lime circle backdrop */}
             <div
-              className="absolute -top-4 -left-4 w-12 h-12"
+              className="absolute rounded-full"
               style={{
-                borderTop: "3px solid var(--onmid-lime)",
-                borderLeft: "3px solid var(--onmid-lime)",
+                inset: 0,
+                background: "var(--onmid-lime)",
+                boxShadow: "0 40px 100px oklch(0.88 0.24 138 / 0.4)",
               }}
             />
+            {/* Inner dark circle with monogram */}
             <div
-              className="absolute -bottom-4 -right-4 w-12 h-12"
+              className="absolute rounded-full flex items-center justify-center overflow-hidden"
               style={{
-                borderBottom: "3px solid var(--onmid-lime)",
-                borderRight: "3px solid var(--onmid-lime)",
+                inset: 40,
+                background:
+                  "radial-gradient(ellipse at 30% 30%, oklch(0.28 0.01 240), oklch(0.13 0.005 240))",
               }}
-            />
-            <div className="absolute inset-0 flex items-center justify-center text-center px-6">
+            >
               <span
-                className="text-foreground/40 uppercase font-semibold"
-                style={{ fontSize: 18, letterSpacing: "0.25em" }}
+                className="font-black text-lime"
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: 320,
+                  lineHeight: 1,
+                  letterSpacing: "-0.05em",
+                }}
               >
-                Foto do<br />Apresentador
+                A
               </span>
             </div>
+            {/* Floating small lime dot */}
+            <div
+              className="absolute rounded-full animate-pulse"
+              style={{
+                right: -20,
+                top: 60,
+                width: 56,
+                height: 56,
+                background: "oklch(0.13 0.005 240)",
+                border: "4px solid var(--onmid-lime)",
+              }}
+            />
           </div>
         </div>
 
-        {/* Bio (col-span-7) */}
+        {/* Bio col 7 */}
         <div
-          className="col-span-7 flex flex-col justify-center pl-12 border-l animate-fade-in-up"
-          style={{
-            borderColor: "oklch(0.88 0.24 138 / 0.3)",
-            animationDelay: "0.2s",
-          }}
+          className="col-span-7 flex flex-col justify-center animate-fade-in-up"
+          style={{ animationDelay: "0.2s" }}
         >
-          <h2 className="slide-title text-foreground">
-            Alaor Pedro<br />de Oliveira
+          <h2
+            className="uppercase"
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 900,
+              fontSize: 108,
+              lineHeight: 0.95,
+              letterSpacing: "-0.05em",
+              color: "oklch(0.13 0.005 240)",
+            }}
+          >
+            Alaor Pedro<br />
+            <span className="text-lime">de Oliveira</span>
           </h2>
-          <p className="slide-body text-lime mt-3 font-semibold">
+          <p
+            className="mt-6 font-semibold"
+            style={{ fontSize: 26, color: "oklch(0.18 0.01 240 / 0.7)" }}
+          >
             @alaorpedro10 · Diretor de Planejamento na ONMID
           </p>
 
-          <div className="grid grid-cols-2 gap-8 mt-10">
+          <div className="grid grid-cols-2 gap-10 mt-12">
             <div>
               <div
-                className="text-lime uppercase font-bold mb-3"
-                style={{ fontSize: 18, letterSpacing: "0.2em" }}
+                className="uppercase font-black mb-3"
+                style={{ fontSize: 16, letterSpacing: "0.3em", color: "oklch(0.13 0.005 240)" }}
               >
-                Formação
+                <span className="text-lime">●</span> Formação
               </div>
-              <ul className="slide-caption text-foreground/85 space-y-2">
+              <ul
+                className="space-y-2"
+                style={{ fontSize: 22, color: "oklch(0.18 0.01 240 / 0.78)", lineHeight: 1.35 }}
+              >
                 <li>Marketing e Publicidade · UNOPAR</li>
                 <li>Gestão de RH · UNOPAR</li>
                 <li>Gestão Comercial · UNOPAR</li>
@@ -93,16 +124,19 @@ export function Slide02() {
             </div>
             <div>
               <div
-                className="text-lime uppercase font-bold mb-3"
-                style={{ fontSize: 18, letterSpacing: "0.2em" }}
+                className="uppercase font-black mb-3"
+                style={{ fontSize: 16, letterSpacing: "0.3em", color: "oklch(0.13 0.005 240)" }}
               >
-                Atuação
+                <span className="text-lime">●</span> Atuação
               </div>
-              <ul className="slide-caption text-foreground/85 space-y-2">
+              <ul
+                className="space-y-2"
+                style={{ fontSize: 22, color: "oklch(0.18 0.01 240 / 0.78)", lineHeight: 1.35 }}
+              >
                 <li>Associação Brasileira de Franchising</li>
                 <li>onmid.com.br</li>
                 <li>alaor@onmid.com.br</li>
-                <li>Av. Higienópolis, 1601 · Sala 07 · Londrina/PR</li>
+                <li>Av. Higienópolis, 1601 · Londrina/PR</li>
               </ul>
             </div>
           </div>
