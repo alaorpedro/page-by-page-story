@@ -107,25 +107,25 @@ export function Slide12() {
 
   return (
     <SlideLayout variant="content" tone="light" bgLetter="N">
-      {/* Brain 3D — intro: gira no eixo vertical, zoom + fade out */}
+      {/* Brain 3D rotativo — vídeo gerado, em loop, com fade no fim */}
       {intro && (
         <div
           aria-hidden
           className="absolute inset-0 pointer-events-none z-40 flex items-center justify-center"
-          style={{ perspective: 1600 }}
         >
-          <img
-            src={brain3d}
-            alt=""
-            width={1024}
-            height={1024}
+          <video
+            src={brainVideo.url}
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
             style={{
-              width: 1100,
-              height: 1100,
+              width: 1200,
+              height: 1200,
               objectFit: "contain",
-              transformOrigin: "center center",
-              filter: "drop-shadow(0 60px 120px oklch(0.55 0.25 260 / 0.45))",
-              animation: "brain-intro 2.4s cubic-bezier(0.6,0,0.25,1) both",
+              mixBlendMode: "multiply",
+              filter: "drop-shadow(0 40px 80px oklch(0.84 0.18 130 / 0.35))",
+              animation: "brain-intro 3s cubic-bezier(0.6,0,0.25,1) both",
             }}
           />
         </div>
