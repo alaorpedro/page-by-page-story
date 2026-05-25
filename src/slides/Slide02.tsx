@@ -4,122 +4,72 @@ import alaorPhoto from "@/assets/alaor.jpg";
 export function Slide02() {
   return (
     <SlideLayout variant="content" tone="light">
-      {/* ============ LEFT: contained portrait card ============ */}
-      <div
-        className="absolute animate-fade-in"
-        style={{ left: 96, top: 168, width: 760, height: 808 }}
-      >
-        {/* Lime offset block behind the photo (depth) */}
+      {/* Full-bleed background photo */}
+      <div className="absolute inset-0 animate-fade-in overflow-hidden">
+        <img
+          src={alaorPhoto}
+          alt="Alaor Pedro de Oliveira"
+          className="w-full h-full object-cover"
+          style={{ filter: "grayscale(1) contrast(1.15) brightness(0.92)" }}
+          draggable={false}
+        />
+        {/* Lime duotone wash */}
         <div
-          className="absolute rounded-sm"
+          className="absolute inset-0 mix-blend-multiply"
+          style={{ background: "var(--onmid-lime)", opacity: 0.5 }}
+        />
+        {/* Right-side dark gradient for text legibility */}
+        <div
+          className="absolute inset-y-0 right-0"
           style={{
-            left: -22,
-            top: 22,
-            right: 22,
-            bottom: -22,
-            background: "var(--onmid-lime)",
+            width: "62%",
+            background:
+              "linear-gradient(to left, oklch(0.13 0.005 240 / 0.92) 0%, oklch(0.13 0.005 240 / 0.65) 55%, oklch(0.13 0.005 240 / 0) 100%)",
           }}
         />
-
-        {/* Photo card */}
+        {/* Subtle top/bottom vignette */}
         <div
-          className="absolute inset-0 overflow-hidden rounded-sm"
-          style={{ boxShadow: "0 40px 90px oklch(0 0 0 / 0.18)" }}
-        >
-          <img
-            src={alaorPhoto}
-            alt="Alaor Pedro de Oliveira"
-            className="w-full h-full object-cover"
-            style={{ filter: "grayscale(1) contrast(1.1) brightness(0.96)" }}
-            draggable={false}
-          />
-          {/* Soft duotone wash */}
-          <div
-            className="absolute inset-0 mix-blend-multiply"
-            style={{ background: "var(--onmid-lime)", opacity: 0.42 }}
-          />
-          {/* Bottom gradient for the role tag */}
-          <div
-            className="absolute inset-x-0 bottom-0 h-64 pointer-events-none"
-            style={{
-              background:
-                "linear-gradient(180deg, oklch(0 0 0 / 0) 0%, oklch(0.13 0.005 240 / 0.85) 100%)",
-            }}
-          />
-          {/* Role tag inside photo */}
-          <div className="absolute left-8 bottom-8 right-8 flex items-end justify-between">
-            <div>
-              <div
-                className="uppercase font-bold mb-2"
-                style={{
-                  fontSize: 14,
-                  letterSpacing: "0.4em",
-                  color: "var(--onmid-lime)",
-                }}
-              >
-                Apresentador
-              </div>
-              <div
-                className="font-black"
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: 26,
-                  lineHeight: 1.05,
-                  color: "oklch(0.98 0.005 100)",
-                  letterSpacing: "-0.02em",
-                }}
-              >
-                @alaorpedro10
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Big editorial "02." floating on top-right corner of photo */}
-        <div
-          className="absolute font-black animate-fade-in-up"
+          className="absolute inset-0 pointer-events-none"
           style={{
-            right: -56,
-            top: -72,
+            background:
+              "linear-gradient(180deg, oklch(0 0 0 / 0.18) 0%, oklch(0 0 0 / 0) 25%, oklch(0 0 0 / 0) 75%, oklch(0 0 0 / 0.25) 100%)",
+          }}
+        />
+      </div>
+
+      {/* Section marker — right side */}
+      <div
+        className="absolute right-24 top-44 flex items-center gap-8 animate-fade-in-up z-10"
+        style={{ width: "44%" }}
+      >
+        <div className="flex-1 h-px" style={{ background: "oklch(1 0 0 / 0.25)" }} />
+        <div
+          className="font-extrabold"
+          style={{
             fontFamily: "var(--font-display)",
-            fontSize: 180,
-            lineHeight: 0.85,
-            letterSpacing: "-0.07em",
-            color: "oklch(0.13 0.005 240)",
-            animationDelay: "0.1s",
+            fontSize: 72,
+            lineHeight: 1,
+            color: "oklch(0.98 0.005 100)",
           }}
         >
           02<span className="text-lime">.</span>
         </div>
       </div>
 
-      {/* ============ BRIDGE: lime horizontal rule crossing the seam ============ */}
+      {/* Text column over photo */}
       <div
-        className="absolute animate-fade-in"
-        style={{
-          left: 760,
-          top: 360,
-          width: 240,
-          height: 6,
-          background: "var(--onmid-lime)",
-          animationDelay: "0.2s",
-        }}
-      />
-
-      {/* ============ RIGHT: editorial content column ============ */}
-      <div
-        className="absolute animate-fade-in-up"
-        style={{ left: 920, right: 96, top: 240, animationDelay: "0.25s" }}
+        className="absolute right-24 top-[280px] animate-fade-in-up text-right z-10"
+        style={{ width: "48%", animationDelay: "0.15s" }}
       >
         <div
-          className="uppercase font-bold mb-5"
+          className="uppercase font-bold mb-6"
           style={{
             fontSize: 16,
             letterSpacing: "0.45em",
-            color: "oklch(0.18 0.01 240 / 0.55)",
+            color: "var(--onmid-lime)",
           }}
         >
-          Diretor de Planejamento
+          Apresentador
         </div>
 
         <h2
@@ -129,7 +79,7 @@ export function Slide02() {
             fontSize: 104,
             lineHeight: 0.92,
             letterSpacing: "-0.05em",
-            color: "oklch(0.13 0.005 240)",
+            color: "oklch(0.98 0.005 100)",
           }}
         >
           Alaor<br />
@@ -138,27 +88,31 @@ export function Slide02() {
         </h2>
 
         <p
-          className="mt-10 max-w-[640px]"
+          className="mt-10 ml-auto"
           style={{
             fontFamily: "var(--font-display)",
             fontSize: 22,
             lineHeight: 1.45,
-            color: "oklch(0.18 0.01 240 / 0.7)",
+            color: "oklch(0.98 0.005 100 / 0.78)",
             fontWeight: 500,
+            maxWidth: 640,
           }}
         >
           Mais de uma década traduzindo dados em estratégia de alta performance
           para marcas e franquias em todo o Brasil.
         </p>
 
-        <div className="grid grid-cols-2 gap-10 mt-12 max-w-[680px]">
+        <div
+          className="grid grid-cols-2 gap-10 mt-12 ml-auto text-left"
+          style={{ maxWidth: 680 }}
+        >
           <div>
             <div
               className="uppercase font-black mb-4 flex items-center gap-3"
               style={{
                 fontSize: 12,
                 letterSpacing: "0.35em",
-                color: "oklch(0.13 0.005 240)",
+                color: "oklch(0.98 0.005 100)",
               }}
             >
               <span style={{ width: 22, height: 2, background: "var(--onmid-lime)" }} />
@@ -168,7 +122,7 @@ export function Slide02() {
               className="space-y-2"
               style={{
                 fontSize: 15,
-                color: "oklch(0.18 0.01 240 / 0.78)",
+                color: "oklch(0.98 0.005 100 / 0.78)",
                 lineHeight: 1.5,
               }}
             >
@@ -184,7 +138,7 @@ export function Slide02() {
               style={{
                 fontSize: 12,
                 letterSpacing: "0.35em",
-                color: "oklch(0.13 0.005 240)",
+                color: "oklch(0.98 0.005 100)",
               }}
             >
               <span style={{ width: 22, height: 2, background: "var(--onmid-lime)" }} />
@@ -194,7 +148,7 @@ export function Slide02() {
               className="space-y-2"
               style={{
                 fontSize: 15,
-                color: "oklch(0.18 0.01 240 / 0.78)",
+                color: "oklch(0.98 0.005 100 / 0.78)",
                 lineHeight: 1.5,
               }}
             >
@@ -204,6 +158,18 @@ export function Slide02() {
               <li>Londrina · PR</li>
             </ul>
           </div>
+        </div>
+
+        <div
+          className="mt-8 inline-block font-black"
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: 22,
+            color: "var(--onmid-lime)",
+            letterSpacing: "-0.02em",
+          }}
+        >
+          @alaorpedro10
         </div>
       </div>
     </SlideLayout>
