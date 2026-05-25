@@ -13,36 +13,14 @@ export function Slide13() {
   const [step, setStep] = useState(0);
 
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      const fwd = e.key === "ArrowRight" || e.key === " " || e.key === "PageDown";
-      const back = e.key === "ArrowLeft" || e.key === "PageUp";
-      if (fwd && step < TOTAL) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        setStep((s) => Math.min(TOTAL, s + 1));
-      } else if (back && step > 0) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        setStep((s) => Math.max(0, s - 1));
-      }
-    };
-    window.addEventListener("keydown", onKey, true);
-    return () => window.removeEventListener("keydown", onKey, true);
-  }, [step]);
+    // Sequência automática: dispara todos os passos da animação em um único frame de entrada.
+    const delays = [200, 900, 1700, 2400]; // ms para steps 1, 2, 3, 4
+    const timers = delays.map((d, i) =>
+      window.setTimeout(() => setStep(i + 1), d),
+    );
+    return () => timers.forEach((t) => window.clearTimeout(t));
+  }, []);
 
-  useEffect(() => {
-    const onClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.closest("button") || target.closest("a") || target.closest("[role=dialog]")) return;
-      if (step < TOTAL) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        setStep((s) => Math.min(TOTAL, s + 1));
-      }
-    };
-    window.addEventListener("click", onClick, true);
-    return () => window.removeEventListener("click", onClick, true);
-  }, [step]);
 
   const showIntro = step >= 0;
   const showVitima = step >= 1;
@@ -265,20 +243,6 @@ export function Slide13() {
         </span>
       </div>
 
-      {/* Step indicator */}
-      <div className="absolute bottom-14 right-32 z-30 flex items-center gap-2">
-        {Array.from({ length: TOTAL + 1 }).map((_, i) => (
-          <div
-            key={i}
-            className="h-1 rounded-full transition-all"
-            style={{
-              width: i === step ? 32 : 12,
-              background:
-                i <= step ? "var(--onmid-lime)" : "oklch(0.18 0.01 240 / 0.15)",
-            }}
-          />
-        ))}
-      </div>
     </SlideLayout>
   );
 }
