@@ -237,8 +237,16 @@ export function Slide12() {
       {/* HERO do stage (lado direito) */}
       <div
         className="absolute z-20"
-        style={{ left: "48%", right: 64, top: 240, bottom: 220 }}
+        style={{
+          left: "48%",
+          right: 64,
+          top: 240,
+          bottom: 220,
+          opacity: intro ? 0 : 1,
+          transition: "opacity 700ms ease 1300ms",
+        }}
       >
+
         {current ? (
           <div
             key={step}
