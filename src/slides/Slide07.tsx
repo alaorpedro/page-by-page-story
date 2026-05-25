@@ -119,7 +119,7 @@ export function Slide07() {
           }}
         />
 
-        <div className="relative grid grid-cols-4 gap-8">
+        <div className="relative grid grid-cols-5 gap-6">
           {STEPS.map((s, i) => (
             <div
               key={i}
