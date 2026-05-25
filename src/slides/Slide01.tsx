@@ -118,8 +118,9 @@ export function Slide01() {
     {/* Vignette overlay — covers slide during the animation phase */}
     {playKey !== null && (
       <div key={playKey} className="absolute inset-0 z-50 pointer-events-none">
-        <IntroVignettePreview />
+        <IntroVignettePreview hideReplay />
       </div>
+
     )}
     </>
   );
