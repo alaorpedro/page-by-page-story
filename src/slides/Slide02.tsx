@@ -10,7 +10,7 @@ export function Slide02() {
           src={alaorPhoto}
           alt="Alaor Pedro de Oliveira"
           className="w-full h-full object-cover"
-          style={{ filter: "grayscale(1) contrast(1.15) brightness(0.92)" }}
+          style={{ filter: "grayscale(1) contrast(1.15) brightness(0.92)", objectPosition: "left center" }}
           draggable={false}
         />
         {/* Lime duotone wash */}
@@ -18,13 +18,13 @@ export function Slide02() {
           className="absolute inset-0 mix-blend-multiply"
           style={{ background: "var(--onmid-lime)", opacity: 0.5 }}
         />
-        {/* Right-side dark gradient for text legibility */}
+        {/* Right-side dark gradient for text legibility — does not cover the face on the left */}
         <div
           className="absolute inset-y-0 right-0"
           style={{
-            width: "62%",
+            width: "52%",
             background:
-              "linear-gradient(to left, oklch(0.13 0.005 240 / 0.92) 0%, oklch(0.13 0.005 240 / 0.65) 55%, oklch(0.13 0.005 240 / 0) 100%)",
+              "linear-gradient(to left, oklch(0.13 0.005 240 / 0.94) 0%, oklch(0.13 0.005 240 / 0.78) 55%, oklch(0.13 0.005 240 / 0) 100%)",
           }}
         />
         {/* Subtle top/bottom vignette */}
@@ -40,7 +40,7 @@ export function Slide02() {
       {/* Section marker — right side */}
       <div
         className="absolute right-24 top-44 flex items-center gap-8 animate-fade-in-up z-10"
-        style={{ width: "44%" }}
+        style={{ width: "40%" }}
       >
         <div className="flex-1 h-px" style={{ background: "oklch(1 0 0 / 0.25)" }} />
         <div
@@ -59,7 +59,7 @@ export function Slide02() {
       {/* Text column over photo */}
       <div
         className="absolute right-24 top-[280px] animate-fade-in-up text-right z-10"
-        style={{ width: "48%", animationDelay: "0.15s" }}
+        style={{ width: "44%", animationDelay: "0.15s" }}
       >
         <div
           className="uppercase font-bold mb-6"
