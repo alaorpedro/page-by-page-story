@@ -11,7 +11,7 @@ const STEPS: Step[] = [
   {
     ord: "1º",
     title: "Descoberta",
-    desc: "Feed, Stories, Pesquisa, Display, Vídeos, Curtidas, Compartilhamento.",
+    desc: "Dia a dia do lead, situações que encaram a realidade.",
     accent: true,
   },
   {
