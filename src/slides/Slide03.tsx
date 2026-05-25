@@ -26,7 +26,7 @@ export function Slide03() {
 
   useEffect(() => {
     const CYCLE = 1000;
-    const FADE = 220;
+    const FADE = 420;
     const t = setInterval(() => {
       setVisible(false);
       setTimeout(() => {
