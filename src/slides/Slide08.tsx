@@ -108,6 +108,32 @@ export function Slide08() {
         >
           Abordagem · Primeiro contato
         </div>
+        <div
+          className="flex items-center gap-3 rounded-full animate-fade-in-up"
+          style={{
+            padding: "10px 20px",
+            background: "var(--onmid-lime)",
+            color: "oklch(0.13 0.005 240)",
+            boxShadow: "0 14px 40px oklch(0.84 0.18 130 / 0.4)",
+            animationDelay: "0.2s",
+          }}
+        >
+          <span
+            className="inline-block rounded-full"
+            style={{
+              width: 10,
+              height: 10,
+              background: "oklch(0.13 0.005 240)",
+              animation: "real-pulse 1.6s ease-in-out infinite",
+            }}
+          />
+          <span
+            className="uppercase font-black"
+            style={{ fontSize: 14, letterSpacing: "0.28em" }}
+          >
+            Conversa real · Caso verídico
+          </span>
+        </div>
       </div>
 
       {/* Chat panel */}
@@ -258,6 +284,10 @@ export function Slide08() {
         @keyframes typing-bounce {
           0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
           30% { transform: translateY(-6px); opacity: 1; }
+        }
+        @keyframes real-pulse {
+          0%, 100% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.6); opacity: 0.4; }
         }
       `}</style>
     </SlideLayout>
