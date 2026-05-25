@@ -170,6 +170,9 @@ export function Slide12() {
             {current.chem}
           </div>
         )}
+      </div>
+
+
 
 
       {/* HERO do stage (lado direito) */}
