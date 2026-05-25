@@ -290,7 +290,7 @@ export function Slide07() {
             top: 28,
             height: 2,
             background:
-              "repeating-linear-gradient(to right, oklch(1 0 0 / 0.18) 0 8px, transparent 8px 16px)",
+              "repeating-linear-gradient(to right, oklch(0.13 0.005 240 / 0.2) 0 8px, transparent 8px 16px)",
           }}
         />
 
