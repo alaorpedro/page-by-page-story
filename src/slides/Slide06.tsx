@@ -312,15 +312,16 @@ function Iphone({
           className="absolute left-0 right-0 px-4 flex flex-col gap-1.5"
           style={{ top: 130, bottom: 24 }}
         >
-          {/* "HOJE" divider — sempre visível */}
-          <DayDivider label="HOJE" />
-
           {MESSAGES.slice(0, visibleCount).map((m, i) => {
             const prev = i > 0 ? MESSAGES[i - 1] : null;
-            // gap maior entre o grupo 1 e o grupo 2 (intervalo de tempo)
-            const extraGap = prev && prev.group !== m.group ? 14 : 0;
+            const groupChanged = prev && prev.group !== m.group;
             return (
-              <div key={i} style={{ marginTop: extraGap }}>
+              <div key={i}>
+                {groupChanged && (
+                  <div style={{ marginTop: 12, marginBottom: 8 }}>
+                    <DayDivider label="HOJE" />
+                  </div>
+                )}
                 <Bubble msg={m} delay={i * 0.05} />
               </div>
             );
