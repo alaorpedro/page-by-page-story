@@ -64,9 +64,12 @@ export function Slide06() {
     return () => window.removeEventListener("click", onClick, true);
   }, [step]);
 
-  // visible messages = step (0→0, 1→1, 2→2, 3→2)
-  const visibleCount = Math.min(step, MESSAGES.length);
-  const showTyping = step < MESSAGES.length;
+  // step → quantas mensagens já apareceram + se mostra typing
+  // 0: nada + typing | 1: grupo 1 (3 msgs) | 2: grupo 1 + typing | 3: tudo | 4: tudo + callout
+  const group1Count = MESSAGES.filter((m) => m.group === 1).length;
+  const visibleCount =
+    step === 0 ? 0 : step === 1 || step === 2 ? group1Count : MESSAGES.length;
+  const showTyping = step === 0 || step === 2;
 
   return (
     <SlideLayout variant="content" tone="dark" bgLetter="6">
