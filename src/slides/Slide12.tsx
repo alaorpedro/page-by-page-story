@@ -171,7 +171,7 @@ export function Slide12() {
           maxWidth: 620,
           opacity: intro ? 0 : 1,
           transform: intro ? "translateY(20px)" : "translateY(0)",
-          transition: "opacity 700ms ease 2050ms, transform 700ms ease 2050ms",
+          transition: "opacity 700ms ease 4050ms, transform 700ms ease 4050ms",
         }}
       >
 
