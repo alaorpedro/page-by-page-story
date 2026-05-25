@@ -94,7 +94,7 @@ export function Slide02() {
             lineHeight: 1.45,
             color: "oklch(0.98 0.005 100 / 0.78)",
             fontWeight: 500,
-            maxWidth: 640,
+            maxWidth: 820,
           }}
         >
           Mais de uma década traduzindo dados em estratégia de alta performance
