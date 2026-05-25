@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import brainVideo from "@/assets/brain-rotate.mp4.asset.json";
+import brainVideo from "@/assets/brain-rotate-alpha.webm";
 
 import { SlideLayout } from "@/components/SlideLayout";
 
@@ -114,7 +114,7 @@ export function Slide12() {
           className="absolute inset-0 pointer-events-none z-40 flex items-center justify-center"
         >
           <video
-            src={brainVideo.url}
+            src={brainVideo}
             autoPlay
             muted
             playsInline
@@ -123,7 +123,7 @@ export function Slide12() {
               width: 1200,
               height: 1200,
               objectFit: "contain",
-              mixBlendMode: "darken",
+              background: "transparent",
               animation: "brain-intro 3s cubic-bezier(0.6,0,0.25,1) both",
             }}
           />
