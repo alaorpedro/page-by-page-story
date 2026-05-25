@@ -59,7 +59,7 @@ export function Slide12() {
   const [intro, setIntro] = useState(true);
 
   useEffect(() => {
-    const t = setTimeout(() => setIntro(false), 3000);
+    const t = setTimeout(() => setIntro(false), 5000);
     return () => clearTimeout(t);
   }, []);
 
@@ -124,7 +124,7 @@ export function Slide12() {
               height: 1200,
               objectFit: "contain",
               background: "transparent",
-              animation: "brain-intro 3s cubic-bezier(0.6,0,0.25,1) both",
+              animation: "brain-intro 5s cubic-bezier(0.6,0,0.25,1) both",
             }}
           />
         </div>
@@ -138,7 +138,7 @@ export function Slide12() {
         style={{
           opacity: intro ? 0 : 1,
           transform: intro ? "translateY(-12px)" : "translateY(0)",
-          transition: "opacity 600ms ease 1900ms, transform 600ms ease 1900ms",
+          transition: "opacity 600ms ease 3900ms, transform 600ms ease 3900ms",
         }}
       >
 
@@ -171,7 +171,7 @@ export function Slide12() {
           maxWidth: 620,
           opacity: intro ? 0 : 1,
           transform: intro ? "translateY(20px)" : "translateY(0)",
-          transition: "opacity 700ms ease 2050ms, transform 700ms ease 2050ms",
+          transition: "opacity 700ms ease 4050ms, transform 700ms ease 4050ms",
         }}
       >
 
@@ -236,7 +236,7 @@ export function Slide12() {
           top: 240,
           bottom: 220,
           opacity: intro ? 0 : 1,
-          transition: "opacity 700ms ease 2200ms",
+          transition: "opacity 700ms ease 4200ms",
         }}
       >
 
@@ -479,9 +479,9 @@ export function Slide12() {
         }
         @keyframes brain-intro {
           0%   { opacity: 0; transform: scale(0.6); filter: blur(12px); }
-          12%  { opacity: 1;                        filter: blur(0); }
-          70%  { opacity: 1; transform: scale(1);   filter: blur(0); }
-          100% { opacity: 0; transform: scale(1.6); filter: blur(8px); }
+          8%   { opacity: 1;                        filter: blur(0); }
+          80%  { opacity: 1; transform: scale(1);   filter: blur(0); }
+          100% { opacity: 0; transform: scale(1.7); filter: blur(10px); }
         }
 
       `}</style>
