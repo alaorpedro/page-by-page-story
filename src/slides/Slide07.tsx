@@ -174,7 +174,7 @@ export function Slide07() {
                     background:
                       current.accent || isFinal
                         ? "var(--onmid-lime)"
-                        : "oklch(1 0 0 / 0.06)",
+                        : "oklch(0.13 0.005 240)",
                     color:
                       current.accent || isFinal
                         ? "oklch(0.13 0.005 240)"
@@ -182,11 +182,11 @@ export function Slide07() {
                     border:
                       current.accent || isFinal
                         ? "none"
-                        : "2px solid oklch(1 0 0 / 0.2)",
+                        : "2px solid oklch(0.13 0.005 240 / 0.15)",
                     boxShadow:
                       current.accent || isFinal
-                        ? "0 30px 80px oklch(0.84 0.18 130 / 0.45)"
-                        : "0 30px 80px oklch(0 0 0 / 0.5)",
+                        ? "0 30px 80px oklch(0.84 0.18 130 / 0.5)"
+                        : "0 30px 80px oklch(0 0 0 / 0.2)",
                     letterSpacing: "-0.04em",
                   }}
                 >
