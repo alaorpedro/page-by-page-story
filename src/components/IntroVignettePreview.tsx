@@ -64,8 +64,14 @@ export function IntroVignettePreview({ hideReplay = false }: Props) {
           font-weight: 900; color: white;
           font-size: 360px; line-height: 0.85;
           letter-spacing: -0.06em; text-transform: uppercase;
-          animation: vigZoomWord 1.3s cubic-bezier(.2,.7,.2,1) forwards,
-                     vigGlitch 0.12s steps(2) 0.3s 4;
+        }
+        .vig-stage-2 .vig-word {
+          animation: vigZoomWord 1.3s cubic-bezier(.2,.7,.2,1) 1.32s both,
+                     vigGlitch 0.12s steps(2) 1.6s 4;
+        }
+        .vig-stage-3 .vig-word {
+          animation: vigZoomWord 1.3s cubic-bezier(.2,.7,.2,1) 2.64s both,
+                     vigGlitch 0.12s steps(2) 2.9s 4;
         }
         .vig-word-lime { color: var(--onmid-lime, #c7ff3a); }
         .vig-bar {
