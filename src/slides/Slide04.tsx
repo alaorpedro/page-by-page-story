@@ -209,6 +209,107 @@ export function Slide04() {
           />
         ))}
       </div>
+
+      {/* Term modal */}
+      {openTerm && (
+        <div
+          className="absolute inset-0 z-40 flex items-center justify-center animate-fade-in"
+          style={{ background: "oklch(0.13 0.005 240 / 0.55)", backdropFilter: "blur(8px)" }}
+          onClick={() => setOpenTerm(null)}
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            onClick={(e) => e.stopPropagation()}
+            className="relative animate-scale-in"
+            style={{
+              width: 880,
+              maxWidth: "90%",
+              background: "oklch(0.985 0.004 90)",
+              color: "oklch(0.13 0.005 240)",
+              padding: "72px 80px",
+              borderRadius: 8,
+              boxShadow: "0 60px 120px oklch(0 0 0 / 0.45)",
+              borderTop: "8px solid var(--onmid-lime)",
+            }}
+          >
+            <button
+              onClick={() => setOpenTerm(null)}
+              aria-label="Fechar"
+              className="absolute top-6 right-6 w-12 h-12 rounded-full flex items-center justify-center hover:opacity-70 transition"
+              style={{ background: "oklch(0 0 0 / 0.06)", fontSize: 22 }}
+            >
+              ×
+            </button>
+            <div
+              className="uppercase font-bold mb-4"
+              style={{
+                fontSize: 14,
+                letterSpacing: "0.35em",
+                color: "oklch(0.18 0.01 240 / 0.55)",
+              }}
+            >
+              Definição
+            </div>
+            <h3
+              style={{
+                fontFamily: "var(--font-display)",
+                fontWeight: 900,
+                fontSize: 96,
+                lineHeight: 0.95,
+                letterSpacing: "-0.04em",
+                marginBottom: 24,
+              }}
+            >
+              {TERMS[openTerm].title}
+              <span className="text-lime">.</span>
+            </h3>
+            <p
+              className="font-medium"
+              style={{
+                fontSize: 28,
+                lineHeight: 1.4,
+                color: "oklch(0.18 0.01 240 / 0.82)",
+              }}
+            >
+              {TERMS[openTerm].body}
+            </p>
+          </div>
+        </div>
+      )}
     </SlideLayout>
+  );
+}
+
+function TermBtn({
+  k,
+  onOpen,
+  children,
+}: {
+  k: TermKey;
+  onOpen: (k: TermKey) => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={(e) => {
+        e.stopPropagation();
+        onOpen(k);
+      }}
+      className="relative font-black inline-block transition-transform hover:-translate-y-0.5"
+      style={{
+        color: "oklch(0.13 0.005 240)",
+        backgroundImage:
+          "linear-gradient(var(--onmid-lime), var(--onmid-lime))",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "100% 38%",
+        backgroundPosition: "0 88%",
+        padding: "0 6px",
+        cursor: "pointer",
+      }}
+    >
+      {children}
+    </button>
   );
 }
