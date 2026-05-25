@@ -84,7 +84,8 @@ export function IntroVignettePreview({ hideReplay = false }: { hideReplay?: bool
           text-transform: uppercase;
           white-space: nowrap;
           will-change: transform, opacity, filter, text-shadow, clip-path;
-        }
+        .vig-logo { height: 380px; width: auto; font-size: 0; object-fit: contain; }
+
         .vig-scanlines {
           position: absolute; inset: 0; pointer-events: none; z-index: 50;
           background: repeating-linear-gradient(
