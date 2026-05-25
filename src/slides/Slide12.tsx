@@ -56,6 +56,14 @@ const REWARDS = [
 export function Slide12() {
   const TOTAL = STAGES.length;
   const [step, setStep] = useState(0);
+  const [intro, setIntro] = useState(true);
+
+  useEffect(() => {
+    const t = setTimeout(() => setIntro(false), 1400);
+    return () => clearTimeout(t);
+  }, []);
+
+
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
