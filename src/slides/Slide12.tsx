@@ -120,13 +120,12 @@ export function Slide12() {
             width={1024}
             height={1024}
             style={{
-              width: 900,
-              height: 900,
+              width: 1100,
+              height: 1100,
               objectFit: "contain",
-              transformStyle: "preserve-3d",
-              backfaceVisibility: "visible",
-              filter: "drop-shadow(0 50px 100px oklch(0 0 0 / 0.35))",
-              animation: "brain-intro 2.4s cubic-bezier(0.6,0,0.3,1) both",
+              transformOrigin: "center center",
+              filter: "drop-shadow(0 60px 120px oklch(0.55 0.25 260 / 0.45))",
+              animation: "brain-intro 2.4s cubic-bezier(0.6,0,0.25,1) both",
             }}
           />
         </div>
@@ -480,10 +479,11 @@ export function Slide12() {
           100% { opacity: 1; transform: scale(1); }
         }
         @keyframes brain-intro {
-          0%   { opacity: 0; transform: scale(0.5) rotateY(0deg);    filter: blur(10px); }
-          18%  { opacity: 1;                                          filter: blur(0); }
-          70%  { opacity: 1; transform: scale(1)   rotateY(720deg);  filter: blur(0); }
-          100% { opacity: 0; transform: scale(1.9) rotateY(900deg);  filter: blur(6px); }
+          0%   { opacity: 0; transform: scale(0.4) rotate(-12deg);             filter: blur(14px) brightness(1.3); }
+          15%  { opacity: 1;                                                    filter: blur(0) brightness(1.15); }
+          55%  { opacity: 1; transform: scale(1.05) rotate(2deg);              filter: blur(0) brightness(1); }
+          80%  { opacity: 0.9; transform: scale(1.45) rotate(4deg);            filter: blur(2px) brightness(1.1); }
+          100% { opacity: 0; transform: scale(2.2) rotate(6deg);               filter: blur(10px) brightness(1.3); }
         }
 
       `}</style>
