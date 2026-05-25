@@ -256,7 +256,7 @@ export function Slide07() {
                       fontSize: 96,
                       lineHeight: 0.95,
                       letterSpacing: "-0.035em",
-                      color: current.accent
+                      color: current.accent || isFinal
                         ? "var(--onmid-lime)"
                         : "oklch(0.98 0 0)",
                     }}
