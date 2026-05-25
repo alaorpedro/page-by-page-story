@@ -21,6 +21,7 @@ const STEPS = 3; // 0: p1, 1: + "Mas isso não é tudo.", 2: + frase final
 
 export function Slide04() {
   const [step, setStep] = useState(0);
+  const [openTerm, setOpenTerm] = useState<TermKey | null>(null);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
