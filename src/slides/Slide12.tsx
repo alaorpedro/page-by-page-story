@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import brain3d from "@/assets/brain-3d.png";
+import brainVideo from "@/assets/brain-rotate.mp4.asset.json";
 
 import { SlideLayout } from "@/components/SlideLayout";
 
@@ -59,7 +59,7 @@ export function Slide12() {
   const [intro, setIntro] = useState(true);
 
   useEffect(() => {
-    const t = setTimeout(() => setIntro(false), 2400);
+    const t = setTimeout(() => setIntro(false), 3000);
     return () => clearTimeout(t);
   }, []);
 
@@ -107,25 +107,25 @@ export function Slide12() {
 
   return (
     <SlideLayout variant="content" tone="light" bgLetter="N">
-      {/* Brain 3D — intro: gira no eixo vertical, zoom + fade out */}
+      {/* Brain 3D rotativo — vídeo gerado, em loop, com fade no fim */}
       {intro && (
         <div
           aria-hidden
           className="absolute inset-0 pointer-events-none z-40 flex items-center justify-center"
-          style={{ perspective: 1600 }}
         >
-          <img
-            src={brain3d}
-            alt=""
-            width={1024}
-            height={1024}
+          <video
+            src={brainVideo.url}
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
             style={{
-              width: 1100,
-              height: 1100,
+              width: 1200,
+              height: 1200,
               objectFit: "contain",
-              transformOrigin: "center center",
-              filter: "drop-shadow(0 60px 120px oklch(0.55 0.25 260 / 0.45))",
-              animation: "brain-intro 2.4s cubic-bezier(0.6,0,0.25,1) both",
+              mixBlendMode: "multiply",
+              filter: "drop-shadow(0 40px 80px oklch(0.84 0.18 130 / 0.35))",
+              animation: "brain-intro 3s cubic-bezier(0.6,0,0.25,1) both",
             }}
           />
         </div>
@@ -479,11 +479,10 @@ export function Slide12() {
           100% { opacity: 1; transform: scale(1); }
         }
         @keyframes brain-intro {
-          0%   { opacity: 0; transform: scale(0.4) rotate(-12deg);             filter: blur(14px) brightness(1.3); }
-          15%  { opacity: 1;                                                    filter: blur(0) brightness(1.15); }
-          55%  { opacity: 1; transform: scale(1.05) rotate(2deg);              filter: blur(0) brightness(1); }
-          80%  { opacity: 0.9; transform: scale(1.45) rotate(4deg);            filter: blur(2px) brightness(1.1); }
-          100% { opacity: 0; transform: scale(2.2) rotate(6deg);               filter: blur(10px) brightness(1.3); }
+          0%   { opacity: 0; transform: scale(0.6); filter: blur(12px); }
+          12%  { opacity: 1;                        filter: blur(0); }
+          70%  { opacity: 1; transform: scale(1);   filter: blur(0); }
+          100% { opacity: 0; transform: scale(1.6); filter: blur(8px); }
         }
 
       `}</style>
