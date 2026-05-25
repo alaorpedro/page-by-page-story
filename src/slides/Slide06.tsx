@@ -106,25 +106,25 @@ export function Slide06() {
         <Iphone visibleCount={visibleCount} showTyping={showTyping} />
       </div>
 
-      {/* Attendant photo (right, top) */}
+      {/* Attendant photo (right) — maior, sem caixa de texto */}
       <div
         className="absolute z-20 animate-fade-in-up"
-        style={{ right: 140, top: 180, width: 560, animationDelay: "0.2s" }}
+        style={{ right: 40, top: 220, width: 820, animationDelay: "0.2s" }}
       >
         {/* Lime backdrop circle */}
         <div
           className="absolute rounded-full"
           style={{
-            width: 500,
-            height: 500,
-            right: 30,
+            width: 720,
+            height: 720,
+            right: 50,
             top: 40,
             background: "var(--onmid-lime)",
             opacity: 0.95,
           }}
         />
         {/* Crossfade entre atendente triste (mensagens raivosas) e feliz (pedido de pizza) */}
-        <div className="relative" style={{ width: 560, height: 560 }}>
+        <div className="relative" style={{ width: 820, height: 820 }}>
           {[
             { src: attendantSad, visible: step === 1 || step === 2 },
             { src: attendantHappy, visible: !(step === 1 || step === 2) },
@@ -138,7 +138,7 @@ export function Slide06() {
               height={1024}
               className="absolute inset-0"
               style={{
-                width: 560,
+                width: 820,
                 height: "auto",
                 opacity: visible ? 1 : 0,
                 transition: "opacity 500ms ease",
@@ -147,72 +147,6 @@ export function Slide06() {
             />
           ))}
         </div>
-      </div>
-
-      {/* Headline + callout (bottom right) — caixa escura para legibilidade */}
-      <div
-        className="absolute z-30"
-        style={{
-          right: 80,
-          bottom: 90,
-          width: 720,
-          padding: "32px 36px",
-          background: "oklch(0.13 0.005 240 / 0.78)",
-          backdropFilter: "blur(14px)",
-          border: "1px solid oklch(1 0 0 / 0.08)",
-          borderLeft: "4px solid var(--onmid-lime)",
-          boxShadow: "0 30px 60px oklch(0 0 0 / 0.45)",
-        }}
-      >
-        <div
-          className="uppercase font-black mb-3 animate-fade-in-up"
-          style={{
-            fontSize: 18,
-            letterSpacing: "0.35em",
-            color: "var(--onmid-lime)",
-            animationDelay: "0.3s",
-          }}
-        >
-          O que ficou de fora
-        </div>
-        <div
-          className="font-black animate-fade-in-up"
-          style={{
-            fontFamily: "var(--font-display)",
-            fontSize: 48,
-            lineHeight: 1,
-            letterSpacing: "-0.035em",
-            color: "oklch(0.98 0 0)",
-            animationDelay: "0.4s",
-          }}
-        >
-          A atendente até{" "}
-          <span
-            className="px-2 inline-block"
-            style={{
-              background: "var(--onmid-lime)",
-              color: "oklch(0.13 0.005 240)",
-              transform: "skewX(-4deg)",
-            }}
-          >
-            resolveu
-          </span>
-          .
-        </div>
-
-        {step >= 4 && (
-          <p
-            className="mt-6 font-medium animate-fade-in-up"
-            style={{
-              fontSize: 28,
-              lineHeight: 1.3,
-              color: "oklch(1 0 0 / 0.8)",
-            }}
-          >
-            Mas não mudou o estado emocional da cliente — e o relacionamento
-            terminou ali.
-          </p>
-        )}
       </div>
 
       {/* Step indicator */}
