@@ -1,56 +1,105 @@
 import type { ReactNode } from "react";
 import { OnmidMark } from "./OnmidMark";
 import { useSlideMeta } from "./SlideContext";
+import blobLime from "@/assets/blob-lime.png";
+import blobDark from "@/assets/blob-dark.png";
 
 type Variant = "hero" | "content" | "statement" | "bare";
+type Tone = "dark" | "light";
 
 type Props = {
   children: ReactNode;
   variant?: Variant;
+  /** "dark" = charcoal bg + light text. "light" = cream bg + dark text. */
+  tone?: Tone;
   kicker?: string;
+  /** Optional giant background letter/number behind content (editorial accent). */
+  bgLetter?: string;
+  /** Optional decorative blob: position + size (px in 1920x1080 space). */
+  blob?: {
+    variant?: "lime" | "dark";
+    side?: "left" | "right";
+    top?: number;
+    size?: number;
+    opacity?: number;
+  };
   bg?: string;
-  /** @deprecated legacy prop — ignored. Chrome is owned by SlideLayout now. */
-  arcs?: unknown;
-  /** @deprecated legacy prop — ignored. Chrome is owned by SlideLayout now. */
-  logo?: unknown;
+  /** @deprecated */ arcs?: unknown;
+  /** @deprecated */ logo?: unknown;
 };
 
-/**
- * Unified slide chrome (Geometric Constructivist).
- * - Always renders top header bar (logo mark + slide counter)
- * - Always renders bottom 1/3 lime + 2/3 white-5 rhythm bar
- * - Hero variant adds decorative concentric rings top-right
- * - Content variant reserves padded area + faded corner brand bottom-right
- * - Statement variant centers a single big-statement child
- * - Bare variant: only chrome, children control all spacing
- */
+const DARK_BG =
+  "radial-gradient(ellipse 90% 70% at 50% 40%, oklch(0.21 0.008 240) 0%, oklch(0.13 0.005 240) 100%)";
+const LIGHT_BG =
+  "radial-gradient(ellipse 90% 70% at 50% 40%, oklch(0.985 0.004 90) 0%, oklch(0.94 0.008 90) 100%)";
+
 export function SlideLayout({
   children,
   variant = "content",
+  tone = "dark",
   kicker,
+  bgLetter,
+  blob,
   bg,
 }: Props) {
   const { index, total } = useSlideMeta();
   const counter = `${String(index).padStart(2, "0")} // ${String(total).padStart(2, "0")}`;
+  const isLight = tone === "light";
+
+  const textBase = isLight ? "oklch(0.18 0.01 240)" : "oklch(0.98 0 0)";
+  const textMuted = isLight ? "oklch(0.18 0.01 240 / 0.55)" : "oklch(1 0 0 / 0.6)";
+  const chromeMuted = isLight ? "oklch(0.18 0.01 240 / 0.35)" : "oklch(1 0 0 / 0.25)";
+  const rhythmTrack = isLight ? "oklch(0 0 0 / 0.06)" : "oklch(1 0 0 / 0.05)";
 
   return (
     <div
       className="slide-content relative"
-      style={bg ? { background: bg } : undefined}
+      style={{
+        background: bg ?? (isLight ? LIGHT_BG : DARK_BG),
+        color: textBase,
+      }}
     >
-      {/* Background field */}
-      {!bg && (
+      {/* Giant editorial background letter */}
+      {bgLetter && (
         <div
-          className="absolute inset-0"
+          aria-hidden
+          className="absolute pointer-events-none select-none animate-fade-in"
           style={{
-            background:
-              "radial-gradient(ellipse 90% 70% at 50% 40%, oklch(0.21 0.008 240) 0%, oklch(0.13 0.005 240) 100%)",
+            left: "-4%",
+            top: "-8%",
+            fontFamily: "var(--font-display)",
+            fontWeight: 900,
+            fontSize: 1400,
+            lineHeight: 1,
+            letterSpacing: "-0.08em",
+            color: isLight ? "oklch(0 0 0 / 0.04)" : "oklch(1 0 0 / 0.035)",
           }}
+        >
+          {bgLetter}
+        </div>
+      )}
+
+      {/* Decorative 3D blob */}
+      {blob && (
+        <img
+          src={blob.variant === "dark" ? blobDark : blobLime}
+          alt=""
+          aria-hidden
+          className="absolute pointer-events-none animate-fade-in"
+          style={{
+            [blob.side ?? "right"]: -120,
+            top: blob.top ?? 80,
+            width: blob.size ?? 720,
+            height: "auto",
+            opacity: blob.opacity ?? 0.95,
+            filter: "drop-shadow(0 40px 80px oklch(0 0 0 / 0.35))",
+          } as React.CSSProperties}
+          loading="lazy"
         />
       )}
 
-      {/* Hero decorative rings */}
-      {variant === "hero" && (
+      {/* Hero decorative rings — only on dark hero */}
+      {variant === "hero" && !isLight && (
         <>
           <div
             className="absolute rounded-full pointer-events-none animate-fade-in"
@@ -79,8 +128,8 @@ export function SlideLayout({
       <div className="absolute top-0 left-0 right-0 flex justify-between items-center px-16 pt-12 z-30 animate-fade-in">
         <OnmidMark size={44} iconOnly />
         <div
-          className="text-foreground/25 font-mono tracking-[0.25em]"
-          style={{ fontSize: 11 }}
+          className="font-mono tracking-[0.25em]"
+          style={{ fontSize: 11, color: chromeMuted }}
         >
           {counter}
         </div>
@@ -89,30 +138,23 @@ export function SlideLayout({
       {/* Content slot */}
       <div className="absolute inset-0 z-20">{children}</div>
 
-      {/* Faded corner brand on content/statement slides */}
+      {/* Faded corner brand */}
       {(variant === "content" || variant === "statement") && (
         <div className="absolute bottom-14 right-16 z-20">
-          <OnmidMark size={22} faded />
+          <OnmidMark size={22} faded tone={tone} />
         </div>
       )}
 
       {/* Bottom rhythm bar */}
       <div className="absolute bottom-0 left-0 right-0 h-2 flex z-30">
-        <div
-          className="h-full"
-          style={{ width: "33.33%", background: "var(--onmid-lime)" }}
-        />
-        <div
-          className="h-full flex-1"
-          style={{ background: "oklch(1 0 0 / 0.05)" }}
-        />
+        <div className="h-full" style={{ width: "33.33%", background: "var(--onmid-lime)" }} />
+        <div className="h-full flex-1" style={{ background: rhythmTrack }} />
       </div>
 
-      {/* Optional kicker (rarely used) */}
       {kicker && (
         <div
-          className="absolute top-32 right-16 z-30 text-foreground/40 uppercase font-semibold"
-          style={{ fontSize: 18, letterSpacing: "0.3em" }}
+          className="absolute top-32 right-16 z-30 uppercase font-semibold"
+          style={{ fontSize: 18, letterSpacing: "0.3em", color: textMuted }}
         >
           {kicker}
         </div>
