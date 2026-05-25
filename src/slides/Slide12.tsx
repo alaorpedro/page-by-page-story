@@ -484,8 +484,7 @@ export function Slide12() {
           100% { opacity: 1; transform: scale(1); }
         }
         @keyframes brain-intro {
-          0%   { opacity: 0; transform: scale(0.6); filter: blur(12px); }
-          6%   { opacity: 1;                        filter: blur(0); }
+          0%   { opacity: 1; transform: scale(0.9); filter: blur(0); }
           85%  { opacity: 1; transform: scale(1);   filter: blur(0); }
           100% { opacity: 0; transform: scale(1.7); filter: blur(10px); }
         }
