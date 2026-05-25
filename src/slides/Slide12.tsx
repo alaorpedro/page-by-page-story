@@ -59,9 +59,10 @@ export function Slide12() {
   const [intro, setIntro] = useState(true);
 
   useEffect(() => {
-    const t = setTimeout(() => setIntro(false), 1400);
+    const t = setTimeout(() => setIntro(false), 2400);
     return () => clearTimeout(t);
   }, []);
+
 
 
 
@@ -106,38 +107,32 @@ export function Slide12() {
 
   return (
     <SlideLayout variant="content" tone="light" bgLetter="N">
-      {/* Brain 3D — intro spinning + persistent backdrop */}
-      <div
-        aria-hidden
-        className="absolute pointer-events-none z-10"
-        style={{
-          right: intro ? "50%" : -80,
-          top: intro ? "50%" : 200,
-          width: intro ? 720 : 620,
-          height: intro ? 720 : 620,
-          transform: intro
-            ? "translate(50%, -50%)"
-            : "translate(0, 0)",
-          transition:
-            "right 1100ms cubic-bezier(0.7,0,0.2,1) 200ms, top 1100ms cubic-bezier(0.7,0,0.2,1) 200ms, width 1100ms cubic-bezier(0.7,0,0.2,1) 200ms, height 1100ms cubic-bezier(0.7,0,0.2,1) 200ms, transform 1100ms cubic-bezier(0.7,0,0.2,1) 200ms",
-          filter: "drop-shadow(0 40px 80px oklch(0 0 0 / 0.25))",
-        }}
-      >
-        <img
-          src={brain3d}
-          alt=""
-          width={1024}
-          height={1024}
-          className="w-full h-full object-contain"
-          style={{
-            animation: intro
-              ? "brain-spin-in 1.3s cubic-bezier(0.34,1.2,0.5,1) both"
-              : "brain-float 6s ease-in-out infinite",
-            opacity: intro ? 1 : 0.92,
-            transition: "opacity 800ms ease 600ms",
-          }}
-        />
-      </div>
+      {/* Brain 3D — intro: gira no eixo vertical, zoom + fade out */}
+      {intro && (
+        <div
+          aria-hidden
+          className="absolute inset-0 pointer-events-none z-40 flex items-center justify-center"
+          style={{ perspective: 1600 }}
+        >
+          <img
+            src={brain3d}
+            alt=""
+            width={1024}
+            height={1024}
+            style={{
+              width: 900,
+              height: 900,
+              objectFit: "contain",
+              transformStyle: "preserve-3d",
+              backfaceVisibility: "visible",
+              filter: "drop-shadow(0 50px 100px oklch(0 0 0 / 0.35))",
+              animation: "brain-intro 2.4s cubic-bezier(0.6,0,0.3,1) both",
+            }}
+          />
+        </div>
+      )}
+
+
 
       {/* Header */}
       <div
@@ -145,7 +140,7 @@ export function Slide12() {
         style={{
           opacity: intro ? 0 : 1,
           transform: intro ? "translateY(-12px)" : "translateY(0)",
-          transition: "opacity 600ms ease 1000ms, transform 600ms ease 1000ms",
+          transition: "opacity 600ms ease 1900ms, transform 600ms ease 1900ms",
         }}
       >
 
@@ -178,7 +173,7 @@ export function Slide12() {
           maxWidth: 620,
           opacity: intro ? 0 : 1,
           transform: intro ? "translateY(20px)" : "translateY(0)",
-          transition: "opacity 700ms ease 1150ms, transform 700ms ease 1150ms",
+          transition: "opacity 700ms ease 2050ms, transform 700ms ease 2050ms",
         }}
       >
 
@@ -243,7 +238,7 @@ export function Slide12() {
           top: 240,
           bottom: 220,
           opacity: intro ? 0 : 1,
-          transition: "opacity 700ms ease 1300ms",
+          transition: "opacity 700ms ease 2200ms",
         }}
       >
 
@@ -484,15 +479,13 @@ export function Slide12() {
           60%  { opacity: 1; transform: scale(1.05); }
           100% { opacity: 1; transform: scale(1); }
         }
-        @keyframes brain-spin-in {
-          0%   { opacity: 0; transform: scale(0.2) rotate(-540deg); filter: blur(8px); }
-          60%  { opacity: 1; filter: blur(0); }
-          100% { opacity: 1; transform: scale(1) rotate(0deg); filter: blur(0); }
+        @keyframes brain-intro {
+          0%   { opacity: 0; transform: scale(0.5) rotateY(0deg);    filter: blur(10px); }
+          18%  { opacity: 1;                                          filter: blur(0); }
+          70%  { opacity: 1; transform: scale(1)   rotateY(720deg);  filter: blur(0); }
+          100% { opacity: 0; transform: scale(1.9) rotateY(900deg);  filter: blur(6px); }
         }
-        @keyframes brain-float {
-          0%, 100% { transform: translateY(0) rotate(0deg); }
-          50%      { transform: translateY(-14px) rotate(2deg); }
-        }
+
       `}</style>
 
     </SlideLayout>
