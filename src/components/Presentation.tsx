@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ScaledSlide } from "./ScaledSlide";
+import { SlideContext } from "./SlideContext";
 import { Slide01 } from "@/slides/Slide01";
 import { Slide02 } from "@/slides/Slide02";
 import { Slide03 } from "@/slides/Slide03";
