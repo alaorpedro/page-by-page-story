@@ -19,14 +19,21 @@ const FONT_CYCLE = [
 
 export function Slide03() {
   const [fontIdx, setFontIdx] = useState(0);
+  const [visible, setVisible] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
 
   useEffect(() => {
+    const CYCLE = 700;
+    const FADE = 220;
     const t = setInterval(() => {
-      setFontIdx((i) => (i + 1) % FONT_CYCLE.length);
-    }, 400);
+      setVisible(false);
+      setTimeout(() => {
+        setFontIdx((i) => (i + 1) % FONT_CYCLE.length);
+        setVisible(true);
+      }, FADE);
+    }, CYCLE);
     return () => clearInterval(t);
   }, []);
 
@@ -146,7 +153,8 @@ export function Slide03() {
               color: "oklch(0.98 0.005 100)",
               lineHeight: 0.9,
               whiteSpace: "nowrap",
-              animation: "fade-in 0.25s ease-out both",
+              opacity: visible ? 1 : 0,
+              transition: "opacity 220ms ease-out",
             }}
           >
             propósito<span className="text-lime">.</span>
