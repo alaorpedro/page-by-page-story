@@ -7,10 +7,12 @@ type Variant = "hero" | "content" | "statement" | "bare";
 type Props = {
   children: ReactNode;
   variant?: Variant;
-  /** Optional uppercase tracked label shown in the content section header */
   kicker?: string;
-  /** Background color override for full-bleed slides (e.g. WhatsApp green) */
   bg?: string;
+  /** @deprecated legacy prop — ignored. Chrome is owned by SlideLayout now. */
+  arcs?: unknown;
+  /** @deprecated legacy prop — ignored. Chrome is owned by SlideLayout now. */
+  logo?: unknown;
 };
 
 /**
