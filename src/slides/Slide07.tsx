@@ -157,11 +157,18 @@ export function Slide07() {
         />
 
         <div className="relative grid grid-cols-5 gap-6">
-          {STEPS.map((s, i) => (
+          {STEPS.map((s, i) => {
+            const active = i < step;
+            return (
             <div
               key={i}
-              className="flex flex-col items-start animate-fade-in-up"
-              style={{ animationDelay: `${0.25 + i * 0.12}s` }}
+              className="flex flex-col items-start"
+              style={{
+                opacity: active ? 1 : 0.22,
+                filter: active ? "none" : "saturate(0.3)",
+                transform: active ? "translateY(0)" : "translateY(6px)",
+                transition: "opacity 500ms ease, filter 500ms ease, transform 500ms ease",
+              }}
             >
               {/* Number badge */}
               <div
@@ -171,19 +178,20 @@ export function Slide07() {
                   height: 112,
                   fontFamily: "var(--font-display)",
                   fontSize: s.accent ? 52 : 48,
-                  background: s.accent
+                  background: s.accent && active
                     ? "var(--onmid-lime)"
                     : "oklch(1 0 0 / 0.06)",
-                  color: s.accent
+                  color: s.accent && active
                     ? "oklch(0.13 0.005 240)"
                     : "oklch(0.98 0 0)",
-                  border: s.accent
+                  border: s.accent && active
                     ? "none"
                     : "2px solid oklch(1 0 0 / 0.18)",
-                  boxShadow: s.accent
+                  boxShadow: s.accent && active
                     ? "0 20px 50px oklch(0.84 0.18 130 / 0.35)"
                     : "none",
                   letterSpacing: "-0.04em",
+                  transition: "background 400ms ease, color 400ms ease, box-shadow 400ms ease",
                 }}
               >
                 {s.ord}
@@ -213,7 +221,7 @@ export function Slide07() {
                   fontSize: 38,
                   lineHeight: 1,
                   letterSpacing: "-0.02em",
-                  color: s.accent
+                  color: s.accent && active
                     ? "var(--onmid-lime)"
                     : "oklch(0.98 0 0)",
                 }}
@@ -233,8 +241,23 @@ export function Slide07() {
                 {s.desc}
               </p>
             </div>
-          ))}
+            );
+          })}
         </div>
+      </div>
+
+      {/* Step indicator */}
+      <div className="absolute bottom-14 left-16 z-30 flex items-center gap-2">
+        {Array.from({ length: STEPS_COUNT + 1 }).map((_, i) => (
+          <div
+            key={i}
+            className="h-1 rounded-full transition-all"
+            style={{
+              width: i === step ? 32 : 12,
+              background: i <= step ? "var(--onmid-lime)" : "oklch(1 0 0 / 0.18)",
+            }}
+          />
+        ))}
       </div>
     </SlideLayout>
   );
