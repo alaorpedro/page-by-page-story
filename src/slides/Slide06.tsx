@@ -123,19 +123,30 @@ export function Slide06() {
             opacity: 0.95,
           }}
         />
-        <img
-          src={attendant}
-          alt="Atendente com headset"
-          loading="lazy"
-          width={1024}
-          height={1024}
-          className="relative"
-          style={{
-            width: 720,
-            height: "auto",
-            filter: "drop-shadow(0 30px 60px oklch(0 0 0 / 0.45))",
-          }}
-        />
+        {/* Crossfade entre atendente triste (mensagens raivosas) e feliz (pedido de pizza) */}
+        <div className="relative" style={{ width: 720, height: 720 }}>
+          {[
+            { src: attendantSad, visible: step === 1 || step === 2 },
+            { src: attendantHappy, visible: !(step === 1 || step === 2) },
+          ].map(({ src, visible }, idx) => (
+            <img
+              key={idx}
+              src={src}
+              alt="Atendente com headset"
+              loading="lazy"
+              width={1024}
+              height={1024}
+              className="absolute inset-0"
+              style={{
+                width: 720,
+                height: "auto",
+                opacity: visible ? 1 : 0,
+                transition: "opacity 500ms ease",
+                filter: "drop-shadow(0 30px 60px oklch(0 0 0 / 0.45))",
+              }}
+            />
+          ))}
+        </div>
       </div>
 
       {/* Headline + callout (bottom right) */}
