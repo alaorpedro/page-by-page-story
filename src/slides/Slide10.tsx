@@ -165,12 +165,11 @@ export function Slide10() {
                   lineHeight: 1,
                   fontWeight: 900,
                   letterSpacing: "-0.05em",
-                  color: "var(--onmid-lime)",
-                  WebkitTextStroke: "3px oklch(0.13 0.005 240)",
+                  color: "oklch(0.13 0.005 240)",
                   textShadow: "0 30px 80px oklch(0.84 0.18 130 / 0.5)",
                 }}
               >
-                AGORA<span style={{ color: "oklch(0.13 0.005 240)" }}>!</span>
+                AGORA<span style={{ color: "var(--onmid-lime)" }}>!</span>
               </h1>
             </div>
           )}
