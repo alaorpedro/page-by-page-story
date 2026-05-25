@@ -40,7 +40,7 @@ export function Slide04() {
           style={{
             fontSize: 44,
             lineHeight: 1.28,
-            color: "oklch(1 0 0 / 0.85)",
+            color: "oklch(0.18 0.01 240 / 0.78)",
             animationDelay: "0.1s",
           }}
         >
@@ -56,7 +56,7 @@ export function Slide04() {
             fontSize: 72,
             lineHeight: 1,
             letterSpacing: "-0.04em",
-            color: "oklch(0.98 0 0)",
+            color: "oklch(0.13 0.005 240)",
             animationDelay: "0.25s",
           }}
         >
@@ -68,7 +68,7 @@ export function Slide04() {
           style={{
             fontSize: 44,
             lineHeight: 1.28,
-            color: "oklch(1 0 0 / 0.85)",
+            color: "oklch(0.18 0.01 240 / 0.78)",
             animationDelay: "0.4s",
           }}
         >
@@ -85,6 +85,7 @@ export function Slide04() {
           </span>
           .
         </p>
+
       </div>
     </SlideLayout>
   );
