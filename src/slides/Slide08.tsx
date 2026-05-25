@@ -285,6 +285,10 @@ export function Slide08() {
           0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
           30% { transform: translateY(-6px); opacity: 1; }
         }
+        @keyframes real-pulse {
+          0%, 100% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.6); opacity: 0.4; }
+        }
       `}</style>
     </SlideLayout>
   );
