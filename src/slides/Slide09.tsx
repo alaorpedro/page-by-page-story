@@ -115,7 +115,7 @@ export function Slide09() {
           className="uppercase font-black mb-2"
           style={{ fontSize: 18, letterSpacing: "0.3em", color: "var(--onmid-lime)" }}
         >
-          Situações que encaram a realidade
+          Quando você liga para lead ele pode estar...
         </div>
       </div>
 
