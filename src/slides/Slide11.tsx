@@ -158,7 +158,7 @@ export function Slide11() {
           left: "44%",
           right: 64,
           top: 240,
-          bottom: 220,
+          bottom: 340,
         }}
       >
         {current ? (
@@ -283,97 +283,134 @@ export function Slide11() {
         )}
       </div>
 
-      {/* Trilha inferior — 3 pilares como chips conectados */}
+      {/* Trilha inferior — 3 pilares como cards */}
       <div
         className="absolute z-20"
-        style={{ left: 64, right: 64, bottom: 110 }}
+        style={{ left: 64, right: 64, bottom: 100 }}
       >
-        {/* Linha conectora */}
-        <div
-          className="absolute"
-          style={{
-            left: 60,
-            right: 60,
-            top: 38,
-            height: 2,
-            background:
-              "repeating-linear-gradient(to right, oklch(1 0 0 / 0.18) 0 8px, transparent 8px 16px)",
-          }}
-        />
-
-        <div className="relative grid grid-cols-3 gap-6">
+        <div className="grid grid-cols-3 gap-6">
           {PILLARS.map((p, i) => {
             const revealed = i < step;
             const isCurrent = i === step - 1;
+            const isLime = (isCurrent || revealed) && p.highlight;
             return (
               <div
                 key={i}
-                className="flex items-center gap-4"
+                className="relative rounded-3xl overflow-hidden"
                 style={{
+                  height: 210,
+                  padding: "26px 28px",
+                  background: isLime
+                    ? "var(--onmid-lime)"
+                    : isCurrent
+                    ? "oklch(0.98 0 0)"
+                    : "oklch(1 0 0 / 0.05)",
+                  border: isLime || isCurrent
+                    ? "none"
+                    : "1px solid oklch(1 0 0 / 0.1)",
                   opacity: revealed ? 1 : 0.3,
-                  filter: revealed ? "none" : "saturate(0.2) blur(5px)",
+                  filter: revealed ? "none" : "saturate(0.2) blur(6px)",
+                  transform: isCurrent ? "translateY(-10px) scale(1.02)" : "translateY(0)",
+                  boxShadow: isCurrent
+                    ? isLime
+                      ? "0 30px 70px oklch(0.84 0.18 130 / 0.55)"
+                      : "0 30px 70px oklch(0 0 0 / 0.55)"
+                    : revealed
+                    ? "0 14px 40px oklch(0 0 0 / 0.35)"
+                    : "none",
                   transition:
-                    "opacity 500ms ease, filter 500ms ease, transform 400ms ease",
-                  transform: isCurrent ? "translateY(-6px)" : "translateY(0)",
+                    "opacity 500ms ease, filter 500ms ease, transform 500ms cubic-bezier(0.22,1,0.36,1), box-shadow 500ms ease, background 500ms ease",
                 }}
               >
-                <div
-                  className="rounded-2xl flex items-center justify-center font-black shrink-0"
-                  style={{
-                    width: 76,
-                    height: 76,
-                    fontFamily: "var(--font-display)",
-                    fontSize: 32,
-                    background:
-                      isCurrent && p.highlight
-                        ? "var(--onmid-lime)"
-                        : isCurrent
-                        ? "oklch(0.98 0 0)"
-                        : revealed && p.highlight
-                        ? "var(--onmid-lime)"
-                        : "oklch(1 0 0 / 0.08)",
-                    color:
-                      (isCurrent && !p.highlight) || (!isCurrent && !p.highlight)
-                        ? isCurrent
-                          ? "oklch(0.13 0.005 240)"
-                          : "oklch(0.98 0 0)"
-                        : "oklch(0.13 0.005 240)",
-                    border:
-                      revealed || isCurrent
-                        ? "none"
-                        : "2px solid oklch(1 0 0 / 0.15)",
-                    boxShadow: isCurrent
-                      ? "0 16px 40px oklch(0.84 0.18 130 / 0.4)"
-                      : "none",
-                    letterSpacing: "-0.04em",
-                    transition: "all 400ms ease",
-                  }}
-                >
-                  {p.ord}
-                </div>
-                <div className="min-w-0">
+                {/* Barra lime à esquerda quando current */}
+                {isCurrent && !isLime && (
                   <div
-                    className="uppercase font-black mb-1"
+                    className="absolute left-0 top-6 bottom-6 rounded-r-full"
+                    style={{ width: 6, background: "var(--onmid-lime)" }}
+                  />
+                )}
+
+                {/* Top: número + kicker */}
+                <div className="flex items-start justify-between mb-4">
+                  <div
+                    className="uppercase font-black"
                     style={{
-                      fontSize: 12,
-                      letterSpacing: "0.28em",
-                      color: isCurrent
-                        ? "var(--onmid-lime)"
-                        : "oklch(1 0 0 / 0.5)",
+                      fontSize: 13,
+                      letterSpacing: "0.3em",
+                      color: isLime
+                        ? "oklch(0.13 0.005 240 / 0.7)"
+                        : isCurrent
+                        ? "oklch(0.13 0.005 240 / 0.6)"
+                        : "oklch(1 0 0 / 0.55)",
                     }}
                   >
                     {p.kicker}
                   </div>
                   <div
-                    className="font-bold truncate"
+                    className="font-black"
                     style={{
-                      fontSize: 18,
-                      lineHeight: 1.2,
-                      color: "oklch(0.98 0 0)",
+                      fontFamily: "var(--font-display)",
+                      fontSize: 56,
+                      lineHeight: 0.85,
+                      letterSpacing: "-0.04em",
+                      color: isLime
+                        ? "oklch(0.13 0.005 240)"
+                        : isCurrent
+                        ? "oklch(0.13 0.005 240)"
+                        : "oklch(1 0 0 / 0.18)",
                     }}
                   >
-                    {p.question}
+                    {p.ord}
                   </div>
+                </div>
+
+                {/* Pergunta */}
+                <div
+                  className="font-black"
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: 26,
+                    lineHeight: 1.1,
+                    letterSpacing: "-0.025em",
+                    color: isLime
+                      ? "oklch(0.13 0.005 240)"
+                      : isCurrent
+                      ? "oklch(0.13 0.005 240)"
+                      : "oklch(0.98 0 0)",
+                  }}
+                >
+                  {p.question}
+                </div>
+
+                {/* Footer status */}
+                <div
+                  className="absolute left-7 right-7 bottom-5 flex items-center gap-2 uppercase font-bold"
+                  style={{
+                    fontSize: 11,
+                    letterSpacing: "0.28em",
+                    color: isLime
+                      ? "oklch(0.13 0.005 240 / 0.75)"
+                      : isCurrent
+                      ? "oklch(0.13 0.005 240 / 0.65)"
+                      : "oklch(1 0 0 / 0.5)",
+                  }}
+                >
+                  <span
+                    className="inline-block rounded-full"
+                    style={{
+                      width: 8,
+                      height: 8,
+                      background: isLime
+                        ? "oklch(0.13 0.005 240)"
+                        : isCurrent
+                        ? "var(--onmid-lime)"
+                        : revealed
+                        ? "var(--onmid-lime)"
+                        : "oklch(1 0 0 / 0.3)",
+                      animation: isCurrent ? "pillar-dot 1.4s ease-in-out infinite" : "none",
+                    }}
+                  />
+                  {isCurrent ? "Em foco agora" : revealed ? "Já visto" : "Em breve"}
                 </div>
               </div>
             );
@@ -404,6 +441,10 @@ export function Slide11() {
         @keyframes chip-pop {
           0%   { opacity: 0; transform: translateY(10px) scale(0.92); }
           100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes pillar-dot {
+          0%, 100% { transform: scale(1); opacity: 1; }
+          50%      { transform: scale(1.6); opacity: 0.5; }
         }
       `}</style>
     </SlideLayout>
