@@ -20,34 +20,38 @@ export function IntroVignettePreview() {
           0%,100% { opacity: 0 }
           50% { opacity: 1 }
         }
-        @keyframes vig-zoom-out {
-          0% { transform: scale(10); filter: blur(40px); opacity: 0 }
-          20% { opacity: 1 }
-          100% { transform: scale(1); filter: blur(0); opacity: 1 }
+        /* Slide from right + massive zoom + skew, settle with overshoot */
+        @keyframes vig-swoosh {
+          0%   { transform: translateX(140vw) scale(14) skewX(-20deg); filter: blur(60px); opacity: 0 }
+          12%  { opacity: 1 }
+          45%  { transform: translateX(35vw)  scale(5)  skewX(-12deg); filter: blur(14px) }
+          60%  { filter: blur(0) }
+          75%  { transform: translateX(-3vw)  scale(0.94) skewX(-2deg) }
+          85%  { transform: translateX(2vw)   scale(1.06) skewX(2deg) }
+          100% { transform: translateX(0)     scale(1)    skewX(0); opacity: 1 }
+        }
+        @keyframes vig-exit-left {
+          0%   { transform: translateX(0) scale(1) skewX(0); opacity: 1; filter: blur(0) }
+          100% { transform: translateX(-160vw) scale(0.35) skewX(22deg); opacity: 0; filter: blur(28px) }
         }
         @keyframes vig-glitch {
-          0%, 100% { transform: translate(0,0); text-shadow: 0 0 0 transparent }
-          10% { transform: translate(-8px, 2px); text-shadow: 6px 0 #ff003c, -6px 0 #00f0ff }
-          20% { transform: translate(6px, -3px); text-shadow: -4px 0 #ff003c, 4px 0 #00f0ff }
-          30% { transform: translate(-3px, 1px); text-shadow: 3px 0 #ff003c, -3px 0 #00f0ff }
-          40% { transform: translate(0,0); text-shadow: 0 0 0 transparent }
+          0%, 100% { transform: translate(0,0); text-shadow: 0 0 0 transparent; clip-path: inset(0 0 0 0) }
+          8%   { transform: translate(-16px, 4px); text-shadow: 12px 0 #ff003c, -12px 0 #00f0ff; clip-path: inset(15% 0 35% 0) }
+          16%  { transform: translate(14px, -5px); text-shadow: -10px 0 #ff003c, 10px 0 #00f0ff; clip-path: inset(60% 0 8% 0) }
+          24%  { transform: translate(-6px, 2px); text-shadow: 6px 0 #ff003c, -6px 0 #00f0ff; clip-path: inset(0 0 0 0) }
+          40%  { transform: translate(8px, 1px); text-shadow: -5px 0 #ff003c, 5px 0 #00f0ff; clip-path: inset(40% 0 30% 0) }
+          55%  { transform: translate(0,0); text-shadow: 0 0 0 transparent }
         }
         @keyframes vig-shake {
           0%, 100% { transform: translate(0,0) }
-          25% { transform: translate(-12px, 6px) }
-          50% { transform: translate(10px, -8px) }
-          75% { transform: translate(-6px, 4px) }
+          25% { transform: translate(-14px, 7px) }
+          50% { transform: translate(12px, -9px) }
+          75% { transform: translate(-7px, 5px) }
         }
         @keyframes vig-bar-flicker {
           0%, 100% { opacity: 0 }
           10%, 30%, 60% { opacity: 1 }
           20%, 50%, 80% { opacity: 0.2 }
-        }
-        @keyframes vig-slam-in {
-          0% { transform: scale(20) skewX(-12deg); opacity: 0; filter: blur(20px) }
-          60% { transform: scale(0.9) skewX(-6deg); opacity: 1; filter: blur(0) }
-          80% { transform: scale(1.05) skewX(-4deg) }
-          100% { transform: scale(1) skewX(-4deg) }
         }
         @keyframes vig-final-fade-in {
           0%, 95% { opacity: 0 }
@@ -55,14 +59,18 @@ export function IntroVignettePreview() {
         }
         @keyframes vig-cut-show {
           0%, 100% { opacity: 0 }
-          5%, 95% { opacity: 1 }
+          5%, 95%  { opacity: 1 }
         }
         @keyframes vig-scanlines {
           0% { background-position: 0 0 }
           100% { background-position: 0 8px }
         }
+        @keyframes vig-strobe {
+          0%, 60%, 100% { opacity: 0 }
+          20%, 40% { opacity: 0.4 }
+        }
 
-        .vig-stage { position: absolute; inset: 0; display: grid; place-items: center; }
+        .vig-stage { position: absolute; inset: 0; display: grid; place-items: center; overflow: hidden; }
         .vig-word {
           font-family: var(--font-display);
           font-weight: 900;
@@ -72,14 +80,14 @@ export function IntroVignettePreview() {
           letter-spacing: -0.06em;
           text-transform: uppercase;
           white-space: nowrap;
-          will-change: transform, opacity, filter;
+          will-change: transform, opacity, filter, text-shadow, clip-path;
         }
         .vig-scanlines {
           position: absolute; inset: 0; pointer-events: none; z-index: 50;
           background: repeating-linear-gradient(
             to bottom,
-            oklch(0 0 0 / 0.18) 0px,
-            oklch(0 0 0 / 0.18) 1px,
+            oklch(0 0 0 / 0.22) 0px,
+            oklch(0 0 0 / 0.22) 1px,
             transparent 1px,
             transparent 4px
           );
@@ -88,36 +96,55 @@ export function IntroVignettePreview() {
         }
         .vig-noise {
           position: absolute; inset: 0; pointer-events: none; z-index: 40;
-          background-image: radial-gradient(oklch(0 0 0 / 0.35) 1px, transparent 1px);
+          background-image: radial-gradient(oklch(0 0 0 / 0.4) 1px, transparent 1px);
           background-size: 3px 3px;
-          opacity: 0.25;
+          opacity: 0.3;
           mix-blend-mode: overlay;
         }
 
         /* timeline */
-        .vig-flash-1 { animation: vig-flash 0.2s ease-out 0s 1 both; background:#fff; position:absolute; inset:0; z-index:60 }
-        .vig-flash-2 { animation: vig-flash 0.12s ease-out 1.0s 1 both; background:var(--onmid-lime); position:absolute; inset:0; z-index:60 }
-        .vig-flash-3 { animation: vig-flash 0.12s ease-out 1.8s 1 both; background:#fff; position:absolute; inset:0; z-index:60 }
-        .vig-flash-4 { animation: vig-flash 0.1s ease-out 2.6s 1 both; background:var(--onmid-lime); position:absolute; inset:0; z-index:60 }
+        .vig-flash-1 { animation: vig-flash 0.18s ease-out 0s    1 both; background:#fff;              position:absolute; inset:0; z-index:60 }
+        .vig-flash-2 { animation: vig-flash 0.14s ease-out 0.95s 1 both; background:var(--onmid-lime); position:absolute; inset:0; z-index:60 }
+        .vig-flash-3 { animation: vig-flash 0.14s ease-out 1.75s 1 both; background:#fff;              position:absolute; inset:0; z-index:60 }
+        .vig-flash-4 { animation: vig-flash 0.12s ease-out 2.55s 1 both; background:var(--onmid-lime); position:absolute; inset:0; z-index:60 }
 
-        .vig-stage-1 { animation: vig-cut-show 0.8s steps(1,end) 0.2s 1 both; }
-        .vig-stage-1 .vig-word { animation: vig-zoom-out 0.7s cubic-bezier(.2,.8,.2,1) 0.2s 1 both, vig-glitch 0.5s steps(1,end) 0.75s 2 both; }
+        /* Each stage: swoosh in from right with zoom + glitch + exit left */
+        .vig-stage-1 { animation: vig-cut-show 1.05s steps(1,end) 0.15s 1 both; }
+        .vig-stage-1 .vig-word {
+          animation:
+            vig-swoosh   0.85s cubic-bezier(.16,.84,.2,1) 0.15s 1 both,
+            vig-glitch   0.55s steps(1,end)               0.95s 2 both,
+            vig-exit-left 0.22s cubic-bezier(.6,0,.9,.3)  1.05s 1 both;
+        }
 
-        .vig-stage-2 { animation: vig-cut-show 0.8s steps(1,end) 1.0s 1 both; }
-        .vig-stage-2 .vig-word { animation: vig-zoom-out 0.5s cubic-bezier(.2,.8,.2,1) 1.0s 1 both, vig-glitch 0.4s steps(1,end) 1.4s 1 both; }
+        .vig-stage-2 { animation: vig-cut-show 0.85s steps(1,end) 1.0s 1 both; }
+        .vig-stage-2 .vig-word {
+          animation:
+            vig-swoosh   0.7s  cubic-bezier(.16,.84,.2,1) 1.0s  1 both,
+            vig-glitch   0.45s steps(1,end)               1.55s 2 both,
+            vig-exit-left 0.2s cubic-bezier(.6,0,.9,.3)   1.78s 1 both;
+        }
 
-        .vig-stage-3 { animation: vig-cut-show 0.8s steps(1,end) 1.8s 1 both; }
+        .vig-stage-3 { animation: vig-cut-show 0.85s steps(1,end) 1.8s 1 both; }
         .vig-stage-3 .vig-word {
           background: var(--onmid-lime);
           color: oklch(0.13 0.005 240);
           padding: 0 32px;
-          animation: vig-slam-in 0.6s cubic-bezier(.2,.8,.2,1) 1.8s 1 both, vig-shake 0.2s steps(2,end) 2.3s 2 both;
+          animation:
+            vig-swoosh   0.7s  cubic-bezier(.16,.84,.2,1) 1.8s  1 both,
+            vig-shake    0.18s steps(2,end)               2.35s 2 both,
+            vig-exit-left 0.2s cubic-bezier(.6,0,.9,.3)   2.58s 1 both;
         }
 
-        .vig-stage-4 { animation: vig-cut-show 0.6s steps(1,end) 2.6s 1 both; }
-        .vig-stage-4 .vig-word { font-size: 240px; animation: vig-zoom-out 0.55s cubic-bezier(.2,.8,.2,1) 2.6s 1 both, vig-glitch 0.3s steps(1,end) 3.0s 1 both; }
+        .vig-stage-4 { animation: vig-cut-show 0.95s steps(1,end) 2.6s 1 both; }
+        .vig-stage-4 .vig-word {
+          font-size: 240px;
+          animation:
+            vig-swoosh 0.8s  cubic-bezier(.16,.84,.2,1) 2.6s  1 both,
+            vig-glitch 0.45s steps(1,end)               3.25s 2 both;
+        }
 
-        .vig-final { animation: vig-final-fade-in 3.4s linear 0s 1 both; }
+        .vig-final { animation: vig-final-fade-in 3.85s linear 0s 1 both; }
 
         .vig-bar { animation: vig-bar-flicker 0.6s steps(1,end) 0.4s 3 both; }
       `}</style>
