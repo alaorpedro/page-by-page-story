@@ -160,37 +160,44 @@ export function Slide04() {
             >
               Decisões de compra são sempre o resultado de uma
             </p>
-            <p
+            <div
               className="mt-4"
               style={{
                 fontFamily: "var(--font-display)",
                 fontWeight: 900,
                 fontSize: 148,
-                lineHeight: 0.92,
+                lineHeight: 1.05,
                 letterSpacing: "-0.055em",
                 color: "oklch(0.13 0.005 240)",
               }}
             >
-              <span
-                className="px-4 inline-block"
-                style={{
-                  background: "var(--onmid-lime)",
-                  transform: "skewX(-4deg)",
-                }}
-              >
-                mudança em seu
-              </span>
-              <br />
-              <span
-                className="px-4 inline-block"
-                style={{
-                  background: "var(--onmid-lime)",
-                  transform: "skewX(-4deg)",
-                }}
-              >
-                estado emocional.
-              </span>
-            </p>
+              <div className="flex flex-col items-start gap-3">
+                <span
+                  className="px-4"
+                  style={{
+                    background: "var(--onmid-lime)",
+                    transform: "skewX(-4deg)",
+                    transformOrigin: "left center",
+                    display: "inline-block",
+                    backfaceVisibility: "hidden",
+                  }}
+                >
+                  mudança em seu
+                </span>
+                <span
+                  className="px-4"
+                  style={{
+                    background: "var(--onmid-lime)",
+                    transform: "skewX(-4deg)",
+                    transformOrigin: "left center",
+                    display: "inline-block",
+                    backfaceVisibility: "hidden",
+                  }}
+                >
+                  estado emocional.
+                </span>
+              </div>
+            </div>
           </div>
         )}
       </div>
