@@ -16,8 +16,8 @@ const STEPS: Step[] = [
   },
   {
     ord: "2º",
-    title: "Contato",
-    desc: "Primeira apresentação da marca para o lead.",
+    title: "A Busca",
+    desc: "Lembrança da Marca (marketing), Redes Sociais, Televisão, etc...",
   },
   {
     ord: "3º",
