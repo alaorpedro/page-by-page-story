@@ -25,6 +25,24 @@ export function Slide04() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      if (openTerm) {
+        if (e.key === "Escape") {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          setOpenTerm(null);
+        } else if (
+          e.key === "ArrowRight" ||
+          e.key === " " ||
+          e.key === "PageDown" ||
+          e.key === "ArrowLeft" ||
+          e.key === "PageUp"
+        ) {
+          // bloqueia avanço/volta de slide enquanto modal está aberto
+          e.preventDefault();
+          e.stopImmediatePropagation();
+        }
+        return;
+      }
       const fwd = e.key === "ArrowRight" || e.key === " " || e.key === "PageDown";
       const back = e.key === "ArrowLeft" || e.key === "PageUp";
       if (fwd && step < STEPS - 1) {
@@ -37,9 +55,9 @@ export function Slide04() {
         setStep((s) => Math.max(0, s - 1));
       }
     };
-    window.addEventListener("keydown", onKey, true); // capture phase, beats Presentation
+    window.addEventListener("keydown", onKey, true);
     return () => window.removeEventListener("keydown", onKey, true);
-  }, [step]);
+  }, [step, openTerm]);
 
   const onClick = () => setStep((s) => Math.min(STEPS - 1, s + 1));
 
