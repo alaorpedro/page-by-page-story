@@ -2,7 +2,7 @@ import { SlideLayout } from "@/components/SlideLayout";
 
 export function Slide04() {
   return (
-    <SlideLayout variant="content" tone="dark" bgLetter="4">
+    <SlideLayout variant="content" tone="light" bgLetter="4">
       {/* Section kicker */}
       <div className="absolute left-16 right-16 top-44 flex items-center gap-8 animate-fade-in-up">
         <div
@@ -11,26 +11,27 @@ export function Slide04() {
             fontFamily: "var(--font-display)",
             fontSize: 64,
             lineHeight: 1,
-            color: "oklch(0.98 0 0)",
+            color: "oklch(0.18 0.01 240)",
           }}
         >
           04<span className="text-lime">.</span>
         </div>
         <div
           className="flex-1 h-px max-w-[600px]"
-          style={{ background: "oklch(1 0 0 / 0.15)" }}
+          style={{ background: "oklch(0 0 0 / 0.12)" }}
         />
         <div
           className="uppercase font-bold mr-auto"
           style={{
             fontSize: 18,
             letterSpacing: "0.35em",
-            color: "oklch(1 0 0 / 0.55)",
+            color: "oklch(0.18 0.01 240 / 0.55)",
           }}
         >
           Nossa Crença
         </div>
       </div>
+
 
       {/* Body */}
       <div className="absolute left-16 right-16 top-[300px] bottom-32 max-w-[1280px]">
@@ -39,7 +40,7 @@ export function Slide04() {
           style={{
             fontSize: 44,
             lineHeight: 1.28,
-            color: "oklch(1 0 0 / 0.85)",
+            color: "oklch(0.18 0.01 240 / 0.78)",
             animationDelay: "0.1s",
           }}
         >
@@ -55,7 +56,7 @@ export function Slide04() {
             fontSize: 72,
             lineHeight: 1,
             letterSpacing: "-0.04em",
-            color: "oklch(0.98 0 0)",
+            color: "oklch(0.13 0.005 240)",
             animationDelay: "0.25s",
           }}
         >
@@ -67,7 +68,7 @@ export function Slide04() {
           style={{
             fontSize: 44,
             lineHeight: 1.28,
-            color: "oklch(1 0 0 / 0.85)",
+            color: "oklch(0.18 0.01 240 / 0.78)",
             animationDelay: "0.4s",
           }}
         >
@@ -84,6 +85,7 @@ export function Slide04() {
           </span>
           .
         </p>
+
       </div>
     </SlideLayout>
   );
