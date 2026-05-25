@@ -479,11 +479,10 @@ export function Slide12() {
           100% { opacity: 1; transform: scale(1); }
         }
         @keyframes brain-intro {
-          0%   { opacity: 0; transform: scale(0.4) rotate(-12deg);             filter: blur(14px) brightness(1.3); }
-          15%  { opacity: 1;                                                    filter: blur(0) brightness(1.15); }
-          55%  { opacity: 1; transform: scale(1.05) rotate(2deg);              filter: blur(0) brightness(1); }
-          80%  { opacity: 0.9; transform: scale(1.45) rotate(4deg);            filter: blur(2px) brightness(1.1); }
-          100% { opacity: 0; transform: scale(2.2) rotate(6deg);               filter: blur(10px) brightness(1.3); }
+          0%   { opacity: 0; transform: scale(0.6); filter: blur(12px); }
+          12%  { opacity: 1;                        filter: blur(0); }
+          70%  { opacity: 1; transform: scale(1);   filter: blur(0); }
+          100% { opacity: 0; transform: scale(1.6); filter: blur(8px); }
         }
 
       `}</style>
