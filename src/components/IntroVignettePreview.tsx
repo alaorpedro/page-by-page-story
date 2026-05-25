@@ -39,7 +39,8 @@ export function IntroVignettePreview({ hideReplay = false }: Props) {
         }
         @keyframes vigFlash {
           0%, 100% { opacity: 0; }
-          5%, 8%   { opacity: 1; }
+          32%, 33% { opacity: 0.5; }
+          65%, 66% { opacity: 0.5; }
         }
         .vig-stage {
           position: absolute; inset: 0;
