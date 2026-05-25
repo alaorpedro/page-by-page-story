@@ -75,7 +75,7 @@ export function Slide07() {
   }, [step, STEPS_COUNT]);
 
   return (
-    <SlideLayout variant="content" tone="dark" bgLetter="7">
+    <SlideLayout variant="content" tone="light" bgLetter="7">
       {/* Header */}
       <div className="absolute left-16 right-16 top-44 flex items-center gap-8 animate-fade-in-up z-20">
         <div
@@ -84,21 +84,21 @@ export function Slide07() {
             fontFamily: "var(--font-display)",
             fontSize: 64,
             lineHeight: 1,
-            color: "oklch(0.98 0 0)",
+            color: "oklch(0.13 0.005 240)",
           }}
         >
           07<span className="text-lime">.</span>
         </div>
         <div
           className="flex-1 h-px max-w-[460px]"
-          style={{ background: "oklch(1 0 0 / 0.15)" }}
+          style={{ background: "oklch(0 0 0 / 0.15)" }}
         />
         <div
           className="uppercase font-bold mr-auto"
           style={{
             fontSize: 18,
             letterSpacing: "0.35em",
-            color: "oklch(1 0 0 / 0.55)",
+            color: "oklch(0.13 0.005 240 / 0.55)",
           }}
         >
           Fluxo de anúncios
