@@ -1,4 +1,6 @@
 import { useState } from "react";
+import logoWhite from "@/assets/onmid-logo-white.png";
+
 
 /**
  * Radical intro vignette — preview only.
