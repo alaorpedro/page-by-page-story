@@ -378,6 +378,19 @@ export function Slide07() {
           />
         ))}
       </div>
+
+      <style>{`
+        @keyframes success-ring {
+          0%   { transform: scale(0.9); opacity: 0.55; }
+          80%  { opacity: 0; }
+          100% { transform: scale(1.9); opacity: 0; }
+        }
+        @keyframes success-spark {
+          0%   { transform: translate(-50%, -50%) translate(0, 0) scale(0.6); opacity: 0; }
+          25%  { opacity: 1; }
+          100% { transform: translate(-50%, -50%) translate(var(--x), var(--y)) scale(0.4); opacity: 0; }
+        }
+      `}</style>
     </SlideLayout>
   );
 }
