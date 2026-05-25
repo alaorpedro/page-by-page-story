@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { SlideLayout } from "@/components/SlideLayout";
 import { IntroVignettePreview } from "@/components/IntroVignettePreview";
+import { LiveInfoBar } from "@/components/LiveInfoBar";
+
 
 const STATIC_MS = 10000; // hold the static slide for 10s
 const ANIM_MS = 4000;    // vignette duration (~4s)
@@ -46,6 +48,10 @@ export function Slide01() {
           Onmid · Treinamento 2026
         </span>
       </div>
+
+      {/* Live info: hora de Londrina, clima, data, status */}
+      <LiveInfoBar />
+
 
       {/* Center-left main copy */}
       <div className="absolute left-24 top-1/2 -translate-y-1/2 max-w-[1500px]">
