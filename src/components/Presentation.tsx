@@ -8,6 +8,7 @@ import { Slide04 } from "@/slides/Slide04";
 import { Slide05 } from "@/slides/Slide05";
 import { Slide06 } from "@/slides/Slide06";
 import { Slide07 } from "@/slides/Slide07";
+import { Slide07b } from "@/slides/Slide07b";
 import { Slide08 } from "@/slides/Slide08";
 import { Slide09 } from "@/slides/Slide09";
 import { Slide10 } from "@/slides/Slide10";
@@ -43,6 +44,7 @@ const SLIDES: SlideEntry[] = [
   { id: "05", title: "Mudança do Estado Emocional", node: <Slide05 /> },
   { id: "06", title: "Caso WhatsApp", node: <Slide06 /> },
   { id: "07", title: "Fluxo de Anúncios", node: <Slide07 /> },
+  { id: "07b", title: "Por que clicam e não respondem?", node: <Slide07b /> },
   { id: "08", title: "Mensagem Beto/Yamaha", node: <Slide08 /> },
   { id: "09", title: "Rotina das pessoas", node: <Slide09 /> },
   { id: "10", title: "Agora!", node: <Slide10 /> },
