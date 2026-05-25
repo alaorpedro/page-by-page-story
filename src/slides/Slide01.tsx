@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { SlideLayout } from "@/components/SlideLayout";
 import { IntroVignettePreview } from "@/components/IntroVignettePreview";
+import { LiveInfoBar } from "@/components/LiveInfoBar";
+
 
 const STATIC_MS = 10000; // hold the static slide for 10s
 const ANIM_MS = 4000;    // vignette duration (~4s)
