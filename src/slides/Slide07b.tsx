@@ -12,7 +12,7 @@ export function Slide07b() {
             marginBottom: 40,
           }}
         >
-          A pergunta que ninguém faz
+          A pergunta que todos os CRCs fazem
         </p>
 
         <h1
