@@ -120,13 +120,12 @@ export function Slide12() {
             width={1024}
             height={1024}
             style={{
-              width: 900,
-              height: 900,
+              width: 1100,
+              height: 1100,
               objectFit: "contain",
-              transformStyle: "preserve-3d",
-              backfaceVisibility: "visible",
-              filter: "drop-shadow(0 50px 100px oklch(0 0 0 / 0.35))",
-              animation: "brain-intro 2.4s cubic-bezier(0.6,0,0.3,1) both",
+              transformOrigin: "center center",
+              filter: "drop-shadow(0 60px 120px oklch(0.55 0.25 260 / 0.45))",
+              animation: "brain-intro 2.4s cubic-bezier(0.6,0,0.25,1) both",
             }}
           />
         </div>
