@@ -3,10 +3,10 @@ import { SlideLayout } from "@/components/SlideLayout";
 import attendant from "@/assets/attendant-headset.png";
 
 // Steps:
-// 0 typing (início)
-// 1 troca inicial educada (3 bolhas)
-// 2 typing (mais tarde, mesmo dia)
-// 3 mensagens finais — cliente frustrado (2 bolhas)
+// 0 typing inicial
+// 1 grupo 1 (ontem) — cliente furiosa, "não volto mais"
+// 2 typing simulando a passagem do tempo
+// 3 grupo 2 (hoje) — divisor HOJE + cliente voltando pra pedir pizza
 // 4 callout final
 const STEPS = 5;
 
@@ -14,19 +14,21 @@ type Msg = {
   text: string;
   time: string;
   from: "client" | "company";
-  group: 1 | 2; // 1 = troca inicial, 2 = finalização
+  group: 1 | 2; // 1 = ontem (angry) | 2 = hoje (volta pedindo pizza)
 };
 const MESSAGES: Msg[] = [
-  { text: "Boa noite", time: "08:16 PM", from: "client", group: 1 },
-  { text: "Boa noite 👋", time: "08:17 PM", from: "company", group: 1 },
-  { text: "Quero pedir pizza", time: "08:17 PM", from: "client", group: 1 },
-  { text: "Vcs perderam cliente", time: "10:12 PM", from: "client", group: 2 },
+  // Ontem
+  { text: "Vcs perderam cliente", time: "10:12 PM", from: "client", group: 1 },
   {
     text: "Obrigada pelas desculpas, porém não volto mais.",
     time: "10:13 PM",
     from: "client",
-    group: 2,
+    group: 1,
   },
+  // Hoje
+  { text: "Boa noite", time: "08:16 PM", from: "client", group: 2 },
+  { text: "Boa noite 👋", time: "08:17 PM", from: "company", group: 2 },
+  { text: "Quero pedir pizza", time: "08:17 PM", from: "client", group: 2 },
 ];
 
 export function Slide06() {
