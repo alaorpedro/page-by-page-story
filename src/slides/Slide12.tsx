@@ -236,7 +236,7 @@ export function Slide12() {
           top: 240,
           bottom: 220,
           opacity: intro ? 0 : 1,
-          transition: "opacity 700ms ease 4200ms",
+          transition: "opacity 600ms ease 6700ms",
         }}
       >
 
