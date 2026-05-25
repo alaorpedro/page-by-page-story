@@ -10,17 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as PreviewIntroSlowRouteImport } from './routes/preview.intro-slow'
 import { Route as PreviewIntroRouteImport } from './routes/preview.intro'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PreviewIntroSlowRoute = PreviewIntroSlowRouteImport.update({
-  id: '/preview/intro-slow',
-  path: '/preview/intro-slow',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PreviewIntroRoute = PreviewIntroRouteImport.update({
@@ -32,31 +26,27 @@ const PreviewIntroRoute = PreviewIntroRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/preview/intro': typeof PreviewIntroRoute
-  '/preview/intro-slow': typeof PreviewIntroSlowRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/preview/intro': typeof PreviewIntroRoute
-  '/preview/intro-slow': typeof PreviewIntroSlowRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/preview/intro': typeof PreviewIntroRoute
-  '/preview/intro-slow': typeof PreviewIntroSlowRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/preview/intro' | '/preview/intro-slow'
+  fullPaths: '/' | '/preview/intro'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/preview/intro' | '/preview/intro-slow'
-  id: '__root__' | '/' | '/preview/intro' | '/preview/intro-slow'
+  to: '/' | '/preview/intro'
+  id: '__root__' | '/' | '/preview/intro'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PreviewIntroRoute: typeof PreviewIntroRoute
-  PreviewIntroSlowRoute: typeof PreviewIntroSlowRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -66,13 +56,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/preview/intro-slow': {
-      id: '/preview/intro-slow'
-      path: '/preview/intro-slow'
-      fullPath: '/preview/intro-slow'
-      preLoaderRoute: typeof PreviewIntroSlowRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/preview/intro': {
@@ -88,8 +71,17 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PreviewIntroRoute: PreviewIntroRoute,
-  PreviewIntroSlowRoute: PreviewIntroSlowRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
