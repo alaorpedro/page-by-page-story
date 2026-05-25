@@ -77,10 +77,10 @@ export function SlideLayout({
 
       {/* Top header bar */}
       <div className="absolute top-0 left-0 right-0 flex justify-between items-center px-16 pt-12 z-30 animate-fade-in">
-        <OnmidMark size={42} />
+        <OnmidMark size={44} iconOnly />
         <div
-          className="text-foreground/40 font-mono tracking-widest"
-          style={{ fontSize: 22 }}
+          className="text-foreground/25 font-mono tracking-[0.25em]"
+          style={{ fontSize: 11 }}
         >
           {counter}
         </div>
@@ -89,10 +89,10 @@ export function SlideLayout({
       {/* Content slot */}
       <div className="absolute inset-0 z-20">{children}</div>
 
-      {/* Faded corner brand on content/statement slides (not on hero — header is the brand mark) */}
+      {/* Faded corner brand on content/statement slides */}
       {(variant === "content" || variant === "statement") && (
         <div className="absolute bottom-14 right-16 z-20">
-          <OnmidMark size={22} faded />
+          <OnmidMark size={20} faded iconOnly />
         </div>
       )}
 
