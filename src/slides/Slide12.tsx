@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import brain3d from "@/assets/brain-3d.png";
+
 import { SlideLayout } from "@/components/SlideLayout";
 
 type Stage = {
@@ -54,6 +56,14 @@ const REWARDS = [
 export function Slide12() {
   const TOTAL = STAGES.length;
   const [step, setStep] = useState(0);
+  const [intro, setIntro] = useState(true);
+
+  useEffect(() => {
+    const t = setTimeout(() => setIntro(false), 1400);
+    return () => clearTimeout(t);
+  }, []);
+
+
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -96,8 +106,49 @@ export function Slide12() {
 
   return (
     <SlideLayout variant="content" tone="light" bgLetter="N">
+      {/* Brain 3D — intro spinning + persistent backdrop */}
+      <div
+        aria-hidden
+        className="absolute pointer-events-none z-10"
+        style={{
+          right: intro ? "50%" : -80,
+          top: intro ? "50%" : 200,
+          width: intro ? 720 : 620,
+          height: intro ? 720 : 620,
+          transform: intro
+            ? "translate(50%, -50%)"
+            : "translate(0, 0)",
+          transition:
+            "right 1100ms cubic-bezier(0.7,0,0.2,1) 200ms, top 1100ms cubic-bezier(0.7,0,0.2,1) 200ms, width 1100ms cubic-bezier(0.7,0,0.2,1) 200ms, height 1100ms cubic-bezier(0.7,0,0.2,1) 200ms, transform 1100ms cubic-bezier(0.7,0,0.2,1) 200ms",
+          filter: "drop-shadow(0 40px 80px oklch(0 0 0 / 0.25))",
+        }}
+      >
+        <img
+          src={brain3d}
+          alt=""
+          width={1024}
+          height={1024}
+          className="w-full h-full object-contain"
+          style={{
+            animation: intro
+              ? "brain-spin-in 1.3s cubic-bezier(0.34,1.2,0.5,1) both"
+              : "brain-float 6s ease-in-out infinite",
+            opacity: intro ? 1 : 0.92,
+            transition: "opacity 800ms ease 600ms",
+          }}
+        />
+      </div>
+
       {/* Header */}
-      <div className="absolute left-16 right-16 top-44 flex items-center gap-8 animate-fade-in-up z-30">
+      <div
+        className="absolute left-16 right-16 top-44 flex items-center gap-8 z-30"
+        style={{
+          opacity: intro ? 0 : 1,
+          transform: intro ? "translateY(-12px)" : "translateY(0)",
+          transition: "opacity 600ms ease 1000ms, transform 600ms ease 1000ms",
+        }}
+      >
+
         <div
           className="font-extrabold"
           style={{
@@ -120,9 +171,17 @@ export function Slide12() {
 
       {/* Título lateral vertical */}
       <div
-        className="absolute z-20 animate-fade-in-up"
-        style={{ left: 64, top: 260, animationDelay: "0.1s", maxWidth: 620 }}
+        className="absolute z-20"
+        style={{
+          left: 64,
+          top: 260,
+          maxWidth: 620,
+          opacity: intro ? 0 : 1,
+          transform: intro ? "translateY(20px)" : "translateY(0)",
+          transition: "opacity 700ms ease 1150ms, transform 700ms ease 1150ms",
+        }}
       >
+
         <div
           className="uppercase font-black"
           style={{
@@ -178,8 +237,16 @@ export function Slide12() {
       {/* HERO do stage (lado direito) */}
       <div
         className="absolute z-20"
-        style={{ left: "48%", right: 64, top: 240, bottom: 220 }}
+        style={{
+          left: "48%",
+          right: 64,
+          top: 240,
+          bottom: 220,
+          opacity: intro ? 0 : 1,
+          transition: "opacity 700ms ease 1300ms",
+        }}
       >
+
         {current ? (
           <div
             key={step}
@@ -417,7 +484,17 @@ export function Slide12() {
           60%  { opacity: 1; transform: scale(1.05); }
           100% { opacity: 1; transform: scale(1); }
         }
+        @keyframes brain-spin-in {
+          0%   { opacity: 0; transform: scale(0.2) rotate(-540deg); filter: blur(8px); }
+          60%  { opacity: 1; filter: blur(0); }
+          100% { opacity: 1; transform: scale(1) rotate(0deg); filter: blur(0); }
+        }
+        @keyframes brain-float {
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          50%      { transform: translateY(-14px) rotate(2deg); }
+        }
       `}</style>
+
     </SlideLayout>
   );
 }
