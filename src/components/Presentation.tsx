@@ -133,9 +133,11 @@ export function Presentation() {
 
   return (
     <div className={`fixed inset-0 ${chromeVisible ? "" : "cursor-none"}`} style={{ background: "oklch(0.13 0.005 240)" }}>
-      <ScaledSlide key={slideKey}>{current.node}</ScaledSlide>
+      <SlideContext.Provider value={{ index: index + 1, total }}>
+        <ScaledSlide key={slideKey}>{current.node}</ScaledSlide>
+      </SlideContext.Provider>
 
-      {/* Top-right slide counter & fullscreen */}
+      {/* Top-right fullscreen toggle (counter is now part of slide chrome) */}
       <div
         className={`absolute top-5 right-6 flex items-center gap-3 transition-opacity duration-500 ${
           chromeVisible ? "opacity-100" : "opacity-0"
@@ -148,9 +150,6 @@ export function Presentation() {
         >
           {isFull ? "Sair" : "Tela cheia"}
         </button>
-        <div className="px-3 py-1.5 rounded-full bg-white/10 text-white/80 text-xs font-mono backdrop-blur">
-          {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
-        </div>
       </div>
 
       {/* Bottom-center nav */}
