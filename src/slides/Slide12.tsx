@@ -124,7 +124,7 @@ export function Slide12() {
               height: 1200,
               objectFit: "contain",
               background: "transparent",
-              animation: "brain-intro 3s cubic-bezier(0.6,0,0.25,1) both",
+              animation: "brain-intro 5s cubic-bezier(0.6,0,0.25,1) both",
             }}
           />
         </div>
