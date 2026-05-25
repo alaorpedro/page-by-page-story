@@ -21,8 +21,8 @@ const STEPS: Step[] = [
   },
   {
     ord: "3º",
-    title: "Argumentação",
-    desc: "Quebra de objeções e construção de confiança.",
+    title: "O Contato",
+    desc: "Passo de confiança, apresentação pessoal, venda da imagem do CRC.",
   },
   {
     ord: "4º",
