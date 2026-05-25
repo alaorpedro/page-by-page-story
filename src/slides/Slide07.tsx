@@ -29,6 +29,11 @@ const STEPS: Step[] = [
     title: "Persuasão",
     desc: "Argumentações, quebra de objeções, escuta ativa.",
   },
+  {
+    ord: "5º",
+    title: "Fechamento",
+    desc: "Agendamento confiante, transação financeira, fidelização.",
+  },
 ];
 
 export function Slide07() {
@@ -114,7 +119,7 @@ export function Slide07() {
           }}
         />
 
-        <div className="relative grid grid-cols-4 gap-8">
+        <div className="relative grid grid-cols-5 gap-6">
           {STEPS.map((s, i) => (
             <div
               key={i}
