@@ -31,21 +31,21 @@ export function Slide17() {
       </div>
 
       {/* Body */}
-      <div className="absolute left-16 right-16 top-[300px] bottom-32 max-w-[1200px]">
+      <div className="absolute left-16 right-16 top-[270px] max-w-[1300px]">
         <h2
           className="uppercase animate-fade-in-up"
           style={{
             fontFamily: "var(--font-display)",
             fontWeight: 900,
-            fontSize: 156,
-            lineHeight: 0.92,
-            letterSpacing: "-0.06em",
+            fontSize: 124,
+            lineHeight: 0.95,
+            letterSpacing: "-0.05em",
             color: "oklch(0.13 0.005 240)",
             animationDelay: "0.1s",
           }}
         >
           Por que<br />
-          as pessoas<br />
+          as pessoas{" "}
           <span
             className="px-4 inline-block"
             style={{
@@ -59,9 +59,9 @@ export function Slide17() {
         </h2>
 
         <p
-          className="mt-12 font-medium max-w-[860px] animate-fade-in-up"
+          className="mt-8 font-medium max-w-[920px] animate-fade-in-up"
           style={{
-            fontSize: 30,
+            fontSize: 28,
             lineHeight: 1.4,
             color: "oklch(0.18 0.01 240 / 0.75)",
             animationDelay: "0.3s",
@@ -80,7 +80,10 @@ export function Slide17() {
       </div>
 
       {/* Bottom cards */}
-      <div className="absolute left-16 right-16 bottom-28 grid grid-cols-2 gap-6 max-w-[1100px] animate-fade-in-up" style={{ animationDelay: "0.45s" }}>
+      <div
+        className="absolute left-16 right-16 bottom-24 grid grid-cols-2 gap-6 max-w-[1200px] animate-fade-in-up"
+        style={{ animationDelay: "0.45s" }}
+      >
         <div
           className="p-6"
           style={{
@@ -117,6 +120,7 @@ export function Slide17() {
           </div>
         </div>
       </div>
+
     </SlideLayout>
   );
 }
