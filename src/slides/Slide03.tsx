@@ -1,5 +1,5 @@
 import { SlideLayout } from "@/components/SlideLayout";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import familiaPhoto from "@/assets/familia.jpg";
 
 const FONT_CYCLE = [
@@ -19,13 +19,32 @@ const FONT_CYCLE = [
 
 export function Slide03() {
   const [fontIdx, setFontIdx] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(1);
 
   useEffect(() => {
     const t = setInterval(() => {
       setFontIdx((i) => (i + 1) % FONT_CYCLE.length);
-    }, 650);
+    }, 400);
     return () => clearInterval(t);
   }, []);
+
+  useLayoutEffect(() => {
+    const fit = () => {
+      const c = containerRef.current;
+      const t = textRef.current;
+      if (!c || !t) return;
+      const cw = c.clientWidth;
+      const tw = t.scrollWidth;
+      setScale(tw > 0 ? Math.min(1, cw / tw) : 1);
+    };
+    fit();
+    // refit after webfont loads
+    (document as any).fonts?.ready?.then(fit);
+    const id = requestAnimationFrame(fit);
+    return () => cancelAnimationFrame(id);
+  }, [fontIdx]);
 
   const f = FONT_CYCLE[fontIdx];
 
@@ -100,27 +119,38 @@ export function Slide03() {
         </div>
       </div>
 
-      {/* Giant animated "propósito" */}
+      {/* Giant animated "propósito" — auto-fits to slide width */}
       <div
-        className="absolute inset-x-0 z-10 px-[80px] animate-fade-in-up"
+        ref={containerRef}
+        className="absolute inset-x-0 z-10 px-[80px] animate-fade-in-up overflow-hidden"
         style={{ bottom: 140, animationDelay: "0.35s" }}
       >
         <div
-          key={fontIdx}
-          className="leading-none"
           style={{
-            fontFamily: f.family,
-            fontWeight: f.weight as number,
-            fontStyle: f.style,
-            letterSpacing: f.letter,
-            fontSize: 320,
-            color: "oklch(0.98 0.005 100)",
-            lineHeight: 0.85,
-            whiteSpace: "nowrap",
-            animation: "fade-in 0.45s ease-out both",
+            transform: `scale(${scale})`,
+            transformOrigin: "left bottom",
+            width: "fit-content",
+            height: 320 * 0.95,
           }}
         >
-          propósito<span className="text-lime">.</span>
+          <div
+            ref={textRef}
+            key={fontIdx}
+            className="leading-none"
+            style={{
+              fontFamily: f.family,
+              fontWeight: f.weight as number,
+              fontStyle: f.style,
+              letterSpacing: f.letter,
+              fontSize: 320,
+              color: "oklch(0.98 0.005 100)",
+              lineHeight: 0.9,
+              whiteSpace: "nowrap",
+              animation: "fade-in 0.25s ease-out both",
+            }}
+          >
+            propósito<span className="text-lime">.</span>
+          </div>
         </div>
       </div>
     </SlideLayout>
