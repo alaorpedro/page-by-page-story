@@ -369,7 +369,7 @@ export function Slide07() {
             className="h-1 rounded-full transition-all"
             style={{
               width: i === step ? 32 : 12,
-              background: i <= step ? "var(--onmid-lime)" : "oklch(1 0 0 / 0.18)",
+              background: i <= step ? "var(--onmid-lime)" : "oklch(0.13 0.005 240 / 0.18)",
             }}
           />
         ))}
