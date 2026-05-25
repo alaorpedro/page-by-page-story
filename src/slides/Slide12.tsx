@@ -106,8 +106,49 @@ export function Slide12() {
 
   return (
     <SlideLayout variant="content" tone="light" bgLetter="N">
+      {/* Brain 3D — intro spinning + persistent backdrop */}
+      <div
+        aria-hidden
+        className="absolute pointer-events-none z-10"
+        style={{
+          right: intro ? "50%" : -80,
+          top: intro ? "50%" : 200,
+          width: intro ? 720 : 620,
+          height: intro ? 720 : 620,
+          transform: intro
+            ? "translate(50%, -50%)"
+            : "translate(0, 0)",
+          transition:
+            "right 1100ms cubic-bezier(0.7,0,0.2,1) 200ms, top 1100ms cubic-bezier(0.7,0,0.2,1) 200ms, width 1100ms cubic-bezier(0.7,0,0.2,1) 200ms, height 1100ms cubic-bezier(0.7,0,0.2,1) 200ms, transform 1100ms cubic-bezier(0.7,0,0.2,1) 200ms",
+          filter: "drop-shadow(0 40px 80px oklch(0 0 0 / 0.25))",
+        }}
+      >
+        <img
+          src={brain3d}
+          alt=""
+          width={1024}
+          height={1024}
+          className="w-full h-full object-contain"
+          style={{
+            animation: intro
+              ? "brain-spin-in 1.3s cubic-bezier(0.34,1.2,0.5,1) both"
+              : "brain-float 6s ease-in-out infinite",
+            opacity: intro ? 1 : 0.92,
+            transition: "opacity 800ms ease 600ms",
+          }}
+        />
+      </div>
+
       {/* Header */}
-      <div className="absolute left-16 right-16 top-44 flex items-center gap-8 animate-fade-in-up z-30">
+      <div
+        className="absolute left-16 right-16 top-44 flex items-center gap-8 z-30"
+        style={{
+          opacity: intro ? 0 : 1,
+          transform: intro ? "translateY(-12px)" : "translateY(0)",
+          transition: "opacity 600ms ease 1000ms, transform 600ms ease 1000ms",
+        }}
+      >
+
         <div
           className="font-extrabold"
           style={{
