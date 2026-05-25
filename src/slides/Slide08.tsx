@@ -116,14 +116,13 @@ export function Slide08() {
         style={{
           left: "8%",
           right: "8%",
-          top: 300,
-          bottom: 160,
+          top: 256,
+          bottom: 110,
           background: "oklch(0.18 0.008 240 / 0.85)",
           border: "1px solid oklch(1 0 0 / 0.07)",
           backdropFilter: "blur(8px)",
           boxShadow: "0 40px 100px oklch(0 0 0 / 0.5)",
-          padding: "44px 56px",
-          overflow: "hidden",
+          padding: "28px 40px 32px",
         }}
       >
         {/* Chat header */}
