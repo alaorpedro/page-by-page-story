@@ -328,9 +328,16 @@ function Iphone({
             const prev = i > 0 ? MESSAGES[i - 1] : null;
             const groupChanged = prev && prev.group !== m.group;
             return (
-              <div key={i}>
+              <div
+                key={i}
+                className="flex flex-col"
+                style={{ alignItems: m.from === "company" ? "flex-end" : "flex-start" }}
+              >
                 {groupChanged && (
-                  <div style={{ marginTop: 12, marginBottom: 8 }}>
+                  <div
+                    className="self-stretch"
+                    style={{ marginTop: 12, marginBottom: 8 }}
+                  >
                     <DayDivider label="HOJE" />
                   </div>
                 )}
