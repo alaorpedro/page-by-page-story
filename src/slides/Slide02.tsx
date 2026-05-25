@@ -4,18 +4,16 @@ import alaorPhoto from "@/assets/alaor.jpg";
 export function Slide02() {
   return (
     <SlideLayout variant="content" tone="light">
-      {/* Stylized full-bleed background photo on the right */}
+      {/* Stylized full-bleed background photo on the LEFT */}
       <div
-        className="absolute inset-y-0 right-0 animate-fade-in"
+        className="absolute inset-y-0 left-0 animate-fade-in"
         style={{ width: "58%", overflow: "hidden" }}
       >
         <img
           src={alaorPhoto}
           alt="Alaor Pedro de Oliveira"
           className="w-full h-full object-cover"
-          style={{
-            filter: "grayscale(1) contrast(1.15) brightness(0.95)",
-          }}
+          style={{ filter: "grayscale(1) contrast(1.15) brightness(0.95)" }}
           draggable={false}
         />
         {/* Lime duotone wash */}
@@ -23,16 +21,16 @@ export function Slide02() {
           className="absolute inset-0 mix-blend-multiply"
           style={{ background: "var(--onmid-lime)", opacity: 0.55 }}
         />
-        {/* Soft fade from the left so text side blends cleanly */}
+        {/* Soft fade on the right edge so text side blends cleanly */}
         <div
-          className="absolute inset-y-0 left-0"
+          className="absolute inset-y-0 right-0"
           style={{
             width: "45%",
             background:
-              "linear-gradient(to right, oklch(0.97 0.01 100) 0%, oklch(0.97 0.01 100 / 0) 100%)",
+              "linear-gradient(to left, oklch(0.97 0.01 100) 0%, oklch(0.97 0.01 100 / 0) 100%)",
           }}
         />
-        {/* Subtle grain via top vignette */}
+        {/* Subtle top/bottom vignette */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -42,8 +40,12 @@ export function Slide02() {
         />
       </div>
 
-      {/* Text column — fully on the left, never crossing the face */}
-      <div className="absolute left-16 top-44 flex items-center gap-8 animate-fade-in-up" style={{ width: "38%" }}>
+      {/* Section marker — right side */}
+      <div
+        className="absolute right-16 top-44 flex items-center gap-8 animate-fade-in-up"
+        style={{ width: "38%" }}
+      >
+        <div className="flex-1 h-px" style={{ background: "oklch(0 0 0 / 0.15)" }} />
         <div
           className="font-extrabold"
           style={{
@@ -55,11 +57,11 @@ export function Slide02() {
         >
           02<span className="text-lime">.</span>
         </div>
-        <div className="flex-1 h-px" style={{ background: "oklch(0 0 0 / 0.15)" }} />
       </div>
 
+      {/* Text content — right column */}
       <div
-        className="absolute left-16 top-[300px] animate-fade-in-up"
+        className="absolute right-16 top-[300px] animate-fade-in-up text-right"
         style={{ width: "38%", animationDelay: "0.15s" }}
       >
         <div
@@ -93,7 +95,7 @@ export function Slide02() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-8 mt-12">
+        <div className="grid grid-cols-2 gap-8 mt-12 text-left">
           <div>
             <div
               className="uppercase font-black mb-3 flex items-center gap-3"
