@@ -24,14 +24,14 @@ export function IntroVignettePreview({ hideReplay = false }: Props) {
           50% { opacity: 1 }
         }
         @keyframes vig-zoom-out {
-          0% { transform: scale(10); filter: blur(40px); opacity: 0 }
+          0% { transform: scale(3); opacity: 0 }
           20% { opacity: 1 }
-          100% { transform: scale(1); filter: blur(0); opacity: 1 }
+          100% { transform: scale(1); opacity: 1 }
         }
         @keyframes vig-zoom-out-logo {
-          0% { transform: scale(8); filter: blur(30px); opacity: 0 }
+          0% { transform: scale(3); opacity: 0 }
           20% { opacity: 1 }
-          100% { transform: scale(1); filter: blur(0); opacity: 1 }
+          100% { transform: scale(1); opacity: 1 }
         }
         @keyframes vig-glitch {
           0%, 100% { transform: translate(0,0); text-shadow: 0 0 0 transparent }
@@ -52,8 +52,8 @@ export function IntroVignettePreview({ hideReplay = false }: Props) {
           20%, 50%, 80% { opacity: 0.2 }
         }
         @keyframes vig-slam-in {
-          0% { transform: scale(20) skewX(-12deg); opacity: 0; filter: blur(20px) }
-          60% { transform: scale(0.9) skewX(-6deg); opacity: 1; filter: blur(0) }
+          0% { transform: scale(3) skewX(-12deg); opacity: 0 }
+          60% { transform: scale(0.9) skewX(-6deg); opacity: 1 }
           80% { transform: scale(1.05) skewX(-4deg) }
           100% { transform: scale(1) skewX(-4deg) }
         }
