@@ -76,13 +76,12 @@ export function IntroVignettePreview({ hideReplay = false }: Props) {
           letter-spacing: -0.06em;
           text-transform: uppercase;
           white-space: nowrap;
-          will-change: transform, opacity, filter;
+          /* no will-change: transform → browser re-rasterizes each frame, text stays crisp at any zoom */
         }
         .vig-logo-img {
           width: 60%;
           max-width: 900px;
           height: auto;
-          will-change: transform, opacity, filter;
           filter: drop-shadow(0 0 40px oklch(0.88 0.24 138 / 0.5));
         }
         .vig-scanlines {
