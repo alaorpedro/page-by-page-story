@@ -157,6 +157,7 @@ export function Slide07() {
         ) : (
           (() => {
             const current = STEPS[step - 1];
+            const isFinal = step === STEPS_COUNT;
             return (
               <div
                 key={step}
@@ -170,21 +171,63 @@ export function Slide07() {
                     height: 280,
                     fontFamily: "var(--font-display)",
                     fontSize: 140,
-                    background: current.accent
-                      ? "var(--onmid-lime)"
-                      : "oklch(1 0 0 / 0.06)",
-                    color: current.accent
-                      ? "oklch(0.13 0.005 240)"
-                      : "oklch(0.98 0 0)",
-                    border: current.accent
-                      ? "none"
-                      : "2px solid oklch(1 0 0 / 0.2)",
-                    boxShadow: current.accent
-                      ? "0 30px 80px oklch(0.84 0.18 130 / 0.45)"
-                      : "0 30px 80px oklch(0 0 0 / 0.5)",
+                    background:
+                      current.accent || isFinal
+                        ? "var(--onmid-lime)"
+                        : "oklch(1 0 0 / 0.06)",
+                    color:
+                      current.accent || isFinal
+                        ? "oklch(0.13 0.005 240)"
+                        : "oklch(0.98 0 0)",
+                    border:
+                      current.accent || isFinal
+                        ? "none"
+                        : "2px solid oklch(1 0 0 / 0.2)",
+                    boxShadow:
+                      current.accent || isFinal
+                        ? "0 30px 80px oklch(0.84 0.18 130 / 0.45)"
+                        : "0 30px 80px oklch(0 0 0 / 0.5)",
                     letterSpacing: "-0.04em",
                   }}
                 >
+                  {/* Splash de sucesso (apenas no 5º) — ondas concêntricas + faíscas sutis em lime */}
+                  {isFinal && (
+                    <>
+                      {[0, 0.25, 0.5].map((delay, idx) => (
+                        <span
+                          key={idx}
+                          className="absolute rounded-full pointer-events-none"
+                          style={{
+                            inset: 0,
+                            border: "2px solid var(--onmid-lime)",
+                            opacity: 0,
+                            animation: `success-ring 1.8s ease-out ${delay}s infinite`,
+                          }}
+                        />
+                      ))}
+                      {Array.from({ length: 10 }).map((_, idx) => {
+                        const angle = (idx / 10) * Math.PI * 2;
+                        const dist = 200;
+                        return (
+                          <span
+                            key={`spark-${idx}`}
+                            className="absolute rounded-full pointer-events-none"
+                            style={{
+                              width: 6,
+                              height: 6,
+                              left: "50%",
+                              top: "50%",
+                              background: "var(--onmid-lime)",
+                              opacity: 0,
+                              animation: `success-spark 1.1s ease-out ${0.15 + (idx % 5) * 0.05}s both`,
+                              ["--x" as string]: `${Math.cos(angle) * dist}px`,
+                              ["--y" as string]: `${Math.sin(angle) * dist}px`,
+                            }}
+                          />
+                        );
+                      })}
+                    </>
+                  )}
                   {current.ord}
                   {current.accent && (
                     <span
@@ -213,7 +256,7 @@ export function Slide07() {
                       fontSize: 96,
                       lineHeight: 0.95,
                       letterSpacing: "-0.035em",
-                      color: current.accent
+                      color: current.accent || isFinal
                         ? "var(--onmid-lime)"
                         : "oklch(0.98 0 0)",
                     }}
@@ -335,6 +378,19 @@ export function Slide07() {
           />
         ))}
       </div>
+
+      <style>{`
+        @keyframes success-ring {
+          0%   { transform: scale(0.9); opacity: 0.55; }
+          80%  { opacity: 0; }
+          100% { transform: scale(1.9); opacity: 0; }
+        }
+        @keyframes success-spark {
+          0%   { transform: translate(-50%, -50%) translate(0, 0) scale(0.6); opacity: 0; }
+          25%  { opacity: 1; }
+          100% { transform: translate(-50%, -50%) translate(var(--x), var(--y)) scale(0.4); opacity: 0; }
+        }
+      `}</style>
     </SlideLayout>
   );
 }
