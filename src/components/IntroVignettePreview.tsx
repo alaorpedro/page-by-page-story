@@ -152,7 +152,13 @@ export function IntroVignettePreview({ hideReplay = false }: { hideReplay?: bool
 
       {/* ============== STAGE 1: ONMID ============== */}
       <div className="vig-stage vig-stage-1">
-        <div className="vig-word">ONMID</div>
+        <img
+          src={logoWhite}
+          alt="Onmid"
+          className="vig-word vig-logo"
+          draggable={false}
+        />
+
         <div
           className="vig-bar absolute left-0 right-0 h-2 bg-lime"
           style={{ top: "30%", background: "var(--onmid-lime)" }}
