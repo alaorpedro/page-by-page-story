@@ -75,8 +75,8 @@ export function IntroVignettePreview({ hideReplay = false }: Props) {
         }
         .vig-flash {
           position: absolute; inset: 0; background: white;
-          animation: vigFlash 1.3s steps(1) infinite;
-          mix-blend-mode: screen;
+          animation: vigFlash 4s steps(1) forwards;
+          opacity: 0;
         }
         .vig-scanlines {
           position: absolute; inset: 0; pointer-events: none;
