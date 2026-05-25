@@ -321,19 +321,19 @@ export function Slide07() {
                       current && s.accent
                         ? "var(--onmid-lime)"
                         : current
-                        ? "oklch(0.98 0 0)"
+                        ? "oklch(0.13 0.005 240)"
                         : revealed && s.accent
                         ? "var(--onmid-lime)"
-                        : "oklch(0.13 0.005 240)",
+                        : "oklch(0.98 0 0)",
                     color:
                       current && !s.accent
-                        ? "oklch(0.13 0.005 240)"
+                        ? "oklch(0.98 0 0)"
                         : s.accent && revealed
                         ? "oklch(0.13 0.005 240)"
-                        : "oklch(0.98 0 0)",
+                        : "oklch(0.13 0.005 240)",
                     border: revealed
                       ? "none"
-                      : "2px solid oklch(1 0 0 / 0.2)",
+                      : "2px solid oklch(0.13 0.005 240 / 0.2)",
                     boxShadow: current
                       ? "0 10px 30px oklch(0.84 0.18 130 / 0.4)"
                       : "none",
@@ -349,8 +349,8 @@ export function Slide07() {
                     fontSize: 14,
                     letterSpacing: "0.15em",
                     color: current
-                      ? "var(--onmid-lime)"
-                      : "oklch(1 0 0 / 0.7)",
+                      ? "oklch(0.13 0.005 240)"
+                      : "oklch(0.13 0.005 240 / 0.6)",
                   }}
                 >
                   {s.title}
