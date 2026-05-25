@@ -1,29 +1,34 @@
 import { SlideLayout } from "@/components/SlideLayout";
-import { OnmidLogo } from "@/components/OnmidLogo";
+import { OnmidMark } from "@/components/OnmidMark";
 
 export function Slide31() {
   return (
-    <SlideLayout arcs="corners" logo="none">
-      <div className="absolute inset-0 flex flex-col items-center justify-center px-[8%] text-center">
-        <h1 className="slide-title-lg text-lime animate-fade-in-up">
-          Obrigado pelo<br />tempo e presença
+    <SlideLayout variant="hero">
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-16 text-center">
+        <div
+          className="h-3 mb-12 animate-slide-in-left"
+          style={{ width: 200, background: "var(--onmid-lime)" }}
+        />
+        <h1 className="slide-title-xl text-foreground uppercase animate-fade-in-up">
+          Obrigado pelo<br />
+          <span className="text-lime">tempo e presença</span>
         </h1>
 
         <div
-          className="mt-20 animate-scale-in"
-          style={{ animationDelay: "0.3s" }}
+          className="mt-16 animate-fade-in-up"
+          style={{ animationDelay: "0.4s" }}
         >
-          <OnmidLogo size={300} />
+          <OnmidMark size={64} />
         </div>
 
         <div
-          className="mt-14 animate-fade-in-up"
+          className="mt-12 animate-fade-in-up"
           style={{ animationDelay: "0.6s" }}
         >
           <p className="slide-subtitle text-foreground font-bold">
             Alaor Pedro de Oliveira
           </p>
-          <p className="slide-body text-foreground/80 mt-1">
+          <p className="slide-body text-foreground/60 mt-1">
             Diretor de Planejamento
           </p>
         </div>

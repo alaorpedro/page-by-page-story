@@ -1,29 +1,32 @@
 import { SlideLayout } from "@/components/SlideLayout";
-import { OnmidLogo } from "@/components/OnmidLogo";
 
 export function Slide28() {
   return (
-    <SlideLayout arcs="corners" logo="none">
-      <div className="absolute inset-0 flex flex-col items-center justify-center px-[8%] text-center">
-        <p className="slide-subtitle text-foreground animate-fade-in-up">
-          As pessoas estão acostumadas a clicar<br />
-          em tudo! mas, a presença na rotina delas<br />
-          muda o jogo!
+    <SlideLayout variant="statement">
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-16 text-center">
+        <p
+          className="slide-subtitle text-foreground/85 animate-fade-in-up max-w-[1500px]"
+          style={{ fontWeight: 500 }}
+        >
+          As pessoas estão acostumadas a clicar em tudo,<br />
+          mas a presença na rotina delas muda o jogo.
         </p>
 
         <h1
-          className="slide-title-xl text-lime italic mt-16 animate-fade-in-up"
-          style={{ animationDelay: "0.3s" }}
+          className="text-lime italic animate-fade-in-up uppercase"
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: 150,
+            lineHeight: 0.95,
+            fontWeight: 900,
+            letterSpacing: "-0.035em",
+            marginTop: 60,
+            animationDelay: "0.3s",
+            textShadow: "0 0 100px oklch(0.88 0.24 138 / 0.35)",
+          }}
         >
-          VOCÊ ESTÁ 100%<br />PRESENTE NA VENDA?
+          Você está 100%<br />presente na venda?
         </h1>
-
-        <div
-          className="mt-16 animate-fade-in"
-          style={{ animationDelay: "0.7s" }}
-        >
-          <OnmidLogo size={170} />
-        </div>
       </div>
     </SlideLayout>
   );
