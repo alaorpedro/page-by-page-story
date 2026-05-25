@@ -75,7 +75,7 @@ export function Slide07() {
   }, [step, STEPS_COUNT]);
 
   return (
-    <SlideLayout variant="content" tone="dark" bgLetter="7">
+    <SlideLayout variant="content" tone="light" bgLetter="7">
       {/* Header */}
       <div className="absolute left-16 right-16 top-44 flex items-center gap-8 animate-fade-in-up z-20">
         <div
@@ -84,21 +84,21 @@ export function Slide07() {
             fontFamily: "var(--font-display)",
             fontSize: 64,
             lineHeight: 1,
-            color: "oklch(0.98 0 0)",
+            color: "oklch(0.13 0.005 240)",
           }}
         >
           07<span className="text-lime">.</span>
         </div>
         <div
           className="flex-1 h-px max-w-[460px]"
-          style={{ background: "oklch(1 0 0 / 0.15)" }}
+          style={{ background: "oklch(0 0 0 / 0.15)" }}
         />
         <div
           className="uppercase font-bold mr-auto"
           style={{
             fontSize: 18,
             letterSpacing: "0.35em",
-            color: "oklch(1 0 0 / 0.55)",
+            color: "oklch(0.13 0.005 240 / 0.55)",
           }}
         >
           Fluxo de anúncios
@@ -115,7 +115,7 @@ export function Slide07() {
           style={{
             fontSize: 20,
             letterSpacing: "0.3em",
-            color: "var(--onmid-lime)",
+            color: "oklch(0.13 0.005 240 / 0.55)",
           }}
         >
           Entendendo o fluxo de
@@ -127,11 +127,11 @@ export function Slide07() {
             fontSize: 80,
             lineHeight: 0.95,
             letterSpacing: "-0.04em",
-            color: "oklch(0.98 0 0)",
+            color: "oklch(0.13 0.005 240)",
           }}
         >
           Anúncios{" "}
-          <span style={{ color: "oklch(1 0 0 / 0.35)" }}>/</span>{" "}
+          <span style={{ color: "oklch(0.13 0.005 240 / 0.35)" }}>/</span>{" "}
           <span className="italic" style={{ fontWeight: 300 }}>
             Divulgação
           </span>
@@ -148,7 +148,7 @@ export function Slide07() {
             className="h-full flex items-center justify-center text-center animate-fade-in"
             style={{
               fontSize: 28,
-              color: "oklch(1 0 0 / 0.45)",
+              color: "oklch(0.13 0.005 240 / 0.45)",
               letterSpacing: "0.05em",
             }}
           >
@@ -174,7 +174,7 @@ export function Slide07() {
                     background:
                       current.accent || isFinal
                         ? "var(--onmid-lime)"
-                        : "oklch(1 0 0 / 0.06)",
+                        : "oklch(0.13 0.005 240)",
                     color:
                       current.accent || isFinal
                         ? "oklch(0.13 0.005 240)"
@@ -182,11 +182,11 @@ export function Slide07() {
                     border:
                       current.accent || isFinal
                         ? "none"
-                        : "2px solid oklch(1 0 0 / 0.2)",
+                        : "2px solid oklch(0.13 0.005 240 / 0.15)",
                     boxShadow:
                       current.accent || isFinal
-                        ? "0 30px 80px oklch(0.84 0.18 130 / 0.45)"
-                        : "0 30px 80px oklch(0 0 0 / 0.5)",
+                        ? "0 30px 80px oklch(0.84 0.18 130 / 0.5)"
+                        : "0 30px 80px oklch(0 0 0 / 0.2)",
                     letterSpacing: "-0.04em",
                   }}
                 >
@@ -254,9 +254,7 @@ export function Slide07() {
                       fontSize: 96,
                       lineHeight: 0.95,
                       letterSpacing: "-0.035em",
-                      color: current.accent || isFinal
-                        ? "var(--onmid-lime)"
-                        : "oklch(0.98 0 0)",
+                      color: "oklch(0.13 0.005 240)",
                     }}
                   >
                     {current.title}
@@ -265,7 +263,7 @@ export function Slide07() {
                     style={{
                       fontSize: 30,
                       lineHeight: 1.3,
-                      color: "oklch(1 0 0 / 0.78)",
+                      color: "oklch(0.13 0.005 240 / 0.72)",
                       maxWidth: 820,
                     }}
                   >
@@ -292,7 +290,7 @@ export function Slide07() {
             top: 28,
             height: 2,
             background:
-              "repeating-linear-gradient(to right, oklch(1 0 0 / 0.18) 0 8px, transparent 8px 16px)",
+              "repeating-linear-gradient(to right, oklch(0.13 0.005 240 / 0.2) 0 8px, transparent 8px 16px)",
           }}
         />
 
@@ -323,19 +321,19 @@ export function Slide07() {
                       current && s.accent
                         ? "var(--onmid-lime)"
                         : current
-                        ? "oklch(0.98 0 0)"
+                        ? "oklch(0.13 0.005 240)"
                         : revealed && s.accent
                         ? "var(--onmid-lime)"
-                        : "oklch(0.13 0.005 240)",
+                        : "oklch(0.98 0 0)",
                     color:
                       current && !s.accent
-                        ? "oklch(0.13 0.005 240)"
+                        ? "oklch(0.98 0 0)"
                         : s.accent && revealed
                         ? "oklch(0.13 0.005 240)"
-                        : "oklch(0.98 0 0)",
+                        : "oklch(0.13 0.005 240)",
                     border: revealed
                       ? "none"
-                      : "2px solid oklch(1 0 0 / 0.2)",
+                      : "2px solid oklch(0.13 0.005 240 / 0.2)",
                     boxShadow: current
                       ? "0 10px 30px oklch(0.84 0.18 130 / 0.4)"
                       : "none",
@@ -351,8 +349,8 @@ export function Slide07() {
                     fontSize: 14,
                     letterSpacing: "0.15em",
                     color: current
-                      ? "var(--onmid-lime)"
-                      : "oklch(1 0 0 / 0.7)",
+                      ? "oklch(0.13 0.005 240)"
+                      : "oklch(0.13 0.005 240 / 0.6)",
                   }}
                 >
                   {s.title}
@@ -371,7 +369,7 @@ export function Slide07() {
             className="h-1 rounded-full transition-all"
             style={{
               width: i === step ? 32 : 12,
-              background: i <= step ? "var(--onmid-lime)" : "oklch(1 0 0 / 0.18)",
+              background: i <= step ? "var(--onmid-lime)" : "oklch(0.13 0.005 240 / 0.18)",
             }}
           />
         ))}
