@@ -138,7 +138,7 @@ export function Slide12() {
         style={{
           opacity: intro ? 0 : 1,
           transform: intro ? "translateY(-12px)" : "translateY(0)",
-          transition: "opacity 600ms ease 1900ms, transform 600ms ease 1900ms",
+          transition: "opacity 600ms ease 3900ms, transform 600ms ease 3900ms",
         }}
       >
 
