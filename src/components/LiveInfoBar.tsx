@@ -26,13 +26,15 @@ function fmtDate(d: Date) {
 }
 
 export function LiveInfoBar() {
-  const [now, setNow] = useState(new Date());
+  const [now, setNow] = useState<Date | null>(null);
   const [weather, setWeather] = useState<Weather>(null);
 
   useEffect(() => {
+    setNow(new Date());
     const id = setInterval(() => setNow(new Date()), 1000);
     return () => clearInterval(id);
   }, []);
+
 
   useEffect(() => {
     let cancelled = false;
@@ -82,7 +84,7 @@ export function LiveInfoBar() {
       className="absolute right-16 top-44 animate-fade-in-up flex items-stretch gap-8"
       style={{ animationDelay: "0.25s" }}
     >
-      <Item label="Agora · Londrina" value={fmtTime(now)} />
+      <Item label="Agora · Londrina" value={now ? fmtTime(now) : "--:--:--"} />
       <div style={{ width: 1, background: "oklch(1 0 0 / 0.12)" }} />
       <Item
         label="Tempo"
@@ -100,7 +102,7 @@ export function LiveInfoBar() {
           className="text-foreground/85 font-semibold"
           style={{ fontSize: 14, lineHeight: 1 }}
         >
-          {fmtDate(now)}
+          {now ? fmtDate(now) : ""}
         </span>
         {weather && (
           <span
