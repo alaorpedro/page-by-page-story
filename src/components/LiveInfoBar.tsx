@@ -26,13 +26,15 @@ function fmtDate(d: Date) {
 }
 
 export function LiveInfoBar() {
-  const [now, setNow] = useState(new Date());
+  const [now, setNow] = useState<Date | null>(null);
   const [weather, setWeather] = useState<Weather>(null);
 
   useEffect(() => {
+    setNow(new Date());
     const id = setInterval(() => setNow(new Date()), 1000);
     return () => clearInterval(id);
   }, []);
+
 
   useEffect(() => {
     let cancelled = false;
