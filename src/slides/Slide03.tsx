@@ -154,7 +154,7 @@ export function Slide03() {
               lineHeight: 0.9,
               whiteSpace: "nowrap",
               opacity: visible ? 1 : 0,
-              transition: "opacity 220ms ease-out",
+              transition: "opacity 420ms ease-in-out",
             }}
           >
             propósito<span className="text-lime">.</span>
