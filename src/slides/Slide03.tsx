@@ -1,5 +1,5 @@
 import { SlideLayout } from "@/components/SlideLayout";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import familiaPhoto from "@/assets/familia.jpg";
 
 const FONT_CYCLE = [
