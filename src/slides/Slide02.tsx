@@ -4,109 +4,173 @@ import alaorPhoto from "@/assets/alaor.jpg";
 export function Slide02() {
   return (
     <SlideLayout variant="content" tone="light">
-      {/* Stylized full-bleed background photo on the LEFT */}
+      {/* ============ LEFT: contained portrait card ============ */}
       <div
-        className="absolute inset-y-0 left-0 animate-fade-in"
-        style={{ width: "58%", overflow: "hidden" }}
+        className="absolute animate-fade-in"
+        style={{ left: 96, top: 168, width: 760, height: 808 }}
       >
-        <img
-          src={alaorPhoto}
-          alt="Alaor Pedro de Oliveira"
-          className="w-full h-full object-cover"
-          style={{ filter: "grayscale(1) contrast(1.15) brightness(0.95)" }}
-          draggable={false}
-        />
-        {/* Lime duotone wash */}
+        {/* Lime offset block behind the photo (depth) */}
         <div
-          className="absolute inset-0 mix-blend-multiply"
-          style={{ background: "var(--onmid-lime)", opacity: 0.55 }}
-        />
-        {/* Soft fade on the right edge so text side blends cleanly */}
-        <div
-          className="absolute inset-y-0 right-0"
+          className="absolute rounded-sm"
           style={{
-            width: "45%",
-            background:
-              "linear-gradient(to left, oklch(0.97 0.01 100) 0%, oklch(0.97 0.01 100 / 0) 100%)",
+            left: -22,
+            top: 22,
+            right: 22,
+            bottom: -22,
+            background: "var(--onmid-lime)",
           }}
         />
-        {/* Subtle top/bottom vignette */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "linear-gradient(180deg, oklch(0 0 0 / 0.12) 0%, oklch(0 0 0 / 0) 30%, oklch(0 0 0 / 0) 70%, oklch(0 0 0 / 0.18) 100%)",
-          }}
-        />
-      </div>
 
-      {/* Section marker — right side */}
-      <div
-        className="absolute right-16 top-44 flex items-center gap-8 animate-fade-in-up"
-        style={{ width: "38%" }}
-      >
-        <div className="flex-1 h-px" style={{ background: "oklch(0 0 0 / 0.15)" }} />
+        {/* Photo card */}
         <div
-          className="font-extrabold"
+          className="absolute inset-0 overflow-hidden rounded-sm"
+          style={{ boxShadow: "0 40px 90px oklch(0 0 0 / 0.18)" }}
+        >
+          <img
+            src={alaorPhoto}
+            alt="Alaor Pedro de Oliveira"
+            className="w-full h-full object-cover"
+            style={{ filter: "grayscale(1) contrast(1.1) brightness(0.96)" }}
+            draggable={false}
+          />
+          {/* Soft duotone wash */}
+          <div
+            className="absolute inset-0 mix-blend-multiply"
+            style={{ background: "var(--onmid-lime)", opacity: 0.42 }}
+          />
+          {/* Bottom gradient for the role tag */}
+          <div
+            className="absolute inset-x-0 bottom-0 h-64 pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(180deg, oklch(0 0 0 / 0) 0%, oklch(0.13 0.005 240 / 0.85) 100%)",
+            }}
+          />
+          {/* Role tag inside photo */}
+          <div className="absolute left-8 bottom-8 right-8 flex items-end justify-between">
+            <div>
+              <div
+                className="uppercase font-bold mb-2"
+                style={{
+                  fontSize: 14,
+                  letterSpacing: "0.4em",
+                  color: "var(--onmid-lime)",
+                }}
+              >
+                Apresentador
+              </div>
+              <div
+                className="font-black"
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: 26,
+                  lineHeight: 1.05,
+                  color: "oklch(0.98 0.005 100)",
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                @alaorpedro10
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Big editorial "02." floating on top-right corner of photo */}
+        <div
+          className="absolute font-black animate-fade-in-up"
           style={{
+            right: -56,
+            top: -72,
             fontFamily: "var(--font-display)",
-            fontSize: 64,
-            lineHeight: 1,
-            color: "oklch(0.18 0.01 240)",
+            fontSize: 180,
+            lineHeight: 0.85,
+            letterSpacing: "-0.07em",
+            color: "oklch(0.13 0.005 240)",
+            animationDelay: "0.1s",
           }}
         >
           02<span className="text-lime">.</span>
         </div>
       </div>
 
-      {/* Text content — right column */}
+      {/* ============ BRIDGE: lime horizontal rule crossing the seam ============ */}
       <div
-        className="absolute right-16 top-[300px] animate-fade-in-up text-right"
-        style={{ width: "38%", animationDelay: "0.15s" }}
+        className="absolute animate-fade-in"
+        style={{
+          left: 760,
+          top: 360,
+          width: 240,
+          height: 6,
+          background: "var(--onmid-lime)",
+          animationDelay: "0.2s",
+        }}
+      />
+
+      {/* ============ RIGHT: editorial content column ============ */}
+      <div
+        className="absolute animate-fade-in-up"
+        style={{ left: 920, right: 96, top: 240, animationDelay: "0.25s" }}
       >
         <div
-          className="uppercase font-bold mb-6"
-          style={{ fontSize: 16, letterSpacing: "0.4em", color: "oklch(0.18 0.01 240 / 0.6)" }}
+          className="uppercase font-bold mb-5"
+          style={{
+            fontSize: 16,
+            letterSpacing: "0.45em",
+            color: "oklch(0.18 0.01 240 / 0.55)",
+          }}
         >
-          Apresentador
+          Diretor de Planejamento
         </div>
 
         <h2
           style={{
             fontFamily: "var(--font-display)",
             fontWeight: 900,
-            fontSize: 88,
-            lineHeight: 0.94,
-            letterSpacing: "-0.045em",
+            fontSize: 104,
+            lineHeight: 0.92,
+            letterSpacing: "-0.05em",
             color: "oklch(0.13 0.005 240)",
           }}
         >
-          Alaor Pedro<br />
-          <span className="text-lime">de Oliveira</span>
+          Alaor<br />
+          Pedro de<br />
+          <span className="text-lime">Oliveira</span>
         </h2>
 
-        <div
-          className="mt-6 font-semibold"
-          style={{ fontSize: 20, color: "oklch(0.18 0.01 240 / 0.7)", lineHeight: 1.4 }}
+        <p
+          className="mt-10 max-w-[640px]"
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: 22,
+            lineHeight: 1.45,
+            color: "oklch(0.18 0.01 240 / 0.7)",
+            fontWeight: 500,
+          }}
         >
-          Diretor de Planejamento · ONMID
-          <div className="mt-1" style={{ fontSize: 16, color: "oklch(0.18 0.01 240 / 0.55)" }}>
-            @alaorpedro10
-          </div>
-        </div>
+          Mais de uma década traduzindo dados em estratégia de alta performance
+          para marcas e franquias em todo o Brasil.
+        </p>
 
-        <div className="grid grid-cols-2 gap-8 mt-12 text-left">
+        <div className="grid grid-cols-2 gap-10 mt-12 max-w-[680px]">
           <div>
             <div
-              className="uppercase font-black mb-3 flex items-center gap-3"
-              style={{ fontSize: 12, letterSpacing: "0.35em", color: "oklch(0.13 0.005 240)" }}
+              className="uppercase font-black mb-4 flex items-center gap-3"
+              style={{
+                fontSize: 12,
+                letterSpacing: "0.35em",
+                color: "oklch(0.13 0.005 240)",
+              }}
             >
-              <span style={{ width: 16, height: 2, background: "var(--onmid-lime)" }} />
+              <span style={{ width: 22, height: 2, background: "var(--onmid-lime)" }} />
               Formação
             </div>
             <ul
               className="space-y-2"
-              style={{ fontSize: 14, color: "oklch(0.18 0.01 240 / 0.78)", lineHeight: 1.45 }}
+              style={{
+                fontSize: 15,
+                color: "oklch(0.18 0.01 240 / 0.78)",
+                lineHeight: 1.5,
+              }}
             >
               <li>Marketing e Publicidade · UNOPAR</li>
               <li>Gestão de RH · UNOPAR</li>
@@ -116,20 +180,28 @@ export function Slide02() {
           </div>
           <div>
             <div
-              className="uppercase font-black mb-3 flex items-center gap-3"
-              style={{ fontSize: 12, letterSpacing: "0.35em", color: "oklch(0.13 0.005 240)" }}
+              className="uppercase font-black mb-4 flex items-center gap-3"
+              style={{
+                fontSize: 12,
+                letterSpacing: "0.35em",
+                color: "oklch(0.13 0.005 240)",
+              }}
             >
-              <span style={{ width: 16, height: 2, background: "var(--onmid-lime)" }} />
-              Atuação
+              <span style={{ width: 22, height: 2, background: "var(--onmid-lime)" }} />
+              Contato
             </div>
             <ul
               className="space-y-2"
-              style={{ fontSize: 14, color: "oklch(0.18 0.01 240 / 0.78)", lineHeight: 1.45 }}
+              style={{
+                fontSize: 15,
+                color: "oklch(0.18 0.01 240 / 0.78)",
+                lineHeight: 1.5,
+              }}
             >
-              <li>ABF · Franchising</li>
               <li>onmid.com.br</li>
               <li>alaor@onmid.com.br</li>
-              <li>Av. Higienópolis, 1601 · Londrina/PR</li>
+              <li>Av. Higienópolis, 1601</li>
+              <li>Londrina · PR</li>
             </ul>
           </div>
         </div>
