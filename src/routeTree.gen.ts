@@ -9,9 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SocialmediaRouteImport } from './routes/socialmedia'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PreviewIntroRouteImport } from './routes/preview.intro'
 
+const SocialmediaRoute = SocialmediaRouteImport.update({
+  id: '/socialmedia',
+  path: '/socialmedia',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -25,32 +31,43 @@ const PreviewIntroRoute = PreviewIntroRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/socialmedia': typeof SocialmediaRoute
   '/preview/intro': typeof PreviewIntroRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/socialmedia': typeof SocialmediaRoute
   '/preview/intro': typeof PreviewIntroRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/socialmedia': typeof SocialmediaRoute
   '/preview/intro': typeof PreviewIntroRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/preview/intro'
+  fullPaths: '/' | '/socialmedia' | '/preview/intro'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/preview/intro'
-  id: '__root__' | '/' | '/preview/intro'
+  to: '/' | '/socialmedia' | '/preview/intro'
+  id: '__root__' | '/' | '/socialmedia' | '/preview/intro'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SocialmediaRoute: typeof SocialmediaRoute
   PreviewIntroRoute: typeof PreviewIntroRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/socialmedia': {
+      id: '/socialmedia'
+      path: '/socialmedia'
+      fullPath: '/socialmedia'
+      preLoaderRoute: typeof SocialmediaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SocialmediaRoute: SocialmediaRoute,
   PreviewIntroRoute: PreviewIntroRoute,
 }
 export const routeTree = rootRouteImport
