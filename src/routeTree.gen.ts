@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SocialmediaRouteImport } from './routes/socialmedia'
+import { Route as CrcRouteImport } from './routes/crc'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PreviewIntroRouteImport } from './routes/preview.intro'
 
 const SocialmediaRoute = SocialmediaRouteImport.update({
   id: '/socialmedia',
   path: '/socialmedia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CrcRoute = CrcRouteImport.update({
+  id: '/crc',
+  path: '/crc',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -31,30 +37,34 @@ const PreviewIntroRoute = PreviewIntroRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/crc': typeof CrcRoute
   '/socialmedia': typeof SocialmediaRoute
   '/preview/intro': typeof PreviewIntroRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/crc': typeof CrcRoute
   '/socialmedia': typeof SocialmediaRoute
   '/preview/intro': typeof PreviewIntroRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/crc': typeof CrcRoute
   '/socialmedia': typeof SocialmediaRoute
   '/preview/intro': typeof PreviewIntroRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/socialmedia' | '/preview/intro'
+  fullPaths: '/' | '/crc' | '/socialmedia' | '/preview/intro'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/socialmedia' | '/preview/intro'
-  id: '__root__' | '/' | '/socialmedia' | '/preview/intro'
+  to: '/' | '/crc' | '/socialmedia' | '/preview/intro'
+  id: '__root__' | '/' | '/crc' | '/socialmedia' | '/preview/intro'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CrcRoute: typeof CrcRoute
   SocialmediaRoute: typeof SocialmediaRoute
   PreviewIntroRoute: typeof PreviewIntroRoute
 }
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/socialmedia'
       fullPath: '/socialmedia'
       preLoaderRoute: typeof SocialmediaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/crc': {
+      id: '/crc'
+      path: '/crc'
+      fullPath: '/crc'
+      preLoaderRoute: typeof CrcRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CrcRoute: CrcRoute,
   SocialmediaRoute: SocialmediaRoute,
   PreviewIntroRoute: PreviewIntroRoute,
 }
