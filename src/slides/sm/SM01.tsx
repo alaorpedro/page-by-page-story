@@ -1,8 +1,11 @@
 import { SlideLayout } from "@/components/SlideLayout";
+import { LiveInfoBar } from "@/components/LiveInfoBar";
 
 export function SM01() {
   return (
     <SlideLayout variant="hero" tone="dark" bgLetter="@">
+      <LiveInfoBar />
+
       <div className="absolute inset-0 flex flex-col justify-center px-32">
         <div
           className="uppercase font-bold animate-fade-in-up"
@@ -29,11 +32,10 @@ export function SM01() {
             maxWidth: 1600,
           }}
         >
-          Redes sociais<br />
+          Redes sociais
+          <br />
           para clínicas{" "}
-          <span style={{ color: "var(--onmid-lime)", fontStyle: "italic" }}>
-            odontológicas
-          </span>
+          <span style={{ color: "var(--onmid-lime)", fontStyle: "italic" }}>odontológicas</span>
         </h1>
 
         <p
@@ -48,8 +50,7 @@ export function SM01() {
             animationDelay: "0.35s",
           }}
         >
-          Estratégia e posicionamento — antes de pensar em postagem,
-          é preciso pensar em marca.
+          Estratégia e posicionamento — antes de pensar em postagem, é preciso pensar em marca.
         </p>
 
         <div

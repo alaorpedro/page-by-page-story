@@ -1,8 +1,11 @@
 import { SlideLayout } from "@/components/SlideLayout";
+import { LiveInfoBar } from "@/components/LiveInfoBar";
 
 export function PF01() {
   return (
     <SlideLayout variant="hero" tone="dark" bgLetter="%">
+      <LiveInfoBar />
+
       <div className="absolute inset-0 flex flex-col justify-center px-32">
         <div
           className="uppercase font-bold animate-fade-in-up"
