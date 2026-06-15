@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SocialmediaRouteImport } from './routes/socialmedia'
+import { Route as PerformanceRouteImport } from './routes/performance'
 import { Route as CrcRouteImport } from './routes/crc'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PreviewIntroRouteImport } from './routes/preview.intro'
@@ -17,6 +18,11 @@ import { Route as PreviewIntroRouteImport } from './routes/preview.intro'
 const SocialmediaRoute = SocialmediaRouteImport.update({
   id: '/socialmedia',
   path: '/socialmedia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PerformanceRoute = PerformanceRouteImport.update({
+  id: '/performance',
+  path: '/performance',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CrcRoute = CrcRouteImport.update({
@@ -38,12 +44,14 @@ const PreviewIntroRoute = PreviewIntroRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/crc': typeof CrcRoute
+  '/performance': typeof PerformanceRoute
   '/socialmedia': typeof SocialmediaRoute
   '/preview/intro': typeof PreviewIntroRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/crc': typeof CrcRoute
+  '/performance': typeof PerformanceRoute
   '/socialmedia': typeof SocialmediaRoute
   '/preview/intro': typeof PreviewIntroRoute
 }
@@ -51,20 +59,28 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/crc': typeof CrcRoute
+  '/performance': typeof PerformanceRoute
   '/socialmedia': typeof SocialmediaRoute
   '/preview/intro': typeof PreviewIntroRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/crc' | '/socialmedia' | '/preview/intro'
+  fullPaths: '/' | '/crc' | '/performance' | '/socialmedia' | '/preview/intro'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/crc' | '/socialmedia' | '/preview/intro'
-  id: '__root__' | '/' | '/crc' | '/socialmedia' | '/preview/intro'
+  to: '/' | '/crc' | '/performance' | '/socialmedia' | '/preview/intro'
+  id:
+    | '__root__'
+    | '/'
+    | '/crc'
+    | '/performance'
+    | '/socialmedia'
+    | '/preview/intro'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CrcRoute: typeof CrcRoute
+  PerformanceRoute: typeof PerformanceRoute
   SocialmediaRoute: typeof SocialmediaRoute
   PreviewIntroRoute: typeof PreviewIntroRoute
 }
@@ -76,6 +92,13 @@ declare module '@tanstack/react-router' {
       path: '/socialmedia'
       fullPath: '/socialmedia'
       preLoaderRoute: typeof SocialmediaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/performance': {
+      id: '/performance'
+      path: '/performance'
+      fullPath: '/performance'
+      preLoaderRoute: typeof PerformanceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/crc': {
@@ -105,9 +128,20 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CrcRoute: CrcRoute,
+  PerformanceRoute: PerformanceRoute,
   SocialmediaRoute: SocialmediaRoute,
   PreviewIntroRoute: PreviewIntroRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
