@@ -1,4 +1,6 @@
 import type { ReactNode } from "react";
+import { Link } from "@tanstack/react-router";
+import { House } from "lucide-react";
 import { OnmidMark } from "./OnmidMark";
 import { useSlideMeta } from "./SlideContext";
 import blobLime from "@/assets/blob-lime.png";
@@ -24,6 +26,7 @@ type Props = {
     opacity?: number;
   };
   bg?: string;
+  showHomeButton?: boolean;
   /** @deprecated */ arcs?: unknown;
   /** @deprecated */ logo?: unknown;
 };
@@ -41,6 +44,7 @@ export function SlideLayout({
   bgLetter,
   blob,
   bg,
+  showHomeButton = false,
 }: Props) {
   const { index, total } = useSlideMeta();
   const counter = `${String(index).padStart(2, "0")} // ${String(total).padStart(2, "0")}`;
@@ -86,14 +90,16 @@ export function SlideLayout({
           alt=""
           aria-hidden
           className="absolute pointer-events-none animate-fade-in"
-          style={{
-            [blob.side ?? "right"]: -120,
-            top: blob.top ?? 80,
-            width: blob.size ?? 720,
-            height: "auto",
-            opacity: blob.opacity ?? 0.95,
-            filter: "drop-shadow(0 40px 80px oklch(0 0 0 / 0.35))",
-          } as React.CSSProperties}
+          style={
+            {
+              [blob.side ?? "right"]: -120,
+              top: blob.top ?? 80,
+              width: blob.size ?? 720,
+              height: "auto",
+              opacity: blob.opacity ?? 0.95,
+              filter: "drop-shadow(0 40px 80px oklch(0 0 0 / 0.35))",
+            } as React.CSSProperties
+          }
           loading="lazy"
         />
       )}
@@ -127,11 +133,21 @@ export function SlideLayout({
       {/* Top header bar */}
       <div className="absolute top-0 left-0 right-0 flex justify-between items-center px-16 pt-12 z-30 animate-fade-in">
         <OnmidMark size={44} iconOnly />
-        <div
-          className="font-mono tracking-[0.25em]"
-          style={{ fontSize: 11, color: chromeMuted }}
-        >
-          {counter}
+        <div className="flex items-center gap-4">
+          {showHomeButton && (
+            <Link
+              data-slide-chrome
+              to="/"
+              className="inline-flex h-8 w-8 items-center justify-center rounded-full transition-colors hover:bg-white/10"
+              style={{ color: chromeMuted }}
+              aria-label="Voltar para a home de treinamentos"
+            >
+              <House size={15} strokeWidth={2.2} aria-hidden />
+            </Link>
+          )}
+          <div className="font-mono tracking-[0.25em]" style={{ fontSize: 11, color: chromeMuted }}>
+            {counter}
+          </div>
         </div>
       </div>
 

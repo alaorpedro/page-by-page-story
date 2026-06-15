@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { SlideLayout } from "@/components/SlideLayout";
 import { IntroVignettePreview } from "@/components/IntroVignettePreview";
 import { LiveInfoBar } from "@/components/LiveInfoBar";
-import { TrainingHomeButton } from "@/components/TrainingHomeButton";
 
 const STATIC_MS = 10000; // hold the static slide for 10s
 const ANIM_MS = 3400; // vignette duration (~3.4s)
@@ -27,9 +26,7 @@ export function Slide01() {
 
   return (
     <>
-      <SlideLayout variant="hero" tone="dark">
-        <TrainingHomeButton />
-
+      <SlideLayout variant="hero" tone="dark" showHomeButton>
         {/* Thin lime vertical rail */}
         <div
           className="absolute left-16 top-44 bottom-32 animate-fade-in"
