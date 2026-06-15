@@ -1,9 +1,11 @@
 import { SlideLayout } from "@/components/SlideLayout";
 import { LiveInfoBar } from "@/components/LiveInfoBar";
+import { TrainingHomeButton } from "@/components/TrainingHomeButton";
 
 export function PF01() {
   return (
     <SlideLayout variant="hero" tone="dark" bgLetter="%">
+      <TrainingHomeButton />
       <LiveInfoBar />
 
       <div className="absolute inset-0 flex flex-col justify-center px-32">
