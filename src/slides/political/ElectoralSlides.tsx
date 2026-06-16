@@ -227,7 +227,7 @@ export function MP01() {
             "linear-gradient(90deg, oklch(0.13 0.005 240 / 0.92) 0%, oklch(0.13 0.005 240 / 0.64) 48%, oklch(0.13 0.005 240 / 0.54) 100%)",
         }}
       />
-      <LiveInfoBar />
+      <LiveInfoBar layout="vertical" />
 
       <div
         className="absolute inset-0 flex flex-col justify-center px-32"
