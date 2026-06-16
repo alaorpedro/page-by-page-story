@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SocialmediaRouteImport } from './routes/socialmedia'
 import { Route as PerformanceRouteImport } from './routes/performance'
+import { Route as MarketingPoliticoRouteImport } from './routes/marketing-politico'
 import { Route as CrcRouteImport } from './routes/crc'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PreviewIntroRouteImport } from './routes/preview.intro'
@@ -23,6 +24,11 @@ const SocialmediaRoute = SocialmediaRouteImport.update({
 const PerformanceRoute = PerformanceRouteImport.update({
   id: '/performance',
   path: '/performance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarketingPoliticoRoute = MarketingPoliticoRouteImport.update({
+  id: '/marketing-politico',
+  path: '/marketing-politico',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CrcRoute = CrcRouteImport.update({
@@ -44,6 +50,7 @@ const PreviewIntroRoute = PreviewIntroRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/crc': typeof CrcRoute
+  '/marketing-politico': typeof MarketingPoliticoRoute
   '/performance': typeof PerformanceRoute
   '/socialmedia': typeof SocialmediaRoute
   '/preview/intro': typeof PreviewIntroRoute
@@ -51,6 +58,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/crc': typeof CrcRoute
+  '/marketing-politico': typeof MarketingPoliticoRoute
   '/performance': typeof PerformanceRoute
   '/socialmedia': typeof SocialmediaRoute
   '/preview/intro': typeof PreviewIntroRoute
@@ -59,19 +67,33 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/crc': typeof CrcRoute
+  '/marketing-politico': typeof MarketingPoliticoRoute
   '/performance': typeof PerformanceRoute
   '/socialmedia': typeof SocialmediaRoute
   '/preview/intro': typeof PreviewIntroRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/crc' | '/performance' | '/socialmedia' | '/preview/intro'
+  fullPaths:
+    | '/'
+    | '/crc'
+    | '/marketing-politico'
+    | '/performance'
+    | '/socialmedia'
+    | '/preview/intro'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/crc' | '/performance' | '/socialmedia' | '/preview/intro'
+  to:
+    | '/'
+    | '/crc'
+    | '/marketing-politico'
+    | '/performance'
+    | '/socialmedia'
+    | '/preview/intro'
   id:
     | '__root__'
     | '/'
     | '/crc'
+    | '/marketing-politico'
     | '/performance'
     | '/socialmedia'
     | '/preview/intro'
@@ -80,6 +102,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CrcRoute: typeof CrcRoute
+  MarketingPoliticoRoute: typeof MarketingPoliticoRoute
   PerformanceRoute: typeof PerformanceRoute
   SocialmediaRoute: typeof SocialmediaRoute
   PreviewIntroRoute: typeof PreviewIntroRoute
@@ -99,6 +122,13 @@ declare module '@tanstack/react-router' {
       path: '/performance'
       fullPath: '/performance'
       preLoaderRoute: typeof PerformanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketing-politico': {
+      id: '/marketing-politico'
+      path: '/marketing-politico'
+      fullPath: '/marketing-politico'
+      preLoaderRoute: typeof MarketingPoliticoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/crc': {
@@ -128,6 +158,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CrcRoute: CrcRoute,
+  MarketingPoliticoRoute: MarketingPoliticoRoute,
   PerformanceRoute: PerformanceRoute,
   SocialmediaRoute: SocialmediaRoute,
   PreviewIntroRoute: PreviewIntroRoute,

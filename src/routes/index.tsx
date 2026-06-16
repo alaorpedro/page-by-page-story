@@ -23,7 +23,7 @@ export const Route = createFileRoute("/")({
 });
 
 type Training = {
-  to: "/crc" | "/socialmedia" | "/performance";
+  to: "/crc" | "/socialmedia" | "/performance" | "/marketing-politico";
   eyebrow: string;
   title: string;
   description: string;
@@ -53,6 +53,14 @@ const TRAININGS: Training[] = [
     title: "Tráfego Pago de Alta Performance",
     description: "Metodologia Exclusiva Onmid de acompanhamento de tráfego pago.",
     meta: "3 slides · introdutório",
+  },
+  {
+    to: "/marketing-politico",
+    eyebrow: "Campanha · Eleições 2026",
+    title: "Marketing Político para Candidatos",
+    description:
+      "Publicidade, marketing, relacionamento e IA para campanhas mais claras, responsáveis e consistentes.",
+    meta: "7 slides · ~35 min",
   },
 ];
 
@@ -123,8 +131,8 @@ function MenuSlide() {
 
       {/* Cards */}
       <div
-        className="absolute grid grid-cols-3"
-        style={{ left: 110, right: 110, bottom: 110, gap: 28 }}
+        className="absolute grid grid-cols-4"
+        style={{ left: 90, right: 90, bottom: 105, gap: 22 }}
       >
         {TRAININGS.map((t, i) => (
           <Link
@@ -133,8 +141,8 @@ function MenuSlide() {
             className="group block h-full rounded-3xl border transition-all duration-300 hover:-translate-y-1 animate-fade-in-up"
             style={{
               animationDelay: `${0.2 + i * 0.1}s`,
-              padding: 38,
-              minHeight: 390,
+              padding: 30,
+              minHeight: 370,
               background:
                 "linear-gradient(180deg, oklch(1 0 0 / 0.05) 0%, oklch(1 0 0 / 0.02) 100%)",
               borderColor: "oklch(1 0 0 / 0.12)",
@@ -143,10 +151,10 @@ function MenuSlide() {
             <div
               className="uppercase font-bold"
               style={{
-                fontSize: 18,
-                letterSpacing: "0.4em",
+                fontSize: 15,
+                letterSpacing: "0.34em",
                 color: "oklch(0.85 0.18 138)",
-                marginBottom: 34,
+                marginBottom: 28,
               }}
             >
               {t.eyebrow}
@@ -155,7 +163,7 @@ function MenuSlide() {
               style={{
                 fontFamily: "var(--font-display)",
                 fontWeight: 900,
-                fontSize: 44,
+                fontSize: 36,
                 lineHeight: 1.02,
                 letterSpacing: "-0.03em",
                 marginBottom: 24,
@@ -163,13 +171,13 @@ function MenuSlide() {
             >
               {t.title}
             </h2>
-            <p className="opacity-75" style={{ fontSize: 22, lineHeight: 1.42, marginBottom: 42 }}>
+            <p className="opacity-75" style={{ fontSize: 19, lineHeight: 1.38, marginBottom: 34 }}>
               {t.description}
             </p>
             <div className="flex items-center justify-between">
               <span
                 className="uppercase opacity-60"
-                style={{ fontSize: 18, letterSpacing: "0.25em" }}
+                style={{ fontSize: 14, letterSpacing: "0.22em" }}
               >
                 {t.meta}
               </span>
@@ -177,7 +185,7 @@ function MenuSlide() {
                 className="inline-flex items-center gap-3 font-bold transition-transform group-hover:translate-x-1"
                 style={{
                   fontFamily: "var(--font-display)",
-                  fontSize: 28,
+                  fontSize: 22,
                   color: "oklch(0.85 0.18 138)",
                   letterSpacing: "-0.01em",
                 }}
