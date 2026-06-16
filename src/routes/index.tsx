@@ -33,7 +33,6 @@ type Training = {
 
 const GENERAL_PASSWORD = "onmid@123";
 const POLITICAL_PASSWORD = "leandro@2026";
-const ACCESS_KEY = "onmid-training-access";
 
 const TRAININGS: Training[] = [
   {
@@ -86,12 +85,6 @@ function MenuSlide() {
   const [passwordError, setPasswordError] = useState("");
 
   const openTraining = (training: Training) => {
-    const savedAccess = sessionStorage.getItem(ACCESS_KEY);
-    if (savedAccess === "all" || savedAccess === training.to) {
-      void navigate({ to: training.to });
-      return;
-    }
-
     setSelectedTraining(training);
     setPassword("");
     setPasswordError("");
@@ -117,7 +110,6 @@ function MenuSlide() {
       return;
     }
 
-    sessionStorage.setItem(ACCESS_KEY, isGeneralPassword ? "all" : selectedTraining.to);
     void navigate({ to: selectedTraining.to });
   };
 
