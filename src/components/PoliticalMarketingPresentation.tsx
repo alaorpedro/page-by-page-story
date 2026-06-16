@@ -18,53 +18,87 @@ import {
   MP14,
 } from "@/slides/political/ElectoralSlides";
 
-type SlideEntry = { id: string; title: string; node: React.ReactNode };
+type SlideComponent = (props: { revealStep: number }) => React.ReactNode;
+type SlideEntry = {
+  id: string;
+  title: string;
+  component: SlideComponent;
+  revealSteps?: number;
+};
 
 const SLIDES: SlideEntry[] = [
-  { id: "01", title: "Proposta estratégica", node: <MP01 /> },
-  { id: "02", title: "Desafio", node: <MP02 /> },
-  { id: "03", title: "Tese central", node: <MP03 /> },
-  { id: "04", title: "Capital político", node: <MP04 /> },
-  { id: "05", title: "Arquitetura", node: <MP05 /> },
-  { id: "06", title: "Studio de Criação", node: <MP06 /> },
-  { id: "07", title: "Tráfego Pago", node: <MP07 /> },
-  { id: "08", title: "Consultoria", node: <MP08 /> },
-  { id: "09", title: "Produção de Conteúdo", node: <MP09 /> },
-  { id: "10", title: "War Room", node: <MP10 /> },
-  { id: "11", title: "Indicadores", node: <MP11 /> },
-  { id: "12", title: "Mapa de conteúdo", node: <MP12 /> },
-  { id: "13", title: "Pacotes integrados", node: <MP13 /> },
-  { id: "14", title: "Próximo passo", node: <MP14 /> },
+  { id: "01", title: "Proposta estratégica", component: MP01 },
+  { id: "02", title: "Desafio", component: MP02, revealSteps: 3 },
+  { id: "03", title: "Tese central", component: MP03, revealSteps: 5 },
+  { id: "04", title: "Capital político", component: MP04, revealSteps: 4 },
+  { id: "05", title: "Arquitetura", component: MP05, revealSteps: 4 },
+  { id: "06", title: "Studio de Criação", component: MP06, revealSteps: 3 },
+  { id: "07", title: "Tráfego Pago", component: MP07, revealSteps: 3 },
+  { id: "08", title: "Consultoria", component: MP08, revealSteps: 4 },
+  { id: "09", title: "Produção de Conteúdo", component: MP09, revealSteps: 3 },
+  { id: "10", title: "War Room", component: MP10, revealSteps: 5 },
+  { id: "11", title: "Indicadores", component: MP11, revealSteps: 4 },
+  { id: "12", title: "Mapa de conteúdo", component: MP12, revealSteps: 6 },
+  { id: "13", title: "Pacotes integrados", component: MP13, revealSteps: 4 },
+  { id: "14", title: "Próximo passo", component: MP14, revealSteps: 4 },
 ];
 
 export function PoliticalMarketingPresentation() {
   const [index, setIndex] = useState(0);
+  const [revealStep, setRevealStep] = useState(0);
   const [isFull, setIsFull] = useState(false);
   const [chromeVisible, setChromeVisible] = useState(true);
 
   const total = SLIDES.length;
   const current = SLIDES[index];
+  const revealTotal = current.revealSteps ?? 0;
   const slideKey = useMemo(() => `${current.id}-${index}`, [current.id, index]);
 
-  const next = useCallback(() => setIndex((i) => Math.min(total - 1, i + 1)), [total]);
-  const prev = useCallback(() => setIndex((i) => Math.max(0, i - 1)), []);
+  const nextSlide = useCallback(() => {
+    setRevealStep(0);
+    setIndex((i) => Math.min(total - 1, i + 1));
+  }, [total]);
+  const prevSlide = useCallback(() => {
+    setRevealStep(0);
+    setIndex((i) => Math.max(0, i - 1));
+  }, []);
+
+  const advance = useCallback(() => {
+    if (revealStep < revealTotal) {
+      setRevealStep((s) => Math.min(revealTotal, s + 1));
+      return;
+    }
+    nextSlide();
+  }, [nextSlide, revealStep, revealTotal]);
+
+  const retreat = useCallback(() => {
+    if (revealStep > 0) {
+      setRevealStep((s) => Math.max(0, s - 1));
+      return;
+    }
+    prevSlide();
+  }, [prevSlide, revealStep]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") {
         e.preventDefault();
-        next();
+        advance();
       } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
         e.preventDefault();
-        prev();
-      } else if (e.key === "Home") setIndex(0);
-      else if (e.key === "End") setIndex(total - 1);
-      else if (e.key.toLowerCase() === "f") toggleFullscreen();
+        retreat();
+      } else if (e.key === "Home") {
+        setRevealStep(0);
+        setIndex(0);
+      } else if (e.key === "End") {
+        setRevealStep(0);
+        setIndex(total - 1);
+      } else if (e.key.toLowerCase() === "f") toggleFullscreen();
       else if (e.key === "Escape" && document.fullscreenElement) document.exitFullscreen();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [next, prev, total]);
+  }, [advance, retreat, total]);
 
   useEffect(() => {
     const onChange = () => setIsFull(!!document.fullscreenElement);
@@ -110,15 +144,15 @@ export function PoliticalMarketingPresentation() {
           target.closest("[role=dialog]")
         )
           return;
-        next();
+        advance();
       }}
       onContextMenu={(e) => {
         e.preventDefault();
-        prev();
+        retreat();
       }}
     >
       <SlideContext.Provider value={{ index: index + 1, total }}>
-        <ScaledSlide key={slideKey}>{current.node}</ScaledSlide>
+        <ScaledSlide key={slideKey}>{current.component({ revealStep })}</ScaledSlide>
       </SlideContext.Provider>
 
       <div
@@ -141,8 +175,8 @@ export function PoliticalMarketingPresentation() {
         }`}
       >
         <button
-          onClick={prev}
-          disabled={index === 0}
+          onClick={retreat}
+          disabled={index === 0 && revealStep === 0}
           className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white disabled:opacity-30 backdrop-blur flex items-center justify-center"
           aria-label="Slide anterior"
         >
@@ -152,7 +186,10 @@ export function PoliticalMarketingPresentation() {
           {SLIDES.map((s, i) => (
             <button
               key={s.id}
-              onClick={() => setIndex(i)}
+              onClick={() => {
+                setRevealStep(0);
+                setIndex(i);
+              }}
               className={`h-1.5 rounded-full transition-all ${
                 i === index ? "w-8 bg-white" : "w-3 bg-white/30 hover:bg-white/50"
               }`}
@@ -161,8 +198,8 @@ export function PoliticalMarketingPresentation() {
           ))}
         </div>
         <button
-          onClick={next}
-          disabled={index === total - 1}
+          onClick={advance}
+          disabled={index === total - 1 && revealStep >= revealTotal}
           className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white disabled:opacity-30 backdrop-blur flex items-center justify-center"
           aria-label="Próximo slide"
         >

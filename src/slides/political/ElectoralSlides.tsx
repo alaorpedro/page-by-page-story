@@ -1,6 +1,9 @@
-import { useEffect, useState } from "react";
 import { LiveInfoBar } from "@/components/LiveInfoBar";
 import { SlideLayout } from "@/components/SlideLayout";
+
+type ElectoralSlideProps = {
+  revealStep: number;
+};
 
 type Card = {
   title: string;
@@ -12,20 +15,6 @@ const WHITE = "oklch(0.98 0 0)";
 const MUTED = "oklch(1 0 0 / 0.66)";
 const INK = "oklch(0.16 0.01 240)";
 const INK_MUTED = "oklch(0.2 0.01 240 / 0.68)";
-
-function useReveal(count: number, delay = 360) {
-  const [visible, setVisible] = useState(0);
-
-  useEffect(() => {
-    setVisible(0);
-    const timers = Array.from({ length: count }, (_, i) =>
-      window.setTimeout(() => setVisible(i + 1), 280 + i * delay),
-    );
-    return () => timers.forEach(window.clearTimeout);
-  }, [count, delay]);
-
-  return visible;
-}
 
 function Kicker({
   children,
@@ -52,7 +41,7 @@ function Kicker({
 function BigTitle({
   children,
   tone = "dark",
-  size = 128,
+  size = 82,
   maxWidth = 1420,
 }: {
   children: React.ReactNode;
@@ -66,9 +55,9 @@ function BigTitle({
       style={{
         fontFamily: "var(--font-display)",
         fontWeight: 900,
-        fontSize: size,
-        lineHeight: 0.94,
-        letterSpacing: "-0.055em",
+        fontSize: Math.min(size, 88),
+        lineHeight: 0.98,
+        letterSpacing: "-0.045em",
         color: tone === "dark" ? WHITE : INK,
         maxWidth,
         animationDelay: "0.12s",
@@ -84,13 +73,14 @@ function CardGrid({
   tone = "dark",
   columns,
   bottom = 130,
+  revealStep,
 }: {
   cards: Card[];
   tone?: "dark" | "light";
   columns?: number;
   bottom?: number;
+  revealStep: number;
 }) {
-  const visible = useReveal(cards.length);
   const isLight = tone === "light";
 
   return (
@@ -109,11 +99,11 @@ function CardGrid({
           key={card.title}
           className="animate-fade-in-up"
           style={{
-            opacity: visible > i ? 1 : 0,
-            transform: visible > i ? "translateY(0)" : "translateY(24px)",
+            opacity: revealStep > i ? 1 : 0,
+            transform: revealStep > i ? "translateY(0)" : "translateY(24px)",
             transition: "opacity 420ms ease, transform 420ms ease",
-            padding: "30px 30px 34px",
-            minHeight: 245,
+            padding: "36px 34px 40px",
+            minHeight: 290,
             background: isLight ? "oklch(1 0 0 / 0.72)" : "oklch(1 0 0 / 0.045)",
             borderTop: `2px solid ${isLight ? "oklch(0.48 0.18 138)" : GREEN}`,
             borderLeft: isLight ? "1px solid oklch(0.16 0.01 240 / 0.08)" : "none",
@@ -135,7 +125,7 @@ function CardGrid({
             style={{
               fontFamily: "var(--font-display)",
               fontWeight: 900,
-              fontSize: 36,
+              fontSize: 42,
               lineHeight: 1,
               letterSpacing: "-0.035em",
               color: isLight ? INK : WHITE,
@@ -144,7 +134,7 @@ function CardGrid({
           >
             {card.title}
           </h3>
-          <p style={{ fontSize: 23, lineHeight: 1.34, color: isLight ? INK_MUTED : MUTED }}>
+          <p style={{ fontSize: 25, lineHeight: 1.32, color: isLight ? INK_MUTED : MUTED }}>
             {card.text}
           </p>
         </div>
@@ -156,11 +146,12 @@ function CardGrid({
 function MetricStrip({
   metrics,
   tone = "dark",
+  revealStep,
 }: {
   metrics: { value: string; label: string }[];
   tone?: "dark" | "light";
+  revealStep: number;
 }) {
-  const visible = useReveal(metrics.length, 280);
   const isLight = tone === "light";
 
   return (
@@ -179,8 +170,8 @@ function MetricStrip({
           key={metric.label}
           className="animate-fade-in-up"
           style={{
-            opacity: visible > i ? 1 : 0,
-            transform: visible > i ? "translateY(0)" : "translateY(24px)",
+            opacity: revealStep > i ? 1 : 0,
+            transform: revealStep > i ? "translateY(0)" : "translateY(24px)",
             transition: "opacity 420ms ease, transform 420ms ease",
             paddingTop: 30,
             borderTop: `2px solid ${isLight ? "oklch(0.48 0.18 138)" : GREEN}`,
@@ -243,7 +234,7 @@ export function MP01() {
           className="animate-fade-in-up"
           style={{
             marginTop: 52,
-            fontSize: 32,
+            fontSize: 27,
             lineHeight: 1.35,
             color: MUTED,
             maxWidth: 1180,
@@ -281,17 +272,17 @@ export function MP01() {
   );
 }
 
-export function MP02() {
+export function MP02({ revealStep }: ElectoralSlideProps) {
   return (
     <SlideLayout variant="content" tone="dark" kicker="Desafio">
       <div className="absolute left-24 top-40 right-24">
         <Kicker>O desafio</Kicker>
-        <BigTitle size={124}>Campanha não se vence no improviso.</BigTitle>
+        <BigTitle>Campanha não se vence no improviso.</BigTitle>
         <p
           className="animate-fade-in-up"
           style={{
             marginTop: 34,
-            fontSize: 32,
+            fontSize: 27,
             lineHeight: 1.35,
             color: MUTED,
             maxWidth: 1040,
@@ -316,17 +307,18 @@ export function MP02() {
             text: "Sem método, a campanha vira sensação. Com indicadores, vira gestão de meta.",
           },
         ]}
+        revealStep={revealStep}
       />
     </SlideLayout>
   );
 }
 
-export function MP03() {
+export function MP03({ revealStep }: ElectoralSlideProps) {
   return (
     <SlideLayout variant="statement" tone="dark" bgLetter="M" kicker="Tese central">
       <div className="absolute left-24 top-40 right-24">
         <Kicker>Tese central da Onmid</Kicker>
-        <BigTitle size={118} maxWidth={1500}>
+        <BigTitle maxWidth={1500}>
           Campanha eleitoral precisa operar como uma máquina editorial com inteligência de dados.
         </BigTitle>
       </div>
@@ -340,17 +332,18 @@ export function MP03() {
           { title: "Tráfego", text: "Distribui para as pessoas certas." },
           { title: "Mensuração", text: "Mostra se a campanha está ficando mais forte." },
         ]}
+        revealStep={revealStep}
       />
     </SlideLayout>
   );
 }
 
-export function MP04() {
+export function MP04({ revealStep }: ElectoralSlideProps) {
   return (
     <SlideLayout variant="content" tone="light" kicker="Capital político">
       <div className="absolute left-24 top-36 right-24">
         <Kicker tone="light">Capital político que precisa virar comunicação</Kicker>
-        <BigTitle tone="light" size={112} maxWidth={1420}>
+        <BigTitle tone="light" maxWidth={1420}>
           A campanha deve organizar os ativos já existentes em narrativas de alto valor.
         </BigTitle>
       </div>
@@ -362,17 +355,18 @@ export function MP04() {
           { value: "Norte", label: "liderança regional" },
           { value: "Dia a dia", label: "presença pública" },
         ]}
+        revealStep={revealStep}
       />
     </SlideLayout>
   );
 }
 
-export function MP05() {
+export function MP05({ revealStep }: ElectoralSlideProps) {
   return (
     <SlideLayout variant="content" tone="dark" kicker="Arquitetura">
       <div className="absolute left-24 top-40 right-24">
         <Kicker>Arquitetura da campanha</Kicker>
-        <BigTitle size={128}>Quatro frentes trabalhando como um único sistema.</BigTitle>
+        <BigTitle>Quatro frentes trabalhando como um único sistema.</BigTitle>
       </div>
       <CardGrid
         columns={4}
@@ -394,17 +388,18 @@ export function MP05() {
             text: "Captação, edição e cobertura do dia a dia do candidato.",
           },
         ]}
+        revealStep={revealStep}
       />
     </SlideLayout>
   );
 }
 
-export function MP06() {
+export function MP06({ revealStep }: ElectoralSlideProps) {
   return (
     <SlideLayout variant="content" tone="light" kicker="Pacote 01">
       <div className="absolute left-24 top-36 right-24">
         <Kicker tone="light">Pacote 1 · Studio de Criação</Kicker>
-        <BigTitle tone="light" size={124}>
+        <BigTitle tone="light">
           O sistema visual que dá consistência, reconhecimento e velocidade.
         </BigTitle>
       </div>
@@ -424,17 +419,18 @@ export function MP06() {
             text: "Hierarquia visual, mensagens por tema, chamadas de ação e padrão de reconhecimento.",
           },
         ]}
+        revealStep={revealStep}
       />
     </SlideLayout>
   );
 }
 
-export function MP07() {
+export function MP07({ revealStep }: ElectoralSlideProps) {
   return (
     <SlideLayout variant="content" tone="dark" kicker="Pacote 02">
       <div className="absolute left-24 top-40 right-24">
         <Kicker>Pacote 2 · Tráfego Pago</Kicker>
-        <BigTitle size={124}>
+        <BigTitle>
           Distribuição estratégica para transformar conteúdo em alcance qualificado.
         </BigTitle>
       </div>
@@ -453,17 +449,18 @@ export function MP07() {
             text: "Análise de alcance, frequência, custo, engajamento, criativos vencedores e oportunidades de pauta.",
           },
         ]}
+        revealStep={revealStep}
       />
     </SlideLayout>
   );
 }
 
-export function MP08() {
+export function MP08({ revealStep }: ElectoralSlideProps) {
   return (
     <SlideLayout variant="content" tone="light" kicker="Pacote 03">
       <div className="absolute left-24 top-36 right-24">
         <Kicker tone="light">Pacote 3 · Consultoria de Marketing</Kicker>
-        <BigTitle tone="light" size={118}>
+        <BigTitle tone="light">
           Método de mensuração e acompanhamento da meta de 100 mil votos.
         </BigTitle>
       </div>
@@ -475,19 +472,18 @@ export function MP08() {
           { value: "Narrativas", label: "temas de força" },
           { value: "Dados", label: "painel semanal" },
         ]}
+        revealStep={revealStep}
       />
     </SlideLayout>
   );
 }
 
-export function MP09() {
+export function MP09({ revealStep }: ElectoralSlideProps) {
   return (
     <SlideLayout variant="content" tone="dark" kicker="Pacote 04">
       <div className="absolute left-24 top-40 right-24">
         <Kicker>Pacote 4 · Produção de Conteúdo</Kicker>
-        <BigTitle size={124}>
-          A câmera acompanha para transformar presença em percepção pública.
-        </BigTitle>
+        <BigTitle>A câmera acompanha para transformar presença em percepção pública.</BigTitle>
       </div>
       <CardGrid
         cards={[
@@ -504,17 +500,18 @@ export function MP09() {
             text: "Antes de gravar, a equipe entende qual narrativa aquela agenda precisa provar.",
           },
         ]}
+        revealStep={revealStep}
       />
     </SlideLayout>
   );
 }
 
-export function MP10() {
+export function MP10({ revealStep }: ElectoralSlideProps) {
   return (
     <SlideLayout variant="statement" tone="dark" bgLetter="W" kicker="War Room">
       <div className="absolute left-24 top-40 right-24">
         <Kicker>Método Onmid</Kicker>
-        <BigTitle size={132}>War Room eleitoral para publicar, impulsionar e corrigir.</BigTitle>
+        <BigTitle>War Room eleitoral para publicar, impulsionar e corrigir.</BigTitle>
       </div>
       <CardGrid
         bottom={110}
@@ -526,17 +523,18 @@ export function MP10() {
           { title: "Fim de semana", text: "Conteúdo de presença e mobilização." },
           { title: "Semanal", text: "Leitura da meta e próximos movimentos." },
         ]}
+        revealStep={revealStep}
       />
     </SlideLayout>
   );
 }
 
-export function MP11() {
+export function MP11({ revealStep }: ElectoralSlideProps) {
   return (
     <SlideLayout variant="content" tone="light" kicker="Indicadores">
       <div className="absolute left-24 top-36 right-24">
         <Kicker tone="light">Painel de indicadores</Kicker>
-        <BigTitle tone="light" size={116}>
+        <BigTitle tone="light">
           Decisão de campanha sem confundir vaidade com avanço eleitoral.
         </BigTitle>
       </div>
@@ -555,17 +553,18 @@ export function MP11() {
           },
           { title: "Mobilização", text: "Cadastros, WhatsApp, eventos, lideranças e voluntários." },
         ]}
+        revealStep={revealStep}
       />
     </SlideLayout>
   );
 }
 
-export function MP12() {
+export function MP12({ revealStep }: ElectoralSlideProps) {
   return (
     <SlideLayout variant="content" tone="dark" kicker="Conteúdo">
       <div className="absolute left-24 top-40 right-24">
         <Kicker>Mapa de conteúdo</Kicker>
-        <BigTitle size={118}>Para cada publicação, uma função dentro da campanha.</BigTitle>
+        <BigTitle>Para cada publicação, uma função dentro da campanha.</BigTitle>
       </div>
       <CardGrid
         bottom={105}
@@ -578,19 +577,18 @@ export function MP12() {
           { title: "Mobilização", text: "Convites, eventos, voluntários e participação." },
           { title: "Contraste positivo", text: "Por que seguir junto, sem ataque vazio." },
         ]}
+        revealStep={revealStep}
       />
     </SlideLayout>
   );
 }
 
-export function MP13() {
+export function MP13({ revealStep }: ElectoralSlideProps) {
   return (
     <SlideLayout variant="content" tone="light" kicker="Entrega integrada">
       <div className="absolute left-24 top-36 right-24">
         <Kicker tone="light">Pacotes integrados</Kicker>
-        <BigTitle tone="light" size={122}>
-          Quatro entregas, um comando estratégico.
-        </BigTitle>
+        <BigTitle tone="light">Quatro entregas, um comando estratégico.</BigTitle>
       </div>
       <CardGrid
         tone="light"
@@ -601,24 +599,23 @@ export function MP13() {
           { title: "Consultoria", text: "Gestão de meta." },
           { title: "Produção", text: "Foto e vídeo." },
         ]}
+        revealStep={revealStep}
       />
     </SlideLayout>
   );
 }
 
-export function MP14() {
+export function MP14({ revealStep }: ElectoralSlideProps) {
   return (
     <SlideLayout variant="hero" tone="dark" bgLetter="→">
       <div className="absolute inset-0 flex flex-col justify-center px-32">
         <Kicker>Próximo passo</Kicker>
-        <BigTitle size={152} maxWidth={1500}>
-          Vamos transformar a campanha em operação.
-        </BigTitle>
+        <BigTitle maxWidth={1500}>Vamos transformar a campanha em operação.</BigTitle>
         <p
           className="animate-fade-in-up"
           style={{
             marginTop: 58,
-            fontSize: 34,
+            fontSize: 28,
             lineHeight: 1.35,
             color: MUTED,
             maxWidth: 1180,
@@ -641,6 +638,7 @@ export function MP14() {
           { title: "War Room", text: "Instalação do método semanal de gestão." },
           { title: "Produção", text: "Calendário, captação, criação e distribuição." },
         ]}
+        revealStep={revealStep}
       />
     </SlideLayout>
   );
