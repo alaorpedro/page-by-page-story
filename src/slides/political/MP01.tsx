@@ -34,8 +34,7 @@ export function MP01() {
         >
           Marketing
           <br />
-          político para{" "}
-          <span style={{ color: "var(--onmid-lime)", fontStyle: "italic" }}>candidatos</span>
+          político <span style={{ color: "var(--onmid-lime)", fontStyle: "italic" }}>2026</span>
         </h1>
 
         <p
