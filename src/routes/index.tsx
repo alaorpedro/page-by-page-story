@@ -1,4 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState, type FormEvent } from "react";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { ScaledSlide } from "@/components/ScaledSlide";
 import { OnmidLogo } from "@/components/OnmidLogo";
 
@@ -29,6 +30,10 @@ type Training = {
   description: string;
   meta: string;
 };
+
+const GENERAL_PASSWORD = "onmid@123";
+const POLITICAL_PASSWORD = "leandro@2026";
+const ACCESS_KEY = "onmid-training-access";
 
 const TRAININGS: Training[] = [
   {
@@ -75,6 +80,47 @@ function Index() {
 }
 
 function MenuSlide() {
+  const navigate = useNavigate();
+  const [selectedTraining, setSelectedTraining] = useState<Training | null>(null);
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
+  const openTraining = (training: Training) => {
+    const savedAccess = sessionStorage.getItem(ACCESS_KEY);
+    if (savedAccess === "all" || savedAccess === training.to) {
+      void navigate({ to: training.to });
+      return;
+    }
+
+    setSelectedTraining(training);
+    setPassword("");
+    setPasswordError("");
+  };
+
+  const closePasswordPrompt = () => {
+    setSelectedTraining(null);
+    setPassword("");
+    setPasswordError("");
+  };
+
+  const submitPassword = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!selectedTraining) return;
+
+    const normalizedPassword = password.trim();
+    const isGeneralPassword = normalizedPassword === GENERAL_PASSWORD;
+    const isPoliticalPassword =
+      selectedTraining.to === "/marketing-politico" && normalizedPassword === POLITICAL_PASSWORD;
+
+    if (!isGeneralPassword && !isPoliticalPassword) {
+      setPasswordError("Senha incorreta.");
+      return;
+    }
+
+    sessionStorage.setItem(ACCESS_KEY, isGeneralPassword ? "all" : selectedTraining.to);
+    void navigate({ to: selectedTraining.to });
+  };
+
   return (
     <div
       className="slide-content relative"
@@ -135,10 +181,11 @@ function MenuSlide() {
         style={{ left: 90, right: 90, bottom: 105, gap: 22 }}
       >
         {TRAININGS.map((t, i) => (
-          <Link
+          <button
             key={t.to}
-            to={t.to}
-            className="group block h-full rounded-3xl border transition-all duration-300 hover:-translate-y-1 animate-fade-in-up"
+            type="button"
+            onClick={() => openTraining(t)}
+            className="group block h-full rounded-3xl border text-left transition-all duration-300 hover:-translate-y-1 animate-fade-in-up"
             style={{
               animationDelay: `${0.2 + i * 0.1}s`,
               padding: 30,
@@ -194,9 +241,121 @@ function MenuSlide() {
                 <span aria-hidden>→</span>
               </span>
             </div>
-          </Link>
+          </button>
         ))}
       </div>
+
+      {selectedTraining && (
+        <div
+          className="absolute inset-0 z-40 flex items-center justify-center animate-fade-in"
+          style={{ background: "oklch(0.08 0.005 240 / 0.72)" }}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="password-title"
+        >
+          <form
+            onSubmit={submitPassword}
+            className="rounded-3xl border"
+            style={{
+              width: 560,
+              padding: 42,
+              background: "oklch(0.13 0.005 240 / 0.96)",
+              borderColor: "oklch(1 0 0 / 0.14)",
+              boxShadow: "0 32px 90px oklch(0 0 0 / 0.48)",
+            }}
+          >
+            <div
+              className="uppercase font-bold"
+              style={{
+                fontSize: 14,
+                letterSpacing: "0.35em",
+                color: "oklch(0.85 0.18 138)",
+                marginBottom: 22,
+              }}
+            >
+              Acesso restrito
+            </div>
+            <h2
+              id="password-title"
+              style={{
+                fontFamily: "var(--font-display)",
+                fontWeight: 900,
+                fontSize: 44,
+                lineHeight: 1,
+                letterSpacing: "-0.035em",
+                marginBottom: 18,
+              }}
+            >
+              {selectedTraining.title}
+            </h2>
+            <label
+              className="block"
+              style={{ fontSize: 18, color: "oklch(1 0 0 / 0.72)", marginBottom: 14 }}
+              htmlFor="training-password"
+            >
+              Digite a senha para começar.
+            </label>
+            <input
+              id="training-password"
+              type="password"
+              value={password}
+              onChange={(event) => {
+                setPassword(event.target.value);
+                setPasswordError("");
+              }}
+              autoFocus
+              className="w-full rounded-2xl border outline-none transition-colors focus:border-lime-400"
+              style={{
+                height: 64,
+                padding: "0 22px",
+                background: "oklch(1 0 0 / 0.06)",
+                borderColor: passwordError ? "oklch(0.64 0.22 28)" : "oklch(1 0 0 / 0.16)",
+                color: "white",
+                fontSize: 24,
+              }}
+            />
+            <div
+              aria-live="polite"
+              style={{
+                height: 28,
+                marginTop: 12,
+                color: "oklch(0.72 0.21 28)",
+                fontSize: 16,
+              }}
+            >
+              {passwordError}
+            </div>
+            <div className="flex justify-end gap-4" style={{ marginTop: 18 }}>
+              <button
+                type="button"
+                onClick={closePasswordPrompt}
+                className="rounded-full font-bold transition-colors hover:bg-white/10"
+                style={{
+                  height: 52,
+                  padding: "0 26px",
+                  color: "oklch(1 0 0 / 0.72)",
+                  fontSize: 18,
+                }}
+              >
+                Cancelar
+              </button>
+              <button
+                type="submit"
+                className="rounded-full font-bold transition-transform hover:translate-x-1"
+                style={{
+                  height: 52,
+                  padding: "0 30px",
+                  background: "oklch(0.85 0.18 138)",
+                  color: "oklch(0.13 0.005 240)",
+                  fontSize: 18,
+                }}
+              >
+                Entrar
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
 
       {/* Footer */}
       <div
