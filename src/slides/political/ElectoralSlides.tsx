@@ -229,7 +229,10 @@ export function MP01() {
       />
       <LiveInfoBar />
 
-      <div className="absolute inset-0 flex flex-col justify-center px-32">
+      <div
+        className="absolute inset-0 flex flex-col justify-center px-32"
+        style={{ transform: "translateY(140px)" }}
+      >
         <Kicker>Proposta estratégica · Campanha eleitoral</Kicker>
         <h1
           className="animate-fade-in-up"
