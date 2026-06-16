@@ -1,5 +1,6 @@
 import { LiveInfoBar } from "@/components/LiveInfoBar";
 import { SlideLayout } from "@/components/SlideLayout";
+import cobraReporterWatermark from "@/assets/cobra-reporter-watermark.jpg";
 
 type ElectoralSlideProps = {
   revealStep: number;
@@ -209,6 +210,23 @@ function MetricStrip({
 export function MP01() {
   return (
     <SlideLayout variant="hero" tone="dark" bgLetter="100" showHomeButton>
+      <img
+        src={cobraReporterWatermark}
+        alt=""
+        aria-hidden
+        className="absolute inset-0 h-full w-full object-cover pointer-events-none"
+        style={{
+          opacity: 0.22,
+          filter: "grayscale(0.1) contrast(1.08)",
+        }}
+      />
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(90deg, oklch(0.13 0.005 240 / 0.96) 0%, oklch(0.13 0.005 240 / 0.82) 46%, oklch(0.13 0.005 240 / 0.92) 100%)",
+        }}
+      />
       <LiveInfoBar />
 
       <div className="absolute inset-0 flex flex-col justify-center px-32">
