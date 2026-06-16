@@ -8,7 +8,7 @@ export const Route = createFileRoute("/marketing-politico")({
       {
         name: "description",
         content:
-          "Treinamento Onmid de marketing político para candidatos às eleições de 2026 no Brasil.",
+          "Proposta estratégica Onmid de marketing eleitoral com método, produção diária e mensuração.",
       },
       {
         property: "og:title",
@@ -17,7 +17,7 @@ export const Route = createFileRoute("/marketing-politico")({
       {
         property: "og:description",
         content:
-          "Apresentação em tela cheia: publicidade, marketing, relacionamento e IA para campanhas políticas responsáveis.",
+          "Apresentação em tela cheia: studio de criação, tráfego pago, consultoria, métricas e produção de conteúdo.",
       },
     ],
   }),

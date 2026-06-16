@@ -57,10 +57,10 @@ const TRAININGS: Training[] = [
   {
     to: "/marketing-politico",
     eyebrow: "Campanha · Eleições 2026",
-    title: "Marketing Político para Candidatos",
+    title: "Marketing Político 2026",
     description:
-      "Publicidade, marketing, relacionamento e IA para campanhas mais claras, responsáveis e consistentes.",
-    meta: "7 slides · ~35 min",
+      "Campanha eleitoral com método, produção diária, tráfego pago e mensuração para perseguir meta de votos.",
+    meta: "14 slides · proposta",
   },
 ];
 

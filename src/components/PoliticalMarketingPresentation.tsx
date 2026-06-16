@@ -1,24 +1,40 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ScaledSlide } from "./ScaledSlide";
 import { SlideContext } from "./SlideContext";
-import { MP01 } from "@/slides/political/MP01";
-import { MP02 } from "@/slides/political/MP02";
-import { MP03 } from "@/slides/political/MP03";
-import { MP04 } from "@/slides/political/MP04";
-import { MP05 } from "@/slides/political/MP05";
-import { MP06 } from "@/slides/political/MP06";
-import { MP07 } from "@/slides/political/MP07";
+import {
+  MP01,
+  MP02,
+  MP03,
+  MP04,
+  MP05,
+  MP06,
+  MP07,
+  MP08,
+  MP09,
+  MP10,
+  MP11,
+  MP12,
+  MP13,
+  MP14,
+} from "@/slides/political/ElectoralSlides";
 
 type SlideEntry = { id: string; title: string; node: React.ReactNode };
 
 const SLIDES: SlideEntry[] = [
-  { id: "01", title: "Capa", node: <MP01 /> },
-  { id: "02", title: "Quatro pilares", node: <MP02 /> },
-  { id: "03", title: "Publicidade", node: <MP03 /> },
-  { id: "04", title: "Marketing", node: <MP04 /> },
-  { id: "05", title: "Relacionamento", node: <MP05 /> },
-  { id: "06", title: "IA", node: <MP06 /> },
-  { id: "07", title: "Síntese", node: <MP07 /> },
+  { id: "01", title: "Proposta estratégica", node: <MP01 /> },
+  { id: "02", title: "Desafio", node: <MP02 /> },
+  { id: "03", title: "Tese central", node: <MP03 /> },
+  { id: "04", title: "Capital político", node: <MP04 /> },
+  { id: "05", title: "Arquitetura", node: <MP05 /> },
+  { id: "06", title: "Studio de Criação", node: <MP06 /> },
+  { id: "07", title: "Tráfego Pago", node: <MP07 /> },
+  { id: "08", title: "Consultoria", node: <MP08 /> },
+  { id: "09", title: "Produção de Conteúdo", node: <MP09 /> },
+  { id: "10", title: "War Room", node: <MP10 /> },
+  { id: "11", title: "Indicadores", node: <MP11 /> },
+  { id: "12", title: "Mapa de conteúdo", node: <MP12 /> },
+  { id: "13", title: "Pacotes integrados", node: <MP13 /> },
+  { id: "14", title: "Próximo passo", node: <MP14 /> },
 ];
 
 export function PoliticalMarketingPresentation() {
