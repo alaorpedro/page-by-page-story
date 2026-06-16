@@ -216,15 +216,15 @@ export function MP01() {
         aria-hidden
         className="absolute inset-0 h-full w-full object-cover pointer-events-none"
         style={{
-          opacity: 0.22,
-          filter: "grayscale(0.1) contrast(1.08)",
+          opacity: 0.48,
+          filter: "grayscale(0.08) contrast(1.12) saturate(0.95)",
         }}
       />
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "linear-gradient(90deg, oklch(0.13 0.005 240 / 0.96) 0%, oklch(0.13 0.005 240 / 0.82) 46%, oklch(0.13 0.005 240 / 0.92) 100%)",
+            "linear-gradient(90deg, oklch(0.13 0.005 240 / 0.92) 0%, oklch(0.13 0.005 240 / 0.64) 48%, oklch(0.13 0.005 240 / 0.54) 100%)",
         }}
       />
       <LiveInfoBar />
