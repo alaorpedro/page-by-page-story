@@ -245,29 +245,6 @@ export function MP01() {
           mil votos.
         </p>
       </div>
-
-      <div
-        className="absolute right-24 bottom-32 text-right animate-fade-in-up"
-        style={{ animationDelay: "0.5s" }}
-      >
-        <div
-          style={{
-            fontFamily: "var(--font-display)",
-            fontWeight: 900,
-            fontSize: 90,
-            lineHeight: 1,
-            color: GREEN,
-          }}
-        >
-          100.000
-        </div>
-        <div
-          className="uppercase font-bold"
-          style={{ fontSize: 16, letterSpacing: "0.28em", color: "oklch(1 0 0 / 0.48)" }}
-        >
-          votos como direção
-        </div>
-      </div>
     </SlideLayout>
   );
 }
