@@ -279,7 +279,7 @@ export function MP02({ revealStep }: ElectoralSlideProps) {
     <SlideLayout variant="content" tone="dark" kicker="Desafio">
       <div className="absolute left-24 top-40 right-24">
         <Kicker>O desafio</Kicker>
-        <BigTitle>Campanha não se vence no improviso.</BigTitle>
+        <BigTitle>Voto é consequência de repetição, confiança e presença organizada.</BigTitle>
         <p
           className="animate-fade-in-up"
           style={{
@@ -291,7 +291,7 @@ export function MP02({ revealStep }: ElectoralSlideProps) {
             animationDelay: "0.28s",
           }}
         >
-          Voto é consequência de repetição, confiança e presença organizada.
+          Campanha não se vence no improviso.
         </p>
       </div>
       <CardGrid
