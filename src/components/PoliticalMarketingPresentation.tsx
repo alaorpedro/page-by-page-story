@@ -47,6 +47,7 @@ export function PoliticalMarketingPresentation() {
 
   const total = SLIDES.length;
   const current = SLIDES[index];
+  const CurrentSlide = current.component;
   const revealTotal = current.revealSteps ?? 0;
   const slideKey = useMemo(() => `${current.id}-${index}`, [current.id, index]);
 
@@ -148,7 +149,9 @@ export function PoliticalMarketingPresentation() {
       }}
     >
       <SlideContext.Provider value={{ index: index + 1, total }}>
-        <ScaledSlide key={slideKey}>{current.component({ revealStep })}</ScaledSlide>
+        <ScaledSlide key={slideKey}>
+          <CurrentSlide revealStep={revealStep} />
+        </ScaledSlide>
       </SlideContext.Provider>
 
       <div
