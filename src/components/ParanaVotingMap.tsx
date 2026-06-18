@@ -31,7 +31,7 @@ type MapData = {
   features: MapFeature[];
 };
 
-const DATA = mapData as MapData;
+const DATA = mapData as unknown as MapData;
 const NUMBER = new Intl.NumberFormat("pt-BR");
 const MAP_WIDTH = 1080;
 const MAP_HEIGHT = 590;
