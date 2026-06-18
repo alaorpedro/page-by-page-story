@@ -27,6 +27,7 @@ type Props = {
   };
   bg?: string;
   showHomeButton?: boolean;
+  showHeaderIcon?: boolean;
   /** @deprecated */ arcs?: unknown;
   /** @deprecated */ logo?: unknown;
 };
@@ -45,6 +46,7 @@ export function SlideLayout({
   blob,
   bg,
   showHomeButton = false,
+  showHeaderIcon = true,
 }: Props) {
   const { index, total } = useSlideMeta();
   const counter = `${String(index).padStart(2, "0")} // ${String(total).padStart(2, "0")}`;
@@ -132,7 +134,7 @@ export function SlideLayout({
 
       {/* Top header bar */}
       <div className="absolute top-0 left-0 right-0 flex justify-between items-center px-16 pt-12 z-30 animate-fade-in">
-        <OnmidMark size={44} iconOnly />
+        {showHeaderIcon ? <OnmidMark size={44} iconOnly /> : <span />}
         <div className="flex items-center gap-4">
           {showHomeButton && (
             <Link

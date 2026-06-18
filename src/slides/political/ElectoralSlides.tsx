@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Check, X } from "lucide-react";
 import { LiveInfoBar } from "@/components/LiveInfoBar";
+import { DigitalPresenceAnalysis } from "@/components/DigitalPresenceAnalysis";
 import { MunicipalityProfile } from "@/components/MunicipalityProfile";
 import { ParanaVotingMap } from "@/components/ParanaVotingMap";
 import { SlideLayout } from "@/components/SlideLayout";
@@ -368,6 +369,7 @@ export function MP01() {
           Marketing eleitoral com método, produção diária e mensuração para perseguir a meta de 100
           mil votos.
         </p>
+        <DigitalPresenceAnalysis />
       </div>
     </SlideLayout>
   );
@@ -956,7 +958,6 @@ export function MP12({ revealStep }: ElectoralSlideProps) {
     </SlideLayout>
   );
 }
-
 
 function IntegratedPackageCards({ revealStep }: ElectoralSlideProps) {
   const [selectedPackage, setSelectedPackage] = useState<IntegratedPackage | null>(null);

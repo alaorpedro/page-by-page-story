@@ -2,10 +2,6 @@ import { Globe, Instagram, Mail, MapPin, MessageCircle } from "lucide-react";
 import { SlideLayout } from "@/components/SlideLayout";
 import onmidLogo from "@/assets/onmid-logo-white.png";
 
-type ThankYouSlideProps = {
-  revealStep: number;
-};
-
 const GREEN = "var(--onmid-lime)";
 const WHITE = "oklch(0.98 0 0)";
 const MUTED = "oklch(1 0 0 / 0.62)";
@@ -42,17 +38,10 @@ const CONTACTS = [
   },
 ];
 
-export function ThankYouSlide({ revealStep }: ThankYouSlideProps) {
+export function ThankYouSlide() {
   return (
-    <SlideLayout variant="hero" tone="dark" bgLetter="ON">
-      <div
-        className="absolute left-28 right-28 top-32 flex items-center justify-between"
-        style={{
-          opacity: revealStep > 0 ? 1 : 0,
-          transform: revealStep > 0 ? "translateY(0)" : "translateY(20px)",
-          transition: "opacity 500ms ease, transform 500ms cubic-bezier(0.22, 1, 0.36, 1)",
-        }}
-      >
+    <SlideLayout variant="hero" tone="dark" bgLetter="ON" showHeaderIcon={false}>
+      <div className="absolute left-28 right-28 top-32 flex items-center justify-between">
         <img
           src={onmidLogo}
           alt="Onmid"
@@ -72,9 +61,6 @@ export function ThankYouSlide({ revealStep }: ThankYouSlideProps) {
           top: 270,
           gridTemplateColumns: "1.4fr 0.6fr",
           gap: 100,
-          opacity: revealStep > 1 ? 1 : 0,
-          transform: revealStep > 1 ? "translateY(0)" : "translateY(28px)",
-          transition: "opacity 520ms ease, transform 520ms cubic-bezier(0.22, 1, 0.36, 1)",
         }}
       >
         <div>
@@ -159,9 +145,6 @@ export function ThankYouSlide({ revealStep }: ThankYouSlideProps) {
           gridTemplateColumns: "1.45fr repeat(4, minmax(0, 1fr))",
           borderTop: "1px solid oklch(1 0 0 / 0.14)",
           borderBottom: "1px solid oklch(1 0 0 / 0.08)",
-          opacity: revealStep > 2 ? 1 : 0,
-          transform: revealStep > 2 ? "translateY(0)" : "translateY(20px)",
-          transition: "opacity 500ms ease, transform 500ms cubic-bezier(0.22, 1, 0.36, 1)",
         }}
       >
         {CONTACTS.map((contact) => {

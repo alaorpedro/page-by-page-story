@@ -38,7 +38,7 @@ const SLIDES: SlideEntry[] = [
   { id: "10", title: "Mapa de conteúdo", component: MP12, revealSteps: 6 },
   { id: "11", title: "Pacotes integrados", component: MP13, revealSteps: 4 },
   { id: "12", title: "Próximo passo", component: MP14, revealSteps: 4 },
-  { id: "13", title: "Obrigado", component: ThankYouSlide, revealSteps: 3 },
+  { id: "13", title: "Obrigado", component: ThankYouSlide },
 ];
 
 export function PoliticalMarketingPresentation() {
