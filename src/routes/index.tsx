@@ -64,7 +64,7 @@ const TRAININGS: Training[] = [
     title: "Marketing Político 2026",
     description:
       "Campanha eleitoral com método, produção diária, tráfego pago e mensuração para perseguir meta de votos.",
-    meta: "16 slides · proposta",
+    meta: "12 slides · proposta",
   },
 ];
 
