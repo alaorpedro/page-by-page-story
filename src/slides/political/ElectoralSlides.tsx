@@ -851,30 +851,112 @@ export function MP11({ revealStep }: ElectoralSlideProps) {
 }
 
 export function MP12({ revealStep }: ElectoralSlideProps) {
+  const CARDS = [
+    { title: "Prova de entrega", text: "Obras, leis, recursos e solução concreta." },
+    { title: "Território", text: "Cidades, lideranças, demandas e presença local." },
+    { title: "Humanização", text: "Família, bastidores, rotina, valores e proximidade." },
+    { title: "Autoridade", text: "Comissões, projetos, pautas e experiência." },
+    { title: "Mobilização", text: "Convites, eventos, voluntários e participação." },
+    { title: "Contraste positivo", text: "Por que seguir junto, sem ataque vazio." },
+  ];
+
   return (
     <SlideLayout variant="content" tone="dark" kicker="Conteúdo">
-      <RevealHeader revealStep={revealStep}>
-        <Kicker>Mapa de conteúdo</Kicker>
-        <BigTitle expanded={revealStep === 0}>
+      <div
+        className="absolute left-24 right-24"
+        style={{ top: 122, transition: "top 600ms cubic-bezier(0.22, 1, 0.36, 1)" }}
+      >
+        <div className="flex items-baseline justify-between animate-fade-in-up">
+          <Kicker>Mapa de conteúdo</Kicker>
+          <span
+            className="font-bold uppercase animate-fade-in-up"
+            style={{
+              fontSize: 18,
+              letterSpacing: "0.28em",
+              color: "oklch(1 0 0 / 0.28)",
+              animationDelay: "0.1s",
+            }}
+          >
+            Conteúdo
+          </span>
+        </div>
+        <h2
+          className="animate-fade-in-up"
+          style={{
+            fontFamily: "var(--font-display)",
+            fontWeight: 900,
+            fontSize: 78,
+            lineHeight: 1.02,
+            letterSpacing: "-0.04em",
+            color: WHITE,
+            maxWidth: 1280,
+            animationDelay: "0.14s",
+          }}
+        >
           Para cada publicação, uma função dentro da campanha.
-        </BigTitle>
-      </RevealHeader>
-      <CardGrid
-        bottom={105}
-        columns={3}
-        cards={[
-          { title: "Prova de entrega", text: "Obras, leis, recursos e solução concreta." },
-          { title: "Território", text: "Cidades, lideranças, demandas e presença local." },
-          { title: "Humanização", text: "Família, bastidores, rotina, valores e proximidade." },
-          { title: "Autoridade", text: "Comissões, projetos, pautas e experiência." },
-          { title: "Mobilização", text: "Convites, eventos, voluntários e participação." },
-          { title: "Contraste positivo", text: "Por que seguir junto, sem ataque vazio." },
-        ]}
-        revealStep={revealStep}
-      />
+        </h2>
+      </div>
+
+      <div
+        className="absolute grid"
+        style={{
+          left: 110,
+          right: 110,
+          bottom: 118,
+          gap: 2,
+          gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+        }}
+      >
+        {CARDS.map((card, i) => (
+          <div
+            key={card.title}
+            className="flex flex-col"
+            style={{
+              opacity: revealStep > i ? 1 : 0,
+              transform: revealStep > i ? "translateY(0)" : "translateY(28px)",
+              transition: "opacity 440ms ease, transform 440ms cubic-bezier(0.22, 1, 0.36, 1)",
+              transitionDelay: `${i * 60}ms`,
+              padding: "44px 42px 46px",
+              minHeight: 288,
+              background: "oklch(1 0 0 / 0.045)",
+              borderTop: `3px solid ${GREEN}`,
+            }}
+          >
+            <div
+              className="font-mono"
+              style={{
+                fontSize: 18,
+                letterSpacing: "0.2em",
+                color: GREEN,
+                marginBottom: 34,
+              }}
+            >
+              {String(i + 1).padStart(2, "0")}
+            </div>
+            <h3
+              style={{
+                fontFamily: "var(--font-display)",
+                fontWeight: 900,
+                fontSize: 44,
+                lineHeight: 1,
+                letterSpacing: "-0.035em",
+                color: WHITE,
+                fontStyle: "italic",
+                marginBottom: 18,
+              }}
+            >
+              {card.title}
+            </h3>
+            <p style={{ fontSize: 24, lineHeight: 1.4, color: MUTED, maxWidth: 420 }}>
+              {card.text}
+            </p>
+          </div>
+        ))}
+      </div>
     </SlideLayout>
   );
 }
+
 
 function IntegratedPackageCards({ revealStep }: ElectoralSlideProps) {
   const [selectedPackage, setSelectedPackage] = useState<IntegratedPackage | null>(null);
