@@ -62,6 +62,13 @@ function getFill(votes: number, active: boolean) {
   return "oklch(0.84 0.01 90)";
 }
 
+function getMunicipalityFontSize(name: string) {
+  if (name.length <= 14) return 42;
+  if (name.length <= 19) return 36;
+  if (name.length <= 24) return 30;
+  return 25;
+}
+
 export function ParanaVotingMap({ visible }: { visible: boolean }) {
   const ranked = useMemo(
     () =>
@@ -125,6 +132,7 @@ export function ParanaVotingMap({ visible }: { visible: boolean }) {
   const activeRank = ranked.findIndex(
     (feature) => feature.properties.code === activeFeature?.properties.code,
   );
+  const activeName = activeFeature?.properties.name ?? "";
 
   const stopInteraction = (event: MouseEvent<HTMLElement>) => event.stopPropagation();
 
@@ -220,12 +228,13 @@ export function ParanaVotingMap({ visible }: { visible: boolean }) {
             marginTop: 16,
             fontFamily: "var(--font-display)",
             fontWeight: 900,
-            fontSize: 42,
-            lineHeight: 0.98,
+            fontSize: getMunicipalityFontSize(activeName),
+            lineHeight: 1,
             color: "oklch(0.16 0.01 240)",
+            whiteSpace: "nowrap",
           }}
         >
-          {activeFeature?.properties.name}
+          {activeName}
         </h3>
         <div className="flex items-end justify-between" style={{ marginTop: 24 }}>
           <div>
