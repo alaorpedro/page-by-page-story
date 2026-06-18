@@ -385,6 +385,183 @@ export function MP04({ revealStep }: ElectoralSlideProps) {
   );
 }
 
+const GROWTH_TIERS = [
+  {
+    label: "Bases prioritárias",
+    detail: "6 cidades · acima de 1.000 votos",
+    base: "25.413",
+    growth: "+14.000",
+    rate: "+55%",
+    share: "36% da meta",
+  },
+  {
+    label: "Consolidação regional",
+    detail: "9 cidades · entre 300 e 999 votos",
+    base: "5.623",
+    growth: "+5.100",
+    rate: "+91%",
+    share: "13% da meta",
+  },
+  {
+    label: "Escala territorial",
+    detail: "136 cidades · entre 100 e 299 votos",
+    base: "21.984",
+    growth: "+15.400",
+    rate: "+70%",
+    share: "39% da meta",
+  },
+  {
+    label: "Expansão de presença",
+    detail: "129 cidades · abaixo de 100 votos",
+    base: "6.444",
+    growth: "+4.770",
+    rate: "+74%",
+    share: "12% da meta",
+  },
+];
+
+export function MP04Growth({ revealStep }: ElectoralSlideProps) {
+  return (
+    <SlideLayout variant="content" tone="dark" kicker="Meta 2026">
+      <RevealHeader revealStep={revealStep} compactTop={118} expandedTop={250}>
+        <Kicker>Projeção ponderada · 100 mil votos</Kicker>
+        <BigTitle maxWidth={1600} size={70} expanded={revealStep === 0}>
+          A meta cresce pelo peso real de cada território, não por percentuais iguais.
+        </BigTitle>
+      </RevealHeader>
+
+      <div
+        className="absolute left-20 right-20 grid"
+        style={{
+          top: 365,
+          gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+          gap: 20,
+        }}
+      >
+        {GROWTH_TIERS.map((tier, index) => (
+          <div
+            key={tier.label}
+            style={{
+              minHeight: 330,
+              padding: "28px 28px 26px",
+              background: "oklch(1 0 0 / 0.045)",
+              borderTop: `2px solid ${GREEN}`,
+              opacity: revealStep > index ? 1 : 0,
+              transform: revealStep > index ? "translateY(0)" : "translateY(28px)",
+              transition: "opacity 420ms ease, transform 420ms ease",
+            }}
+          >
+            <div
+              className="font-mono"
+              style={{ color: GREEN, fontSize: 14, letterSpacing: "0.2em" }}
+            >
+              {String(index + 1).padStart(2, "0")} · {tier.share}
+            </div>
+            <h3
+              style={{
+                marginTop: 24,
+                minHeight: 76,
+                fontFamily: "var(--font-display)",
+                fontWeight: 900,
+                fontSize: 31,
+                lineHeight: 1,
+                color: WHITE,
+              }}
+            >
+              {tier.label}
+            </h3>
+            <p
+              style={{ marginTop: 12, minHeight: 48, fontSize: 16, lineHeight: 1.35, color: MUTED }}
+            >
+              {tier.detail}
+            </p>
+            <div className="flex items-end justify-between" style={{ marginTop: 24 }}>
+              <div>
+                <span
+                  className="uppercase font-bold"
+                  style={{ display: "block", fontSize: 11, letterSpacing: "0.2em", color: MUTED }}
+                >
+                  Base 2022
+                </span>
+                <strong style={{ display: "block", marginTop: 7, fontSize: 25, color: WHITE }}>
+                  {tier.base}
+                </strong>
+              </div>
+              <div style={{ textAlign: "right" }}>
+                <span
+                  className="uppercase font-bold"
+                  style={{ display: "block", fontSize: 11, letterSpacing: "0.2em", color: MUTED }}
+                >
+                  Incremento
+                </span>
+                <strong
+                  style={{
+                    display: "block",
+                    marginTop: 7,
+                    fontFamily: "var(--font-display)",
+                    fontSize: 35,
+                    color: GREEN,
+                  }}
+                >
+                  {tier.growth}
+                </strong>
+              </div>
+            </div>
+            <div
+              className="flex items-center justify-between"
+              style={{
+                marginTop: 22,
+                paddingTop: 18,
+                borderTop: "1px solid oklch(1 0 0 / 0.1)",
+              }}
+            >
+              <span style={{ fontSize: 14, color: MUTED }}>crescimento local</span>
+              <strong style={{ fontSize: 22, color: WHITE }}>{tier.rate}</strong>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div
+        className="absolute left-20 right-20 bottom-16 flex items-center justify-between"
+        style={{
+          opacity: revealStep > 0 ? 1 : 0,
+          transition: "opacity 420ms ease",
+        }}
+      >
+        <div className="flex items-center gap-5">
+          {[
+            ["Digital", "35%"],
+            ["Cabos eleitorais", "25%"],
+            ["Propaganda gratuita", "20%"],
+            ["Mala direta", "15%"],
+            ["CRM e mobilização", "5%"],
+          ].map(([channel, share]) => (
+            <div key={channel}>
+              <strong style={{ color: GREEN, fontSize: 18 }}>{share}</strong>
+              <span style={{ marginLeft: 8, color: MUTED, fontSize: 14 }}>{channel}</span>
+            </div>
+          ))}
+        </div>
+        <div style={{ textAlign: "right" }}>
+          <strong
+            style={{
+              display: "block",
+              fontFamily: "var(--font-display)",
+              fontSize: 38,
+              lineHeight: 1,
+              color: WHITE,
+            }}
+          >
+            60.730 + 39.270 = <span style={{ color: GREEN }}>100.000</span>
+          </strong>
+          <span style={{ color: MUTED, fontSize: 14 }}>crescimento global necessário: 64,7%</span>
+        </div>
+      </div>
+    </SlideLayout>
+  );
+}
+
 export function MP05({ revealStep }: ElectoralSlideProps) {
   return (
     <SlideLayout variant="content" tone="dark" kicker="Arquitetura">
