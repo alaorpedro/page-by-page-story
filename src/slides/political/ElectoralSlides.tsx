@@ -44,11 +44,13 @@ function BigTitle({
   tone = "dark",
   size = 82,
   maxWidth = 1420,
+  expanded = false,
 }: {
   children: React.ReactNode;
   tone?: "dark" | "light";
   size?: number;
   maxWidth?: number;
+  expanded?: boolean;
 }) {
   return (
     <h2
@@ -56,16 +58,44 @@ function BigTitle({
       style={{
         fontFamily: "var(--font-display)",
         fontWeight: 900,
-        fontSize: Math.min(size, 88),
-        lineHeight: 0.98,
+        fontSize: expanded ? Math.max(size, 124) : Math.min(size, 88),
+        lineHeight: expanded ? 0.9 : 0.98,
         letterSpacing: "-0.045em",
         color: tone === "dark" ? WHITE : INK,
         maxWidth,
         animationDelay: "0.12s",
+        transition:
+          "font-size 600ms cubic-bezier(0.22, 1, 0.36, 1), line-height 600ms cubic-bezier(0.22, 1, 0.36, 1)",
       }}
     >
       {children}
     </h2>
+  );
+}
+
+function RevealHeader({
+  children,
+  revealStep,
+  compactTop = 144,
+  expandedTop = 270,
+}: {
+  children: React.ReactNode;
+  revealStep: number;
+  compactTop?: number;
+  expandedTop?: number;
+}) {
+  const expanded = revealStep === 0;
+
+  return (
+    <div
+      className="absolute left-24 right-24"
+      style={{
+        top: expanded ? expandedTop : compactTop,
+        transition: "top 600ms cubic-bezier(0.22, 1, 0.36, 1)",
+      }}
+    >
+      {children}
+    </div>
   );
 }
 
@@ -275,9 +305,11 @@ export function MP01() {
 export function MP02({ revealStep }: ElectoralSlideProps) {
   return (
     <SlideLayout variant="content" tone="dark" kicker="Desafio">
-      <div className="absolute left-24 top-40 right-24">
+      <RevealHeader revealStep={revealStep}>
         <Kicker>O desafio</Kicker>
-        <BigTitle>Voto é consequência de repetição, confiança e presença organizada.</BigTitle>
+        <BigTitle expanded={revealStep === 0}>
+          Voto é consequência de repetição, confiança e presença organizada.
+        </BigTitle>
         <p
           className="animate-fade-in-up"
           style={{
@@ -291,7 +323,7 @@ export function MP02({ revealStep }: ElectoralSlideProps) {
         >
           Campanha não se vence no improviso.
         </p>
-      </div>
+      </RevealHeader>
       <CardGrid
         cards={[
           {
@@ -316,12 +348,12 @@ export function MP02({ revealStep }: ElectoralSlideProps) {
 export function MP03({ revealStep }: ElectoralSlideProps) {
   return (
     <SlideLayout variant="statement" tone="dark" bgLetter="M" kicker="Tese central">
-      <div className="absolute left-24 top-40 right-24">
+      <RevealHeader revealStep={revealStep}>
         <Kicker>Tese central da Onmid</Kicker>
-        <BigTitle maxWidth={1500}>
+        <BigTitle maxWidth={1500} expanded={revealStep === 0}>
           Campanha eleitoral precisa operar como uma máquina editorial com inteligência de dados.
         </BigTitle>
-      </div>
+      </RevealHeader>
       <CardGrid
         bottom={112}
         columns={5}
@@ -341,12 +373,12 @@ export function MP03({ revealStep }: ElectoralSlideProps) {
 export function MP04({ revealStep }: ElectoralSlideProps) {
   return (
     <SlideLayout variant="content" tone="light" kicker="Capital político">
-      <div className="absolute left-24 top-36 right-24">
+      <RevealHeader revealStep={revealStep}>
         <Kicker tone="light">Capital político que precisa virar comunicação</Kicker>
-        <BigTitle tone="light" maxWidth={1420}>
+        <BigTitle tone="light" maxWidth={1420} expanded={revealStep === 0}>
           A campanha deve organizar os ativos já existentes em narrativas de alto valor.
         </BigTitle>
-      </div>
+      </RevealHeader>
       <MetricStrip
         tone="light"
         metrics={[
@@ -364,10 +396,12 @@ export function MP04({ revealStep }: ElectoralSlideProps) {
 export function MP05({ revealStep }: ElectoralSlideProps) {
   return (
     <SlideLayout variant="content" tone="dark" kicker="Arquitetura">
-      <div className="absolute left-24 top-40 right-24">
+      <RevealHeader revealStep={revealStep}>
         <Kicker>Arquitetura da campanha</Kicker>
-        <BigTitle>Quatro frentes trabalhando como um único sistema.</BigTitle>
-      </div>
+        <BigTitle expanded={revealStep === 0}>
+          Quatro frentes trabalhando como um único sistema.
+        </BigTitle>
+      </RevealHeader>
       <CardGrid
         columns={4}
         cards={[
@@ -397,12 +431,12 @@ export function MP05({ revealStep }: ElectoralSlideProps) {
 export function MP06({ revealStep }: ElectoralSlideProps) {
   return (
     <SlideLayout variant="content" tone="light" kicker="Pacote 01">
-      <div className="absolute left-24 top-36 right-24">
+      <RevealHeader revealStep={revealStep}>
         <Kicker tone="light">Pacote 1 · Studio de Criação</Kicker>
-        <BigTitle tone="light">
+        <BigTitle tone="light" expanded={revealStep === 0}>
           O sistema visual que dá consistência, reconhecimento e velocidade.
         </BigTitle>
-      </div>
+      </RevealHeader>
       <CardGrid
         tone="light"
         cards={[
@@ -428,12 +462,12 @@ export function MP06({ revealStep }: ElectoralSlideProps) {
 export function MP07({ revealStep }: ElectoralSlideProps) {
   return (
     <SlideLayout variant="content" tone="dark" kicker="Pacote 02">
-      <div className="absolute left-24 top-40 right-24">
+      <RevealHeader revealStep={revealStep}>
         <Kicker>Pacote 2 · Tráfego Pago</Kicker>
-        <BigTitle>
+        <BigTitle expanded={revealStep === 0}>
           Distribuição estratégica para transformar conteúdo em alcance qualificado.
         </BigTitle>
-      </div>
+      </RevealHeader>
       <CardGrid
         cards={[
           {
@@ -458,12 +492,12 @@ export function MP07({ revealStep }: ElectoralSlideProps) {
 export function MP08({ revealStep }: ElectoralSlideProps) {
   return (
     <SlideLayout variant="content" tone="light" kicker="Pacote 03">
-      <div className="absolute left-24 top-36 right-24">
+      <RevealHeader revealStep={revealStep}>
         <Kicker tone="light">Pacote 3 · Consultoria de Marketing</Kicker>
-        <BigTitle tone="light">
+        <BigTitle tone="light" expanded={revealStep === 0}>
           Método de mensuração e acompanhamento da meta de 100 mil votos.
         </BigTitle>
-      </div>
+      </RevealHeader>
       <MetricStrip
         tone="light"
         metrics={[
@@ -481,10 +515,12 @@ export function MP08({ revealStep }: ElectoralSlideProps) {
 export function MP09({ revealStep }: ElectoralSlideProps) {
   return (
     <SlideLayout variant="content" tone="dark" kicker="Pacote 04">
-      <div className="absolute left-24 top-40 right-24">
+      <RevealHeader revealStep={revealStep}>
         <Kicker>Pacote 4 · Produção de Conteúdo</Kicker>
-        <BigTitle>A câmera acompanha para transformar presença em percepção pública.</BigTitle>
-      </div>
+        <BigTitle expanded={revealStep === 0}>
+          A câmera acompanha para transformar presença em percepção pública.
+        </BigTitle>
+      </RevealHeader>
       <CardGrid
         cards={[
           {
@@ -509,10 +545,12 @@ export function MP09({ revealStep }: ElectoralSlideProps) {
 export function MP10({ revealStep }: ElectoralSlideProps) {
   return (
     <SlideLayout variant="statement" tone="dark" bgLetter="W" kicker="War Room">
-      <div className="absolute left-24 top-40 right-24">
+      <RevealHeader revealStep={revealStep}>
         <Kicker>Método Onmid</Kicker>
-        <BigTitle>War Room eleitoral para publicar, impulsionar e corrigir.</BigTitle>
-      </div>
+        <BigTitle expanded={revealStep === 0}>
+          War Room eleitoral para publicar, impulsionar e corrigir.
+        </BigTitle>
+      </RevealHeader>
       <CardGrid
         bottom={110}
         columns={5}
@@ -532,12 +570,12 @@ export function MP10({ revealStep }: ElectoralSlideProps) {
 export function MP11({ revealStep }: ElectoralSlideProps) {
   return (
     <SlideLayout variant="content" tone="light" kicker="Indicadores">
-      <div className="absolute left-24 top-36 right-24">
+      <RevealHeader revealStep={revealStep}>
         <Kicker tone="light">Painel de indicadores</Kicker>
-        <BigTitle tone="light">
+        <BigTitle tone="light" expanded={revealStep === 0}>
           Decisão de campanha sem confundir vaidade com avanço eleitoral.
         </BigTitle>
-      </div>
+      </RevealHeader>
       <CardGrid
         tone="light"
         columns={4}
@@ -562,10 +600,12 @@ export function MP11({ revealStep }: ElectoralSlideProps) {
 export function MP12({ revealStep }: ElectoralSlideProps) {
   return (
     <SlideLayout variant="content" tone="dark" kicker="Conteúdo">
-      <div className="absolute left-24 top-40 right-24">
+      <RevealHeader revealStep={revealStep}>
         <Kicker>Mapa de conteúdo</Kicker>
-        <BigTitle>Para cada publicação, uma função dentro da campanha.</BigTitle>
-      </div>
+        <BigTitle expanded={revealStep === 0}>
+          Para cada publicação, uma função dentro da campanha.
+        </BigTitle>
+      </RevealHeader>
       <CardGrid
         bottom={105}
         columns={3}
@@ -586,10 +626,12 @@ export function MP12({ revealStep }: ElectoralSlideProps) {
 export function MP13({ revealStep }: ElectoralSlideProps) {
   return (
     <SlideLayout variant="content" tone="light" kicker="Entrega integrada">
-      <div className="absolute left-24 top-36 right-24">
+      <RevealHeader revealStep={revealStep}>
         <Kicker tone="light">Pacotes integrados</Kicker>
-        <BigTitle tone="light">Quatro entregas, um comando estratégico.</BigTitle>
-      </div>
+        <BigTitle tone="light" expanded={revealStep === 0}>
+          Quatro entregas, um comando estratégico.
+        </BigTitle>
+      </RevealHeader>
       <CardGrid
         tone="light"
         columns={4}
@@ -608,9 +650,11 @@ export function MP13({ revealStep }: ElectoralSlideProps) {
 export function MP14({ revealStep }: ElectoralSlideProps) {
   return (
     <SlideLayout variant="hero" tone="dark" bgLetter="→">
-      <div className="absolute inset-0 flex flex-col justify-center px-32">
+      <RevealHeader revealStep={revealStep} compactTop={160} expandedTop={310}>
         <Kicker>Próximo passo</Kicker>
-        <BigTitle maxWidth={1500}>Vamos transformar a campanha em operação.</BigTitle>
+        <BigTitle maxWidth={1500} expanded={revealStep === 0}>
+          Vamos transformar a campanha em operação.
+        </BigTitle>
         <p
           className="animate-fade-in-up"
           style={{
@@ -625,7 +669,7 @@ export function MP14({ revealStep }: ElectoralSlideProps) {
           A Onmid assume a inteligência estratégica, a força criativa e a capacidade de produção
           para perseguir a meta de 100 mil votos com método.
         </p>
-      </div>
+      </RevealHeader>
       <CardGrid
         bottom={88}
         columns={4}
