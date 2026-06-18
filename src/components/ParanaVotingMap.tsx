@@ -31,7 +31,7 @@ type MapData = {
   features: MapFeature[];
 };
 
-const DATA = mapData as MapData;
+const DATA = mapData as unknown as MapData;
 const NUMBER = new Intl.NumberFormat("pt-BR");
 const MAP_WIDTH = 1080;
 const MAP_HEIGHT = 590;
@@ -41,12 +41,12 @@ function visitPositions(
   coordinates: PolygonCoordinates | MultiPolygonCoordinates,
   callback: (position: Position) => void,
 ) {
-  const visit = (value: Position | Position[] | Position[][]) => {
-    if (typeof value[0] === "number") {
+  const visit = (value: Position | Position[] | Position[][] | Position[][][]) => {
+    if (Array.isArray(value) && value.length === 2 && typeof value[0] === "number") {
       callback(value as Position);
       return;
     }
-    for (const child of value as Position[] | Position[][]) visit(child);
+    for (const child of value as Position[] | Position[][] | Position[][][]) visit(child);
   };
 
   visit(coordinates);
