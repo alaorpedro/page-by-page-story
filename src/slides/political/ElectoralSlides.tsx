@@ -98,7 +98,6 @@ function CardGrid({
       {cards.map((card, i) => (
         <div
           key={card.title}
-          className="animate-fade-in-up"
           style={{
             opacity: revealStep > i ? 1 : 0,
             transform: revealStep > i ? "translateY(0)" : "translateY(24px)",
@@ -169,7 +168,6 @@ function MetricStrip({
       {metrics.map((metric, i) => (
         <div
           key={metric.label}
-          className="animate-fade-in-up"
           style={{
             opacity: revealStep > i ? 1 : 0,
             transform: revealStep > i ? "translateY(0)" : "translateY(24px)",
