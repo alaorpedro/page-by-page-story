@@ -374,9 +374,9 @@ export function MP03({ revealStep }: ElectoralSlideProps) {
 export function MP04({ revealStep }: ElectoralSlideProps) {
   return (
     <SlideLayout variant="content" tone="light" kicker="Capital político">
-      <RevealHeader revealStep={revealStep}>
+      <RevealHeader revealStep={revealStep} compactTop={110}>
         <Kicker tone="light">Votação por município · Eleições 2022</Kicker>
-        <BigTitle tone="light" size={68} maxWidth={1420} expanded={revealStep === 0}>
+        <BigTitle tone="light" size={54} maxWidth={1650} expanded={revealStep === 0}>
           O mapa revela onde a confiança já foi transformada em voto.
         </BigTitle>
       </RevealHeader>

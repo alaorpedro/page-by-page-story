@@ -133,7 +133,7 @@ export function ParanaVotingMap({ visible }: { visible: boolean }) {
       data-slide-chrome
       className="absolute left-20 right-20 bottom-20 grid transition-all duration-700"
       style={{
-        top: 365,
+        top: 350,
         gridTemplateColumns: "minmax(0, 1.65fr) minmax(360px, 0.72fr)",
         gap: 34,
         opacity: visible ? 1 : 0,
