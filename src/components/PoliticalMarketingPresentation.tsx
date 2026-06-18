@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { ScaledSlide } from "./ScaledSlide";
 import { SlideContext } from "./SlideContext";
 import { CampaignToolsSlide } from "@/slides/political/CampaignToolsSlide";
+import { ThankYouSlide } from "@/slides/political/ThankYouSlide";
 import {
   MP01,
   MP02,
@@ -37,6 +38,7 @@ const SLIDES: SlideEntry[] = [
   { id: "10", title: "Mapa de conteúdo", component: MP12, revealSteps: 6 },
   { id: "11", title: "Pacotes integrados", component: MP13, revealSteps: 4 },
   { id: "12", title: "Próximo passo", component: MP14, revealSteps: 4 },
+  { id: "13", title: "Obrigado", component: ThankYouSlide, revealSteps: 3 },
 ];
 
 export function PoliticalMarketingPresentation() {

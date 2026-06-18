@@ -131,24 +131,13 @@ export function CampaignToolsSlide({ revealStep }: CampaignToolsSlideProps) {
   return (
     <SlideLayout variant="content" tone="dark" kicker="Tecnologia">
       <div className="absolute left-24 right-24" style={{ top: 122 }}>
-        <div className="flex items-baseline justify-between">
+        <div>
           <div
             className="uppercase font-bold animate-fade-in-up"
             style={{ fontSize: 18, letterSpacing: "0.45em", color: GREEN }}
           >
             Painel de ferramentas
           </div>
-          <span
-            className="uppercase font-bold animate-fade-in-up"
-            style={{
-              fontSize: 16,
-              letterSpacing: "0.28em",
-              color: "oklch(1 0 0 / 0.3)",
-              animationDelay: "0.1s",
-            }}
-          >
-            Clique para explorar
-          </span>
         </div>
         <h2
           className="animate-fade-in-up"
