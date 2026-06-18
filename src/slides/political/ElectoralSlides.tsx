@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { Check, X } from "lucide-react";
 import { LiveInfoBar } from "@/components/LiveInfoBar";
 import { MunicipalityProfile } from "@/components/MunicipalityProfile";
 import { ParanaVotingMap } from "@/components/ParanaVotingMap";
@@ -13,11 +15,78 @@ type Card = {
   text: string;
 };
 
+type IntegratedPackage = {
+  title: string;
+  short: string;
+  price: string;
+  role: string;
+  deliveries: string[];
+};
+
 const GREEN = "var(--onmid-lime)";
 const WHITE = "oklch(0.98 0 0)";
 const MUTED = "oklch(1 0 0 / 0.66)";
 const INK = "oklch(0.16 0.01 240)";
 const INK_MUTED = "oklch(0.2 0.01 240 / 0.68)";
+
+const INTEGRATED_PACKAGES: IntegratedPackage[] = [
+  {
+    title: "Studio",
+    short: "Visual e peças.",
+    price: "R$ 35.000,00",
+    role: "Sistema visual e criativo para dar unidade, reconhecimento e velocidade à campanha.",
+    deliveries: [
+      "Identidade visual da campanha e manual de aplicação.",
+      "Artes para feed, stories, carrosséis, agenda e mobilização.",
+      "Capas, cards, cortes e peças de oportunidade.",
+      "Santinhos, adesivos, folders e materiais para reuniões.",
+      "Templates para respostas rápidas e comunicação territorial.",
+      "Organização da linguagem visual por tema e fase da campanha.",
+    ],
+  },
+  {
+    title: "Tráfego",
+    short: "Distribuição.",
+    price: "R$ 50.000,00",
+    role: "Distribuição estratégica para transformar conteúdo em alcance qualificado e frequência.",
+    deliveries: [
+      "Planejamento de mídia por território, público e fase eleitoral.",
+      "Configuração, publicação e monitoramento das campanhas.",
+      "Testes A/B de criativos, mensagens, públicos e formatos.",
+      "Otimização diária de verba, alcance, frequência e custo.",
+      "Campanhas de reconhecimento, conteúdo, mobilização e WhatsApp.",
+      "Relatórios de desempenho com criativos e territórios prioritários.",
+    ],
+  },
+  {
+    title: "Consultoria",
+    short: "Gestão de meta.",
+    price: "R$ 25.000,00",
+    role: "Inteligência estratégica para conectar comunicação, território e meta de votos.",
+    deliveries: [
+      "Diagnóstico eleitoral, riscos, ativos e oportunidades.",
+      "Plano de campanha com fases, narrativas e prioridades.",
+      "Meta de votos distribuída por município e faixa territorial.",
+      "War Room semanal para leitura de cenário e tomada de decisão.",
+      "Painel de indicadores de comunicação, mobilização e território.",
+      "Recomendações de pauta, posicionamento e correções de rota.",
+    ],
+  },
+  {
+    title: "Produção",
+    short: "Foto e vídeo.",
+    price: "R$ 60.000,00",
+    role: "Cobertura audiovisual para transformar agenda e presença em percepção pública.",
+    deliveries: [
+      "Captação fotográfica e audiovisual da agenda do candidato.",
+      "Vídeos verticais, bastidores, depoimentos e conteúdos espontâneos.",
+      "Cobertura de reuniões, visitas, eventos e encontros com lideranças.",
+      "Edição de Reels, Stories, cortes rápidos e vídeos institucionais.",
+      "Legendas, versões por formato e peças de reação rápida.",
+      "Banco organizado de fotos e vídeos para uso durante a campanha.",
+    ],
+  },
+];
 
 function Kicker({
   children,
@@ -807,6 +876,267 @@ export function MP12({ revealStep }: ElectoralSlideProps) {
   );
 }
 
+function IntegratedPackageCards({ revealStep }: ElectoralSlideProps) {
+  const [selectedPackage, setSelectedPackage] = useState<IntegratedPackage | null>(null);
+
+  return (
+    <>
+      <div
+        data-slide-chrome
+        className="absolute grid"
+        style={{
+          left: 110,
+          right: 110,
+          bottom: 130,
+          gap: 24,
+          gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+        }}
+      >
+        {INTEGRATED_PACKAGES.map((item, index) => (
+          <button
+            key={item.title}
+            type="button"
+            onClick={() => setSelectedPackage(item)}
+            className="group text-left transition-colors"
+            style={{
+              opacity: revealStep > index ? 1 : 0,
+              transform: revealStep > index ? "translateY(0)" : "translateY(24px)",
+              transition: "opacity 420ms ease, transform 420ms ease, background-color 180ms ease",
+              pointerEvents: revealStep > index ? "auto" : "none",
+              padding: "34px 32px 30px",
+              minHeight: 290,
+              background: "oklch(1 0 0 / 0.72)",
+              borderTop: "2px solid oklch(0.48 0.18 138)",
+              borderLeft: "1px solid oklch(0.16 0.01 240 / 0.08)",
+              borderRight: "1px solid oklch(0.16 0.01 240 / 0.08)",
+              color: INK,
+            }}
+          >
+            <div
+              className="font-mono"
+              style={{
+                fontSize: 16,
+                letterSpacing: "0.22em",
+                color: "oklch(0.48 0.18 138)",
+              }}
+            >
+              {String(index + 1).padStart(2, "0")}
+            </div>
+            <h3
+              style={{
+                marginTop: 28,
+                fontFamily: "var(--font-display)",
+                fontWeight: 900,
+                fontSize: 42,
+                lineHeight: 1,
+              }}
+            >
+              {item.title}
+            </h3>
+            <p style={{ marginTop: 20, fontSize: 24, color: INK_MUTED }}>{item.short}</p>
+            <div
+              className="flex items-end justify-between"
+              style={{
+                marginTop: 42,
+                paddingTop: 22,
+                borderTop: "1px solid oklch(0.16 0.01 240 / 0.09)",
+              }}
+            >
+              <div>
+                <span
+                  className="uppercase font-bold"
+                  style={{
+                    display: "block",
+                    fontSize: 11,
+                    letterSpacing: "0.2em",
+                    color: INK_MUTED,
+                  }}
+                >
+                  Investimento
+                </span>
+                <strong
+                  style={{
+                    display: "block",
+                    marginTop: 8,
+                    fontFamily: "var(--font-display)",
+                    fontSize: 25,
+                    color: "oklch(0.48 0.18 138)",
+                  }}
+                >
+                  {item.price}
+                </strong>
+              </div>
+              <span
+                aria-hidden
+                style={{
+                  fontSize: 30,
+                  color: "oklch(0.48 0.18 138)",
+                  transition: "transform 180ms ease",
+                }}
+                className="group-hover:translate-x-1"
+              >
+                →
+              </span>
+            </div>
+          </button>
+        ))}
+      </div>
+
+      {selectedPackage && (
+        <div
+          data-slide-chrome
+          className="absolute inset-0 z-50 flex items-center justify-center"
+          style={{ background: "oklch(0.08 0.005 240 / 0.76)" }}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="package-modal-title"
+          onClick={() => setSelectedPackage(null)}
+        >
+          <div
+            className="relative grid overflow-hidden"
+            style={{
+              width: 1320,
+              minHeight: 720,
+              gridTemplateColumns: "0.72fr 1.28fr",
+              background: "oklch(0.98 0.004 90)",
+              color: INK,
+              boxShadow: "0 44px 120px oklch(0 0 0 / 0.42)",
+            }}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div
+              className="flex flex-col justify-between"
+              style={{
+                padding: "54px 48px 48px",
+                background: "oklch(0.15 0.006 240)",
+                color: WHITE,
+              }}
+            >
+              <div>
+                <div
+                  className="uppercase font-bold"
+                  style={{ fontSize: 14, letterSpacing: "0.3em", color: GREEN }}
+                >
+                  Pacote integrado
+                </div>
+                <h3
+                  id="package-modal-title"
+                  style={{
+                    marginTop: 28,
+                    fontFamily: "var(--font-display)",
+                    fontWeight: 900,
+                    fontSize: 70,
+                    lineHeight: 0.92,
+                  }}
+                >
+                  {selectedPackage.title}
+                </h3>
+                <p style={{ marginTop: 28, fontSize: 22, lineHeight: 1.4, color: MUTED }}>
+                  {selectedPackage.role}
+                </p>
+              </div>
+              <div>
+                <span
+                  className="uppercase font-bold"
+                  style={{
+                    display: "block",
+                    fontSize: 12,
+                    letterSpacing: "0.24em",
+                    color: MUTED,
+                  }}
+                >
+                  Investimento
+                </span>
+                <strong
+                  style={{
+                    display: "block",
+                    marginTop: 14,
+                    fontFamily: "var(--font-display)",
+                    fontSize: 48,
+                    lineHeight: 1,
+                    color: GREEN,
+                  }}
+                >
+                  {selectedPackage.price}
+                </strong>
+              </div>
+            </div>
+
+            <div style={{ padding: "54px 58px 48px" }}>
+              <button
+                type="button"
+                onClick={() => setSelectedPackage(null)}
+                className="absolute flex items-center justify-center transition-colors hover:bg-black/5"
+                style={{
+                  right: 26,
+                  top: 24,
+                  width: 46,
+                  height: 46,
+                  color: INK,
+                }}
+                aria-label="Fechar detalhes do pacote"
+              >
+                <X size={25} aria-hidden />
+              </button>
+
+              <div
+                className="uppercase font-bold"
+                style={{
+                  fontSize: 14,
+                  letterSpacing: "0.28em",
+                  color: "oklch(0.48 0.18 138)",
+                }}
+              >
+                Entregas incluídas
+              </div>
+              <div className="grid grid-cols-2" style={{ marginTop: 34, gap: "24px 34px" }}>
+                {selectedPackage.deliveries.map((delivery, index) => (
+                  <div
+                    key={delivery}
+                    className="flex items-start gap-4"
+                    style={{
+                      minHeight: 120,
+                      padding: "22px 20px",
+                      background: "white",
+                      border: "1px solid oklch(0.16 0.01 240 / 0.09)",
+                    }}
+                  >
+                    <span
+                      className="flex shrink-0 items-center justify-center rounded-full"
+                      style={{
+                        width: 32,
+                        height: 32,
+                        background: "oklch(0.9 0.14 138)",
+                        color: INK,
+                      }}
+                    >
+                      <Check size={18} strokeWidth={2.6} aria-hidden />
+                    </span>
+                    <div>
+                      <span
+                        className="font-mono"
+                        style={{
+                          display: "block",
+                          marginBottom: 8,
+                          fontSize: 12,
+                          color: "oklch(0.48 0.18 138)",
+                        }}
+                      >
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <p style={{ fontSize: 18, lineHeight: 1.34, color: INK_MUTED }}>{delivery}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
 export function MP13({ revealStep }: ElectoralSlideProps) {
   return (
     <SlideLayout variant="content" tone="light" kicker="Entrega integrada">
@@ -816,17 +1146,7 @@ export function MP13({ revealStep }: ElectoralSlideProps) {
           Quatro entregas, um comando estratégico.
         </BigTitle>
       </RevealHeader>
-      <CardGrid
-        tone="light"
-        columns={4}
-        cards={[
-          { title: "Studio", text: "Visual e peças." },
-          { title: "Tráfego", text: "Distribuição." },
-          { title: "Consultoria", text: "Gestão de meta." },
-          { title: "Produção", text: "Foto e vídeo." },
-        ]}
-        revealStep={revealStep}
-      />
+      <IntegratedPackageCards revealStep={revealStep} />
     </SlideLayout>
   );
 }
