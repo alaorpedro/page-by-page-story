@@ -9,7 +9,6 @@ import {
   MP04Profile,
   MP04Growth,
   MP05,
-  MP10,
   MP11,
   MP12,
   MP13,
@@ -32,11 +31,10 @@ const SLIDES: SlideEntry[] = [
   { id: "05", title: "Consulta municipal", component: MP04Profile },
   { id: "06", title: "Meta ponderada", component: MP04Growth, revealSteps: 4 },
   { id: "07", title: "Arquitetura", component: MP05, revealSteps: 4 },
-  { id: "08", title: "War Room", component: MP10, revealSteps: 5 },
-  { id: "09", title: "Indicadores", component: MP11, revealSteps: 4 },
-  { id: "10", title: "Mapa de conteúdo", component: MP12, revealSteps: 6 },
-  { id: "11", title: "Pacotes integrados", component: MP13, revealSteps: 4 },
-  { id: "12", title: "Próximo passo", component: MP14, revealSteps: 4 },
+  { id: "08", title: "Indicadores", component: MP11, revealSteps: 4 },
+  { id: "09", title: "Mapa de conteúdo", component: MP12, revealSteps: 6 },
+  { id: "10", title: "Pacotes integrados", component: MP13, revealSteps: 4 },
+  { id: "11", title: "Próximo passo", component: MP14, revealSteps: 4 },
 ];
 
 export function PoliticalMarketingPresentation() {
