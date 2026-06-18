@@ -6,6 +6,7 @@ const spreadsheetPath =
   process.argv[2] ?? "/Users/alaorpedro/Downloads/votacao_completa_cobra_reporter_2022.xlsx";
 const geoJsonPath = process.argv[3] ?? "/tmp/parana-municipios.geojson";
 const municipalitiesPath = process.argv[4] ?? "/tmp/parana-municipios.json";
+const populationPath = process.argv[5] ?? "/tmp/pr-populacao-2022.json";
 const outputPath = resolve("src/data/parana-votes-2022.json");
 
 function decodeXml(value) {
@@ -49,6 +50,13 @@ for (const rowMatch of sheetXml.matchAll(/<row r="(\d+)"[^>]*>(.*?)<\/row>/gs)) 
 }
 
 const municipalityList = JSON.parse(readFileSync(municipalitiesPath, "utf8"));
+const populationData = JSON.parse(readFileSync(populationPath, "utf8"));
+const populationByCode = new Map(
+  populationData[0].resultados[0].series.map((item) => [
+    item.localidade.id,
+    Number(item.serie["2022"]),
+  ]),
+);
 const namesByCode = new Map(
   municipalityList.map((municipality) => [
     String(municipality.id),
@@ -56,6 +64,7 @@ const namesByCode = new Map(
       name: municipality.nome,
       normalizedName: normalize(municipality.nome),
       region: municipality["regiao-imediata"]?.nome ?? "",
+      intermediateRegion: municipality["regiao-imediata"]?.["regiao-intermediaria"]?.nome ?? "",
     },
   ]),
 );
@@ -73,6 +82,8 @@ const features = geoJson.features.map((feature) => {
       code: feature.properties.codarea,
       name: municipality?.name ?? feature.properties.codarea,
       region: municipality?.region ?? "",
+      intermediateRegion: municipality?.intermediateRegion ?? "",
+      population: populationByCode.get(String(feature.properties.codarea)) ?? 0,
       votes: vote?.votes ?? 0,
       hasData: Boolean(vote),
     },

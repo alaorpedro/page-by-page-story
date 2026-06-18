@@ -1,4 +1,5 @@
 import { LiveInfoBar } from "@/components/LiveInfoBar";
+import { MunicipalityProfile } from "@/components/MunicipalityProfile";
 import { ParanaVotingMap } from "@/components/ParanaVotingMap";
 import { SlideLayout } from "@/components/SlideLayout";
 import cobraReporterWatermark from "@/assets/cobra-reporter-watermark.jpg";
@@ -381,6 +382,20 @@ export function MP04({ revealStep }: ElectoralSlideProps) {
         </BigTitle>
       </RevealHeader>
       <ParanaVotingMap visible={revealStep > 0} />
+    </SlideLayout>
+  );
+}
+
+export function MP04Profile() {
+  return (
+    <SlideLayout variant="content" tone="light" kicker="Consulta municipal">
+      <div className="absolute left-24 right-24" style={{ top: 105 }}>
+        <Kicker tone="light">Inteligência territorial · Paraná</Kicker>
+        <BigTitle tone="light" size={56} maxWidth={1600}>
+          Selecione uma cidade e transforme dados públicos em decisão de campanha.
+        </BigTitle>
+      </div>
+      <MunicipalityProfile />
     </SlideLayout>
   );
 }
