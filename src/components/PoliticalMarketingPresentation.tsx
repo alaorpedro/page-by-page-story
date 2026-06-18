@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ScaledSlide } from "./ScaledSlide";
 import { SlideContext } from "./SlideContext";
+import { CampaignToolsSlide } from "@/slides/political/CampaignToolsSlide";
 import {
   MP01,
   MP02,
@@ -31,10 +32,11 @@ const SLIDES: SlideEntry[] = [
   { id: "05", title: "Consulta municipal", component: MP04Profile },
   { id: "06", title: "Meta ponderada", component: MP04Growth, revealSteps: 4 },
   { id: "07", title: "Arquitetura", component: MP05, revealSteps: 4 },
-  { id: "08", title: "Indicadores", component: MP11, revealSteps: 4 },
-  { id: "09", title: "Mapa de conteúdo", component: MP12, revealSteps: 6 },
-  { id: "10", title: "Pacotes integrados", component: MP13, revealSteps: 4 },
-  { id: "11", title: "Próximo passo", component: MP14, revealSteps: 4 },
+  { id: "08", title: "Painel de ferramentas", component: CampaignToolsSlide, revealSteps: 6 },
+  { id: "09", title: "Indicadores", component: MP11, revealSteps: 4 },
+  { id: "10", title: "Mapa de conteúdo", component: MP12, revealSteps: 6 },
+  { id: "11", title: "Pacotes integrados", component: MP13, revealSteps: 4 },
+  { id: "12", title: "Próximo passo", component: MP14, revealSteps: 4 },
 ];
 
 export function PoliticalMarketingPresentation() {
