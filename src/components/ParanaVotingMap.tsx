@@ -41,12 +41,12 @@ function visitPositions(
   coordinates: PolygonCoordinates | MultiPolygonCoordinates,
   callback: (position: Position) => void,
 ) {
-  const visit = (value: Position | Position[] | Position[][]) => {
-    if (typeof value[0] === "number") {
+  const visit = (value: Position | Position[] | Position[][] | Position[][][]) => {
+    if (Array.isArray(value) && value.length === 2 && typeof value[0] === "number") {
       callback(value as Position);
       return;
     }
-    for (const child of value as Position[] | Position[][]) visit(child);
+    for (const child of value as Position[] | Position[][] | Position[][][]) visit(child);
   };
 
   visit(coordinates);
