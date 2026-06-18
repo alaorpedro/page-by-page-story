@@ -30,7 +30,7 @@ const SLIDES: SlideEntry[] = [
   { id: "01", title: "Proposta estratégica", component: MP01 },
   { id: "02", title: "Desafio", component: MP02, revealSteps: 3 },
   { id: "03", title: "Tese central", component: MP03, revealSteps: 5 },
-  { id: "04", title: "Capital político", component: MP04, revealSteps: 4 },
+  { id: "04", title: "Capital político", component: MP04, revealSteps: 1 },
   { id: "05", title: "Arquitetura", component: MP05, revealSteps: 4 },
   { id: "06", title: "Studio de Criação", component: MP06, revealSteps: 3 },
   { id: "07", title: "Tráfego Pago", component: MP07, revealSteps: 3 },

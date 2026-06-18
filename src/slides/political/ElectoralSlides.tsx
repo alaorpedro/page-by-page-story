@@ -1,4 +1,5 @@
 import { LiveInfoBar } from "@/components/LiveInfoBar";
+import { ParanaVotingMap } from "@/components/ParanaVotingMap";
 import { SlideLayout } from "@/components/SlideLayout";
 import cobraReporterWatermark from "@/assets/cobra-reporter-watermark.jpg";
 
@@ -374,21 +375,12 @@ export function MP04({ revealStep }: ElectoralSlideProps) {
   return (
     <SlideLayout variant="content" tone="light" kicker="Capital político">
       <RevealHeader revealStep={revealStep}>
-        <Kicker tone="light">Capital político que precisa virar comunicação</Kicker>
-        <BigTitle tone="light" maxWidth={1420} expanded={revealStep === 0}>
-          A campanha deve organizar os ativos já existentes em narrativas de alto valor.
+        <Kicker tone="light">Votação por município · Eleições 2022</Kicker>
+        <BigTitle tone="light" size={68} maxWidth={1420} expanded={revealStep === 0}>
+          O mapa revela onde a confiança já foi transformada em voto.
         </BigTitle>
       </RevealHeader>
-      <MetricStrip
-        tone="light"
-        metrics={[
-          { value: "150+", label: "projetos apresentados" },
-          { value: "50+", label: "leis sancionadas" },
-          { value: "Norte", label: "liderança regional" },
-          { value: "Dia a dia", label: "presença pública" },
-        ]}
-        revealStep={revealStep}
-      />
+      <ParanaVotingMap visible={revealStep > 0} />
     </SlideLayout>
   );
 }
