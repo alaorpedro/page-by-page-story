@@ -42,7 +42,12 @@ export const Route = createFileRoute("/")({
 });
 
 type Training = {
-  to: "/crc" | "/socialmedia" | "/performance" | "/marketing-politico";
+  to:
+    | "/crc"
+    | "/socialmedia"
+    | "/performance"
+    | "/marketing-politico"
+    | "/marketing-politico-andrea";
   eyebrow: string;
   title: string;
   description: string;
@@ -145,6 +150,14 @@ const TRAININGS: Training[] = [
     description:
       "Campanha eleitoral com método, produção diária, tráfego pago e mensuração para perseguir meta de votos.",
     meta: "13 slides · proposta",
+  },
+  {
+    to: "/marketing-politico-andrea",
+    eyebrow: "Campanha · Primeira Candidatura",
+    title: "Andrea Zancko 2026",
+    description:
+      "Plano fictício de primeira candidatura para construir reconhecimento, comunidade, base e intenção de voto.",
+    meta: "14 slides · proposta",
   },
 ];
 
@@ -258,7 +271,9 @@ function MenuSlide() {
     const normalizedPassword = password.trim();
     const isGeneralPassword = normalizedPassword === GENERAL_PASSWORD;
     const isPoliticalPassword =
-      selectedTraining.to === "/marketing-politico" && normalizedPassword === POLITICAL_PASSWORD;
+      (selectedTraining.to === "/marketing-politico" ||
+        selectedTraining.to === "/marketing-politico-andrea") &&
+      normalizedPassword === POLITICAL_PASSWORD;
 
     if (!isGeneralPassword && !isPoliticalPassword) {
       setPasswordError("Senha incorreta.");
@@ -677,7 +692,7 @@ function MenuSlide() {
           </span>
         </div>
 
-        <div className="grid grid-cols-4" style={{ marginTop: 20, gap: 16 }}>
+        <div className="grid grid-cols-5" style={{ marginTop: 20, gap: 16 }}>
           {TRAININGS.map((t) => (
             <button
               key={t.to}

@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SocialmediaRouteImport } from './routes/socialmedia'
 import { Route as PerformanceRouteImport } from './routes/performance'
+import { Route as MarketingPoliticoAndreaRouteImport } from './routes/marketing-politico-andrea'
 import { Route as MarketingPoliticoRouteImport } from './routes/marketing-politico'
 import { Route as CrcRouteImport } from './routes/crc'
 import { Route as IndexRouteImport } from './routes/index'
@@ -24,6 +25,11 @@ const SocialmediaRoute = SocialmediaRouteImport.update({
 const PerformanceRoute = PerformanceRouteImport.update({
   id: '/performance',
   path: '/performance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarketingPoliticoAndreaRoute = MarketingPoliticoAndreaRouteImport.update({
+  id: '/marketing-politico-andrea',
+  path: '/marketing-politico-andrea',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MarketingPoliticoRoute = MarketingPoliticoRouteImport.update({
@@ -51,6 +57,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/crc': typeof CrcRoute
   '/marketing-politico': typeof MarketingPoliticoRoute
+  '/marketing-politico-andrea': typeof MarketingPoliticoAndreaRoute
   '/performance': typeof PerformanceRoute
   '/socialmedia': typeof SocialmediaRoute
   '/preview/intro': typeof PreviewIntroRoute
@@ -59,6 +66,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/crc': typeof CrcRoute
   '/marketing-politico': typeof MarketingPoliticoRoute
+  '/marketing-politico-andrea': typeof MarketingPoliticoAndreaRoute
   '/performance': typeof PerformanceRoute
   '/socialmedia': typeof SocialmediaRoute
   '/preview/intro': typeof PreviewIntroRoute
@@ -68,6 +76,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/crc': typeof CrcRoute
   '/marketing-politico': typeof MarketingPoliticoRoute
+  '/marketing-politico-andrea': typeof MarketingPoliticoAndreaRoute
   '/performance': typeof PerformanceRoute
   '/socialmedia': typeof SocialmediaRoute
   '/preview/intro': typeof PreviewIntroRoute
@@ -78,6 +87,7 @@ export interface FileRouteTypes {
     | '/'
     | '/crc'
     | '/marketing-politico'
+    | '/marketing-politico-andrea'
     | '/performance'
     | '/socialmedia'
     | '/preview/intro'
@@ -86,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/crc'
     | '/marketing-politico'
+    | '/marketing-politico-andrea'
     | '/performance'
     | '/socialmedia'
     | '/preview/intro'
@@ -94,6 +105,7 @@ export interface FileRouteTypes {
     | '/'
     | '/crc'
     | '/marketing-politico'
+    | '/marketing-politico-andrea'
     | '/performance'
     | '/socialmedia'
     | '/preview/intro'
@@ -103,6 +115,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CrcRoute: typeof CrcRoute
   MarketingPoliticoRoute: typeof MarketingPoliticoRoute
+  MarketingPoliticoAndreaRoute: typeof MarketingPoliticoAndreaRoute
   PerformanceRoute: typeof PerformanceRoute
   SocialmediaRoute: typeof SocialmediaRoute
   PreviewIntroRoute: typeof PreviewIntroRoute
@@ -122,6 +135,13 @@ declare module '@tanstack/react-router' {
       path: '/performance'
       fullPath: '/performance'
       preLoaderRoute: typeof PerformanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketing-politico-andrea': {
+      id: '/marketing-politico-andrea'
+      path: '/marketing-politico-andrea'
+      fullPath: '/marketing-politico-andrea'
+      preLoaderRoute: typeof MarketingPoliticoAndreaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/marketing-politico': {
@@ -159,6 +179,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CrcRoute: CrcRoute,
   MarketingPoliticoRoute: MarketingPoliticoRoute,
+  MarketingPoliticoAndreaRoute: MarketingPoliticoAndreaRoute,
   PerformanceRoute: PerformanceRoute,
   SocialmediaRoute: SocialmediaRoute,
   PreviewIntroRoute: PreviewIntroRoute,

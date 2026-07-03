@@ -18,14 +18,14 @@ import {
 } from "@/slides/political/ElectoralSlides";
 
 type SlideComponent = (props: { revealStep: number }) => React.ReactNode;
-type SlideEntry = {
+export type PoliticalSlideEntry = {
   id: string;
   title: string;
   component: SlideComponent;
   revealSteps?: number;
 };
 
-const SLIDES: SlideEntry[] = [
+const DEFAULT_SLIDES: PoliticalSlideEntry[] = [
   { id: "01", title: "Proposta estratégica", component: MP01 },
   { id: "02", title: "Desafio", component: MP02, revealSteps: 3 },
   { id: "03", title: "Tese central", component: MP03, revealSteps: 5 },
@@ -41,14 +41,20 @@ const SLIDES: SlideEntry[] = [
   { id: "13", title: "Obrigado", component: ThankYouSlide },
 ];
 
-export function PoliticalMarketingPresentation() {
+type PoliticalMarketingPresentationProps = {
+  slides?: PoliticalSlideEntry[];
+};
+
+export function PoliticalMarketingPresentation({
+  slides = DEFAULT_SLIDES,
+}: PoliticalMarketingPresentationProps) {
   const [index, setIndex] = useState(0);
   const [revealStep, setRevealStep] = useState(0);
   const [isFull, setIsFull] = useState(false);
   const [chromeVisible, setChromeVisible] = useState(true);
 
-  const total = SLIDES.length;
-  const current = SLIDES[index];
+  const total = slides.length;
+  const current = slides[index];
   const CurrentSlide = current.component;
   const revealTotal = current.revealSteps ?? 0;
   const slideKey = useMemo(() => `${current.id}-${index}`, [current.id, index]);
@@ -184,7 +190,7 @@ export function PoliticalMarketingPresentation() {
           ‹
         </button>
         <div className="flex items-center gap-1.5 px-3">
-          {SLIDES.map((s, i) => (
+          {slides.map((s, i) => (
             <button
               key={s.id}
               onClick={() => {
