@@ -1,59 +1,112 @@
 import { SlideLayout } from "@/components/SlideLayout";
+import { SlideHeader } from "@/components/SlideHeader";
+
+const CLIENT_BELIEFS = [
+  { q: "Está caro", a: "Preço é mais importante que valor." },
+  { q: "Não é o momento", a: "O agora não é seguro. Melhor esperar." },
+  { q: "Preciso pensar", a: "Posso decidir melhor sozinho, depois." },
+  { q: "Já tentei e não deu certo", a: "Vai acontecer de novo." },
+  { q: "Não sei se é pra mim", a: "Isso funciona para os outros, não pra mim." },
+  { q: "Não confio totalmente", a: "Posso me arrepender ou ser enganado." },
+];
+
+const SELLER_BELIEFS = [
+  "Crenças sobre si mesmo (autoimagem)",
+  "Crenças sobre dinheiro",
+  "Crenças sobre rejeição",
+  "Crenças sobre o produto ou serviço",
+  "Crenças sobre o cliente",
+];
 
 export function Slide20() {
-  const clientBeliefs = [
-    { q: '"Está caro"', a: "Crença: Preço é mais importante que valor." },
-    { q: '"Não é o momento"', a: "Crença: O agora não é seguro. Melhor esperar." },
-    { q: '"Preciso pensar"', a: "Crença: Posso decidir melhor sozinho, depois." },
-    { q: '"Já tentei e não deu certo"', a: "Crença: Vai acontecer de novo." },
-    { q: '"Não sei se é pra mim"', a: "Crença: Isso funciona para os outros, não pra mim." },
-    { q: '"Não confio totalmente"', a: "Crença: Posso me arrepender ou ser enganado." },
-  ];
-
-  const sellerBeliefs = [
-    "Crenças sobre si mesmo (autoimagem)",
-    "Crenças sobre dinheiro",
-    "Crenças sobre rejeição",
-    "Crenças sobre o produto ou serviço",
-    "Crenças sobre o cliente",
-  ];
-
   return (
-    <SlideLayout arcs="corners" logo="br">
-      <div className="absolute inset-0 grid grid-cols-2 gap-16 px-[7%] py-[6%]">
+    <SlideLayout variant="content" tone="dark" bgLetter="C">
+      <SlideHeader number="20" label="Crenças" tone="dark" />
+
+      <div className="absolute left-16 right-16 top-[280px] bottom-28 grid grid-cols-2 gap-16">
+        {/* Coluna: cliente */}
         <div>
-          <h3 className="slide-subtitle hl-lime inline-block animate-fade-in-up">
-            Crenças do Cliente
+          <h3
+            className="uppercase font-black animate-fade-in-up"
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: 46,
+              letterSpacing: "-0.02em",
+              color: "oklch(0.98 0 0)",
+            }}
+          >
+            Crenças do <span className="text-lime">cliente</span>
           </h3>
-          <ul className="mt-8 space-y-4 text-foreground slide-caption">
-            {clientBeliefs.map((b, i) => (
+
+          <ul className="mt-9 space-y-5">
+            {CLIENT_BELIEFS.map((b, i) => (
               <li
-                key={i}
+                key={b.q}
                 className="animate-fade-in-up"
-                style={{ animationDelay: `${0.15 + i * 0.07}s` }}
+                style={{ animationDelay: `${0.2 + i * 0.08}s` }}
               >
-                <span className="font-bold">{b.q}</span>{" "}
-                <span className="text-foreground/80">→ {b.a}</span>
+                <div
+                  className="font-bold"
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: 30,
+                    lineHeight: 1.15,
+                    color: "oklch(0.98 0 0)",
+                  }}
+                >
+                  “{b.q}”
+                </div>
+                <div
+                  className="mt-1"
+                  style={{
+                    fontSize: 22,
+                    lineHeight: 1.3,
+                    color: "oklch(1 0 0 / 0.6)",
+                  }}
+                >
+                  <span className="text-lime font-bold">Crença:</span> {b.a}
+                </div>
               </li>
             ))}
           </ul>
         </div>
 
+        {/* Coluna: vendedor */}
         <div>
           <h3
-            className="slide-subtitle hl-lime inline-block animate-fade-in-up"
-            style={{ animationDelay: "0.1s" }}
+            className="uppercase font-black animate-fade-in-up"
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: 46,
+              letterSpacing: "-0.02em",
+              color: "oklch(0.98 0 0)",
+              animationDelay: "0.1s",
+            }}
           >
-            Crenças do Vendedor
+            Crenças do <span className="text-lime">vendedor</span>
           </h3>
-          <ul className="mt-8 space-y-6 text-foreground slide-body">
-            {sellerBeliefs.map((b, i) => (
+
+          <ul className="mt-9 space-y-6">
+            {SELLER_BELIEFS.map((b, i) => (
               <li
-                key={i}
-                className="animate-fade-in-up font-semibold"
-                style={{ animationDelay: `${0.25 + i * 0.08}s` }}
+                key={b}
+                className="relative pl-8 animate-slide-in-right"
+                style={{
+                  borderLeft: "4px solid var(--onmid-lime)",
+                  animationDelay: `${0.3 + i * 0.1}s`,
+                }}
               >
-                {b}
+                <span
+                  className="font-bold"
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: 32,
+                    lineHeight: 1.2,
+                    color: "oklch(0.98 0 0)",
+                  }}
+                >
+                  {b}
+                </span>
               </li>
             ))}
           </ul>
