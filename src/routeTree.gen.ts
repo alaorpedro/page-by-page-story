@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SocialmediaRouteImport } from './routes/socialmedia'
+import { Route as RomanzaRouteImport } from './routes/romanza'
 import { Route as PerformanceRouteImport } from './routes/performance'
 import { Route as MarketingPoliticoAndreaRouteImport } from './routes/marketing-politico-andrea'
 import { Route as MarketingPoliticoRouteImport } from './routes/marketing-politico'
@@ -20,6 +21,11 @@ import { Route as PreviewIntroRouteImport } from './routes/preview.intro'
 const SocialmediaRoute = SocialmediaRouteImport.update({
   id: '/socialmedia',
   path: '/socialmedia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RomanzaRoute = RomanzaRouteImport.update({
+  id: '/romanza',
+  path: '/romanza',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PerformanceRoute = PerformanceRouteImport.update({
@@ -59,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/marketing-politico': typeof MarketingPoliticoRoute
   '/marketing-politico-andrea': typeof MarketingPoliticoAndreaRoute
   '/performance': typeof PerformanceRoute
+  '/romanza': typeof RomanzaRoute
   '/socialmedia': typeof SocialmediaRoute
   '/preview/intro': typeof PreviewIntroRoute
 }
@@ -68,6 +75,7 @@ export interface FileRoutesByTo {
   '/marketing-politico': typeof MarketingPoliticoRoute
   '/marketing-politico-andrea': typeof MarketingPoliticoAndreaRoute
   '/performance': typeof PerformanceRoute
+  '/romanza': typeof RomanzaRoute
   '/socialmedia': typeof SocialmediaRoute
   '/preview/intro': typeof PreviewIntroRoute
 }
@@ -78,6 +86,7 @@ export interface FileRoutesById {
   '/marketing-politico': typeof MarketingPoliticoRoute
   '/marketing-politico-andrea': typeof MarketingPoliticoAndreaRoute
   '/performance': typeof PerformanceRoute
+  '/romanza': typeof RomanzaRoute
   '/socialmedia': typeof SocialmediaRoute
   '/preview/intro': typeof PreviewIntroRoute
 }
@@ -89,6 +98,7 @@ export interface FileRouteTypes {
     | '/marketing-politico'
     | '/marketing-politico-andrea'
     | '/performance'
+    | '/romanza'
     | '/socialmedia'
     | '/preview/intro'
   fileRoutesByTo: FileRoutesByTo
@@ -98,6 +108,7 @@ export interface FileRouteTypes {
     | '/marketing-politico'
     | '/marketing-politico-andrea'
     | '/performance'
+    | '/romanza'
     | '/socialmedia'
     | '/preview/intro'
   id:
@@ -107,6 +118,7 @@ export interface FileRouteTypes {
     | '/marketing-politico'
     | '/marketing-politico-andrea'
     | '/performance'
+    | '/romanza'
     | '/socialmedia'
     | '/preview/intro'
   fileRoutesById: FileRoutesById
@@ -117,6 +129,7 @@ export interface RootRouteChildren {
   MarketingPoliticoRoute: typeof MarketingPoliticoRoute
   MarketingPoliticoAndreaRoute: typeof MarketingPoliticoAndreaRoute
   PerformanceRoute: typeof PerformanceRoute
+  RomanzaRoute: typeof RomanzaRoute
   SocialmediaRoute: typeof SocialmediaRoute
   PreviewIntroRoute: typeof PreviewIntroRoute
 }
@@ -128,6 +141,13 @@ declare module '@tanstack/react-router' {
       path: '/socialmedia'
       fullPath: '/socialmedia'
       preLoaderRoute: typeof SocialmediaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/romanza': {
+      id: '/romanza'
+      path: '/romanza'
+      fullPath: '/romanza'
+      preLoaderRoute: typeof RomanzaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/performance': {
@@ -181,9 +201,20 @@ const rootRouteChildren: RootRouteChildren = {
   MarketingPoliticoRoute: MarketingPoliticoRoute,
   MarketingPoliticoAndreaRoute: MarketingPoliticoAndreaRoute,
   PerformanceRoute: PerformanceRoute,
+  RomanzaRoute: RomanzaRoute,
   SocialmediaRoute: SocialmediaRoute,
   PreviewIntroRoute: PreviewIntroRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

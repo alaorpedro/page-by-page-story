@@ -47,7 +47,8 @@ type Training = {
     | "/socialmedia"
     | "/performance"
     | "/marketing-politico"
-    | "/marketing-politico-andrea";
+    | "/marketing-politico-andrea"
+    | "/romanza";
   eyebrow: string;
   title: string;
   description: string;
@@ -155,6 +156,14 @@ const TRAININGS: Training[] = [
     description:
       "Plano fictício de primeira candidatura para construir reconhecimento, comunidade, base e intenção de voto.",
     meta: "14 slides · proposta",
+  },
+  {
+    to: "/romanza",
+    eyebrow: "Equipe · Romanza",
+    title: "Treinamento da Equipe Romanza",
+    description:
+      "Estado, condução, regra e carteira: os quatro módulos num dia, com o Regimento Interno explicado por dentro.",
+    meta: "45 slides · até 2h",
   },
 ];
 
@@ -655,7 +664,7 @@ function MenuSlide() {
           </span>
         </div>
 
-        <div className="grid grid-cols-5" style={{ marginTop: 20, gap: 16 }}>
+        <div className="grid grid-cols-6" style={{ marginTop: 20, gap: 14 }}>
           {TRAININGS.map((t) => (
             <button
               key={t.to}
