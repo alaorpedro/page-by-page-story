@@ -62,8 +62,8 @@ export const ROMANZA_SLIDES: DeckEntry[] = [
         title="Não é para decorar artigo. É para entender **o porquê** de cada regra."
         head={["O que tem no regimento", "Onde a gente trabalha hoje"]}
         rows={[
-          ["Estrutura, jornada, conduta e convivência", "Módulo 1 · Estado"],
-          ["Normas de atendimento", "Módulo 2 · Condução"],
+          ["Estrutura, jornada, conduta, apresentação e sigilo", "Módulo 1 · Estado"],
+          ["Atendimento e pós-venda", "Módulo 2 · Condução"],
           ["Política comercial da consignação", "Módulo 3 · Regra e fechamento"],
           ["Benefícios, medidas disciplinares e vigência", "Módulo 4 · Carteira"],
         ]}
@@ -120,14 +120,15 @@ export const ROMANZA_SLIDES: DeckEntry[] = [
     ),
   },
   {
-    id: "m1-art14",
-    title: "Art. 14 · Clima é atendimento",
+    id: "m1-clima",
+    title: "Clima é atendimento",
     node: (
-      <RzArticle
-        art="Art. 14"
-        title="Clima é atendimento"
-        quote="O clima da loja faz parte do atendimento. A cliente percebe o estado de quem a atende **antes de olhar a peça**."
-        after="Por isso a convivência interna é responsabilidade de todas — não assunto só da gerência."
+      <RzStatement
+        label="Clima é atendimento"
+        tone="light"
+        bgLetter="C"
+        text="O clima da loja faz parte do atendimento. A cliente percebe o estado de quem atende **antes de olhar a peça**."
+        body="Por isso a convivência é responsabilidade de todas. E meta é compromisso que você assume — não cobrança que vem de fora."
       />
     ),
   },
@@ -156,28 +157,28 @@ export const ROMANZA_SLIDES: DeckEntry[] = [
   },
   {
     id: "m1-conduta",
-    title: "Art. 15 e 16 · Conduta",
+    title: "Art. 11 a 14 · Conduta",
     node: (
       <RzColumns
-        label="Regimento · Art. 15 e 16"
+        label="Regimento · Art. 11 a 14"
         tone="light"
         title="O que se espera — e o que **não cabe** na Romanza"
         left={{
           head: "Não cabe",
           items: [
-            "Fofoca e falar mal de colegas, chefia ou empresa — inclusive nas redes.",
-            "Problema interno na frente de cliente.",
-            "Celular pessoal no atendimento.",
-            "Peça sem registro e foto de coleção não lançada.",
+            "Ofensa, discriminação, assédio ou expor colegas e clientes.",
+            "Assunto interno discutido na frente do público.",
+            "Celular pessoal no atendimento: fica na bolsa, só no intervalo.",
+            "Peça saindo sem registro; dado ou foto reservada divulgada.",
           ],
         }}
         right={{
           head: "Se espera",
           items: [
-            "Meta como **compromisso**, não cobrança.",
-            "Cuidar do setor e das tarefas comuns.",
-            "Entender o processo antes de criticar.",
-            "Conhecer o produto e guardar sigilo.",
+            "Respeito com colegas, clientes, revendedoras e fornecedores.",
+            "Setor organizado; mercadoria e equipamento bem cuidados.",
+            "Divergência levada à liderança, no lugar certo.",
+            "Conhecer os produtos da sua função.",
           ],
         }}
       />
@@ -212,32 +213,32 @@ export const ROMANZA_SLIDES: DeckEntry[] = [
     ),
   },
   {
-    id: "m1-art17",
-    title: "Art. 17 · Apresentação pessoal",
+    id: "m1-art15",
+    title: "Art. 15 · Uniforme",
     node: (
       <RzArticle
-        art="Art. 17"
-        title="Apresentação pessoal"
-        quote="[Uniforme fornecido pela empresa] ou [roupa da coleção Romanza em dias de lançamento], sempre **com crachá de identificação**."
+        art="Art. 15"
+        title="Uniforme"
+        quote="A empresa fornece **de duas a três blusas de uniforme por ano** para uso no trabalho. Não há exigência de crachá."
         after="Não existe um jeito certo de ser bonita. Existe o jeito profissional de se apresentar — e ele cabe em qualquer estilo, corpo e bolso."
       />
     ),
   },
   {
     id: "m1-setores",
-    title: "Art. 5 a 13 · Setores e jornada",
+    title: "Art. 4 a 10 · Setores e jornada",
     node: (
       <RzRules
-        label="Regimento · Art. 5 a 13"
-        title="Cada setor tem dona. **Cada dúvida tem endereço.**"
+        label="Regimento · Art. 4 a 10"
+        title="Cada setor tem seu papel. **Cada dúvida tem endereço.**"
         head={["Setor", "Cuida de"]}
         rows={[
-          ["Atendimento", "Receber, qualificar, apresentar, orçamento, WhatsApp, pós-venda"],
-          ["Caixa", "Acertos, conferência de devolução, tabela de parcelamento, fechamento do dia"],
-          ["Comercial", "Carteira, cobrança de praça, distribuição, relatório das melhores vendedoras"],
-          ["Financeiro", "Contas, análise de cadastro, inadimplência"],
+          ["Atendimento", "Recepção, peças, distribuição de coleções, orçamentos, WhatsApp e pós-venda"],
+          ["Caixa", "Acertos, conferência de devoluções, tabela vigente e fechamento diário"],
+          ["Comercial", "Carteira, captação de leads, análise de crédito, cobrança de praça e relatórios"],
+          ["Financeiro", "Contas a pagar e receber, análise cadastral e inadimplência"],
         ]}
-        note="Jornada: ponto nunca por outra pessoa · atraso acima de [10 min] avisado antes · falta avisada até [1h antes] · hora extra só autorizada."
+        note="Jornada: seg. a sex. 9h–18h e sáb. 9h–13h · ponto no relógio, nunca por outra pessoa · atraso acima de 10 min avisado antes · hora extra só autorizada."
       />
     ),
   },
@@ -262,13 +263,14 @@ export const ROMANZA_SLIDES: DeckEntry[] = [
   /* ---------------------------- Módulo 2 ---------------------------- */
   { id: "m2", title: "Módulo 2 · Condução", module: 2, node: <RzModule n={2} photo={capa2} /> },
   {
-    id: "m2-art18",
-    title: "Art. 18 · A postura da casa",
+    id: "m2-postura",
+    title: "A postura da casa",
     node: (
-      <RzArticle
-        art="Art. 18"
-        title="A postura da casa"
-        quote="Quem conduz o atendimento é a equipe, não a cliente. **Não atender para vender, mas entender para atender.**"
+      <RzStatement
+        label="A postura da casa"
+        tone="light"
+        bgLetter="A"
+        text="Quem conduz o atendimento é a equipe. **Não atenda para vender — entenda para atender.**"
       />
     ),
   },
@@ -277,10 +279,10 @@ export const ROMANZA_SLIDES: DeckEntry[] = [
     title: "O momento certo é agora",
     node: (
       <RzStatement
-        label="Timing · Art. 19"
+        label="Timing · Art. 16"
         bgLetter="9h"
         text="A cliente que mandou mensagem às 9h e recebeu resposta às 16h **já decidiu outra coisa**."
-        body="Ordem da casa: primeiro a cliente presencial, depois o WhatsApp — com resposta em até [30 minutos] no horário comercial e escala de quem responde o quê."
+        body="Quem divide o atendimento presencial e o digital é a liderança do Atendimento. Prazo para responder mensagens: [30 minutos durante o expediente]."
       />
     ),
   },
@@ -289,15 +291,15 @@ export const ROMANZA_SLIDES: DeckEntry[] = [
     title: "O fluxo do atendimento",
     node: (
       <RzFlow
-        label="O fluxo · Art. 20 e 21"
+        label="O fluxo · Art. 17"
         title="Todo atendimento passa por **quatro etapas**"
         steps={[
           "Qualificar: origem, histórico, região, interesse real",
           "Apresentar as peças",
           "Argumentar e responder objeções",
-          "Fechar com um convite concreto",
+          "Fechar com um próximo passo concreto",
         ]}
-        note="Onde a gente mais pula etapa: da apresentação direto para o fechamento — e a argumentação fica pelo caminho. Na consignação, qualificar mal é mercadoria na mão de quem não vende."
+        note="Onde a gente mais pula etapa: da apresentação direto para o fechamento — e a argumentação fica pelo caminho. E sempre sem informação falsa e sem pressão indevida."
       />
     ),
   },
@@ -343,13 +345,13 @@ export const ROMANZA_SLIDES: DeckEntry[] = [
     ),
   },
   {
-    id: "m2-art22",
-    title: "Art. 22 · Regra se diz no começo",
+    id: "m2-art18",
+    title: "Art. 18 · Condição se diz antes",
     node: (
       <RzArticle
-        art="Art. 22"
-        title="Regra se diz no começo"
-        quote="As regras da casa são apresentadas à revendedora **no início do relacionamento**, e não no momento do conflito."
+        art="Art. 18"
+        title="Condição se diz antes"
+        quote="As condições de consignação e acerto são informadas à revendedora **antes da retirada da mercadoria**."
         after="Quem ouve a regra no primeiro dia aceita. Quem ouve na hora do acerto sente que é contra ela."
       />
     ),
@@ -359,11 +361,11 @@ export const ROMANZA_SLIDES: DeckEntry[] = [
     title: "Pré e pós-venda",
     node: (
       <RzCards
-        label="Pré e pós-venda · Art. 23"
+        label="Pré e pós-venda · Art. 18 e 19"
         title="O atendimento **não termina na sacola**"
         cards={[
           ["Pré-venda", "Preparar a escolha: fotos, cesto separado, horário marcado."],
-          ["Durante o ciclo", "Contato, novidade, perguntar como está vendendo."],
+          ["Durante o ciclo", "Novidades toda semana, acompanhar o ciclo, perguntar como está vendendo."],
           ["Pouca mercadoria", "Chamar para buscar mais antes de ela parar."],
           ["Sumiu", "Contato ativo e fotos. É o pós-venda que sustenta a consignação."],
         ]}
@@ -451,39 +453,39 @@ export const ROMANZA_SLIDES: DeckEntry[] = [
         label="O centro do módulo"
         bgLetter="R"
         text="Ninguém quer ser a pessoa que **disse não**."
-        body="Quando a regra não é cumprida, quase nunca é dúvida sobre ela. É rejeição: o medo de desagradar. Por isso a vontade de “perguntar lá no financeiro” — para o não vir de outra pessoa."
+        body="Quando a regra não é cumprida, quase nunca é dúvida sobre ela. É rejeição: o medo de desagradar. Por isso a vontade de dizer “vou ver se dá” — para o não vir de outra pessoa."
       />
     ),
   },
   {
-    id: "m3-art26",
-    title: "Art. 25 e 26 · Sem autorização",
+    id: "m3-art21",
+    title: "Art. 21 · Exceção não se promete",
     node: (
       <RzArticle
-        art="Art. 25 e 26"
-        title="A regra fala por você"
-        quote="As regras valem para todas, sem exceção — e a equipe aplica **sem precisar de autorização**."
-        after="Pedir exceção a outro setor cria expectativa na revendedora e transfere o desgaste para quem vai negar. A regra não é peso: é proteção."
+        art="Art. 21"
+        title="Exceção não se promete"
+        quote="Pedidos de exceção vão para a direção pelo canal interno. **Ninguém promete condição diferente antes da autorização.**"
+        after="Você aplica a regra. Se a revendedora pedir exceção, você encaminha e responde só com a decisão da direção — nunca com “vou ver se dá”."
       />
     ),
   },
   {
     id: "m3-regras",
-    title: "Art. 25 · A regra e o porquê",
+    title: "Art. 20 · A regra e o porquê",
     node: (
       <RzRules
-        label="Política comercial · Art. 25"
+        label="Política comercial · Art. 20"
         title="A regra e **o porquê dela**"
         head={["Regra", "Por que existe"]}
         rows={[
-          ["Acerto pelo valor integral · sem fiado", "Metade vira dívida sem prazo; a loja vira banco sem garantia"],
-          ["Parcelamento só na tabela vigente", "Pedir autorização já sinaliza que é possível"],
-          ["Sem devolução por sacola de motoboy", "Sem conferência, abre brecha para o acerto não ser pago"],
+          ["Acerto pelo valor integral devido · sem fiado", "Metade vira dívida sem prazo; a loja vira banco sem garantia"],
+          ["Parcelamento só pela tabela vigente, que fica em cada caixa", "A tabela é igual para todas; condição diferente, só pela direção"],
+          ["Devolução com conferência presencial ou procedimento aprovado [transporte a definir]", "Sem conferência, abre brecha para o acerto não ser pago"],
           ["Mínimo de [R$ 300] por orçamento", "Abaixo disso o ciclo não se paga"],
-          ["Mínimo de [R$ 2.000] para abrir orçamento", "Mercadoria parada é faturamento parado"],
-          ["Cobrança de praça só com o mínimo cumprido", "O deslocamento tem custo"],
+          ["Mínimo de [R$ 2.000] para abertura e nova retirada", "Mercadoria parada é faturamento parado"],
+          ["Cobrança de praça só pelos critérios escritos", "O deslocamento tem custo"],
         ]}
-        note="Art. 28 · A regra muda por escrito, pela direção, para todas ao mesmo tempo — nunca numa conversa no balcão."
+        note="Art. 23 · A direção revisa tabela e mínimos [periodicamente] e avisa a equipe com antecedência — nunca numa conversa no balcão."
       />
     ),
   },
@@ -505,11 +507,11 @@ export const ROMANZA_SLIDES: DeckEntry[] = [
           ],
           [
             "“Mando a sacola pelo motoboy?”",
-            "“Devolução a gente confere aqui, na sua frente — é o que protege o seu acerto. Que dia você passa?”",
+            "“Devolução precisa de conferência: a gente faz aqui, na sua frente, e isso protege o seu acerto. Que dia você passa?”",
           ],
           [
             "“Pergunta lá no financeiro se pode?”",
-            "“Essa regra é igual pra todas, não tem exceção pra eu pedir. O que eu consigo fazer por você é…”",
+            "“Isso eu não posso te prometer. Levo seu pedido pra direção e te passo a resposta oficial. Dentro da regra, hoje eu consigo…”",
           ],
         ]}
       />
@@ -520,11 +522,11 @@ export const ROMANZA_SLIDES: DeckEntry[] = [
     title: "Fechar é receber",
     node: (
       <RzStatement
-        label="Fechamento · Art. 27"
+        label="Fechamento"
         tone="light"
         bgLetter="$"
         text="Fechar a venda é **receber o acerto**."
-        body="Não é só entregar a mercadoria — e a meta considera os acertos recebidos. Consignação sem acompanhamento é mercadoria emprestada."
+        body="Não é só entregar a mercadoria: fechamento que não recebe prejudica a própria vendedora. Consignação sem acompanhamento é mercadoria emprestada."
       />
     ),
   },
@@ -569,13 +571,13 @@ export const ROMANZA_SLIDES: DeckEntry[] = [
     title: "Distribuição organizada",
     node: (
       <RzFlow
-        label="Distribuição · Art. 24"
+        label="Distribuição · Art. 19"
         title="Coleção nova **tem ritual**"
         steps={[
-          "Avisar com [3 dias] de antecedência",
-          "Todas escolhem no mesmo horário ou período",
-          "Cada uma com o seu cesto separado",
-          "Coleção nova passa com 50% no caixa, compondo meta",
+          "Novidades informadas às revendedoras toda semana",
+          "O Comercial avisa a coleção com antecedência",
+          "Horários definidos para a escolha",
+          "Peças separadas e identificadas para cada uma",
         ]}
       />
     ),
@@ -608,7 +610,7 @@ export const ROMANZA_SLIDES: DeckEntry[] = [
           ["Compromisso", "Retomar o volume que ela mesma declarou.", "Você queria chegar a tanto. Falta pouco — vamos completar?"],
           ["Afeição", "O pós-venda sustentado no ciclo.", "E aquela cliente sua que amou o vestido, voltou?"],
           ["Aprovação social", "Resultado real de outra revendedora.", "Olha quem foi premiada no ciclo — dá pra você chegar lá."],
-          ["Escassez", "Só quando é real (Art. 29).", "Essa estampa veio pouca. Quer que eu separe a sua?"],
+          ["Escassez", "Só quando é real (Art. 23).", "Essa estampa veio pouca. Quer que eu separe a sua?"],
         ]}
       />
     ),
@@ -634,36 +636,36 @@ export const ROMANZA_SLIDES: DeckEntry[] = [
   },
   {
     id: "m4-beneficios",
-    title: "Art. 30 e 31 · Benefícios",
+    title: "Art. 24 e 25 · Benefícios",
     node: (
       <RzRules
-        label="Regimento · Art. 30 e 31"
+        label="Regimento · Art. 24 e 25"
         tone="light"
         title="O outro lado do regimento: **o que a Romanza oferece**"
         head={["Benefício", "Condição"]}
         rows={[
-          ["[Vale-transporte] e [vale-alimentação]", "Conforme a lei · pago junto com o salário"],
-          ["[Comissão sobre acertos recebidos]", "Atendimento e Comercial, conforme meta do ciclo"],
-          ["[Premiação por meta]", "[Critério a definir]"],
-          ["Desconto de funcionária de [30%]", "Até [R$ 500]/mês, registrado por outra colega; coleção nova só após [15 dias]"],
+          ["Vale-transporte", "Quando devido, conforme a lei"],
+          ["[Vale-alimentação], [comissões] e [premiações]", "Se houver, conforme política escrita"],
+          ["Desconto de 30% em peças", "Após 90 dias de casa · até R$ 300/mês · registrado por outra colega"],
+          ["Coleção nova com desconto", "Só 15 dias após o lançamento · em folha em até 3 parcelas, com autorização"],
         ]}
       />
     ),
   },
   {
     id: "m4-medidas",
-    title: "Art. 32 a 34 · Medidas disciplinares",
+    title: "Art. 26 e 27 · Medidas disciplinares",
     node: (
       <RzLadder
-        label="Regimento · Art. 32 a 34"
-        title="Gradual, proporcional e **sempre reservada**"
+        label="Regimento · Art. 26 e 27"
+        title="Individual, proporcional e **sempre reservada**"
         steps={[
-          ["Orientação", "Conversa verbal, registrada pela responsável do setor."],
-          ["Advertência", "Por escrito, assinada pela colaboradora."],
-          ["Suspensão", "De [1 a 3] dias, sem remuneração."],
-          ["Justa causa", "Nas hipóteses do art. 482 da CLT."],
+          ["Orientação", "Conversa para corrigir o rumo."],
+          ["Advertência", "Registro formal do fato."],
+          ["Suspensão", "Dentro do limite legal."],
+          ["Justa causa", "Só nas hipóteses legais comprovadas."],
         ]}
-        note="Nunca na frente de colegas ou clientes — e você pode registrar a sua versão por escrito."
+        note="Cada caso é apurado individualmente, sem punição automática. A medida é comunicada em conversa reservada, com registro dos fatos — e você apresenta a sua versão."
       />
     ),
   },
