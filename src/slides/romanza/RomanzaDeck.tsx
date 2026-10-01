@@ -34,7 +34,7 @@ import {
 
 /**
  * Treinamento da equipe Romanza — os quatro módulos num dia só, em até 2h.
- * Tempo-alvo: abertura 8' · M1 25' · M2 25' · M3 30' · M4 25' · encerramento 5'.
+ * Tempo-alvo: abertura 8' · M1 28' · M2 23' · M3 28' · M4 25' · encerramento 5'.
  * `module` marca o início de cada módulo (atalhos 1–4 na apresentação).
  */
 export type DeckEntry = { id: string; title: string; node: ReactNode; module?: 1 | 2 | 3 | 4 };
@@ -180,6 +180,46 @@ export const ROMANZA_SLIDES: DeckEntry[] = [
             "Conhecer o produto e guardar sigilo.",
           ],
         }}
+      />
+    ),
+  },
+  {
+    id: "m1-imagem",
+    title: "Sua imagem também atende",
+    node: (
+      <RzStatement
+        label="Imagem pessoal"
+        bgLetter="R"
+        text="Antes da primeira palavra, a cliente **já leu você**."
+        body="Não é sobre padrão de beleza, corpo ou estilo. É sobre cuidado — com você e com quem você recebe. Numa loja de moda, quem atende é a primeira vitrine da Romanza."
+      />
+    ),
+  },
+  {
+    id: "m1-boas-praticas",
+    title: "Boas práticas de apresentação",
+    node: (
+      <RzCards
+        label="Imagem pessoal · boas práticas"
+        title="Cuidado que **a cliente percebe**"
+        cards={[
+          ["Roupa", "Limpa, passada e confortável para o dia inteiro. Vestir a coleção mostra a peça em movimento."],
+          ["Cabelo e mãos", "Arrumados do seu jeito. As mãos aparecem o tempo todo mostrando peça: unhas limpas e cuidadas."],
+          ["Maquiagem, se você usa", "Leve e de dia: realça você sem disputar atenção com a peça. Pele cuidada já é o principal."],
+          ["Perfume e higiene", "Perfume suave — a cliente prova roupa perto de você. Hálito e desodorante em dia."],
+        ]}
+      />
+    ),
+  },
+  {
+    id: "m1-art17",
+    title: "Art. 17 · Apresentação pessoal",
+    node: (
+      <RzArticle
+        art="Art. 17"
+        title="Apresentação pessoal"
+        quote="[Uniforme fornecido pela empresa] ou [roupa da coleção Romanza em dias de lançamento], sempre **com crachá de identificação**."
+        after="Não existe um jeito certo de ser bonita. Existe o jeito profissional de se apresentar — e ele cabe em qualquer estilo, corpo e bolso."
       />
     ),
   },
@@ -337,7 +377,7 @@ export const ROMANZA_SLIDES: DeckEntry[] = [
       <RzDynamic
         title="Cliente, atendente, observadora"
         format="Em trios"
-        time="8 minutos"
+        time="6 minutos"
         steps={[
           "Uma faz a cliente, uma atende, uma observa.",
           "Cenário: a revendedora pergunta pelo WhatsApp se “tem novidade”.",
@@ -495,7 +535,7 @@ export const ROMANZA_SLIDES: DeckEntry[] = [
       <RzDynamic
         title="Roda de objeções"
         format="Todas"
-        time="8 minutos"
+        time="6 minutos"
         steps={[
           "Cada uma pega uma frase do quadro.",
           "Um minuto para responder em voz alta.",

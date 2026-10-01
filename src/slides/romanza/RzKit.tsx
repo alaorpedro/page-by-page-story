@@ -171,9 +171,9 @@ export function RzCover() {
 /* ------------------------------------------------------------------ */
 
 export const MODULES = [
-  { n: "01", name: "Estado", focus: "O clima de dentro chega na cliente antes da peça", time: "25 min" },
-  { n: "02", name: "Condução", focus: "Quem conduz o atendimento é você", time: "25 min" },
-  { n: "03", name: "Regra e fechamento", focus: "Sustentar a regra sem perder a venda", time: "30 min" },
+  { n: "01", name: "Estado", focus: "O clima de dentro chega na cliente antes da peça", time: "28 min" },
+  { n: "02", name: "Condução", focus: "Quem conduz o atendimento é você", time: "23 min" },
+  { n: "03", name: "Regra e fechamento", focus: "Sustentar a regra sem perder a venda", time: "28 min" },
   { n: "04", name: "Carteira", focus: "Mercadoria parada é faturamento parado", time: "25 min" },
 ];
 

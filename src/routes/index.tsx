@@ -163,7 +163,7 @@ const TRAININGS: Training[] = [
     title: "Treinamento da Equipe Romanza",
     description:
       "Estado, condução, regra e carteira: os quatro módulos num dia, com o Regimento Interno explicado por dentro.",
-    meta: "45 slides · até 2h",
+    meta: "48 slides · até 2h",
   },
 ];
 
